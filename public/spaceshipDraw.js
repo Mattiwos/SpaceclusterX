@@ -1,4 +1,16 @@
-function drawSpaceship(x,y,r){
+function drawSpaceship(x,y,r,fire){
+
+   if(fire){
+      fill(255,0,0,random(0,100));
+      noStroke();
+      ellipse(x+1.2*radius*cos(r+PI),y+1.2*radius*sin(r+PI),30,30);
+      ellipse(x+radius*cos(r+PI),y+radius*sin(r+PI),20,20);
+   }
+
+   fill(100);
+    stroke(180);
+    strokeWeight(3);
+
     beginShape();
     vertex(  x-radius*cos(r) + radius/3 * cos(r+PI/2)  ,
              y-radius*sin(r) + radius/3 *sin(r+PI/2)
