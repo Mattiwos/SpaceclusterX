@@ -7,8 +7,8 @@ var player;
 var keyDown={};
 var keys=[65,68,87,83,32];
 
-//how fast the rotation accelerates
-var raccelspeed=0.008;
+
+
 
 //how fast forward acceleration
 var faccelspeed=0.6;
@@ -24,26 +24,23 @@ var d;
 
 function setup() {
   createCanvas(1000, 600);
-  player = new Player(
-    random(-1000,1000),random(-1000,1000),random(-1000,1000));
-    for(var i=0;i<10;i++){
-        spawn=false;
-        cx=random(-1000,1000);
-        cy=random(-1000,1000);
-        cs=random(200,500);
-      while(spawn==false){
-        cx=random(-1000,1000);
-        cy=random(-1000,1000);
-        cs=random(200,500);
+  player = new Player(random(-1000,1000),random(-1000,1000),random(-1000,1000));
+  for(var i=0;i<10;i++){
+      spawn=false;
+    while(spawn==false){
+      cx=random(-1000,1000);
+      cy=random(-1000,1000);
+      cs=random(200,500);
 
-        spawn=true;
-        for(var j=0;j<planets.length;j++){
+      spawn=true;
+      for(var j=0;j<planets.length;j++){
           if(dist(cx,cy,planets[j].x,planets[j].y)<cs+planets[j].s)spawn=false;
-        }
+      }
+
       }
       
       planets.push(new planet (cx,cy,cs) );
-    }
+  }
 }
 
 function draw() {
@@ -70,6 +67,9 @@ class Player{
     //speed of rotation
     this.raccel=0;
     this.faccel=0;
+    this.maxfs = 12;
+    this.maxbs = 1;
+    this.raccelspeed = 0.008;
 
   }
   movement(){
@@ -79,33 +79,37 @@ class Player{
     
 
 
-    print(d);
     
-    if(keyDown[keys[2]]==1){
-      drawSpaceship(width / 2, height /2 ,this.r, true);
-    }else
-    drawSpaceship(width / 2, height /2 ,this.r, false);
-    if(keyDown[keys[1]]==1){
-      if(this.raccel<raccelspeed*(8))
-      this.raccel+=raccelspeed*d;
-    }if(keyDown[keys[0]]==1){
-      if(this.raccel>raccelspeed*(-8))
-      this.raccel-=raccelspeed*d;
+   
+    ///rotation
+    if(keyDown[keys[1]]==1){ //A
+      if(this.raccel<this.raccelspeed*(8))
+      this.raccel+=this.raccelspeed*d;
+    }if(keyDown[keys[0]]==1){ //D
+      if(this.raccel>this.raccelspeed*(-8)) 
+      this.raccel-=this.raccelspeed*d;
     }
     this.r+=this.raccel;
-    if(this.raccel>0)this.raccel-=raccelspeed/2*d;
-    if(this.raccel<0)this.raccel+=raccelspeed/2*d;
-    if(dist(this.raccel,0,0,0)<raccelspeed/4)this.raccel=0;
-
+    console.log(this.raccel);
+    if(this.raccel>0)this.raccel-=this.raccelspeed/2*d;
+    if(this.raccel<0)this.raccel+=this.raccelspeed/2*d;
+    if(abs(this.raccel)<this.raccelspeed/2)this.raccel=this.raccel/2;
+    //forward and backword speeds
     if(keyDown[keys[2]]==1){
-      if(this.faccel<faccelspeed*(12))
+      drawSpaceship(width / 2, height /2 ,this.r, true);
+      if(this.faccel<faccelspeed*(this.maxfs))
       this.faccel+=faccelspeed*d;
-    }if(keyDown[keys[3]]==1){
-      if(this.faccel>faccelspeed*(-7))
+    
+    }
+    else drawSpaceship(width / 2, height /2 ,this.r, false);
+    if(keyDown[keys[3]]==1){
+      if(this.faccel>faccelspeed*(-1*this.maxbs))
       this.faccel-=faccelspeed*d;
     }
+
     this.x+=cos(this.r)*this.faccel*d;
     this.y+=sin(this.r)*this.faccel*d;
+
     if(this.faccel>0)this.faccel-=faccelspeed/4*d;
     if(this.faccel<0)this.faccel+=faccelspeed/4*d;
     if(dist(this.faccel,0,0,0)<faccelspeed/2)this.faccel=0;
