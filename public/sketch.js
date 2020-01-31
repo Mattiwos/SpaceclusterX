@@ -20,6 +20,7 @@ var cx;
 var cy;
 var cs;
 var spawn;
+var d;
 
 function setup() {
   createCanvas(1000, 600);
@@ -46,6 +47,7 @@ function setup() {
 }
 
 function draw() {
+  d=deltaTime/10;
   background(0);
 
   for(var i =0;i<planets.length;i++){
@@ -77,7 +79,7 @@ class Player{
     
 
 
-
+    print(d);
     
     if(keyDown[keys[2]]==1){
       drawSpaceship(width / 2, height /2 ,this.r, true);
@@ -85,28 +87,28 @@ class Player{
     drawSpaceship(width / 2, height /2 ,this.r, false);
     if(keyDown[keys[1]]==1){
       if(this.raccel<raccelspeed*(8))
-      this.raccel+=raccelspeed;
+      this.raccel+=raccelspeed*d;
     }if(keyDown[keys[0]]==1){
       if(this.raccel>raccelspeed*(-8))
-      this.raccel-=raccelspeed;
+      this.raccel-=raccelspeed*d;
     }
     this.r+=this.raccel;
-    if(this.raccel>0)this.raccel-=raccelspeed/2;
-    if(this.raccel<0)this.raccel+=raccelspeed/2;
-    if(dist(this.raccel,0,0,0)<raccelspeed/2)this.raccel=0;
+    if(this.raccel>0)this.raccel-=raccelspeed/2*d;
+    if(this.raccel<0)this.raccel+=raccelspeed/2*d;
+    if(dist(this.raccel,0,0,0)<raccelspeed/4)this.raccel=0;
 
     if(keyDown[keys[2]]==1){
       if(this.faccel<faccelspeed*(12))
-      this.faccel+=faccelspeed;
+      this.faccel+=faccelspeed*d;
     }if(keyDown[keys[3]]==1){
       if(this.faccel>faccelspeed*(-7))
-      this.faccel-=faccelspeed;
+      this.faccel-=faccelspeed*d;
     }
-    this.x+=cos (this.r)*this.faccel;
-    this.y+=sin (this.r)*this.faccel;
-    if(this.faccel>0)this.faccel-=faccelspeed/4;
-    if(this.faccel<0)this.faccel+=faccelspeed/4;
-    if(dist(this.faccel,0,0,0)<faccelspeed/4)this.faccel=0;
+    this.x+=cos(this.r)*this.faccel*d;
+    this.y+=sin(this.r)*this.faccel*d;
+    if(this.faccel>0)this.faccel-=faccelspeed/4*d;
+    if(this.faccel<0)this.faccel+=faccelspeed/4*d;
+    if(dist(this.faccel,0,0,0)<faccelspeed/2)this.faccel=0;
 
 
 
