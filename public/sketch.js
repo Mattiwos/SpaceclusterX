@@ -18,6 +18,9 @@ socket.on("update", (args)=>{
   }
 
 }) 
+socket.on('init', (arg)=>{
+  console.log(arg.currentplayers)
+})
 
 //////////////////////////////////////////////////////////////////////////////////
 
