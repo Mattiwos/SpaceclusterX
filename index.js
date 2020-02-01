@@ -13,7 +13,7 @@ app.use(express.static('assets'));
 
 //renders index.html
 app.get('/', function(req, res){
-  res.render( 'index.html');
+  res.render( 'game.html');
 });
 
 //socket
