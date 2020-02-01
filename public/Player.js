@@ -13,14 +13,6 @@ class Player{
   
     }
     movement(){
-      
-    }
-    draw(){
-      
-  
-  
-      
-     
       ///rotation
       if(keyDown[keys[1]]==1){ //A
         if(this.raccel<this.raccelspeed*(8))
@@ -34,6 +26,8 @@ class Player{
       if(this.raccel>0)this.raccel-=this.raccelspeed/2*d;
       if(this.raccel<0)this.raccel+=this.raccelspeed/2*d;
       if(abs(this.raccel)<this.raccelspeed/3)this.raccel=this.raccel/2;
+
+
       //forward and backword speeds
       if(keyDown[keys[2]]==1){
         this.rocketfire = true;
@@ -54,15 +48,13 @@ class Player{
       if(this.faccel<0)this.faccel+=faccelspeed/4*d;
       if(dist(this.faccel,0,0,0)<faccelspeed/2)this.faccel=0;
   
-  
+      
+    }
+    draw(){
+      this.movement();
       drawSpaceship(width / 2, height /2 ,this.r, this.rocketfire);
     }
   
   }
   
-  function keyPressed(){
-    keyDown[keyCode]=1;
-  }
-  function keyReleased(){
-    keyDown[keyCode]=0;
-  }
+  

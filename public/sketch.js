@@ -92,3 +92,9 @@ function draw() {
 
 }
 
+function keyPressed(){
+  keyDown[keyCode]=1;
+}
+function keyReleased(){
+  keyDown[keyCode]=0;
+}
