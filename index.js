@@ -13,11 +13,16 @@ app.use(express.static('assets'));
 
 //renders index.html
 app.get('/', function(req, res){
-  res.render( 'game.html');
+  res.render( 'index.html');
 });
 
+playerson = [12];
 //socket
 io.on('connection', (socket)=>{
+  socket.emit('init', {
+    currentplayers: playerson
+
+  })
 	
 	socket.on('disconnect', (arg)=>{
 

@@ -3,27 +3,24 @@
 //For website use
 // const socket = io('http://mattiwos.com/');
 //Test Use
-//const socket = io('localhost:5500');
+const socket = io('localhost:5500');
 
 
-// var oplayers = [];
+var oplayers = [];
 
-// socket.on("update", (args)=>{
+socket.on("update", (args)=>{
 
-//   for (var i = 0; i < oplayers.length;i++){
-//     if (oplayers[i].id = args.id){
-//       oplayers[i].update(args.x,args.y,args.r,args.rocketfire)
+  for (var i = 0; i < oplayers.length;i++){
+    if (oplayers[i].id = args.id){
+      oplayers[i].update(args.x,args.y,args.r,args.rocketfire)
 
-//     }
-//   }
+    }
+  }
 
-// }) 
-// socket.emit("currData",{
-//   x: player.x,
-//   y: player.y,
-//   y: player.y,
-//   rocketfire: player.rocketfire
-// })
+}) 
+socket.on('init', (arg)=>{
+  console.log(arg.currentplayers)
+})
 
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -108,4 +105,13 @@ function keyPressed(){
 }
 function keyReleased(){
   keyDown[keyCode]=0;
+}
+function senddata(){
+  socket.emit("currData",{
+    x: player.x,
+    y: player.y,
+    y: player.y,
+    rocketfire: player.rocketfire
+  })
+
 }
