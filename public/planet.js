@@ -46,10 +46,10 @@ class planet{
         this.y+height/2,this.s,this.s);
 
         for(var k=0;k<this.cx.length;k++){
-            //print("draw");
             stroke(this.r/2,this.b/2,this.g/2);
             strokeWeight(3);
             noFill();
+            fill(this.r/2,this.b/2,this.g/2);
             ellipse(this.cx[k]+width/2,this.cy[k]-player.y+height/2,this.cs[k],this.cs[k]);
         }
         pop();
