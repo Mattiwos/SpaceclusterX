@@ -33,7 +33,7 @@ class Player{
       console.log(this.raccel);
       if(this.raccel>0)this.raccel-=this.raccelspeed/2*d;
       if(this.raccel<0)this.raccel+=this.raccelspeed/2*d;
-      if(abs(this.raccel)<this.raccelspeed/2)this.raccel=this.raccel/2;
+      if(abs(this.raccel)<this.raccelspeed/3)this.raccel=this.raccel/2;
       //forward and backword speeds
       if(keyDown[keys[2]]==1){
         this.rocketfire = true;
