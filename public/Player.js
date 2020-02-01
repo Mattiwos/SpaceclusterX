@@ -7,7 +7,7 @@ class Player{
       this.raccel=0;
       this.faccel=0;
       this.maxfs = 12;
-      this.maxbs = 1;
+      this.maxbs = 4;
       this.raccelspeed = 0.008;
       this.rocketfire =false;
   
@@ -22,10 +22,10 @@ class Player{
         this.raccel-=this.raccelspeed*d;
       }
       this.r+=this.raccel;
-      console.log(this.raccel);
+      // <> console.log(this.raccel);
       if(this.raccel>0)this.raccel-=this.raccelspeed/2*d;
       if(this.raccel<0)this.raccel+=this.raccelspeed/2*d;
-      if(abs(this.raccel)<this.raccelspeed/3)this.raccel=this.raccel/2;
+      if(abs(this.raccel)<this.raccelspeed/2*d)this.raccel=this.raccel/2;
 
 
       //forward and backword speeds
@@ -46,12 +46,14 @@ class Player{
   
       if(this.faccel>0)this.faccel-=faccelspeed/4*d;
       if(this.faccel<0)this.faccel+=faccelspeed/4*d;
-      if(dist(this.faccel,0,0,0)<faccelspeed/2)this.faccel=0;
+      if(dist(this.faccel,0,0,0)<faccelspeed/2*d)this.faccel=0;
   
       
     }
     draw(){
       this.movement();
+      drawSpaceship(width / 2, height /2 ,this.r, this.rocketfire);
+
       drawSpaceship(width / 2, height /2 ,this.r, this.rocketfire);
     }
   
