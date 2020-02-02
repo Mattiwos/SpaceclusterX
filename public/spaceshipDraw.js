@@ -9,7 +9,7 @@ function drawSpaceship(x,y,r,fire){
 
    fill(100);
     stroke(180);
-    strokeWeight(3);
+    strokeWeight(2);
 
     beginShape();
     vertex(  x-radius*cos(r) + radius/3 * cos(r+PI/2)  ,

@@ -33,13 +33,15 @@ var player;
 var keyDown={};
 var keys=[65,68,87,83,32];
 
-
+var starspeed=4;
+//the stars move a quarter the speed of the planets
 
 
 //how fast forward acceleration
 var faccelspeed=0.6;
 
 var planets=[];
+var stars=[];
 
 //possible parameters for the coordinates and size of a planet
 var cx;
@@ -56,6 +58,9 @@ function setup() {
 
   player = new Player(random(-1000,1000),random(-1000,1000),random(-1000,1000));
   
+  for(var i=0;i<40;i++){
+    stars.push(new star (random(-1000,1000),random(-1000,1000) ) );
+  }
   for(var i=0;i<10;i++){
       spawn=false;
     while(spawn==false){
@@ -78,9 +83,16 @@ function draw() {
   d=deltaTime/10;
   background(0);
 
+
+  for(var i =0;i<stars.length;i++){
+    stars[i].draw();
+  }
+
+
   for(var i =0;i<planets.length;i++){
     planets[i].draw();
   }
+  
 
   player.draw();
   
