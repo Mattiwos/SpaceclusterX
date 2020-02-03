@@ -1,7 +1,7 @@
 function drawSpaceship(x,y,r,fire){
 
    if(fire){
-      fill(255,0,0,random(0,100));
+      fill(0,0,200,random(0,100));
       noStroke();
       ellipse(x+1.2*radius*cos(r+PI),y+1.2*radius*sin(r+PI),30,30);
       ellipse(x+radius*cos(r+PI),y+radius*sin(r+PI),20,20);

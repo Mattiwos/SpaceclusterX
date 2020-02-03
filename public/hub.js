@@ -8,7 +8,7 @@ class hub{
         fill(200);
         noStroke();
         ellipse(this.x+width/2,this.y+height/2,30,30);
-        print(this.x);
+        
     }
 
 

@@ -19,16 +19,35 @@ app.get('/', function(req, res){
 playerson = [];
 //socket
 io.on('connection', (socket)=>{
-  playerson.push(socket.id);
+  playerson.push([socket.id]);
 
   socket.emit('init', {
     currentplayers: playerson
 
   })
+  socket.on('currData', (args)=>{
+    for (var i = 0; i < playerson.length;i++){
+      if (playerson[i][0] == args.id){
+        playerson[i].push(args.x);
+        playerson[i].push(args.y);
+        playerson[i].push(args.r);
+        playerson[i].push(args.rocketfire);
+        updateLoc();
+        break;
+      }
+    }
+   
+
+  })
+  function updateLoc(){
+    socket.emit('updateLoc',(data)=>{
+      currentplayers = playerson;
+    })
+  }
 	
 	socket.on('disconnect', (arg)=>{
     for (var i = 0; i< playerson.length;i++){
-      if (socket.id == playerson[i]){
+      if (socket.id == playerson[i][0]){
         playerson.splice(i,1);
         break;
       } 

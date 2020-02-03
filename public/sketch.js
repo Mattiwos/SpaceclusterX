@@ -8,16 +8,17 @@ const socket = io('localhost:5500');
 
 var oplayers = [];
 
-socket.on("update", (args)=>{
+socket.on("updateLoc", (args)=>{
+  console.log(args.currentplayers)
+  // for (var i = 0; i < oplayers.length;i++){
+  //   if (oplayers[i].id = args.id){
+  //     oplayers[i].update(args.x,args.y,args.r,args.rocketfire)
 
-  for (var i = 0; i < oplayers.length;i++){
-    if (oplayers[i].id = args.id){
-      oplayers[i].update(args.x,args.y,args.r,args.rocketfire)
-
-    }
-  }
+  //   }
+  // }
 
 }) 
+
 socket.on('init', (arg)=>{
   console.log(arg.currentplayers)
 })
@@ -82,6 +83,7 @@ function setup() {
 function draw() {
   d=deltaTime/10;
   background(0);
+  senddata();
 
 
   for(var i =0;i<stars.length;i++){
@@ -109,9 +111,10 @@ function keyReleased(){
 }
 function senddata(){
   socket.emit("currData",{
+    id: socket.id,
     x: player.x,
     y: player.y,
-    y: player.y,
+    r: player.r,
     rocketfire: player.rocketfire
   })
 
