@@ -33,7 +33,7 @@ var player;
 var keyDown={};
 var keys=[65,68,87,83,32];
 
-var starspeed=4;
+
 //the stars move a quarter the speed of the planets
 
 

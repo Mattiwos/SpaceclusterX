@@ -5,12 +5,14 @@ class star{
         this.y=y;
         //star size
         this.s=5;
+        //star speed 
+        this.ss =4;
         this.glow=4;
     }
     draw(){
 
         push();
-        translate(-player.x/starspeed,-player.y/starspeed);
+        translate(-player.x/this.ss,-player.y/this.ss);
         fill (255);
         noStroke();
         ellipse(this.x+width/2,this.y+height/2,this.s,this.s);
