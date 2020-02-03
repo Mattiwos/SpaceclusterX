@@ -40,7 +40,7 @@ io.on('connection', (socket)=>{
 
   })
   function updateLoc(){
-    socket.emit('updateLoc',(data)=>{
+    io.emit('updateLoc',{
       currentplayers = playerson;
     })
   }
