@@ -16,16 +16,27 @@ app.get('/', function(req, res){
   res.render( 'index.html');
 });
 
-playerson = [12];
+playerson = [];
 //socket
 io.on('connection', (socket)=>{
+  playerson.push(socket.id);
+
   socket.emit('init', {
     currentplayers: playerson
 
   })
 	
 	socket.on('disconnect', (arg)=>{
-
+    for (var i = 0; i< playerson.length;i++){
+      if (socket.id == playerson[i]){
+        playerson.splice(i,1);
+        break;
+      } 
+    }
+    socket.emit('init', {
+      currentplayers: playerson
+  
+    })
 	
 	})
 
