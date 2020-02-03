@@ -13,6 +13,8 @@ class planet{
         this.cs=[];
         this.craters=random(1,5);
         this.spawn=false;
+
+        this.city=[];
         for(let o=0;o<this.craters;o++){
             this.cs.push(random(20,30));
             this.ag=random(0,2*PI);
@@ -20,6 +22,7 @@ class planet{
             this.cx.push(this.x+this.dist*cos(this.ag));
             this.cy.push(this.y+this.dist*sin(this.ag));
             
+            this.city.push(new hub(this.x+this.dist*cos (this.ag),this.y+this.dist*sin (this.ag)));
         //    if(dist (this.x,this.y,this.cx[this.cx.length],this.cy[this.cy.length])+cs[this.cx.length]>this.s)
          //   this.cs[this.cy.length]=0;
         }
@@ -29,7 +32,7 @@ class planet{
         push();
         translate(-player.x,-player.y);
 
-        for(var k=0;k<20;k++){
+        for(let k=0;k<20;k++){
             fill(this.r/2,this.b/2,this.g/2,100-k*255/20);
             strokeWeight(2);
             noStroke();
@@ -45,13 +48,21 @@ class planet{
         ellipse(this.x+width/2,
         this.y+height/2,this.s,this.s);
 
-        for(var k=0;k<this.cx.length;k++){
+        for(let k=0;k<this.cx.length-1;k++){
             stroke(this.r/2,this.b/2,this.g/2);
             strokeWeight(3);
             noFill();
             fill(this.r/2,this.b/2,this.g/2);
             ellipse(this.cx[k]+width/2,this.cy[k]-player.y+height/2,this.cs[k],this.cs[k]);
+            //print(k);
         }
+
+
+        for(let k=0;k<this.city.length-1;k++){
+            this.city[k].draw();
+        }
+
+
         pop();
         
     }
