@@ -3,14 +3,15 @@
 //For website use
 // const socket = io('http://mattiwos.com/');
 //Test Use
-const socket = io(window.location.origin,{
-  transports: ['websocket']
-});
+// const socket = io(window.location.origin,{
+//   transports: ['websocket']
+// });
 // on reconnection, reset the transports option, as the Websocket
 // connection may have failed (caused by proxy, firewall, browser, ...)
-socket.on('reconnect_attempt', () => {
-  socket.io.opts.transports = ['polling', 'websocket'];
-});
+var socket = io();
+// socket.on('reconnect_attempt', () => {
+//   socket.io.opts.transports = ['polling', 'websocket'];
+// });
 
 //var socket = io.connect(window.location.origin); //starts connection with website (server)
 

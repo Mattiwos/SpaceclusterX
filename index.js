@@ -1,11 +1,13 @@
 
 const express  = require('express')
-const port = process.env.PORT || 5500
+
 
 var app = express();
 
-const server = require('http').Server(app);
-const io = require('socket.io')(server);
+const http = require('http').Server(app);
+
+const io = require('socket.io')(http);
+var port = process.env.PORT || 3000;
 //required folders
 
 
@@ -79,11 +81,9 @@ function updateMap(){
   })
 }
 
-server.listen(port, () => {
-    
-    console.log(`Example app listening on port ${port}!`)
-    
-})
+
+
+
 function newplanets(n){
 
   for(var i=0;i<n;i++){
@@ -116,3 +116,7 @@ function newstars(n){
   }
 
 }
+
+http.listen(port, function(){
+  console.log('listening on *:' + port);
+});
