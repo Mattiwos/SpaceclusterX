@@ -7,11 +7,16 @@ var app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 //required folders
+const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn()
+
+const statusMonitor = require('express-status-monitor')();
+app.use(statusMonitor);
+app.get('/status', ensureLoggedIn, statusMonitor.pageRoute)
 
 app.use(express.static('public'));
 app.use(express.static('views'));
 app.use(express.static('assets'));
-app.use(expressStatusMonitor( { websocket: io, port: app.get('port')} ));
+
 //renders index.html
 app.get('/', function(req, res){
   res.render( 'index.html');
