@@ -100,7 +100,7 @@ var d;
 
 function setup() {
   createCanvas(1000, 700);
-  const socket = io.connect(window.location.origin,{
+  const socket = io(window.location.origin,{
     transports: ['websocket']
   });
 
