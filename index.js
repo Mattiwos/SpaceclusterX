@@ -11,7 +11,7 @@ const io = require('socket.io')(server);
 app.use(express.static('public'));
 app.use(express.static('views'));
 app.use(express.static('assets'));
-app.use(expressStatusMonitor({ websocket: io, port: app.get('port') };
+app.use(expressStatusMonitor( { websocket: io, port: app.get('port')} ));
 //renders index.html
 app.get('/', function(req, res){
   res.render( 'index.html');
