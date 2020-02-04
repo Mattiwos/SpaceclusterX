@@ -16,11 +16,7 @@ socket.on("updateLoc", (args)=>{
    
     for (var i =0; i< oplayers.length;i++){
       if (oplayers[i].id == args.currentplayers[e][0] && args.currentplayers[e][0] != socket.id){
-        oplayers[i].x = args.currentplayers[e][1];
-        oplayers[i].y = args.currentplayers[e][2];
-        oplayers[i].r = args.currentplayers[e][3];
-        oplayers[i].rocketfire = args.currentplayers[e][4];
-
+        oplayers[i].update(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0]);
         exists = true
         
 
@@ -34,7 +30,6 @@ socket.on("updateLoc", (args)=>{
       oplayers.push(new Oplayer(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0]))
      
     }
-    else 
     exists = false;
   }
 
@@ -48,10 +43,7 @@ socket.on('init', (args)=>{
     
     for (var i =0; i< oplayers.length;i++){
       if (oplayers[i].id == args.currentplayers[e][0] && args.currentplayers[e][0] != socket.id){
-        oplayers[i].x = args.currentplayers[e][1];
-        oplayers[i].y = args.currentplayers[e][2];
-        oplayers[i].r = args.currentplayers[e][3];
-        oplayers[i].rocketfire = args.currentplayers[e][4];
+        oplayers[i].update(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0]);
 
         exists = true
        
@@ -63,19 +55,14 @@ socket.on('init', (args)=>{
       
     }
     if (exists == false){
-      try{
-      oplayers.push(new Oplayer(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0]))
-      }
-      catch{
-        oplayers.push(new Oplayer(0,0,0,true,args.currentplayers[e][0]))
-      }
-      
-      
+      oplayers.push(new Oplayer(0,0,0,true,args.currentplayers[e][0]))
     }
-    else 
+      
     exists = false;
+    }
+   
 
-  }
+  
 
 })
 
@@ -145,15 +132,16 @@ function draw() {
   for(var i =0;i<stars.length;i++){
     stars[i].draw();
   }
-  for(var i =0;i<oplayers.length;i++){
-    oplayers[i].draw();
-  }
+ 
 
 
   for(var i =0;i<planets.length;i++){
     planets[i].draw();
   }
   
+  for(var i =0;i<oplayers.length;i++){
+    oplayers[i].draw();
+  }
 
   player.draw();
   

@@ -9,16 +9,17 @@ class Oplayer{
 
     }
     draw(){
-        push()
-        translate(-player.x,-player.y);
+        // push();
+        // translate(-player.x,-player.y)
         drawSpaceship(this.x, this.y ,this.r, this.rocketfire);
-        pop()
+        // pop()
     }
-    update(x,y,r,rocketfire){
+    update(x,y,r,rocketfire,id){
         this.x = x;
         this.y = y;
         this.r = r;
         this.rocketfire = rocketfire;
+        this.id = id
 
     }
 //
