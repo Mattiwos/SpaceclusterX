@@ -10,13 +10,13 @@ var stars=[];
 var d;
 //Other players
 
-
+const socket = io(window.location.origin,{
+  transports: ['websocket']
+});
 
 function setup() {
   createCanvas(1000, 700);
-  const socket = io(window.location.origin,{
-    transports: ['websocket']
-  });
+  
 
   player = new Player(random(-1000,1000),random(-1000,1000),random(-1000,1000));
   
