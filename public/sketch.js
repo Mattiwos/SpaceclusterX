@@ -3,8 +3,9 @@
 //For website use
 // const socket = io('http://mattiwos.com/');
 //Test Use
-const socket = io(window.location.origin,{transports: ['websocket']});
+//const socket = io(window.location.origin,{transports: ['websocket']});
 
+socket = io.connect(window.location.origin); //starts connection with website (server)
 
 socket.on("updateLoc", (args)=>{
   
