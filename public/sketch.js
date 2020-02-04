@@ -3,7 +3,7 @@
 //For website use
 // const socket = io('http://mattiwos.com/');
 //Test Use
-const socket = io();
+const socket = io(window.location.origin,{transports: ['websocket']});
 
 
 var oplayers = [];
