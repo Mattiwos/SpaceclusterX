@@ -3,7 +3,7 @@
 //For website use
 // const socket = io('http://mattiwos.com/');
 //Test Use
-const socket = io(document.URL);
+const socket = io(window.location.href);
 
 
 var oplayers = [];
