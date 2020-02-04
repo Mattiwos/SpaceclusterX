@@ -1,12 +1,12 @@
 class planet{
-    constructor(px,py,sz){
+    constructor(px,py,sz,sr,sb,sg){
         this.x=px;
         this.y=py;
         this.s=sz;
         this.rc=px;
-        this.r=random(0,255);
-        this.b=random(0,255);
-        this.g=random(0,255);
+        this.r=sr;
+        this.b=sb;
+        this.g=sg;
 
         this.cx=[];
         this.cy=[];

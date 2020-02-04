@@ -3,10 +3,8 @@
 //For website use
 // const socket = io('http://mattiwos.com/');
 //Test Use
-const socket = io('http://mattiwos.com/',{transports: ['websocket']});
+const socket = io(window.location.origin,{transports: ['websocket']});
 
-
-var oplayers = [];
 
 socket.on("updateLoc", (args)=>{
   
@@ -60,38 +58,34 @@ socket.on('init', (args)=>{
       
     exists = false;
     }
+
+    for (var i = 0; i < args.planets.length; i++){
+      planets.push(new planet(args.planets[i][0],args.planets[i][1],args.planets[i][2], args.planets[i][3], args.planets[i][4], args.planets[i][5]))
+    }
+    for (var i = 0; i < args.stars.length; i++){
+      stars.push(new star(args.stars[i][0],args.stars[i][1]));
+    }
    
 
   
 
 })
 
+socket.on('mapUpdate',(args)=>{
+  
+})
+
 //////////////////////////////////////////////////////////////////////////////////
 
-
-
-//var x = 0 ;
-//var rot = 0 ;
-var radius = 20 ;
-var player;
 var keyDown={};
 var keys=[65,68,87,83,32];
 
 
-//the stars move a quarter the speed of the planets
-
-
-//how fast forward acceleration
-var faccelspeed=0.6;
-
+var oplayers = [];
+var player;
 var planets=[];
 var stars=[];
 
-//possible parameters for the coordinates and size of a planet
-var cx;
-var cy;
-var cs;
-var spawn;
 var d;
 //Other players
 
@@ -102,25 +96,7 @@ function setup() {
 
   player = new Player(random(-1000,1000),random(-1000,1000),random(-1000,1000));
   
-  for(var i=0;i<40;i++){
-    stars.push(new star (random(-1000,1000),random(-1000,1000) ) );
-  }
-  for(var i=0;i<10;i++){
-      spawn=false;
-    while(spawn==false){
-      cx=random(-1000,1000);
-      cy=random(-1000,1000);
-      cs=random(200,500);
-
-      spawn=true;
-      for(var j=0;j<planets.length;j++){
-          if(dist(cx,cy,planets[j].x,planets[j].y)<cs+planets[j].s)spawn=false;
-      }
-
-      }
-      
-      planets.push(new planet (cx,cy,cs) );
-  }
+  
 }
 
 function draw() {

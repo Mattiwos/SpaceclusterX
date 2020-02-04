@@ -9,6 +9,7 @@ class Player{
       this.maxfs = 12;
       this.maxbs = 4;
       this.raccelspeed = 0.008;
+      this.faccelspeed = 0.6;
       this.rocketfire =false;
   
     }
@@ -31,22 +32,22 @@ class Player{
       //forward and backword speeds
       if(keyDown[keys[2]]==1){
         this.rocketfire = true;
-        if(this.faccel<faccelspeed*(this.maxfs))
-        this.faccel+=faccelspeed*d;
+        if(this.faccel<this.faccelspeed*(this.maxfs))
+        this.faccel+=this.faccelspeed*d;
       
       }
       else this.rocketfire = false;
       if(keyDown[keys[3]]==1){
-        if(this.faccel>faccelspeed*(-1*this.maxbs))
-        this.faccel-=faccelspeed*d;
+        if(this.faccel>this.faccelspeed*(-1*this.maxbs))
+        this.faccel-=this.faccelspeed*d;
       }
   
       this.x+=cos(this.r)*this.faccel*d;
       this.y+=sin(this.r)*this.faccel*d;
   
-      if(this.faccel>0)this.faccel-=faccelspeed/4*d;
-      if(this.faccel<0)this.faccel+=faccelspeed/4*d;
-      if(dist(this.faccel,0,0,0)<faccelspeed/2*d)this.faccel=0;
+      if(this.faccel>0)this.faccel-=this.faccelspeed/4*d;
+      if(this.faccel<0)this.faccel+=this.faccelspeed/4*d;
+      if(dist(this.faccel,0,0,0)<this.faccelspeed/2*d)this.faccel=0;
   
       
     }
