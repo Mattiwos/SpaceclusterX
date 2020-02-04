@@ -3,9 +3,7 @@
 //For website use
 // const socket = io('http://mattiwos.com/');
 //Test Use
-// const socket = io(window.location.origin,{
-//   transports: ['websocket']
-// });
+
 // on reconnection, reset the transports option, as the Websocket
 // connection may have failed (caused by proxy, firewall, browser, ...)
 //var socket = io();
@@ -13,7 +11,7 @@
 //   socket.io.opts.transports = ['polling', 'websocket'];
 // });
 
-var socket = io.connect(window.location.origin); //starts connection with website (server)
+// var socket = io.connect(window.location.origin); //starts connection with website (server)
 
 socket.on("updateLoc", (args)=>{
   
@@ -102,6 +100,9 @@ var d;
 
 function setup() {
   createCanvas(1000, 700);
+  const socket = io.connect(window.location.origin,{
+    transports: ['websocket']
+  });
 
   player = new Player(random(-1000,1000),random(-1000,1000),random(-1000,1000));
   
