@@ -1,9 +1,9 @@
 
 ///////////////////////////////Don't Delete///////////////////////////////////////////////////
 //For website use
-const socket = io('http://mattiwos.com/');
+// const socket = io('http://mattiwos.com/');
 //Test Use
-// const socket = io('localhost:5500');
+const socket = io('localhost:5500');
 
 
 var oplayers = [];
