@@ -1,89 +1,3 @@
-
-///////////////////////////////Don't Delete///////////////////////////////////////////////////
-//For website use
-// const socket = io('http://mattiwos.com/');
-//Test Use
-
-// on reconnection, reset the transports option, as the Websocket
-// connection may have failed (caused by proxy, firewall, browser, ...)
-//var socket = io();
-// socket.on('reconnect_attempt', () => {
-//   socket.io.opts.transports = ['polling', 'websocket'];
-// });
-
-// var socket = io.connect(window.location.origin); //starts connection with website (server)
-
-socket.on("updateLoc", (args)=>{
-  
-  var exists = false;
-  
-  for (var e = 0; e < args.currentplayers.length;e++){
-   
-    for (var i =0; i< oplayers.length;i++){
-      if (oplayers[i].id == args.currentplayers[e][0] && args.currentplayers[e][0] != socket.id){
-        oplayers[i].update(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0]);
-        exists = true
-        
-
-      }
-      if (args.currentplayers[e][0] == socket.id){
-        exists = true
-      }
-      
-    }
-    if (exists == false){
-      oplayers.push(new Oplayer(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0]))
-     
-    }
-    exists = false;
-  }
-
-}) 
-
-socket.on('init', (args)=>{
- 
-  var exists = false;
-
-  for (var e = 0; e < args.currentplayers.length;e++){
-    
-    for (var i =0; i< oplayers.length;i++){
-      if (oplayers[i].id == args.currentplayers[e][0] && args.currentplayers[e][0] != socket.id){
-        oplayers[i].update(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0]);
-
-        exists = true
-       
-
-      }
-      if (args.currentplayers[e][0] == socket.id){
-        exists = true
-      }
-      
-    }
-    if (exists == false){
-      oplayers.push(new Oplayer(0,0,0,true,args.currentplayers[e][0]))
-    }
-      
-    exists = false;
-    }
-
-    for (var i = 0; i < args.planets.length; i++){
-      planets.push(new planet(args.planets[i][0],args.planets[i][1],args.planets[i][2], args.planets[i][3], args.planets[i][4], args.planets[i][5]))
-    }
-    for (var i = 0; i < args.stars.length; i++){
-      stars.push(new star(args.stars[i][0],args.stars[i][1]));
-    }
-   
-
-  
-
-})
-
-socket.on('mapUpdate',(args)=>{
-  
-})
-
-//////////////////////////////////////////////////////////////////////////////////
-
 var keyDown={};
 var keys=[65,68,87,83,32];
 
@@ -174,3 +88,88 @@ function senddata(){
   })
 
 }
+
+///////////////////////////////Don't Delete///////////////////////////////////////////////////
+//For website use
+// const socket = io('http://mattiwos.com/');
+//Test Use
+
+// on reconnection, reset the transports option, as the Websocket
+// connection may have failed (caused by proxy, firewall, browser, ...)
+//var socket = io();
+// socket.on('reconnect_attempt', () => {
+//   socket.io.opts.transports = ['polling', 'websocket'];
+// });
+
+// var socket = io.connect(window.location.origin); //starts connection with website (server)
+
+socket.on("updateLoc", (args)=>{
+  
+  var exists = false;
+  
+  for (var e = 0; e < args.currentplayers.length;e++){
+   
+    for (var i =0; i< oplayers.length;i++){
+      if (oplayers[i].id == args.currentplayers[e][0] && args.currentplayers[e][0] != socket.id){
+        oplayers[i].update(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0]);
+        exists = true
+        
+
+      }
+      if (args.currentplayers[e][0] == socket.id){
+        exists = true
+      }
+      
+    }
+    if (exists == false){
+      oplayers.push(new Oplayer(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0]))
+     
+    }
+    exists = false;
+  }
+
+}) 
+
+socket.on('init', (args)=>{
+ 
+  var exists = false;
+
+  for (var e = 0; e < args.currentplayers.length;e++){
+    
+    for (var i =0; i< oplayers.length;i++){
+      if (oplayers[i].id == args.currentplayers[e][0] && args.currentplayers[e][0] != socket.id){
+        oplayers[i].update(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0]);
+
+        exists = true
+       
+
+      }
+      if (args.currentplayers[e][0] == socket.id){
+        exists = true
+      }
+      
+    }
+    if (exists == false){
+      oplayers.push(new Oplayer(0,0,0,true,args.currentplayers[e][0]))
+    }
+      
+    exists = false;
+    }
+
+    for (var i = 0; i < args.planets.length; i++){
+      planets.push(new planet(args.planets[i][0],args.planets[i][1],args.planets[i][2], args.planets[i][3], args.planets[i][4], args.planets[i][5]))
+    }
+    for (var i = 0; i < args.stars.length; i++){
+      stars.push(new star(args.stars[i][0],args.stars[i][1]));
+    }
+   
+
+  
+
+})
+
+socket.on('mapUpdate',(args)=>{
+  
+})
+
+//////////////////////////////////////////////////////////////////////////////////
