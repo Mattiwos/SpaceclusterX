@@ -17,7 +17,7 @@ app.use(express.static('assets'));
 
 //renders index.html
 app.get('/', function(req, res){
-  res.sendFile( 'index.html');
+  res.render( 'index.html');
 });
 
 playerson = [];
