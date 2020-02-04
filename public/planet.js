@@ -11,7 +11,7 @@ class planet{
         this.cx=[];
         this.cy=[];
         this.cs=[];
-        this.craters=random(1,5);
+        //this.craters=random(1,5);
         this.spawn=false;
 
         this.city=[];

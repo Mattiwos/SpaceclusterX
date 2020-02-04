@@ -102,24 +102,47 @@ function setup() {
 function draw() {
   d=deltaTime/10;
   background(0);
-  senddata();
+  senddata(); 
+  
+ 
 
+  //draw objects close by only in orde to increase performance
+  
 
   for(var i =0;i<stars.length;i++){
+   
+    // if ( (dist(player.x,stars[i].x,player.y,stars[i].y)) <= (2*width)){
+    //   stars[i].draw();
+    // }
     stars[i].draw();
+
+   
   }
  
 
 
   for(var i =0;i<planets.length;i++){
+    
+    // if ( (dist(player.x,planets[i].x,player.y,planets[i].y)) <= (2*width)){
+    //   planets[i].draw();
+    // }
     planets[i].draw();
+   
   }
   
   for(var i =0;i<oplayers.length;i++){
+    
+    // if ( (dist(player.x,oplayers[i].x,player.y,oplayers[i].y)) <= (2*width)){
+    //   oplayers[i].draw();
+    // }
     oplayers[i].draw();
+    
   }
 
   player.draw();
+
+  textSize(22)
+  text("X: " + (player.x | 0 )+" Y: "+ (player.y | 0), width*0.8,height*0.9)
   
   
 
