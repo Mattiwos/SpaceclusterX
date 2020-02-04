@@ -9,18 +9,74 @@ const socket = io('localhost:5500');
 var oplayers = [];
 
 socket.on("updateLoc", (args)=>{
-  console.log(args.currentplayers)
-  // for (var i = 0; i < oplayers.length;i++){
-  //   if (oplayers[i].id = args.id){
-  //     oplayers[i].update(args.x,args.y,args.r,args.rocketfire)
+  
+  var exists = false;
+  
+  for (var e = 0; e < args.currentplayers.length;e++){
+   
+    for (var i =0; i< oplayers.length;i++){
+      if (oplayers[i].id == args.currentplayers[e][0] && args.currentplayers[e][0] != socket.id){
+        oplayers[i].x = args.currentplayers[e][1];
+        oplayers[i].y = args.currentplayers[e][2];
+        oplayers[i].r = args.currentplayers[e][3];
+        oplayers[i].rocketfire = args.currentplayers[e][4];
 
-  //   }
-  // }
+        exists = true
+        
+
+      }
+      if (args.currentplayers[e][0] == socket.id){
+        exists = true
+      }
+      
+    }
+    if (exists == false){
+      oplayers.push(new Oplayer(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0]))
+     
+    }
+    else 
+    exists = false;
+  }
 
 }) 
 
-socket.on('init', (arg)=>{
-  console.log(arg.currentplayers)
+socket.on('init', (args)=>{
+ 
+  var exists = false;
+
+  for (var e = 0; e < args.currentplayers.length;e++){
+    
+    for (var i =0; i< oplayers.length;i++){
+      if (oplayers[i].id == args.currentplayers[e][0] && args.currentplayers[e][0] != socket.id){
+        oplayers[i].x = args.currentplayers[e][1];
+        oplayers[i].y = args.currentplayers[e][2];
+        oplayers[i].r = args.currentplayers[e][3];
+        oplayers[i].rocketfire = args.currentplayers[e][4];
+
+        exists = true
+       
+
+      }
+      if (args.currentplayers[e][0] == socket.id){
+        exists = true
+      }
+      
+    }
+    if (exists == false){
+      try{
+      oplayers.push(new Oplayer(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0]))
+      }
+      catch{
+        oplayers.push(new Oplayer(0,0,0,true,args.currentplayers[e][0]))
+      }
+      
+      
+    }
+    else 
+    exists = false;
+
+  }
+
 })
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -88,6 +144,9 @@ function draw() {
 
   for(var i =0;i<stars.length;i++){
     stars[i].draw();
+  }
+  for(var i =0;i<oplayers.length;i++){
+    oplayers[i].draw();
   }
 
 

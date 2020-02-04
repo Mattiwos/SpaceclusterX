@@ -28,10 +28,10 @@ io.on('connection', (socket)=>{
   socket.on('currData', (args)=>{
     for (var i = 0; i < playerson.length;i++){
       if (playerson[i][0] == args.id){
-        playerson[i].push(args.x);
-        playerson[i].push(args.y);
-        playerson[i].push(args.r);
-        playerson[i].push(args.rocketfire);
+        playerson[i][1] = (args.x);
+        playerson[i][2] = (args.y);
+        playerson[i][3] = (args.r);
+        playerson[i][4] = args.rocketfire;
         updateLoc();
         break;
       }
@@ -39,11 +39,7 @@ io.on('connection', (socket)=>{
    
 
   })
-  function updateLoc(){
-    io.emit('updateLoc',{
-      currentplayers = playerson;
-    })
-  }
+
 	
 	socket.on('disconnect', (arg)=>{
     for (var i = 0; i< playerson.length;i++){
@@ -61,6 +57,12 @@ io.on('connection', (socket)=>{
 
 
 });
+
+function updateLoc(){
+  io.emit('updateLoc',{
+    currentplayers: playerson
+  })
+}
 
 
 server.listen(port, () => {

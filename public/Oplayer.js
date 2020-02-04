@@ -9,8 +9,10 @@ class Oplayer{
 
     }
     draw(){
+        push()
+        translate(-player.x,-player.y);
         drawSpaceship(this.x, this.y ,this.r, this.rocketfire);
-
+        pop()
     }
     update(x,y,r,rocketfire){
         this.x = x;
