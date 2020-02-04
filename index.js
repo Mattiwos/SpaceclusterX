@@ -3,14 +3,15 @@ const express  = require('express')
 const port = process.env.PORT || 5500
 
 var app = express();
-var server = require('http').createServer(app);
-var io = require('socket.io').listen(server);
+
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 //required folders
 
 app.use(express.static('public'));
 app.use(express.static('views'));
 app.use(express.static('assets'));
-
+app.use(expressStatusMonitor({ websocket: io, port: app.get('port') };
 //renders index.html
 app.get('/', function(req, res){
   res.render( 'index.html');
