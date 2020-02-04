@@ -93,7 +93,7 @@ var d;
 
 
 function setup() {
-  createCanvas(1000, 600);
+  createCanvas(1000, 700);
 
   player = new Player(random(-1000,1000),random(-1000,1000),random(-1000,1000));
   
@@ -105,8 +105,7 @@ function draw() {
   background(0);
   senddata(); 
   
- 
-
+  //print("as;dlfkj");
   //draw objects close by only in orde to increase performance
   
 
