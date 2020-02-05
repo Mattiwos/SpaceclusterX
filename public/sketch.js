@@ -1,6 +1,6 @@
 ///////////////////////////////Don't Delete///////////////////////////////////////////////////
 //For website use
-const socket = io('http://spaceclusterx.herokuapp.com//',
+const socket = io.connect('http://spaceclusterx.herokuapp.com//',
               {transports:['websocket']});
 //Test Use
 
