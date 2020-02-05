@@ -12,7 +12,7 @@
 
 // var socket = io.connect(window.location.origin); //starts connection with website (server)
 //const socket = io(window.location.origin);
-var socket = io.connect('http://mattiwos.com/');
+var socket = io();
 //var socket = io();
 
 socket.on("updateLoc", (args)=>{
