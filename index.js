@@ -1,7 +1,8 @@
+var express = require('express');
 var app = require('express')();
-var http = require('http').Server(app);
+var http = require('http').createServer(app);
 var io = require('socket.io')(http);
-var port = process.env.PORT || 5500;
+const port = process.env.PORT || 5500;
 
 //required folders
 
