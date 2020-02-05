@@ -1,6 +1,7 @@
 ///////////////////////////////Don't Delete///////////////////////////////////////////////////
 //For website use
-// const socket = io('http://mattiwos.com/');
+const socket = io('http://spaceclusterx.herokuapp.com//',
+              {transports:['websocket']});
 //Test Use
 
 // on reconnection, reset the transports option, as the Websocket
@@ -12,7 +13,8 @@
 
 // var socket = io.connect(window.location.origin); //starts connection with website (server)
 //const socket = io(window.location.origin);
-var socket = io();
+
+//var socket = io();
 //var socket = io();
 
 socket.on("updateLoc", (args)=>{
