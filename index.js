@@ -1,8 +1,10 @@
 var express = require('express');
 var app = express();
-var http = require('http').Server(app);
-var io = require('socket.io').listen(http);
 const port = process.env.PORT || 5500;
+var server = app.listen(port)
+//var http = require('http').Server(app);
+var io = require('socket.io').listen(server);
+
 
 //required folders
 
@@ -113,6 +115,6 @@ function newstars(n){
 
 }
 
-http.listen(port, function(){
-  console.log('listening on *:' + port);
-});
+// http.listen(port, function(){
+//   console.log('listening on *:' + port);
+// });
