@@ -15,13 +15,13 @@ class star{
         translate(-player.x/this.ss,-player.y/this.ss);
         fill (255);
         noStroke();
-        ellipse(this.x+width/2,this.y+height/2,this.s,this.s);
+        ellipse(this.x+width/2,this.y+height/2+m,this.s,this.s);
 
         for(var u=0;u<this.glow;u++){
             noFill();
             stroke(255,255-255/this.glow*u);
             strokeWeight(1);
-            ellipse(this.x+width/2,this.y+height/2,this.s+u,this.s+u);
+            ellipse(this.x+width/2,this.y+height/2+m,this.s+u,this.s+u);
         }
 
         pop ();
