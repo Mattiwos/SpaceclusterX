@@ -157,15 +157,7 @@ function draw() {
 
   player.draw();
 
-  textSize(22);
-  text("X: " + (player.x | 0 )+" Y: "+ (player.y | 0), width*0.8,height*0.9);
-  
-  
-  fill (0,100);
-  noStroke();
-  rect (0,height-m*2,width,m*2);
-  fill(100);
-  rect(width/2 - player.storage * storagewidth / 2, height - m*1.7, player.storage *storagewidth,storagewidth);
+  drawGraphics();
 
 
 }

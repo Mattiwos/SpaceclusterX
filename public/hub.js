@@ -6,6 +6,8 @@ class hub{
         //print("works");
         this.citysize=50;
 
+
+        //graphics for city
         this.rectx=[];
         this.recty=[];
         this.rr=[];
@@ -15,6 +17,56 @@ class hub{
         this.rects=10;
 
         this.rf=[];
+
+        this.numOfResources=4;
+        //the amount of different resources in the game ; constant !
+
+        //hub IMPORT
+        //it buys this from u
+        this.hubImport=[];
+        this.hubImportValue=[];
+        this.importNum=random(1,3);
+
+        //create unique imports
+        for(let k=0;k<this.importNum;k++){
+            this.possible=random(0,4);
+            this.exists=false;
+            while(this.exists==true){
+                this.possible=random(0,4);
+                this.exists=false;
+                for(let h=0;h<this.hubImport.length;h++){
+                    if(this.possible==this.hubImport[h])this.exists=true;
+                }
+            }
+            this.hubImport.push(this.possible);
+            this.hubImportValue.push(int(random(4,8)));
+        }
+
+        //hub EXPORT
+        this.hubExport=[];
+        this.hubExportCost=[];
+        this.exportNum=random(1,3);
+
+        //create unique things for sale, cannot be the same as the imports
+        for(let k=0;k<this.exportNum;k++){
+            this.possible=random(0,4);
+            this.exists=false;
+            while(this.exists==true){
+                this.possible=random(0,4);
+                this.exists=false;
+                for(let h=0;h<this.hubImport.length;h++){
+                    if(this.possible==this.hubImport[h])this.exists=true;
+                }
+                for(let h=0;h<this.hubExport.length;h++){
+                    if(this.possible==this.hubExport[h])this.exists=true;
+                }
+            }
+            this.hubExport.push(this.possible);
+            this.hubExportCost.push(int(random(1,4)));
+        }
+
+
+        //this.
 
 
 
@@ -70,11 +122,3 @@ class hub{
 
 }
 
-function drawResource(x,y,resource,sc){
-    //sc = scale factor
-    noStroke();
-    if(resource==1){
-
-        ellipse(x,y,10*sc,10*sc);
-    }
-}

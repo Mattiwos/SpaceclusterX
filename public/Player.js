@@ -14,6 +14,8 @@ class Player{
 
       this.upgrades = [];
       this.storage = 5;
+
+      this.credits = 10;
   
     }
     movement(){
@@ -51,7 +53,7 @@ class Player{
       if(this.faccel>0)this.faccel-=this.faccelspeed/4*d;
       if(this.faccel<0)this.faccel+=this.faccelspeed/4*d;
       if(dist(this.faccel,0,0,0)<this.faccelspeed/2*d)this.faccel=0;
-  
+      
       
     }
     draw(){
