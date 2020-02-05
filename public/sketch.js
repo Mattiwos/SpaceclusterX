@@ -11,9 +11,7 @@
 // });
 
 // var socket = io.connect(window.location.origin); //starts connection with website (server)
-const socket = io(window.location.origin,{
-  transports: ['websocket']
-});
+const socket = io(window.location.origin);
 socket.on("updateLoc", (args)=>{
   
   var exists = false;
