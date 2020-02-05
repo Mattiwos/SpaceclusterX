@@ -22,8 +22,11 @@ class planet{
             this.dist=random(0,this.s/2-0);
             this.city.push(new hub(this.x+this.dist*cos (this.ag),this.y+this.dist*sin (this.ag)));
         }
-        this.craters=random(10,30);
+        //this.craters=random(this.s^2/16000,this.s^2/8000);
+
+        this.craters=random(10,40);
         for(var o=0;o<this.craters;o++){
+
             this.ag=random(0,2*PI);
             this.cs.push(random(25,80));
             this.dist=random(0,this.s/2-this.cs[o]/2);
@@ -33,6 +36,18 @@ class planet{
             this.cf.push(random(0,255));
             
         }
+        /*for(var o=0;o<this.craters;o++){
+
+            for(var u=0;u<3;u++){
+                this.ag=random(0,2*PI);
+                this.dist=random(0,this.s/2);
+                
+                this.cx.push(this.x+this.dist*cos (this.ag));
+                this.cy.push(this.y+this.dist*sin (this.ag));
+                this.cf.push(random(0,255));
+            }
+            
+        }*/
 
     }
     draw(){
@@ -46,7 +61,7 @@ class planet{
             strokeWeight(2);
             noStroke();
             ellipse(this.x+width/2,
-            this.y+height/2,this.s+2+4*k,this.s+2+4*k);
+            this.y+height/2+m,this.s+2+4*k,this.s+2+4*k);
         }
        
 
@@ -55,14 +70,20 @@ class planet{
         stroke(this.r/2,this.b/2,this.g/2);
         noStroke();
         ellipse(this.x+width/2,
-        this.y+height/2,this.s,this.s);
+        this.y+height/2+m,this.s,this.s);
 
-        for(let k=0;k<this.cx.length-1;k++){
+        for(let k=0;k<this.cx.length-1;k+=3){
             noStroke();
             fill(this.r/2,this.b/2,this.g/2,this.cf[k]);
 
             //fill(this.r/2*this.cf[k]/255,this.b/2*this.cf[k]/255,this.g/2*this.cf[k]/255);
-            ellipse(this.cx[k]+width/2,this.cy[k]+height/2,this.cs[k],this.cs[k]);
+
+
+            //triangle(this.cx[k]+width/2,this.cy[k]+height/2,
+             //   this.cx[k+1]+width/2,this.cy[k+1]+height/2,
+             //   this.cx[k+2]+width/2,this.cy[k+2]+height/2,)
+
+            ellipse(this.cx[k]+width/2,this.cy[k]+height/2+m,this.cs[k],this.cs[k]);
             //print(k);
         }
 

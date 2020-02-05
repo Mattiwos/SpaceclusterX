@@ -6,20 +6,23 @@ class Player{
       //speed of rotation
       this.raccel=0;
       this.faccel=0;
-      this.maxfs = 12;
+      this.maxfs = 16;
       this.maxbs = 4;
       this.raccelspeed = 0.008;
-      this.faccelspeed = 0.6;
+      this.faccelspeed = 0.5;
       this.rocketfire =false;
+
+      this.upgrades = [];
+      this.storage = 5;
   
     }
     movement(){
       ///rotation
       if(keyDown[keys[1]]==1){ //A
-        if(this.raccel<this.raccelspeed*(8))
+        if(this.raccel<this.raccelspeed*(12))
         this.raccel+=this.raccelspeed*d;
       }if(keyDown[keys[0]]==1){ //D
-        if(this.raccel>this.raccelspeed*(-8)) 
+        if(this.raccel>this.raccelspeed*(-12)) 
         this.raccel-=this.raccelspeed*d;
       }
       this.r+=this.raccel;
@@ -29,7 +32,7 @@ class Player{
       if(abs(this.raccel)<this.raccelspeed/2*d)this.raccel=this.raccel/2;
 
 
-      //forward and backword speeds
+      //forward and backward speeds
       if(keyDown[keys[2]]==1){
         this.rocketfire = true;
         if(this.faccel<this.faccelspeed*(this.maxfs))
@@ -53,9 +56,9 @@ class Player{
     }
     draw(){
       this.movement();
-      drawSpaceship(width / 2, height /2 ,this.r, this.rocketfire);
+      drawSpaceship(width / 2, height /2 +m,this.r, this.rocketfire);
 
-      drawSpaceship(width / 2, height /2 ,this.r, this.rocketfire);
+      //drawSpaceship(width / 2, height /2 ,this.r, this.rocketfire);
     }
   
   }
