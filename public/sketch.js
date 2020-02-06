@@ -1,9 +1,10 @@
 ///////////////////////////////Don't Delete///////////////////////////////////////////////////
 //For website use
-const io = require('socket.io-client');
-const socket = io({
-  transports: ['websocket']
-});
+
+const socket = io(
+  {transports: ['websocket']},
+  { forceNew: true }
+  );
 
 // on reconnection, reset the transports option, as the Websocket
 // connection may have failed (caused by proxy, firewall, browser, ...)
