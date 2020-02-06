@@ -43,7 +43,7 @@ class hub{
 
         for(let k=0;k<this.glow;k++){
             //fill(this.rr[0],this.rb[0],this.rg[0],100-k*255/this.glow);
-            fill(0,100-k*255/this.glow);
+            fill(0,0,0,100-k*255/this.glow);
             strokeWeight(2);
             noStroke();
             ellipse(this.x+width/2,
@@ -54,7 +54,7 @@ class hub{
         for(var p=0;p<this.rectnumber-1;p++){
             noStroke();
             fill(this.rf[p]);
-            fill(this.rr[0],this.rg[0],this.rb[0],this.rf[p]);
+            //fill(this.rr[0],this.rg[0],this.rb[0],this.rf[p]);
             //rect (this.rectx[p]-this.rects/2+width/2,this.recty[p]-this.rects/2+height/2,this.rects,this.rects);
 
             ellipse (this.rectx[p]+width/2,this.recty[p]+height/2+m,this.rects,this.rects);
