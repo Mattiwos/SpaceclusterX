@@ -65,16 +65,20 @@ class hub{
         }
 
         //print(this.x+width/2+" "+this/this.y+width/2);
+
+
+        if(dist (this.x,this.y,player.x,player.y)<this.citysize/2+30){
+            stroke(50,100);
+            strokeWeight(50);
+            noFill();
+            ellipse(this.x+width/2,this.y+height/2+m,140,140);
+
+            //for(let h=0;h<this.)
+        }
+
+
     }
 
 
 }
 
-function drawResource(x,y,resource,sc){
-    //sc = scale factor
-    noStroke();
-    if(resource==1){
-
-        ellipse(x,y,10*sc,10*sc);
-    }
-}

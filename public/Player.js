@@ -21,10 +21,10 @@ class Player{
     movement(){
       ///rotation
       if(keyDown[keys[1]]==1){ //A
-        if(this.raccel<this.raccelspeed*(12))
+        if(this.raccel<this.raccelspeed*(9))
         this.raccel+=this.raccelspeed*d;
       }if(keyDown[keys[0]]==1){ //D
-        if(this.raccel>this.raccelspeed*(-12)) 
+        if(this.raccel>this.raccelspeed*(-9)) 
         this.raccel-=this.raccelspeed*d;
       }
       this.r+=this.raccel;
