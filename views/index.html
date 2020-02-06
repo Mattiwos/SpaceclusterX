@@ -13,7 +13,26 @@
     <p>By Peter R. and Mattiwos B.</p>
     <p>Currently incomplete</p>
 
-    
-    <button onclick="window.location.href = 'game.html';">START</button>
+
+    <label for="name">Name (4 to 8 characters):</label>
+    <input type="text" id="name" name="name" required minlength="4" maxlength="8" size="10">
+    <button onclick="myFunction()">START</button>
+    <script src="/socket.io/socket.io.js"></script>
+    <script> 
+    function myFunction() {
+      const socket = io(
+        {transports: ['websocket']},
+        { forceNew: true }
+      );
+      socket.on('reconnect_attempt', () => {
+        socket.io.opts.transports = ['polling', 'websocket'];
+      });
+      socket.emit('name', document.getElementById("name").value)
+
+      window.location.href = 'game.html';
+      
+    }
+    </script>
+
   </body>
 </html>

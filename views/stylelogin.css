@@ -4,3 +4,10 @@ h1{
 p{
     text-align-last: center;
 }
+Button{
+    text-align-last: center;
+}
+
+input{
+    text-align-last: center;
+}

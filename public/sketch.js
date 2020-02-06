@@ -1,3 +1,5 @@
+
+
 ///////////////////////////////Don't Delete///////////////////////////////////////////////////
 //For website use
 
@@ -86,7 +88,7 @@ socket.on('init', (args)=>{
       stars.push(new star(args.stars[i][0],args.stars[i][1]));
     }
    
-
+  name = args.name;
   
 
 })
@@ -136,7 +138,7 @@ function draw() {
   //print("as;dlfkj");
   //draw objects close by only in orde to increase performance
   
-
+  text(name, width/2,height/2);
   for(var i =0;i<stars.length;i++){
    
     // if ( (dist(player.x,stars[i].x,player.y,stars[i].y)) <= (2*width)){
