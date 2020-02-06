@@ -21,7 +21,12 @@ function drawGraphics(){
         fill(255);
         stroke(200);
         strokeWeight(2);
-        text("¢"+player.credits,width/10,height+m);
+        text("¢"+player.displaycredits,width/10,height+m);
+
+    for(let i=0;i<player.cargobay.length;i++){
+        drawResource(width/2 - player.storage * storagewidth / 2 +storagewidth/2  +storagewidth*i, height + m*1.1 - 10,
+            player.cargobay[i],4);
+    }
 
 }
 

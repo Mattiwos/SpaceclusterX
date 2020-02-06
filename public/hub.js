@@ -25,7 +25,7 @@ class hub{
         //how far out the circle goes
         this.displaywidth=170;
 
-
+        this.popup=0;
 
         this.rotate=0;
 
@@ -144,14 +144,18 @@ class hub{
                 fill(255);
                 textSize(25);
                 noStroke();
-               // text(this.resourceExportCost[h],this.resourcex-10,
-              //  this.resourcey+40);
-
-                if(mouseIsPressed&&mouseP==false&&dist (mouseX,mouseY,this.resourcex,this.resourcey)<30){
-
+                text(this.hubExportCost[h],this.resourcex-10,
+                this.resourcey+40);
+                if(mouseIsPressed&&mouseP==false&&dist (mouseX+player.x,mouseY+player.y,this.resourcex,this.resourcey)<30){
+                    
+                    if(player.credits>=this.hubExportCost[h] &&player.cargobay.length<player.storage){
+                        player.credits-=this.hubExportCost[h];
+                        player.cargobay.push(this.hubExport[h]);
+                        mouseP=true;
+                    }
                 }
             }
-        }
+        }else this.popup=0;
 
     }
 
