@@ -1,13 +1,27 @@
 h1{
-    text-align-last: center;
+    text-align: center;
+    
+
 }
 p{
-    text-align-last: center;
+    text-align: center;
 }
-Button{
-    text-align-last: center;
+.loginname {
+    height: 100vw;
+    text-align: center;
 }
 
-input{
+.loginname Button{ 
     text-align-last: center;
+}
+.loginname Button:hover{ 
+
+    font: white;
+    
+    font-size: -webkit-xxx-large;
+    
+}
+.loginname label{
+}
+.loginname input{
 }
