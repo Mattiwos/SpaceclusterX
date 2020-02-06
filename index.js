@@ -21,18 +21,21 @@ app.get('/', function(req, res){
 playerson = [];
 planets = [];
 newplanets(10);
-
+var name;
 stars = [];
 newstars(100);
 
 //socket
 io.on('connection', (socket)=>{
   playerson.push([socket.id]);
-
+  socket.on('name', (arg)=>{
+    name = arg
+  });
   socket.emit('init', {
     currentplayers: playerson,
     planets: planets,
-    stars: stars
+    stars: stars,
+    name:name
 
   })
   socket.on('currData', (args)=>{
