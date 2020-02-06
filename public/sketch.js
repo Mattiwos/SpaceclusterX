@@ -1,3 +1,5 @@
+
+
 ///////////////////////////////Don't Delete///////////////////////////////////////////////////
 //For website use
 
@@ -86,7 +88,7 @@ socket.on('init', (args)=>{
       stars.push(new star(args.stars[i][0],args.stars[i][1]));
     }
    
-
+  name = args.name;
   
 
 })
@@ -116,13 +118,14 @@ var storagewidth = 50;
 
 //Other players
 
+var mouseP=false;
 
 
 function setup() {
-  createCanvas(1000, 700);
+  createCanvas(windowWidth, windowHeight);
   
 
-  player = new Player(random(-1000,1000),random(-1000,1000),random(-1000,1000));
+  player = new Player(width/2+random(-1000,1000),height/2 + m+random(-1000,1000),random(-1000,1000));
   
   
 }
@@ -135,7 +138,7 @@ function draw() {
   //print("as;dlfkj");
   //draw objects close by only in orde to increase performance
   
-
+  text(name, width/2,height/2);
   for(var i =0;i<stars.length;i++){
    
     // if ( (dist(player.x,stars[i].x,player.y,stars[i].y)) <= (2*width)){
@@ -166,6 +169,8 @@ function draw() {
     
   }
 
+  
+
   player.draw();
 
   drawGraphics();
@@ -189,7 +194,12 @@ function senddata(){
   })
 
 }
-
+function mousePressed(){
+  //mouseP=true;
+}
+function mouseReleased(){
+  mouseP=false;
+}
 
 
 //////////////////////////////////////////////////////////////////////////////////

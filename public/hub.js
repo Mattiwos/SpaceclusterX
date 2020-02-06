@@ -1,3 +1,5 @@
+
+
 class hub{
     constructor(x,y,r,g,b){
         //this.p=planet;
@@ -16,6 +18,60 @@ class hub{
 
         this.rf=[];
 
+        //the amount of different resources in the game ; constant !
+        this.numOfResources=4;
+        //more constants
+        this.spacing=0.7;
+        //how far out the circle goes
+        this.displaywidth=170;
+
+
+
+        this.rotate=0;
+
+        //hub IMPORT
+        //it buys this from u
+        this.hubImport=[];
+        this.hubImportValue=[];
+        this.importNum=random(1,2);
+
+        //create unique imports
+        for(let k=0;k<this.importNum;k++){
+            this.possible=int(random(1,5));
+            this.exists=true;
+            while(this.exists==true){
+                this.possible=int(random(1,5));
+                this.exists=false;
+                for(let h=0;h<this.hubImport.length;h++){
+                    if(this.possible==this.hubImport[h])this.exists=true;
+                }
+            }
+            this.hubImport.push(this.possible);
+            this.hubImportValue.push(int(random(4,8)));
+        }
+
+        //hub EXPORT
+        this.hubExport=[];
+        this.hubExportCost=[];
+        this.exportNum=random(1,2);
+
+        //create unique things for sale, cannot be the same as the imports
+        for(let k=0;k<this.exportNum;k++){
+            this.possible=int(random(1,5));
+            this.exists=true;
+            while(this.exists==true){
+                this.possible=int(random(1,5));
+                this.exists=false;
+                for(let h=0;h<this.hubImport.length;h++){
+                    if(this.possible==this.hubImport[h])this.exists=true;
+                }
+                for(let h=0;h<this.hubExport.length;h++){
+                    if(this.possible==this.hubExport[h])this.exists=true;
+                }
+            }
+            this.hubExport.push(this.possible);
+            this.hubExportCost.push(int(random(1,4)));
+        }
 
 
         //this.rr.push(random(0,255));
@@ -67,15 +123,35 @@ class hub{
         //print(this.x+width/2+" "+this/this.y+width/2);
 
 
+        
+
+
+    }
+    drawGraphics(){
+
+        this.rotate+=0.004;
         if(dist (this.x,this.y,player.x,player.y)<this.citysize/2+30){
-            stroke(50,100);
-            strokeWeight(50);
+            stroke(50,180);
+            strokeWeight(60);
             noFill();
-            ellipse(this.x+width/2,this.y+height/2+m,140,140);
+            ellipse(this.x+width/2,this.y+height/2+m,this.displaywidth,this.displaywidth);
 
-            //for(let h=0;h<this.)
+            for(let h=0;h<this.exportNum;h++){
+                this.resourcex=this.x+width/2 +cos(h*this.spacing+this.rotate)*this.displaywidth*0.5;
+                this.resourcey=this.y+height/2+m +sin(h*this.spacing+this.rotate)*this.displaywidth*0.5;
+                drawResource(this.resourcex,this.resourcey,this.hubExport[h],4);
+                //print(this.hubExport[h]);
+                fill(255);
+                textSize(25);
+                noStroke();
+               // text(this.resourceExportCost[h],this.resourcex-10,
+              //  this.resourcey+40);
+
+                if(mouseIsPressed&&mouseP==false&&dist (mouseX,mouseY,this.resourcex,this.resourcey)<30){
+
+                }
+            }
         }
-
 
     }
 

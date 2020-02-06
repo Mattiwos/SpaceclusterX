@@ -32,7 +32,7 @@ function drawResource(x,y,resource,sc){
     //yellow circle
     if(resource==1){
         fill(100,100,0);
-        ellipse(x,y,10*sc,10*sc);
+        ellipse(x,y,8*sc,8*sc);
     }
     //blue square
     if(resource==2){
@@ -43,7 +43,7 @@ function drawResource(x,y,resource,sc){
     //green triangle
     if(resource==3){
         fill(0,200,0);
-        triangle(x,y-5*sc,
+        triangle(x,y+5*sc,
             x-5*sc*sqrt (3)/2, y - 5*sc/2,
             x+5*sc*sqrt (3)/2 , y - 5 *sc/2);
     }
