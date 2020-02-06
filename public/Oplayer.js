@@ -10,8 +10,8 @@ class Oplayer{
     }
     draw(){
         push();
-        translate(-player.x,-player.y)
-        drawSpaceship(this.x + width / 2, this.y +height /2 +m ,this.r, this.rocketfire);
+        translate(-player.x + width/2,-player.y + m + height /2)
+        drawSpaceship(this.x, this.y,this.r, this.rocketfire);
         pop()
     }
     update(x,y,r,rocketfire,id){
