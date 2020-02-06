@@ -1,5 +1,5 @@
 class hub{
-    constructor(x,y){
+    constructor(x,y,r,g,b){
         //this.p=planet;
         this.x=x;
         this.y=y;

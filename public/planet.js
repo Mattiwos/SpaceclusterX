@@ -16,11 +16,12 @@ class planet{
         this.craters=random(0,4);
         this.spawn=false;
 
-        this.city=[];
+        this.city=[]
+        ;
         for(var o=0;o<this.craters;o++){
             this.ag=random(0,2*PI);
             this.dist=random(0,this.s/2-0);
-            this.city.push(new hub(this.x+this.dist*cos (this.ag),this.y+this.dist*sin (this.ag)));
+            this.city.push(new hub(this.x+this.dist*cos (this.ag), this.y+this.dist*sin (this.ag), this.r,this.g,this.b));
         }
         //this.craters=random(this.s^2/16000,this.s^2/8000);
 
