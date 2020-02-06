@@ -58,6 +58,7 @@ class Player{
     }
     draw(){
       this.movement();
+      
       drawSpaceship(width / 2, height /2 +m,this.r, this.rocketfire);
 
       //drawSpaceship(width / 2, height /2 ,this.r, this.rocketfire);

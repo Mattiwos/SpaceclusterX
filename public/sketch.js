@@ -119,10 +119,10 @@ var storagewidth = 50;
 
 
 function setup() {
-  createCanvas(1000, 700);
+  createCanvas(windowWidth, windowHeight);
   
 
-  player = new Player(random(-1000,1000),random(-1000,1000),random(-1000,1000));
+  player = new Player(width/2+random(-1000,1000),height/2 + m+random(-1000,1000),random(-1000,1000));
   
   
 }
