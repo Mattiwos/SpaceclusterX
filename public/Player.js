@@ -14,8 +14,10 @@ class Player{
 
       this.upgrades = [];
       this.storage = 5;
+      this.cargobay = [];
 
       this.credits = 10;
+      this.displaycredits = 10;
   
     }
     movement(){
@@ -33,7 +35,10 @@ class Player{
       if(this.raccel<0)this.raccel+=this.raccelspeed/2*d;
       if(abs(this.raccel)<this.raccelspeed/2*d)this.raccel=this.raccel/2;
 
+      if(this.displaycredits>this.credits)this.displaycredits--;
+      if(this.displaycredits<this.credits)this.displaycredits++;
 
+      
       //forward and backward speeds
       if(keyDown[keys[2]]==1){
         this.rocketfire = true;
