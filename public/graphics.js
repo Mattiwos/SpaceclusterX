@@ -28,8 +28,58 @@ function drawGraphics(){
 function drawResource(x,y,resource,sc){
     //sc = scale factor
     noStroke();
-    if(resource==1){
 
+    //yellow circle
+    if(resource==1){
+        fill(100,100,0);
         ellipse(x,y,10*sc,10*sc);
+    }
+    //blue square
+    if(resource==2){
+        fill(0,0,200);
+        rect(x-(8*sc)/2,y-(8*sc)/2,8*sc,8*sc);
+    }
+
+    //green triangle
+    if(resource==3){
+        fill(0,200,0);
+        triangle(x,y-5*sc,
+            x-5*sc*sqrt (3)/2, y - 5*sc/2,
+            x+5*sc*sqrt (3)/2 , y - 5 *sc/2);
+    }
+
+
+    //pink diamond
+
+    if(resource==4){
+        fill(200,50,150);
+        
+        beginShape();
+        vertex(x,y);
+        vertex(x-8*sc,y);
+        vertex(x-2*sc,y-2*sc);
+        vertex(x,y-8*sc);
+        endShape();
+
+        beginShape();
+        vertex(x,y);
+        vertex(x+8*sc,y);
+        vertex(x+2*sc,y-2*sc);
+        vertex(x,y-8*sc);
+        endShape();
+
+        beginShape();
+        vertex(x,y);
+        vertex(x+8*sc,y);
+        vertex(x+2*sc,y+2*sc);
+        vertex(x,y+8*sc);
+        endShape();
+
+        beginShape();
+        vertex(x,y);
+        vertex(x-8*sc,y);
+        vertex(x-2*sc,y+2*sc);
+        vertex(x,y+8*sc);
+        endShape();
     }
 }
