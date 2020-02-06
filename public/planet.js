@@ -92,6 +92,9 @@ class planet{
         for(let k=0;k<this.city.length-1;k++){
             this.city[k].draw();
         }
+        for(let k=0;k<this.city.length-1;k++){
+            this.city[k].drawGraphics();
+        }
 
 
         pop();

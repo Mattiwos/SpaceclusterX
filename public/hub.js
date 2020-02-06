@@ -33,12 +33,12 @@ class hub{
         //it buys this from u
         this.hubImport=[];
         this.hubImportValue=[];
-        this.importNum=random(1,3);
+        this.importNum=random(1,2);
 
         //create unique imports
         for(let k=0;k<this.importNum;k++){
             this.possible=int(random(1,5));
-            this.exists=false;
+            this.exists=true;
             while(this.exists==true){
                 this.possible=int(random(1,5));
                 this.exists=false;
@@ -53,12 +53,12 @@ class hub{
         //hub EXPORT
         this.hubExport=[];
         this.hubExportCost=[];
-        this.exportNum=random(1,3);
+        this.exportNum=random(1,2);
 
         //create unique things for sale, cannot be the same as the imports
         for(let k=0;k<this.exportNum;k++){
             this.possible=int(random(1,5));
-            this.exists=false;
+            this.exists=true;
             while(this.exists==true){
                 this.possible=int(random(1,5));
                 this.exists=false;
@@ -123,25 +123,35 @@ class hub{
         //print(this.x+width/2+" "+this/this.y+width/2);
 
 
+        
+
+
+    }
+    drawGraphics(){
+
+        this.rotate+=0.004;
         if(dist (this.x,this.y,player.x,player.y)<this.citysize/2+30){
-            stroke(50,150);
+            stroke(50,180);
             strokeWeight(60);
             noFill();
             ellipse(this.x+width/2,this.y+height/2+m,this.displaywidth,this.displaywidth);
 
             for(let h=0;h<this.exportNum;h++){
-                drawResource(this.x+width/2 +cos(h*this.spacing+this.rotate)*this.displaywidth*0.5,
-                this.y+height/2+m +sin(h*this.spacing+this.rotate)*this.displaywidth*0.5,
-                this.hubExport[h],4);
-                print(this.hubExport[h]);
+                this.resourcex=this.x+width/2 +cos(h*this.spacing+this.rotate)*this.displaywidth*0.5;
+                this.resourcey=this.y+height/2+m +sin(h*this.spacing+this.rotate)*this.displaywidth*0.5;
+                drawResource(this.resourcex,this.resourcey,this.hubExport[h],4);
+                //print(this.hubExport[h]);
                 fill(255);
                 textSize(25);
                 noStroke();
-                text(this.hubExportCost[h],this.x+width/2 +cos(h*this.spacing+this.rotate)*this.displaywidth*0.5,
-                this.y+height/2+m +sin(h*this.spacing+this.rotate)*this.displaywidth*0.5-10);
+               // text(this.resourceExportCost[h],this.resourcex-10,
+              //  this.resourcey+40);
+
+                if(mouseIsPressed&&mouseP==false&&dist (mouseX,mouseY,this.resourcex,this.resourcey)<30){
+
+                }
             }
         }
-
 
     }
 

@@ -118,6 +118,7 @@ var storagewidth = 50;
 
 //Other players
 
+var mouseP=false;
 
 
 function setup() {
@@ -168,6 +169,8 @@ function draw() {
     
   }
 
+  
+
   player.draw();
 
   drawGraphics();
@@ -191,7 +194,12 @@ function senddata(){
   })
 
 }
-
+function mousePressed(){
+  //mouseP=true;
+}
+function mouseReleased(){
+  mouseP=false;
+}
 
 
 //////////////////////////////////////////////////////////////////////////////////
