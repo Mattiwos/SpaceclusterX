@@ -5,6 +5,25 @@ function drawGraphics(){
     text("X: " + (player.x | 0 )+" Y: "+ (player.y | 0), width*0.8,height*0.9);
     
     
+    stroke(255,0,0,100);
+    strokeWeight(10);
+    noFill();
+    rect(width/2-100,height/50,200,30);
+    fill(200,0,0,255);
+    noStroke();
+    strokeWeight(0);
+    rect(width/2-100+5,height/50+5,player.health*190/100,20);
+
+    
+    stroke(100,100,0,100);
+    strokeWeight(10);
+    noFill();
+    rect(width/2-100,4*height/50,200,30);
+    fill(50,50,0,255);
+    noStroke();
+    strokeWeight(0);
+    rect(width/2-100+5,4*height/50+5,player.ammo*190/100,20);
+
     fill (0,0,0,190);
     //fill(0);
     noStroke();

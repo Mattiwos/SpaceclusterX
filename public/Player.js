@@ -20,6 +20,8 @@ class Player{
 
       this.credits = 20;
       this.displaycredits = 20;
+      this.health = 100;
+      this.ammo = 0;
   
     }
     movement(){

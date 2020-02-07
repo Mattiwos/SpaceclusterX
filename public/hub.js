@@ -20,6 +20,12 @@ class hub{
 
         //the amount of different resources in the game ; constant !
         this.numOfResources=4;
+        this.numOfUpgrades=2;
+
+
+        //Information about all of the upgrades
+        //this.upgradeName={"Reload","BulletSpeed","Damage"};
+
         //more constants
         this.spacing=0.7;
         //how far out the circle goes
@@ -89,6 +95,29 @@ class hub{
         }
 
         this.glow=5;
+
+        //upgrades available at the hub
+        this.hubUpgrades=[];
+        this.hubUpgradeCost=[];
+        this.upgradesResource=[[]];
+        this.upgradesNum=random(0,2);
+
+
+        for(let k=0;k<this.upgradesNum;k++){
+            this.possible=int(random(1,this.numOfUpgrades+1));
+            this.exists=true;
+            while(this.exists==true){
+                this.possible=int(random(1,this.numOfUpgrades+1));
+                this.exists=false;
+                for(let h=0;h<this.hubUpgrades.length;h++){
+                    if(this.possible==this.hubUpgrades[h])this.exists=true;
+                }
+            }
+            this.hubUpgrades.push(this.possible);
+            //change this this.hubUpgrades.push(int(random(6,10)));
+        }
+
+
     }
     draw(){
         fill(20);
@@ -139,6 +168,13 @@ class hub{
             for(let h=0;h<this.exportNum;h++){
                 this.resourcex=this.x+width/2 +cos(h*this.spacing+this.rotate)*this.popup*0.5;
                 this.resourcey=this.y+height/2+m +sin(h*this.spacing+this.rotate)*this.popup*0.5;
+
+                stroke(50,255);
+                strokeWeight(40*this.popup/this.displaywidth);
+
+                arc (this.x+width/2,this.y+height/2+m,this.popup*0.9,h*this.spacing+this.rotate+this.spacing/3,
+                    h*this.spacing+this.rotate-this.spacing/3);
+
                 drawResource(this.resourcex,this.resourcey,this.hubExport[h],4*this.popup/this.displaywidth);
                 //print(this.hubExport[h]);
                 fill(255);
@@ -172,7 +208,7 @@ class hub{
                         print(this.hubImport[h]);
                         print(player.cargobay.length);
                         print(player.cargobay);
-                        if(player.cargobay[p]==this.hubImport[h]){
+                        if(player.cargobay[p]==this.hubImport[h]&&player.cargostate[p]>-100){
                             player.cargostate[p]=-100;
                             player.credits+=this.hubImportValue[h];
                             mouseP=true;
