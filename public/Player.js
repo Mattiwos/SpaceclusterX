@@ -15,9 +15,11 @@ class Player{
       this.upgrades = [];
       this.storage = 5;
       this.cargobay = [];
+      //cargo state in animation
+      this.cargostate = [];
 
-      this.credits = 10;
-      this.displaycredits = 10;
+      this.credits = 20;
+      this.displaycredits = 20;
   
     }
     movement(){

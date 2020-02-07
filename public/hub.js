@@ -33,21 +33,21 @@ class hub{
         //it buys this from u
         this.hubImport=[];
         this.hubImportValue=[];
-        this.importNum=random(1,2);
+        this.importNum=random(0,2);
 
         //create unique imports
         for(let k=0;k<this.importNum;k++){
-            this.possible=int(random(1,5));
+            this.possible=int(random(1,this.numOfResources+1));
             this.exists=true;
             while(this.exists==true){
-                this.possible=int(random(1,5));
+                this.possible=int(random(1,this.numOfResources+1));
                 this.exists=false;
                 for(let h=0;h<this.hubImport.length;h++){
                     if(this.possible==this.hubImport[h])this.exists=true;
                 }
             }
             this.hubImport.push(this.possible);
-            this.hubImportValue.push(int(random(4,8)));
+            this.hubImportValue.push(int(random(6,10)));
         }
 
         //hub EXPORT
@@ -57,10 +57,10 @@ class hub{
 
         //create unique things for sale, cannot be the same as the imports
         for(let k=0;k<this.exportNum;k++){
-            this.possible=int(random(1,5));
+            this.possible=int(random(1,this.numOfResources+1));
             this.exists=true;
             while(this.exists==true){
-                this.possible=int(random(1,5));
+                this.possible=int(random(1,this.numOfResources+1));
                 this.exists=false;
                 for(let h=0;h<this.hubImport.length;h++){
                     if(this.possible==this.hubImport[h])this.exists=true;
@@ -70,7 +70,7 @@ class hub{
                 }
             }
             this.hubExport.push(this.possible);
-            this.hubExportCost.push(int(random(1,4)));
+            this.hubExportCost.push(int(random(3,6)));
         }
 
 
@@ -131,15 +131,15 @@ class hub{
 
         this.rotate+=0.004;
         if(dist (this.x,this.y,player.x,player.y)<this.citysize/2+30){
-            stroke(50,180);
-            strokeWeight(60);
+            stroke(50,120);
+            strokeWeight(60*this.popup/this.displaywidth);
             noFill();
-            ellipse(this.x+width/2,this.y+height/2+m,this.displaywidth,this.displaywidth);
-
+            ellipse(this.x+width/2,this.y+height/2+m,this.popup,this.popup);
+            if(this.popup<this.displaywidth)this.popup+=25;
             for(let h=0;h<this.exportNum;h++){
-                this.resourcex=this.x+width/2 +cos(h*this.spacing+this.rotate)*this.displaywidth*0.5;
-                this.resourcey=this.y+height/2+m +sin(h*this.spacing+this.rotate)*this.displaywidth*0.5;
-                drawResource(this.resourcex,this.resourcey,this.hubExport[h],4);
+                this.resourcex=this.x+width/2 +cos(h*this.spacing+this.rotate)*this.popup*0.5;
+                this.resourcey=this.y+height/2+m +sin(h*this.spacing+this.rotate)*this.popup*0.5;
+                drawResource(this.resourcex,this.resourcey,this.hubExport[h],4*this.popup/this.displaywidth);
                 //print(this.hubExport[h]);
                 fill(255);
                 textSize(25);
@@ -151,10 +151,39 @@ class hub{
                     if(player.credits>=this.hubExportCost[h] &&player.cargobay.length<player.storage){
                         player.credits-=this.hubExportCost[h];
                         player.cargobay.push(this.hubExport[h]);
+                        player.cargostate.push(100);
                         mouseP=true;
                     }
                 }
             }
+            for(let h=0;h<this.importNum;h++){
+                this.resourcex=this.x+width/2 +cos(h*this.spacing+this.rotate+PI)*this.popup*0.5;
+                this.resourcey=this.y+height/2+m +sin(h*this.spacing+this.rotate+PI)*this.popup*0.5;
+                drawResource(this.resourcex,this.resourcey,this.hubImport[h],4*this.popup/this.displaywidth);
+                //print(this.hubExport[h]);
+                fill(0);
+                textSize(25);
+                noStroke();
+                text(this.hubImportValue[h],this.resourcex-10,
+                this.resourcey+40);
+                if(mouseIsPressed&&mouseP==false&&dist (mouseX+player.x,mouseY+player.y,this.resourcex,this.resourcey)<30){
+                    
+                    for(var p=0;p<player.cargobay.length;p++){
+                        print(this.hubImport[h]);
+                        print(player.cargobay.length);
+                        print(player.cargobay);
+                        if(player.cargobay[p]==this.hubImport[h]){
+                            player.cargostate[p]=-100;
+                            player.credits+=this.hubImportValue[h];
+                            mouseP=true;
+                            break;
+                        }
+                    }
+                    
+                }
+            }
+            
+
         }else this.popup=0;
 
     }

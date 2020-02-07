@@ -13,11 +13,11 @@ class planet{
         this.cs=[];
         this.cf=[];
 
-        this.craters=random(0,4);
+        this.craters=random(1,2);
         this.spawn=false;
 
-        this.city=[]
-        ;
+        this.city=[];
+        
         for(var o=0;o<this.craters;o++){
             this.ag=random(0,2*PI);
             this.dist=random(0,this.s/2-0);

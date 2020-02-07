@@ -10,13 +10,18 @@ function drawGraphics(){
     noStroke();
     rect (0,height,width,m*2);
     //rect()
-    fill(255,100);
+    fill(255,255,255,20);
+    //fill(255,0,0);
+    //fill(255,0,0,100);
+    noStroke();
+    fill(255,255,255,20);
+    rect(width/2 - player.storage * storagewidth / 2 - 10, height + m*1.7 - 10,
+        player.storage *storagewidth +20,storagewidth+20);
+        fill(255,255,255,40);
     rect(width/2 - player.storage * storagewidth / 2, height + m*1.7,
          player.storage *storagewidth,storagewidth);
 
-    rect(width/2 - player.storage * storagewidth / 2 - 10, height + m*1.7 - 10,
-         player.storage *storagewidth +20,storagewidth+20);
-
+    
         textSize(30);
         fill(255);
         stroke(200);
@@ -24,8 +29,38 @@ function drawGraphics(){
         text("¢"+player.displaycredits,width/10,height+m);
 
     for(let i=0;i<player.cargobay.length;i++){
-        drawResource(width/2 - player.storage * storagewidth / 2 +storagewidth/2  +storagewidth*i, height + m*1.1 - 10,
+        if(player.cargostate[i]<=0&&player.cargostate[i]>-100)
+        drawResource(width/2 - player.storage * storagewidth / 2 +storagewidth/2  +storagewidth*i, height + m*1.15,
             player.cargobay[i],4);
+            else if (player.cargostate[i]>0){
+
+                drawResource(
+                    width/2 - player.storage * storagewidth / 2 +storagewidth/2  +storagewidth*i 
+                    +(width/2- (width/2 - player.storage * storagewidth / 2 +storagewidth/2  +storagewidth*i))*player.cargostate[i]/100, 
+
+                    height + m *1.15 - player.cargostate[i]*height/2/100,
+                    //
+
+                    
+                    player.cargobay[i],4*(100-player.cargostate[i])/100);
+                    player.cargostate[i]-=8;
+            }else{
+                drawResource(
+                    width/2 - player.storage * storagewidth / 2 +storagewidth/2  +storagewidth*i 
+                    +(width/2- (width/2 - player.storage * storagewidth / 2 +storagewidth/2  +storagewidth*i))*-1*(player.cargostate[i]+100)/100, 
+
+                    height + m *1.15 - (-1*(player.cargostate[i]+100)*height/2/100),
+                    //
+
+                    
+                    player.cargobay[i],4*-1*(((-200-player.cargostate[i])/100) ));
+                    player.cargostate[i]-=8;
+                    if(player.cargostate[i]<-200){
+                        player.cargobay.splice(i,1);
+                        player.cargostate.splice(i,1);
+                        //break;
+                    }
+            }
     }
 
 }
@@ -37,12 +72,26 @@ function drawResource(x,y,resource,sc){
     //yellow circle
     if(resource==1){
         fill(100,100,0);
-        ellipse(x,y,8*sc,8*sc);
+        
+        noFill();
+        
+        for(let u=8;u>0;u--){
+            strokeWeight(u*sc+3);
+            stroke(100,100,0);
+            stroke(255-20*u,255-20*u,0);
+            noStroke();
+            fill(255-20*u,255-20*u,0);
+            ellipse(x,y,u*sc,u*sc);
+        }
+        
     }
     //blue square
     if(resource==2){
         fill(0,0,200);
         rect(x-(8*sc)/2,y-(8*sc)/2,8*sc,8*sc);
+        fill(0,0,100);
+        rect(x-sc,y-sc*4,sc*2,sc*8);
+        rect(x-sc*4,y-sc,sc*8,sc*2);
     }
 
     //green triangle
@@ -51,6 +100,10 @@ function drawResource(x,y,resource,sc){
         triangle(x,y+5*sc,
             x-5*sc*sqrt (3)/2, y - 5*sc/2,
             x+5*sc*sqrt (3)/2 , y - 5 *sc/2);
+        fill(0,100,0);
+        triangle(x,y+3*sc,
+            x-3*sc*sqrt (3)/2, y - 3*sc/2,
+            x+3*sc*sqrt (3)/2 , y - 3 *sc/2);
     }
 
 
@@ -58,7 +111,7 @@ function drawResource(x,y,resource,sc){
 
     if(resource==4){
         fill(200,50,150);
-        
+        sc=sc*0.7;
         beginShape();
         vertex(x,y);
         vertex(x-8*sc,y);
