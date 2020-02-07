@@ -36,18 +36,19 @@ socket.on("updateLoc", (args)=>{
    
     for (var i =0; i< oplayers.length;i++){
       if (oplayers[i].id == args.currentplayers[e][0] && args.currentplayers[e][0] != socket.id){
-        oplayers[i].update(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0]);
+        oplayers[i].update(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0],args.currentplayers[e][5]);
         exists = true
         
 
       }
       if (args.currentplayers[e][0] == socket.id){
         exists = true
+        player.name = args.currentplayers[e][5]
       }
       
     }
     if (exists == false){
-      oplayers.push(new Oplayer(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0]))
+      oplayers.push(new Oplayer(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0],args.currentplayers[e][5]))
      
     }
     exists = false;
@@ -63,7 +64,7 @@ socket.on('init', (args)=>{
     
     for (var i =0; i< oplayers.length;i++){
       if (oplayers[i].id == args.currentplayers[e][0] && args.currentplayers[e][0] != socket.id){
-        oplayers[i].update(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0]);
+        oplayers[i].update(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0],args.currentplayers[e][5]);
 
         exists = true
        
@@ -71,11 +72,12 @@ socket.on('init', (args)=>{
       }
       if (args.currentplayers[e][0] == socket.id){
         exists = true
+        player.name = args.currentplayers[e][5]
       }
       
     }
     if (exists == false){
-      oplayers.push(new Oplayer(0,0,0,true,args.currentplayers[e][0]))
+      oplayers.push(new Oplayer(0,0,0,true,args.currentplayers[e][0],args.currentplayers[e][5]))
     }
       
     exists = false;
@@ -88,7 +90,7 @@ socket.on('init', (args)=>{
       stars.push(new star(args.stars[i][0],args.stars[i][1]));
     }
    
-  name = args.name;
+ 
   
 
 })
@@ -125,7 +127,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   
 
-  player = new Player(width/2+random(-1000,1000),height/2 + m+random(-1000,1000),random(-1000,1000));
+  player = new Player(width/2+random(-1000,1000),height/2 + m+random(-1000,1000),random(-1000,1000),"unknown");
   
   
 }
@@ -137,8 +139,8 @@ function draw() {
   
   //print("as;dlfkj");
   //draw objects close by only in orde to increase performance
+
   
-  text(name, width/2,height/2);
   for(var i =0;i<stars.length;i++){
    
     // if ( (dist(player.x,stars[i].x,player.y,stars[i].y)) <= (2*width)){
@@ -190,7 +192,8 @@ function senddata(){
     x: player.x,
     y: player.y,
     r: player.r,
-    rocketfire: player.rocketfire
+    rocketfire: player.rocketfire,
+    name: player.name
   })
 
 }
