@@ -1,8 +1,10 @@
 class Player{
-    constructor(ax,ay,ar){
+    constructor(ax,ay,ar,name){
       this.x=ax;
       this.y=ay;
       this.r=ar;
+      
+      this.name = name;
       //speed of rotation
       this.raccel=0;
       this.faccel=0;
@@ -69,6 +71,12 @@ class Player{
       this.movement();
       
       drawSpaceship(width / 2, height /2 +m,this.r, this.rocketfire);
+
+      // if (this.name === undefined){
+      //   window.location.href = 'index.html';
+      // }
+
+      text(String(this.name), width / 2 +2, height /2 +m)
 
       //drawSpaceship(width / 2, height /2 ,this.r, this.rocketfire);
     }

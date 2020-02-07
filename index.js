@@ -21,7 +21,7 @@ app.get('/', function(req, res){
 playerson = [];
 planets = [];
 newplanets(10);
-var name;
+
 stars = [];
 newstars(100);
 
@@ -29,13 +29,21 @@ newstars(100);
 io.on('connection', (socket)=>{
   playerson.push([socket.id]);
   socket.on('name', (arg)=>{
-    name = arg
+
+    for (var i = 0; i < playerson.length;i++){
+      if (playerson[i][0] == socket.id){
+        playerson[i][5] = arg.name;
+        updateLoc();
+        break;
+      }
+    }
+
   });
   socket.emit('init', {
     currentplayers: playerson,
     planets: planets,
-    stars: stars,
-    name:name
+    stars: stars
+    
 
   })
   socket.on('currData', (args)=>{
