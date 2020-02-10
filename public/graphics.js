@@ -138,12 +138,16 @@ function drawResource(x,y,resource,sc){
         vertex(x,y-8*sc);
         endShape();
 
+        fill(150,37,150);
+
         beginShape();
         vertex(x,y);
         vertex(x+8*sc,y);
         vertex(x+2*sc,y-2*sc);
         vertex(x,y-8*sc);
         endShape();
+
+        fill(200,50,150);
 
         beginShape();
         vertex(x,y);
@@ -152,11 +156,44 @@ function drawResource(x,y,resource,sc){
         vertex(x,y+8*sc);
         endShape();
 
+        fill(150,37,150);
+
         beginShape();
         vertex(x,y);
         vertex(x-8*sc,y);
         vertex(x-2*sc,y+2*sc);
         vertex(x,y+8*sc);
         endShape();
+    }
+
+    //red star
+    if(resource==5){
+        sc=sc*0.9;
+        fill(255,0,0);
+        for(let i=0;i<2*PI;i+=PI/8){
+            triangle(x+2*sc*cos (i+PI/2),y+2*sc*sin (i+PI/2),
+            x+2*sc*cos (i-PI/2),y+2*sc*sin (i-PI/2),
+
+            x+7*sc*cos (i),y+7*sc*sin (i),
+            
+            );
+        }
+
+        sc=sc*0.6;
+        fill(255,100,100);
+        for(let i=PI/16;i<2*PI+PI/16;i+=PI/8){
+            triangle(x+2*sc*cos (i+PI/2),y+2*sc*sin (i+PI/2),
+            x+2*sc*cos (i-PI/2),y+2*sc*sin (i-PI/2),
+
+            x+6*sc*cos (i),y+6*sc*sin (i),
+            
+            );
+        }
+    }
+
+    if(resource==6){
+        fill(100,50,0);
+        rect(x-sc*4,y-sc*4,sc*8,sc*3);
+        rect(x-sc*4,y+sc*1,sc*8,sc*3);
     }
 }

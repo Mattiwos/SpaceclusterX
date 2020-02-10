@@ -28,6 +28,7 @@ socket.on('reconnect_attempt', () => {
 //var socket = io();
 //var socket = io();
 
+//if(false)
 socket.on("updateLoc", (args)=>{
   
   var exists = false;
@@ -118,6 +119,22 @@ var m=-50;
 var storagewidth = 50;
 //constant: how big the resources appear in the queue
 
+
+//constant : how many resources ther eare
+var numOfResources=6;
+
+// what are the different upgrades
+
+upgradeName=[];upgradeName.push("Reload");upgradeName.push("BulletSpeed");upgradeName.push("Damage");
+
+upgradeCost=[];upgradeCost.push(10);upgradeCost.push(10);upgradeCost.push(10);
+
+upgradeResources=[];upgradeResources.push([2,3]);upgradeResources.push([1,2]);upgradeResources.push([4,5]);
+
+numOfResourcesUpgrade=[2,2,2];
+
+
+
 //Other players
 
 var mouseP=false;
@@ -176,7 +193,6 @@ function draw() {
   player.draw();
 
   drawGraphics();
-
 
 }
 
