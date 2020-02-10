@@ -300,6 +300,42 @@ class hub{
                         this.resourcex-this.upgradeResources[h].length*10+i*20,
                         this.resourcey+30,this.upgradeResources[h][i],2*this.popup/this.displaywidth
                         );
+
+
+                        //buying the upgrades
+                        if(mouseIsPressed&&mouseP==false&&dist (mouseX+player.x,mouseY+player.y,this.resourcex,this.resourcey)<30){
+                            //this variable is the ones needed
+                            this.resourcesneeded=[];
+                            this.fakecargobay=player.cargobay;
+                            //makes them all 0
+                            for(let w=0;w<this.fakecargobay.length;w++)this.fakecargobay[w]=0;
+
+                            this.resourcesneeded=this.upgradeResources[i];
+
+                            for(var p=0;p<this.resourcesneeded.length;p++){
+                                //goes through each of the cargo bays to see if it has the one
+                                //that its looking for
+                                this.i=0;
+                                this.found=false;
+                                while(this.i<this.fakecargobay.length){
+                                    if(this.fakecargobay[this.i]!=this.resourcesneeded[p]
+                                        &&this.fakecargobay[this.i]==0)
+                                        this.i=1000;
+                                        this.found=true;
+
+                                    this.i++;
+                                }
+                                //if it did find one it saves the index of it
+                                if(this.found){
+                                    this.fakecargobay[this.i]=-100;
+                                    
+                                }
+                            }
+
+                            
+                        }
+
+
                 }
 
 
