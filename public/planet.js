@@ -13,17 +13,12 @@ class planet{
         this.cs=[];
         this.cf=[];
 
-        this.craters=random(0,4);
+        
         this.spawn=false;
 
-        this.city=[]
-        ;
-        for(var o=0;o<this.craters;o++){
-            this.ag=random(0,2*PI);
-            this.dist=random(0,this.s/2-0);
-            this.city.push(new hub(this.x+this.dist*cos (this.ag), this.y+this.dist*sin (this.ag), this.r,this.g,this.b));
-        }
-        //this.craters=random(this.s^2/16000,this.s^2/8000);
+        this.city=[];
+
+
 
         this.craters=random(10,40);
         for(var o=0;o<this.craters;o++){
@@ -37,6 +32,45 @@ class planet{
             this.cf.push(random(0,255));
             
         }
+
+        this.planetExport=[];
+        //this.planetExportCost=[];
+        this.planetResources=random(0,3);
+        //cfreates the planets natural resources that it sells on the citys
+        for(let k=0;k<this.planetResources;k++){
+            this.possible=int(random(1,numOfResources+1));
+            this.exists=true;
+            while(this.exists==true){
+                this.possible=int(random(1,numOfResources+1));
+                this.exists=false;
+                for(let h=0;h<this.planetExport.length;h++){
+                    if(this.possible==this.planetExport[h])this.exists=true;
+                }
+            }
+            this.planetExport.push(this.possible);
+        }
+
+        //print("exports:"+this.planetExport);
+
+        this.craters=random(0,3);
+        
+        for(var o=0;o<this.craters;o++){
+            this.touching=true;
+            while(this.touching==true){
+                this.ag=random(0,2*PI);
+                this.dist=random(0,this.s/2-0);
+                this.touching=false;
+                for(let i=0;i<this.city.length;i++){
+                    if(dist(this.x+this.dist*cos(this.ag),this.y+this.dist*sin(this.ag),this.city[i].x,this.city[i].y)<this.city[i].citysize){
+                        this.touching=true;
+                    }
+                }
+            }
+            this.city.push(new hub(this.x+this.dist*cos (this.ag), this.y+this.dist*sin (this.ag), this.r,this.g,this.b,this));
+        }
+        //this.craters=random(this.s^2/16000,this.s^2/8000);
+
+        
         /*for(var o=0;o<this.craters;o++){
 
             for(var u=0;u<3;u++){

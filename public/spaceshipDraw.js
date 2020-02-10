@@ -1,5 +1,5 @@
 function drawSpaceship(x,y,r,fire){
-   this.r = 20
+   this.r = 20;
    if(fire){
       fill(0,0,200,random(0,100));
       noStroke();

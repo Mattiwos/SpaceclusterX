@@ -1,7 +1,7 @@
 
 
 class hub{
-    constructor(x,y,r,g,b){
+    constructor(x,y,r,g,b,motherplanet){
         //this.p=planet;
         this.x=x;
         this.y=y;
@@ -18,8 +18,34 @@ class hub{
 
         this.rf=[];
 
+        this.motherplanet=motherplanet;
         //the amount of different resources in the game ; constant !
-        this.numOfResources=4;
+
+
+        //Creates the upgrades
+
+       this.upgrades=[];
+       this.numOfUpgrades=int(random(1,2));
+       this.upgradeCost=[];
+       this.upgradeResources=[[]];
+
+        for(let i=0;i<this.numOfUpgrades;i++){
+           this.upgrade = int(random(0,upgradeCost.length));
+
+           this.upgradeCost.push(int(random(upgradeCost[this.upgrade],upgradeCost[this.upgrade]+5)));
+           for(let u=0;u<numOfResourcesUpgrade[this.upgrade];u++){
+               this.upgradeResources[i].push
+               (upgradeResources[this.upgrade][ int(random(0,upgradeResources[this.upgrade].length))  ]   );
+           }
+           this.upgrades.push(this.upgrade);
+
+
+
+       }
+        
+
+        
+
         //more constants
         this.spacing=0.7;
         //how far out the circle goes
@@ -31,23 +57,23 @@ class hub{
 
         //hub IMPORT
         //it buys this from u
-        this.hubImport=[];
-        this.hubImportValue=[];
-        this.importNum=random(1,2);
+        
+       // this.possible=0;
 
+       /*
         //create unique imports
         for(let k=0;k<this.importNum;k++){
-            this.possible=int(random(1,5));
+            this.possible=int(random(1,numOfResources+1));
             this.exists=true;
             while(this.exists==true){
-                this.possible=int(random(1,5));
+                this.possible=int(random(1,numOfResources+1));
                 this.exists=false;
                 for(let h=0;h<this.hubImport.length;h++){
                     if(this.possible==this.hubImport[h])this.exists=true;
                 }
             }
             this.hubImport.push(this.possible);
-            this.hubImportValue.push(int(random(4,8)));
+            this.hubImportValue.push(int(random(6,10)));
         }
 
         //hub EXPORT
@@ -57,10 +83,10 @@ class hub{
 
         //create unique things for sale, cannot be the same as the imports
         for(let k=0;k<this.exportNum;k++){
-            this.possible=int(random(1,5));
+            this.possible=int(random(1,numOfResources+1));
             this.exists=true;
             while(this.exists==true){
-                this.possible=int(random(1,5));
+                this.possible=int(random(1,numOfResources+1));
                 this.exists=false;
                 for(let h=0;h<this.hubImport.length;h++){
                     if(this.possible==this.hubImport[h])this.exists=true;
@@ -70,7 +96,47 @@ class hub{
                 }
             }
             this.hubExport.push(this.possible);
-            this.hubExportCost.push(int(random(1,4)));
+            this.hubExportCost.push(int(random(3,6)));
+        } */
+        //end depreciation
+        this.hubExport=[];
+        this.hubExportCost=[];
+        //this.exportNum=random(1,2);
+
+        
+
+        print(planets.length);
+        //print("planets"+motherplanet.x);
+        //print(this.motherplanet.planetExport.length-1);
+       // print("akljsdfhlkzbnxcm,.v"+this.motherplanet.planetExport.length-1);
+        for(let k=0;k<this.motherplanet.planetExport.length;k++){
+           // this.hubExport.push(this.motherplanet.planetExport[k]);
+            this.hubExportCost.push(int(random(3,5)));
+        }
+
+        this.hubExport = this.motherplanet.planetExport;
+
+        //create unique imports
+        this.hubImport=[];
+        this.hubImportValue=[];
+        this.importNum=random(0,2);
+        //hub Import
+        //if(false)
+        for(let k=0;k<this.importNum;k++){
+            this.possible=int(random(1,numOfResources+1));
+            this.exists=true;
+            while(this.exists==true){
+                this.possible=int(random(1,numOfResources+1));
+                this.exists=false;
+                for(let h=0;h<this.hubImport.length;h++){
+                    if(this.possible==this.hubImport[h])this.exists=true;
+                }
+                for(let h=0;h<this.hubExport.length;h++){
+                    if(this.possible==this.hubExport[h])this.exists=true;
+                }
+            }
+            this.hubImport.push(this.possible);
+            this.hubImportValue.push(int(random(6,10)) );
         }
 
 
@@ -78,6 +144,7 @@ class hub{
         //this.rg.push(random(0,255));
         //this.rb.push(random(0,255));
         
+
         for(var h=0;h<this.rectnumber;h++){
             this.ag=random(0,2*PI);
             this.dist=random(0,this.citysize/2-0);
@@ -89,6 +156,28 @@ class hub{
         }
 
         this.glow=5;
+
+
+
+        //this code isn't needed
+        if(false)
+        for(let k=0;k<this.upgradesNum;k++){
+            this.possible=int(random(1,this.numOfUpgrades+1));
+            this.exists=true;
+            while(this.exists==true){
+                this.possible=int(random(1,this.numOfUpgrades+1));
+                this.exists=false;
+                for(let h=0;h<this.hubUpgrades.length;h++){
+                    if(this.possible==this.hubUpgrades[h])this.exists=true;
+                }
+            }
+            this.hubUpgrades.push(this.possible);
+            //change this this.hubUpgrades.push(int(random(6,10)));
+        }
+
+        print("upgrades"+this.upgrades);
+
+
     }
     draw(){
         fill(20);
@@ -120,8 +209,8 @@ class hub{
             //    this.rectx[p-1]+width/2,this.recty[p-1]+height/2);
         }
 
-        //print(this.x+width/2+" "+this/this.y+width/2);
-
+        
+        
 
         
 
@@ -131,16 +220,24 @@ class hub{
 
         this.rotate+=0.004;
         if(dist (this.x,this.y,player.x,player.y)<this.citysize/2+30){
-            stroke(50,180);
-            strokeWeight(60);
+            stroke(50,120);
+            strokeWeight(60*this.popup/this.displaywidth);
             noFill();
-            ellipse(this.x+width/2,this.y+height/2+m,this.displaywidth,this.displaywidth);
+            ellipse(this.x+width/2,this.y+height/2+m,this.popup,this.popup);
+            if(this.popup<this.displaywidth)this.popup+=25;
+            
+            for(let h=0;h<this.hubExport.length;h++){
+                
+                this.resourcex=this.x+width/2 +cos(h*this.spacing+this.rotate)*this.popup*0.5;
+                this.resourcey=this.y+height/2+m +sin(h*this.spacing+this.rotate)*this.popup*0.5;
 
-            for(let h=0;h<this.exportNum;h++){
-                this.resourcex=this.x+width/2 +cos(h*this.spacing+this.rotate)*this.displaywidth*0.5;
-                this.resourcey=this.y+height/2+m +sin(h*this.spacing+this.rotate)*this.displaywidth*0.5;
-                drawResource(this.resourcex,this.resourcey,this.hubExport[h],4);
-                //print(this.hubExport[h]);
+                stroke(50,255);
+                strokeWeight(40*this.popup/this.displaywidth);
+
+                //arc (this.x+width/2,this.y+height/2+m,this.popup*0.9,this.popup*0.9,h*this.spacing+this.rotate+this.spacing/3,
+                //    h*this.spacing+this.rotate-this.spacing/3);
+
+                drawResource(this.resourcex,this.resourcey,this.hubExport[h],4*this.popup/this.displaywidth);
                 fill(255);
                 textSize(25);
                 noStroke();
@@ -151,10 +248,64 @@ class hub{
                     if(player.credits>=this.hubExportCost[h] &&player.cargobay.length<player.storage){
                         player.credits-=this.hubExportCost[h];
                         player.cargobay.push(this.hubExport[h]);
+                        player.cargostate.push(100);
                         mouseP=true;
                     }
                 }
             }
+            for(let h=0;h<this.hubImport.length;h++){
+                this.resourcex=this.x+width/2 +cos(h*this.spacing+this.rotate+PI)*this.popup*0.5;
+                this.resourcey=this.y+height/2+m +sin(h*this.spacing+this.rotate+PI)*this.popup*0.5;
+                drawResource(this.resourcex,this.resourcey,this.hubImport[h],4*this.popup/this.displaywidth);
+                //print(this.hubExport[h]);
+                fill(0);
+                textSize(25);
+                noStroke();
+                text(this.hubImportValue[h],this.resourcex-10,
+                this.resourcey+40);
+                if(mouseIsPressed&&mouseP==false&&dist (mouseX+player.x,mouseY+player.y,this.resourcex,this.resourcey)<30){
+                    
+                    for(var p=0;p<player.cargobay.length;p++){
+                        if(player.cargobay[p]==this.hubImport[h]&&player.cargostate[p]>-100){
+                            player.cargostate[p]=-100;
+                            player.credits+=this.hubImportValue[h];
+                            mouseP=true;
+                            break;
+                        }
+                    }
+                    
+                }
+            }
+            //display the upgrades available to purchase
+            for(let h=0;h<this.upgrades.length;h++){
+                this.resourcex=this.x+width/2 +cos(h*this.spacing+this.rotate+PI+this.hubImport.length*this.spacing)*this.popup*0.5;
+                this.resourcey=this.y+height/2+m +sin(h*this.spacing+this.rotate+PI+this.hubImport.length*this.spacing)*this.popup*0.5;
+
+                textAlign(CENTER);
+                fill(255);
+                textSize(17);
+
+                text(upgradeName[this.upgrades[h]],this.resourcex,this.resourcey-20);
+                textSize(20);
+                fill(100);
+                text(this.upgradeCost[h],this.resourcex,this.resourcey+20);
+                for(let i=0;i<this.upgradeResources[h].length;i++){
+                    print("upgraderesource"+this.upgradeResources);
+                    //drawResource(this.resourcex,this.resourcey,this.hubImport[h],4*this.popup/this.displaywidth);
+                    //drawResource(
+                    //    this.resourcex-this.upgradeResources[h].length*5+i*10,
+                  //      this.resourcey+10,this.hubImport[h],4*this.popup/this.displaywidth
+                  //      );
+                    drawResource(
+                        this.resourcex-this.upgradeResources[h].length*10+i*20,
+                        this.resourcey+30,this.upgradeResources[h][i],2*this.popup/this.displaywidth
+                        );
+                }
+
+
+            }
+            
+
         }else this.popup=0;
 
     }
