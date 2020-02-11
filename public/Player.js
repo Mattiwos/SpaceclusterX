@@ -20,7 +20,7 @@ class Player{
       //cargo state in animation
       this.cargostate = [];
 
-      this.credits = 4000;
+      this.credits = 20;
       this.displaycredits = 20;
       this.health = 100;
       this.ammo = 50;
