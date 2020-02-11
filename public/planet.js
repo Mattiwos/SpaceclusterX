@@ -52,7 +52,7 @@ class planet{
 
         //print("exports:"+this.planetExport);
 
-        this.craters=random(0,3);
+        this.craters=random(1,3);
         
         for(var o=0;o<this.craters;o++){
             this.touching=true;

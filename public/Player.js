@@ -20,10 +20,14 @@ class Player{
       //cargo state in animation
       this.cargostate = [];
 
-      this.credits = 20;
+      this.credits = 4000;
       this.displaycredits = 20;
       this.health = 100;
-      this.ammo = 0;
+      this.ammo = 50;
+
+      this.bulletSpeed=0;
+      this.reload=2;
+      this.bulletDamage=0;
   
     }
     movement(){
@@ -65,6 +69,17 @@ class Player{
       if(this.faccel<0)this.faccel+=this.faccelspeed/4*d;
       if(dist(this.faccel,0,0,0)<this.faccelspeed/2*d)this.faccel=0;
       
+      if(this.ammo<100){
+        this.ammo+=this.reload/20;
+      }
+
+      //shooting
+
+      if(keyDown[keys[4]]==1 &&this.ammo>20 && reloaded){
+        this.ammo-=20;
+        lasers.push(new Projectile(this.x,this.y,player.r));
+        reloaded=false;
+      }
       
     }
     draw(){
@@ -75,7 +90,8 @@ class Player{
       // if (this.name === undefined){
       //   window.location.href = 'index.html';
       // }
-
+      textSize(10);
+      fill (255);
       text(String(this.name), width / 2 +2, height /2 +m)
 
       //drawSpaceship(width / 2, height /2 ,this.r, this.rocketfire);
