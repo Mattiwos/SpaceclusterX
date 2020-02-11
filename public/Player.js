@@ -26,7 +26,7 @@ class Player{
       this.ammo = 50;
 
       this.bulletSpeed=0;
-      this.reload=2;
+      this.reload=0;
       this.bulletDamage=0;
   
     }
