@@ -9,5 +9,9 @@ Your wealth is calculated by the amount of credits you have and the total value 
 
 Planets
 Each planet has a random amount of hubs on it. Each hub buys and sells resources.
-Each planet on the 
+Each hub on the same planet has the same imports, but different exports
+The hubs also sell upgrades, which cost credits and resources
+
+Upgrades
+
 

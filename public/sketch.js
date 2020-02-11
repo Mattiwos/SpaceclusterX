@@ -110,8 +110,14 @@ var oplayers = [];
 var player;
 var planets=[];
 var stars=[];
+var lasers=[];
+
+var reloaded;
 
 var d;
+
+//used for a while loop
+var z;
 
 var m=-50;
 //how much the ship is moved down from the center
@@ -122,6 +128,11 @@ var storagewidth = 50;
 
 //constant : how many resources ther eare
 var numOfResources=6;
+
+
+
+//constant how spaced the upgrades
+var modificationSpacing=50;
 
 // what are the different upgrades
 
@@ -178,6 +189,23 @@ function draw() {
     planets[i].draw();
    
   }
+
+  for(var i =0;i<lasers.length;i++){
+    
+    // if ( (dist(player.x,planets[i].x,player.y,planets[i].y)) <= (2*width)){
+    //   planets[i].draw();
+    // }
+    lasers[i].draw();
+   
+  }
+  z=0;
+  while(z<lasers.length){
+    if(lasers[z].lifespan<0){
+      lasers.splice(z,1);
+      z=0;
+    }
+    z++;
+  }
   
   for(var i =0;i<oplayers.length;i++){
     
@@ -201,6 +229,7 @@ function keyPressed(){
 }
 function keyReleased(){
   keyDown[keyCode]=0;
+  reloaded=true;
 }
 function senddata(){
   socket.emit("currData",{

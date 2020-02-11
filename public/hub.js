@@ -285,24 +285,83 @@ class hub{
                 fill(255);
                 textSize(17);
 
-                text(upgradeName[this.upgrades[h]],this.resourcex,this.resourcey-20);
+                text(upgradeName[this.upgrades[h]],this.resourcex,this.resourcey-0);
                 textSize(20);
                 fill(100);
                 text(this.upgradeCost[h],this.resourcex,this.resourcey+20);
+                
                 for(let i=0;i<this.upgradeResources[h].length;i++){
-                    print("upgraderesource"+this.upgradeResources);
+                    //print("upgraderesource"+this.upgradeResources);
                     //drawResource(this.resourcex,this.resourcey,this.hubImport[h],4*this.popup/this.displaywidth);
                     //drawResource(
                     //    this.resourcex-this.upgradeResources[h].length*5+i*10,
                   //      this.resourcey+10,this.hubImport[h],4*this.popup/this.displaywidth
                   //      );
+                  
                     drawResource(
-                        this.resourcex-this.upgradeResources[h].length*10+i*20,
+                        this.resourcex-(this.upgradeResources[h].length-1)*10 +(i*20),
                         this.resourcey+30,this.upgradeResources[h][i],2*this.popup/this.displaywidth
                         );
-                }
 
 
+                        //buying the upgrades
+                        //if(false)
+                        if(mouseIsPressed&&mouseP==false&&dist (mouseX+player.x,mouseY+player.y,this.resourcex,this.resourcey)<30){
+
+                            //print("cargo bay before"+player.cargostate);
+                            //this variable is the ones needed
+                            this.resourcesneeded=[];
+                            this.fakecargobay=[];
+                            //makes them all 0
+
+
+                            for(let w=0;w<player.cargobay.length;w++){
+                                this.fakecargobay.push(0);
+                            }
+
+                            this.resourcesneeded=this.upgradeResources[h];
+                            this.changes=0;
+                                for(var p=0;p<this.resourcesneeded.length;p++){
+                                    //goes through each of the cargo bays to see if it has the one
+                                    //that its looking for
+                                    this.q=0;
+                                    this.found=false;
+                                    while(this.q<this.fakecargobay.length &&this.found==false){
+                                        if(player.cargobay[this.q]==this.upgradeResources[h][p]
+                                            &&this.fakecargobay[this.q]==0&&player.cargostate[this.q]>-100){
+                                            //this.q=1000;
+                                            this.found=true;
+
+                                            this.fakecargobay[this.q]=-100;
+                                            this.changes++;
+                                        }
+                                        this.q++;
+                                    }
+                                    //if it did find one it saves the index of it
+                                    if(this.found){
+                                        
+                                    }
+                                }
+                                //if(false)
+                                if(this.changes==this.resourcesneeded.length && player.credits>=this.upgradeCost[h]){
+                                    for(let u=0;u<this.fakecargobay.length;u++){
+                                        if(this.fakecargobay[u]==-100)player.cargostate[u]=-100;
+                                    }
+
+                                    if(this.upgrades[h]==0)player.reload++;
+                                    if(this.upgrades[h]==1)player.bulletSpeed++;
+                                    if(this.upgrades[h]==2)player.bulletDamage++;
+                                    player.credits-=this.upgradeCost[h];
+                                    mouseP=true;
+                                }
+//print("cargo bay after"+player.cargostate);
+                            
+                        }
+
+
+                    }
+
+                   
             }
             
 

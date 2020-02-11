@@ -82,6 +82,19 @@ function drawGraphics(){
             }
     }
 
+
+    ///draw the player's reload, damage, and bulletspeed upgrades
+
+    for(let i=0;i<player.reload;i++){
+        drawIcon(width/modificationSpacing+width/modificationSpacing*i,2*height/modificationSpacing,1,10);
+    }
+    for(let i=0;i<player.bulletDamage;i++){
+        drawIcon(width/modificationSpacing+width/modificationSpacing*i,4*height/modificationSpacing,2,10);
+    }
+    for(let i=0;i<player.bulletSpeed;i++){
+        drawIcon(width/modificationSpacing+width/modificationSpacing*i,6*height/modificationSpacing,3,10);
+    }
+
 }
 
 function drawResource(x,y,resource,sc){
@@ -195,5 +208,38 @@ function drawResource(x,y,resource,sc){
         fill(100,50,0);
         rect(x-sc*4,y-sc*4,sc*8,sc*3);
         rect(x-sc*4,y+sc*1,sc*8,sc*3);
+    }
+}
+
+function drawIcon(x,y,icon,sc){
+    //1 is energy
+    //2 is damage
+    //3 is speed
+
+    fill(255);
+    noStroke();
+    if(icon==1){
+        triangle(x,y,
+            x-sc,y,
+            x,y-2*sc
+        );
+        triangle(x,y,
+            x+sc,y,
+            x,y+2*sc);
+    }
+    if(icon==2){
+        sc=sc/4;
+        for(let i=0;i<2*PI;i+=PI/8){
+            triangle(x+2*sc*cos (i+PI/2),y+2*sc*sin (i+PI/2),
+            x+2*sc*cos (i-PI/2),y+2*sc*sin (i-PI/2),
+
+            x+7*sc*cos (i),y+7*sc*sin (i),
+            
+            );
+        }
+    }
+    if(icon==3){
+        rect(x-2*sc,y-sc/2,2*sc,sc);
+        triangle(x,y-sc,x+sc,y,x,y+sc);
     }
 }
