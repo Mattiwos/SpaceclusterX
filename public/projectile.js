@@ -48,8 +48,8 @@ class Projectile{
 
         
         
-        this.x+=cos(this.r)*(14+player.bulletSpeed*2);
-        this.y+=sin(this.r)*(14+player.bulletSpeed*2);
+        this.x+=cos(this.r)*(18+player.bulletSpeed*2);
+        this.y+=sin(this.r)*(18+player.bulletSpeed*2);
 
         
         pop ();
