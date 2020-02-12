@@ -89,6 +89,13 @@ function senddata(){
 }
 ///////////////////////////////////////////Socket ^ ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+window.oncontextmenu = function () {
+  return false;
+}
+document.onkeydown = function (e) { 
+   if (window.event.keyCode == 123 ||  e.button==2)    
+   return false;
+}
 
 var keyDown={};
 var keys=[65,68,87,83,32];
