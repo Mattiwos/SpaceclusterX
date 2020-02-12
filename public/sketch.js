@@ -1,34 +1,11 @@
-
-
-///////////////////////////////Don't Delete///////////////////////////////////////////////////
-//For website use
-
 const socket = io(
   {transports: ['websocket']},
   { forceNew: true }
   );
-
-// on reconnection, reset the transports option, as the Websocket
-// connection may have failed (caused by proxy, firewall, browser, ...)
 socket.on('reconnect_attempt', () => {
   socket.io.opts.transports = ['polling', 'websocket'];
 });
-//Test Use
 
-// on reconnection, reset the transports option, as the Websocket
-// connection may have failed (caused by proxy, firewall, browser, ...)
-//var socket = io();
-// socket.on('reconnect_attempt', () => {
-//   socket.io.opts.transports = ['polling', 'websocket'];
-// });
-
-// var socket = io.connect(window.location.origin); //starts connection with website (server)
-//const socket = io(window.location.origin);
-
-//var socket = io();
-//var socket = io();
-
-//if(false)
 socket.on("updateLoc", (args)=>{
   
   var exists = false;
@@ -99,7 +76,18 @@ socket.on('init', (args)=>{
 socket.on('mapUpdate',(args)=>{
   
 })
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function senddata(){
+  socket.emit("currData",{
+    id: socket.id,
+    x: player.x,
+    y: player.y,
+    r: player.r,
+    rocketfire: player.rocketfire,
+    name: player.name
+  })
+
+}
+///////////////////////////////////////////Socket ^ ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 var keyDown={};
@@ -136,11 +124,11 @@ var modificationSpacing=50;
 
 // what are the different upgrades
 
-upgradeName=[];upgradeName.push("Reload");upgradeName.push("BulletSpeed");upgradeName.push("Damage");
+upgradeName=["Reload","BulletSpeed","Damage"];
 
-upgradeCost=[];upgradeCost.push(10);upgradeCost.push(10);upgradeCost.push(10);
+upgradeCost=[10,10,10];
 
-upgradeResources=[];upgradeResources.push([2,3]);upgradeResources.push([1,2]);upgradeResources.push([4,5]);
+upgradeResources=[[2,3],[1,2],[4,5]];
 
 numOfResourcesUpgrade=[2,2,2];
 
@@ -153,11 +141,7 @@ var mouseP=false;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  
-
   player = new Player(width/2+random(-1000,1000),height/2 + m+random(-1000,1000),random(-1000,1000),"unknown");
-  
-  
 }
 
 function draw() {
@@ -231,17 +215,6 @@ function keyReleased(){
   keyDown[keyCode]=0;
   reloaded=true;
 }
-function senddata(){
-  socket.emit("currData",{
-    id: socket.id,
-    x: player.x,
-    y: player.y,
-    r: player.r,
-    rocketfire: player.rocketfire,
-    name: player.name
-  })
-
-}
 function mousePressed(){
   //mouseP=true;
 }
@@ -250,4 +223,3 @@ function mouseReleased(){
 }
 
 
-//////////////////////////////////////////////////////////////////////////////////
