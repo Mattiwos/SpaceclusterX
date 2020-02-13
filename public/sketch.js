@@ -131,7 +131,7 @@ var modificationSpacing=50;
 
 // what are the different upgrades
 
-upgradeName=["Reload","BulletSpeed","Damage"];
+upgradeName=["Reload","Laser Speed","Damage"];
 
 upgradeCost=[10,10,10];
 
@@ -162,10 +162,10 @@ function draw() {
   
   for(var i =0;i<stars.length;i++){
    
-    // if ( (dist(player.x,stars[i].x,player.y,stars[i].y)) <= (2*width)){
-    //   stars[i].draw();
-    // }
-    stars[i].draw();
+     if ( (dist(player.x,stars[i].x,player.y,stars[i].y)) <= (2*width)){
+       stars[i].draw();
+     }
+   // stars[i].draw();
 
    
   }
@@ -174,19 +174,19 @@ function draw() {
 
   for(var i =0;i<planets.length;i++){
     
-    // if ( (dist(player.x,planets[i].x,player.y,planets[i].y)) <= (2*width)){
-    //   planets[i].draw();
-    // }
-    planets[i].draw();
+     if ( (dist(player.x,planets[i].x,player.y,planets[i].y)) <= (2*width)){
+       planets[i].draw();
+     }
+    //planets[i].draw();
    
   }
 
   for(var i =0;i<lasers.length;i++){
     
-    // if ( (dist(player.x,planets[i].x,player.y,planets[i].y)) <= (2*width)){
-    //   planets[i].draw();
-    // }
-    lasers[i].draw();
+     if ( (dist(player.x,lasers[i].x,player.y,lasers[i].y)) <= (2*width)){
+       lasers[i].draw();
+     }
+    //lasers[i].draw();
    
   }
   z=0;
@@ -200,10 +200,10 @@ function draw() {
   
   for(var i =0;i<oplayers.length;i++){
     
-    // if ( (dist(player.x,oplayers[i].x,player.y,oplayers[i].y)) <= (2*width)){
-    //   oplayers[i].draw();
-    // }
-    oplayers[i].draw();
+     if ( (dist(player.x,oplayers[i].x,player.y,oplayers[i].y)) <= (2*width)){
+      oplayers[i].draw();
+     }
+    //oplayers[i].draw();
     
   }
 

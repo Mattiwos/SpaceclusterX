@@ -90,9 +90,11 @@ class Player{
       // if (this.name === undefined){
       //   window.location.href = 'index.html';
       // }
-      textSize(10);
+      textSize(20);
       fill (255);
-      text(String(this.name), width / 2 +2, height /2 +m)
+      noStroke();
+      textAlign(CENTER);
+      text(String(this.name), width / 2 +2, height /2 +m*2)
 
       //drawSpaceship(width / 2, height /2 ,this.r, this.rocketfire);
     }

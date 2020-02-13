@@ -21,7 +21,7 @@ class Projectile{
         this.lifespan-=2;
         this.savex=this.x;
         this.savey=this.y;
-        for(let i=5;i>0;i--){
+        for(let i=3;i>0;i--){
             //this.size=15+i;
            
 
@@ -48,8 +48,8 @@ class Projectile{
 
         
         
-        this.x+=cos(this.r)*(18+player.bulletSpeed*3);
-        this.y+=sin(this.r)*(18+player.bulletSpeed*3);
+        this.x+=cos(this.r)*(18+player.bulletSpeed*3)*d;
+        this.y+=sin(this.r)*(18+player.bulletSpeed*3)*d;
 
         
         pop ();

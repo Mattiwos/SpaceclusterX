@@ -25,11 +25,13 @@ class hub{
         //Creates the upgrades
 
        this.upgrades=[];
-       this.numOfUpgrades=int(random(1,2));
+       this.numOfUpgrades=int(random(0,2));
+       if(random(0,10)<2)this.numOfUpgrades=2;
        this.upgradeCost=[];
-       this.upgradeResources=[[]];
+       this.upgradeResources=[];
 
         for(let i=0;i<this.numOfUpgrades;i++){
+            this.upgradeResources.push([]);
            this.upgrade = int(random(0,upgradeCost.length));
 
            this.upgradeCost.push(int(random(upgradeCost[this.upgrade],upgradeCost[this.upgrade]+5)));
@@ -287,7 +289,7 @@ class hub{
 
                 text(upgradeName[this.upgrades[h]],this.resourcex,this.resourcey-0);
                 textSize(20);
-                fill(100);
+                fill(200);
                 text(this.upgradeCost[h],this.resourcex,this.resourcey+20);
                 
                 for(let i=0;i<this.upgradeResources[h].length;i++){
