@@ -77,13 +77,23 @@ socket.on('mapUpdate',(args)=>{
   
 })
 function senddata(){
+  var lasersloc = function (array){
+    finalarray = [];
+    for (var i = 0; i< array.length; i++){
+      finalarray.push([array[i].x,array[i].y,array[i].r])
+    }
+
+    return finalarray;
+  }
+  
   socket.emit("currData",{
     id: socket.id,
     x: player.x,
     y: player.y,
     r: player.r,
     rocketfire: player.rocketfire,
-    name: player.name
+    name: player.name,
+    laserloc: lasersloc(lasers)
   })
 
 }
