@@ -80,19 +80,13 @@ function senddata(){
   var lasersloc = function (array){
     finalarray = [];
     for (var i = 0; i< array.length; i++){
-      finalarray.push([array[i].x,array[i].y,array[i].r])
+      finalarray.push([array[i].x,array[i].y,array[i].r,array[i].id])
     }
 
     return finalarray;
   }
   
-  socket.emit("currData",{
-    id: socket.id,
-    x: player.x,
-    y: player.y,
-    r: player.r,
-    rocketfire: player.rocketfire,
-    name: player.name,
+  socket.emit("pewpew",{
     laserloc: lasersloc(lasers)
   })
 

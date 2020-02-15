@@ -1,5 +1,5 @@
 class Projectile{
-    constructor(x,y,r){
+    constructor(x,y,r,id = (Math.random() * 100000)){
         this.x=x;
         this.y=y;
         this.r=r;
@@ -7,6 +7,7 @@ class Projectile{
         this.lifespan=100;
         this.glow=15;
         this.ratio=10;
+        this.id = id
     }
     draw(){
 

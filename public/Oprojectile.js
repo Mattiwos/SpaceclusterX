@@ -1,11 +1,12 @@
 class Oprojectile{
-    constructor(x,y,r){
+    constructor(x,y,r,id){
         this.x = x
         this.y = y
         this.r = r
         this.glow=15;
         this.ratio=10;
         this.size=25;
+        this.id = id
 
     }
     colisiondetection(){

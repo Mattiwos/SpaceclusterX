@@ -25,6 +25,7 @@ app.get('/', function(req, res){
   res.render( 'index.html');
 });
 
+//error handling
 app.use((req,res,next)=>{
   const error = new Error('The game is not here. Try ${req.originalURL}')
   res.status(404)
@@ -42,8 +43,9 @@ app.use((error,req,res,next)=>{
 
 });
 
-playerson = [];
-planets = [];
+var playerson = [];
+var lasers = [];
+var planets = [];
 newplanets(10);
 
 stars = [];
@@ -66,7 +68,8 @@ io.on('connection', (socket)=>{
   socket.emit('init', {
     currentplayers: playerson,
     planets: planets,
-    stars: stars
+    stars: stars,
+    lasers: lasers,
     
 
   })
@@ -83,6 +86,9 @@ io.on('connection', (socket)=>{
     }
    
 
+  })
+  socket.on('pewpew',(arg)=>{
+    
   })
 
 	
@@ -105,7 +111,8 @@ io.on('connection', (socket)=>{
 
 function updateLoc(){
   io.emit('updateLoc',{
-    currentplayers: playerson
+    currentplayers: playerson,
+    lasers: lasers,
   })
 }
 function updateMap(){
