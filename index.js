@@ -27,7 +27,7 @@ app.get('/', function(req, res){
 
 //error handling
 app.use((req,res,next)=>{
-  const error = new Error('The game is not here. Try ${req.originalURL}')
+  const error = new Error('The game is not here. Try ${port}')
   res.status(404)
   next(error)
 });
