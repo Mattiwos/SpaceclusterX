@@ -5,6 +5,13 @@ var server = app.listen(port)
 //var http = require('http').Server(app);
 var io = require('socket.io').listen(server);
 
+//security
+var helmet = require('helmet');
+//logger
+var morgen = require('morgan');
+
+app.use(helmet());
+app.use(morgen('common'))
 
 //required folders
 
@@ -16,6 +23,23 @@ app.use(express.static('assets'));
 //renders index.html
 app.get('/', function(req, res){
   res.render( 'index.html');
+});
+
+app.use((req,res,next)=>{
+  const error = new Error('The game is not here. Try ${req.originalURL}')
+  res.status(404)
+  next(error)
+});
+app.use((error,req,res,next)=>{
+  const statusCode = res.statusCode ==200 ? 500: res.statusCode
+  res.status(statusCode)
+  
+  res.json({
+    message: error.message,
+    //if in production mode show pancake otherwise stack 
+    stack: process.env.NODE_ENV === 'production' ? ':3' : error.stack,
+  })
+
 });
 
 playerson = [];

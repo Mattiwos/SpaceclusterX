@@ -8,7 +8,15 @@ class Oprojectile{
         this.size=25;
 
     }
+    colisiondetection(){
+        if (dist(player.x,this.x,player.y,this.y) <= this.size){ 
+            //need to improve collision detection if statment
+            player.health-= 5
+        }
+    }
     update(){
+        colisiondetection()
+
         push()
         translate(-player.x,-player.y)
 
