@@ -152,13 +152,13 @@ var modificationSpacing=50;
 
 // what are the different upgrades
 
-upgradeName=["Reload","Laser Speed","Damage"];
+upgradeName=["Reload","Laser Speed","Damage","Cargo Bay"];
 
-upgradeCost=[10,10,10];
+upgradeCost=[10,10,10,5];
 
-upgradeResources=[[2,3],[1,2],[4,5]];
+upgradeResources=[[2,3],[1,2],[4,5],[5,6]];
 
-numOfResourcesUpgrade=[2,2,2];
+numOfResourcesUpgrade=[2,2,2,3];
 
 
 
