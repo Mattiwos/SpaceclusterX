@@ -7,21 +7,27 @@ p{
     text-align: center;
 }
 .loginname {
-    height: 100vw;
+    height: 100;
     text-align: center;
+    
+}
+.loginname input {
+    width: 20%;
+    text-align: center;
+    font-size: medium;
+
 }
 
 .loginname Button{ 
     text-align-last: center;
+
 }
 .loginname Button:hover{ 
 
     font: white;
+    background: black;
+    color: aqua;
     
-    font-size: -webkit-xxx-large;
     
 }
-.loginname label{
-}
-.loginname input{
-}
+
