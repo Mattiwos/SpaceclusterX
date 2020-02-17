@@ -179,6 +179,9 @@ function draw() {
   d=deltaTime/10;
   background(0);
   sendata() 
+  if (player.health <= 0){
+    window.location.href = 'index.html';
+  }
   
   //print("as;dlfkj");
   //draw objects close by only in orde to increase performance
