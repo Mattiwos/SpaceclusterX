@@ -5,7 +5,7 @@ class Projectile{
         this.r=r;
         this.dmg = dmg
         this.size=25;
-        this.lifespan=100;git 
+        this.lifespan=100;
         this.glow=15;
         this.ratio=10;
         this.id = id
@@ -25,7 +25,7 @@ class Projectile{
     }
 
     draw(){
-        colisiondetection()
+        this.colisiondetection()
         push();
         translate(-player.x,-player.y);
 
