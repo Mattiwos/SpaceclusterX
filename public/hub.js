@@ -297,6 +297,7 @@ class hub{
                                     if(this.upgrades[h]==0)player.reload++;
                                     if(this.upgrades[h]==1)player.bulletSpeed++;
                                     if(this.upgrades[h]==2)player.bulletDamage++;
+                                    if(this.upgrades[h]==3)player.storage++;
                                     player.credits-=this.upgradeCost[h];
                                     mouseP=true;
                                 }
