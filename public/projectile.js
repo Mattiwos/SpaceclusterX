@@ -17,8 +17,15 @@ class Projectile{
         
    
     }
-    draw(){
+    colisiondetection(){
+        if (dist(player.x,this.x,player.y,this.y) <= this.size){ 
+            //need to improve collision detection if statment
+            player.health-= this.dmg
+        }
+    }
 
+    draw(){
+        colisiondetection()
         push();
         translate(-player.x,-player.y);
 
