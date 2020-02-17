@@ -21,13 +21,13 @@ app.use(express.static('views'));
 app.use(express.static('assets'));
 
 //renders index.html
-app.get('/', function(req, res){
+app.get('/', (req, res)=>{
   res.render( 'index.html');
 });
 
 //error handling
 app.use((req,res,next)=>{
-  const error = new Error('The game is not here. Try ${req.originalURL}')
+  const error = new Error('The game is not here. Try ${port}')
   res.status(404)
   next(error)
 });
@@ -88,7 +88,7 @@ io.on('connection', (socket)=>{
 
   })
   socket.on('pewpew',(arg)=>{
-    
+    socket.broadcast.emit("playershootomgrunnn",arg);
   })
 
 	

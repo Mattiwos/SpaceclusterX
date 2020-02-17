@@ -76,20 +76,30 @@ socket.on('init', (args)=>{
 socket.on('mapUpdate',(args)=>{
   
 })
-function senddata(){
-  var lasersloc = function (array){
-    finalarray = [];
-    for (var i = 0; i< array.length; i++){
-      finalarray.push([array[i].x,array[i].y,array[i].r,array[i].id])
-    }
+function gunshoot(x,y,r,dmg,id,pid = socket.id){
 
-    return finalarray;
-  }
-  
   socket.emit("pewpew",{
-    laserloc: lasersloc(lasers)
+    x: x,
+    y: y,
+    r: r,
+    dmg: dmg,
+    playerid: pid,
   })
 
+}
+socket.on("playershootomgrunnn",(arg)=>{
+  lasers.push(new Projectile(arg.x,arg.y,arg.r,arg.dmg,arg.id,arg.playerid));
+});
+function sendata(){
+  socket.emit("currData",{	  
+   
+    id: socket.id,	
+    x: player.x,	
+    y: player.y,	
+    r: player.r,	
+    rocketfire: player.rocketfire,	
+    name: player.name,	
+  })
 }
 ///////////////////////////////////////////Socket ^ ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -161,7 +171,7 @@ function setup() {
 function draw() {
   d=deltaTime/10;
   background(0);
-  senddata(); 
+  sendata() 
   
   //print("as;dlfkj");
   //draw objects close by only in orde to increase performance

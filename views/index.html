@@ -13,14 +13,18 @@
     <p>By Peter R. and Mattiwos B.</p>
     
 
-    <div class="loginname">
+    <form class="loginname">
 
     <label for="name">Username:</label>
     <input type="text" id="name" name="name" required minlength="4" maxlength="8" size="10">
     <button onclick="myFunction()">START</button>
+
+    </form>
+
     <script src="/socket.io/socket.io.js"></script>
     <script> 
     function myFunction() {
+
       const socket = io(
         {transports: ['websocket']},
         { forceNew: true }
@@ -28,13 +32,14 @@
       socket.on('reconnect_attempt', () => {
         socket.io.opts.transports = ['polling', 'websocket'];
       });
-      socket.emit('name', document.getElementById("name").value)
+
+      socket.emit('name', document.getElementById("name").value.toString())
 
       window.location.href = 'game.html';
       
     }
     </script>
-    </div>
+    
 
   </body>
 </html>
