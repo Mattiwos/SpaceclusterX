@@ -18,7 +18,7 @@ class Projectile{
    
     }
     colisiondetection(){
-        if (dist(player.x,this.x,player.y,this.y) <= this.size){ 
+        if (dist(this.x,this.y,player.y,player.y) <= this.size){ 
             //need to improve collision detection if statment
             player.health-= this.dmg
         }
