@@ -1,5 +1,5 @@
 class Projectile{
-    constructor(x,y,r,dmg =5,id = round(Math.random() * 10000000),playerid =socket.id,speed = 1){
+    constructor(x,y,r,dmg =5,speed = 1,id = round(Math.random() * 10000000),playerid =socket.id){
         this.x=x;
         this.y=y;
         this.r=r;
@@ -20,7 +20,7 @@ class Projectile{
         this.speed=speed;
 
         if (this.playerid == socket.id){
-            gunshoot(this.x,this.y,this.r,this.dmg,this.id);
+            gunshoot(this.x,this.y,this.r,this.dmg,this.speed,this.id);
         }
         
    
