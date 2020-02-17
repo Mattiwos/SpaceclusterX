@@ -5,7 +5,11 @@ class Projectile{
         this.r=r;
         this.dmg = dmg
         this.size=25;
+//<<<<<<< HEAD
         this.lifespan=100;//git 
+//=======
+        this.lifespan=100;
+//>>>>>>> c2c547824864bba7b9c059c81286a3e10dc5a8ee
         this.glow=15;
         this.ratio=10;
         this.id = id
@@ -18,14 +22,14 @@ class Projectile{
    
     }
     colisiondetection(){
-        if (dist(player.x,this.x,player.y,this.y) <= this.size){ 
+        if (dist(this.x,this.y,player.y,player.y) <= this.size){ 
             //need to improve collision detection if statment
             player.health-= this.dmg
         }
     }
 
     draw(){
-        colisiondetection()
+        this.colisiondetection()
         push();
         translate(-player.x,-player.y);
 
