@@ -122,6 +122,8 @@ class hub{
 
     }
     draw(){
+
+        textAlign(CENTER);
         fill(20);
         noStroke();
         //ellipse(this.x+width/2,this.y+height/2,this.citysize,this.citysize);
@@ -183,7 +185,7 @@ class hub{
                 fill(255);
                 textSize(25);
                 noStroke();
-                text(this.hubExportCost[h],this.resourcex-10,
+                text(this.hubExportCost[h],this.resourcex,
                 this.resourcey+40);
                 if(mouseIsPressed&&mouseP==false&&dist (mouseX+player.x,mouseY+player.y,this.resourcex,this.resourcey)<30){
                     
@@ -201,9 +203,11 @@ class hub{
                 drawResource(this.resourcex,this.resourcey,this.hubImport[h],4*this.popup/this.displaywidth);
                 //print(this.hubExport[h]);
                 fill(0);
-                textSize(25);
+                textSize(22);
                 noStroke();
-                text(this.hubImportValue[h],this.resourcex-10,
+                stroke(255);
+                strokeWeight(1);
+                text("+"+this.hubImportValue[h]+"¢",this.resourcex,
                 this.resourcey+40);
                 if(mouseIsPressed&&mouseP==false&&dist (mouseX+player.x,mouseY+player.y,this.resourcex,this.resourcey)<30){
                     
