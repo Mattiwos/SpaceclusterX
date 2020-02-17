@@ -1,10 +1,10 @@
 class Projectile{
-    constructor(x,y,r,dmg =5,id = round(Math.random() * 10000000),playerid =socket.id){
+    constructor(x,y,r,dmg =5,id = round(Math.random() * 10000000),playerid =socket.id,speed){
         this.x=x;
         this.y=y;
         this.r=r;
         this.dmg = dmg;
-        this.size=25+player.bulletSpeed*2;
+        this.size=25;
 
         this.lifespan=100;
 
@@ -17,8 +17,10 @@ class Projectile{
 
         this.speedmult=0.36;
 
+        this.speed=speed;
+
         if (this.playerid == socket.id){
-            gunshoot(this.x,this.y,this.r,this.dmg,this.id)
+            gunshoot(this.x,this.y,this.r,this.dmg,this.id);
         }
         
    
@@ -68,8 +70,8 @@ class Projectile{
                 fill(255,0,0,this.lifespan*255/15);
                 
             }
-            this.x=this.savex+cos(this.r)*(14+player.bulletSpeed*3.4)*i-1*this.speedmult;
-            this.y=this.savey+sin(this.r)*(14+player.bulletSpeed*3.4)*i-1*this.speedmult;
+            this.x=this.savex+cos(this.r)*(14+this.speed*3.4)*i-1*this.speedmult;
+            this.y=this.savey+sin(this.r)*(14+this.speed*3.4)*i-1*this.speedmult;
             beginShape();
             vertex(this.x+cos(this.r)*this.size +cos(this.r+PI/2)*this.size/this.ratio+width/2,this.y+sin(this.r)*this.size +sin(this.r+PI/2)*this.size/this.ratio+height/2+m);
             vertex(this.x+cos(this.r)*this.size -cos(this.r+PI/2)*this.size/this.ratio+width/2,this.y+sin(this.r)*this.size -sin(this.r+PI/2)*this.size/this.ratio+height/2+m);
@@ -86,8 +88,8 @@ class Projectile{
 
         
         
-        this.x+=cos(this.r)*(18+player.bulletSpeed*3.4)*d*this.speedmult;
-        this.y+=sin(this.r)*(18+player.bulletSpeed*3.4)*d*this.speedmult;
+        this.x+=cos(this.r)*(18+this.speed*3.4)*d*this.speedmult;
+        this.y+=sin(this.r)*(18+this.speed*3.4)*d*this.speedmult;
 
         
         pop ();

@@ -6,7 +6,10 @@ class star{
         //star size
         this.s=5;
         //star speed 
-        this.ss =4;
+        //this.ss =4;
+        this.ss =random(5,7);
+
+
         this.glow=4;
     }
     draw(){

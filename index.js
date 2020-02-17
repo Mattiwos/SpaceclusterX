@@ -50,7 +50,7 @@ newplanets(10);
 
 stars = [];
 newstars(100);
-
+//heroku logs --tail -a spaceclusterx
 //socket
 io.on('connection', (socket)=>{
   playerson.push([socket.id]);
