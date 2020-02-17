@@ -63,6 +63,10 @@ io.on('connection', (socket)=>{
         break;
       }
     }
+    console.log(arg.name);
+    socket.emit("whatsmyname",{
+      name: arg.name,
+    });
 
   });
   socket.emit('init', {

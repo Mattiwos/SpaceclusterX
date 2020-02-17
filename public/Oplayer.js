@@ -19,7 +19,7 @@ class Oplayer{
         pop()
 
     }
-    update(x,y,r,rocketfire,id,name){
+    update(x,y,r,rocketfire,id,name = this.name){
         this.x = x;
         this.y = y;
         this.r = r;
