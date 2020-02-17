@@ -69,7 +69,8 @@ class Player{
       if(this.faccel<0)this.faccel+=this.faccelspeed/4*d;
       if(dist(this.faccel,0,0,0)<this.faccelspeed/2*d)this.faccel=0;
 
-      if(this.faccel>0&&this.health<100)this.health+=0.01;
+
+      if(this.faccel==0&&this.health<100)this.health+=0.01;
       
       if(this.ammo<100){
         this.ammo+=this.reload/15;

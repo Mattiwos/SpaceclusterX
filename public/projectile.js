@@ -3,7 +3,7 @@ class Projectile{
         this.x=x;
         this.y=y;
         this.r=r;
-        this.dmg = dmg
+        this.dmg = dmg;
         this.size=25;
 //<<<<<<< HEAD
         this.lifespan=100;//git 
@@ -22,7 +22,7 @@ class Projectile{
    
     }
     colisiondetection(){
-        if (dist(this.x,this.y,player.y,player.y) <= this.size){ 
+        if (dist(this.x,this.y,player.x,player.y) <= this.size){ 
             //need to improve collision detection if statment
             player.health-= this.dmg;
             this.lifespan=0;
@@ -30,7 +30,7 @@ class Projectile{
     }
 
     draw(){
-        this.colisiondetection()
+        this.colisiondetection();
         push();
         translate(-player.x,-player.y);
 
