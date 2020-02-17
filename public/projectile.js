@@ -1,16 +1,31 @@
 class Projectile{
-    constructor(x,y,r,id = (Math.random() * 100000)){
+    constructor(x,y,r,dmg =5,id = round(Math.random() * 10000000),playerid =socket.id){
         this.x=x;
         this.y=y;
         this.r=r;
+        this.dmg = dmg
         this.size=25;
-        this.lifespan=100;
+        this.lifespan=100;git 
         this.glow=15;
         this.ratio=10;
         this.id = id
-    }
-    draw(){
+        this.playerid = playerid;
 
+        if (this.playerid == socket.id){
+            gunshoot(this.x,this.y,this.r,this.dmg,this.id)
+        }
+        
+   
+    }
+    colisiondetection(){
+        if (dist(player.x,this.x,player.y,this.y) <= this.size){ 
+            //need to improve collision detection if statment
+            player.health-= this.dmg
+        }
+    }
+
+    draw(){
+        colisiondetection()
         push();
         translate(-player.x,-player.y);
 
