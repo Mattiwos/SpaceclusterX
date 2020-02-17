@@ -23,14 +23,16 @@ class Projectile{
     }
     colisiondetection(){
         push();
-        
-        translate(-player.x,-player.y);
-
-        if (dist(this.x,this.y,player.y,player.y) <= 60){ 
+        translate(-player.x + width/2,-player.y + m + height /2)
+        if (this.playerid != socket.id){
+             if (dist(this.x,this.y,player.x,player.y) <= this.size+10){ 
             //need to improve collision detection if statment
-            player.health-= this.dmg;
-            this.lifespan=0;
+              player.health-= this.dmg;
+              this.lifespan=0;
+            }
         }
+    
+        
         pop()
         
     }
