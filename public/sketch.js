@@ -217,9 +217,9 @@ function draw() {
     
    // if( (dist(player.x,player.y,lasers[i].x,lasers[i].y)<diagonal+lasers[i].size))
      //if ( (dist(player.x,lasers[i].x,player.y,lasers[i].y)) <= (2*width)){
-       lasers[i].draw();
+       //lasers[i].draw();
     // }
-    //lasers[i].draw();
+    lasers[i].draw();
    
   }
   z=0;
