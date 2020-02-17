@@ -1,5 +1,5 @@
 class Projectile{
-    constructor(x,y,r,dmg =5,id = round(Math.random() * 10000000),playerid =socket.id,speed){
+    constructor(x,y,r,dmg =5,id = round(Math.random() * 10000000),playerid =socket.id,speed = 1){
         this.x=x;
         this.y=y;
         this.r=r;
@@ -45,6 +45,7 @@ class Projectile{
 
     draw(){
         this.colisiondetection();
+
         push();
         
         translate(-player.x,-player.y);
