@@ -158,11 +158,14 @@ numOfResourcesUpgrade=[2,2,2];
 //Other players
 
 var mouseP=false;
+var diagonal = 0;
 
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   player = new Player(width/2+random(-1000,1000),height/2 + m+random(-1000,1000),random(-1000,1000),"unknown");
+  diagonal = dist(0,0,width/2,height/2);
+  
 }
 
 function draw() {
@@ -176,9 +179,23 @@ function draw() {
   
   for(var i =0;i<stars.length;i++){
    
-     if ( (dist(player.x,stars[i].x,player.y,stars[i].y)) <= (2*width)){
-       stars[i].draw();
-     }
+ //     if(stars[i].x+width/2>player.x-width/2-stars[i].s/2
+  //      && stars[i].x+width/2<player.x+width/2+stars[i].s/2
+  //      && stars[i].y+height/2>player.y-height/2-stars[i].s/2
+  //      && stars[i].y+height/2<player.y+height/2+stars[i].s/2)
+  //      stars[i].draw();
+    
+
+        //if( (dist(player.x,stars[i].x,player.y,stars[i].y)<diagonal))
+  //   if ( (dist(player.x,stars[i].x,player.y,stars[i].y)) <= (2*width)){
+
+    if( (dist(player.x,player.y,stars[i].x,stars[i].y)/4<diagonal+stars[i].s/2))
+    stars[i].draw();
+//   }
+      //stars[i].draw();
+   //  }
+
+
    // stars[i].draw();
 
    
@@ -188,18 +205,20 @@ function draw() {
 
   for(var i =0;i<planets.length;i++){
     
-     if ( (dist(player.x,planets[i].x,player.y,planets[i].y)) <= (2*width)){
+    // if ( (dist(player.x,planets[i].x,player.y,planets[i].y)) <= (2*width)){
+      if( (dist(player.x,player.y,planets[i].x,planets[i].y)<diagonal+planets[i].s/2))
        planets[i].draw();
-     }
+  //   }
     //planets[i].draw();
    
   }
 
   for(var i =0;i<lasers.length;i++){
     
-     if ( (dist(player.x,lasers[i].x,player.y,lasers[i].y)) <= (2*width)){
+    if( (dist(player.x,player.y,lasers[i].x,lasers[i].y)<diagonal+lasers[i].size))
+     //if ( (dist(player.x,lasers[i].x,player.y,lasers[i].y)) <= (2*width)){
        lasers[i].draw();
-     }
+    // }
     //lasers[i].draw();
    
   }
@@ -214,7 +233,7 @@ function draw() {
   
   for(var i =0;i<oplayers.length;i++){
     
-     if ( (dist(player.x,oplayers[i].x,player.y,oplayers[i].y)) <= (2*width)){
+     if ( (dist(player.x,player.y,oplayers[i].x,oplayers[i].y))  <diagonal+40){
       oplayers[i].draw();
      }
     //oplayers[i].draw();
