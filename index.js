@@ -65,7 +65,7 @@ io.on('connection', (socket)=>{
     }
     console.log(arg.name);
     socket.emit("whatsmyname",{
-      name: arg.name,
+      name: arg.name
     });
 
   });
@@ -73,7 +73,7 @@ io.on('connection', (socket)=>{
     currentplayers: playerson,
     planets: planets,
     stars: stars,
-    lasers: lasers,
+    lasers: lasers
     
 
   })
@@ -107,7 +107,10 @@ io.on('connection', (socket)=>{
       currentplayers: playerson
   
     })
-	
+    io.emit('deleteplayer',{
+      name: socket.id
+    })
+    updateLoc()
 	})
 
 

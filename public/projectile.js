@@ -26,14 +26,12 @@ class Projectile{
    
     }
     colisiondetection(){
-//<<<<<<< HEAD
-        //if (dist(this.x,this.y,player.x,player.y) <= this.size){ 
-//=======
+
         push();
         translate(-player.x + width/2,-player.y + m + height /2)
         if (this.playerid != socket.id){
-             if (dist(this.x,this.y,player.x,player.y) <= this.size+10){ 
-//>>>>>>> fca3e10fbd6bfd1cddff4d581354618cdd194829
+             if (dist(this.x,this.y,player.x,player.y) <= this.size+20){ 
+
             //need to improve collision detection if statment
               player.health-= this.dmg;
               this.lifespan=0;

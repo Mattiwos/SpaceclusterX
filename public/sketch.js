@@ -6,6 +6,14 @@ const socket = io(
 socket.on('reconnect_attempt', () => {
   socket.io.opts.transports = ['polling', 'websocket'];
 });
+socket.on('deleteplayer',(arg)=>{
+  for (var i = 0; i < oplayers.length;i++){
+    if (arg.name == oplayers[i].id){
+      oplayers.slice(i,1)
+      console.log("player left")
+    }
+  }
+})
 socket.on('whatsmyname',(arg)=>{ 
   name = arg.name
   
