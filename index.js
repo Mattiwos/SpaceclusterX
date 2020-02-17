@@ -21,7 +21,7 @@ app.use(express.static('views'));
 app.use(express.static('assets'));
 
 //renders index.html
-app.get('/', function(req, res){
+app.get('/', (req, res)=>{
   res.render( 'index.html');
 });
 
@@ -88,7 +88,7 @@ io.on('connection', (socket)=>{
 
   })
   socket.on('pewpew',(arg)=>{
-    
+    socket.broadcast.emit("playershootomgrunnn",arg);
   })
 
 	
