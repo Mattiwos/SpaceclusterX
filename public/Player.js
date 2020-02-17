@@ -26,7 +26,7 @@ class Player{
       this.ammo = 50;
 
       this.bulletSpeed=0;
-      this.reload=4;
+      this.reload=2;
       this.bulletDamage=0;
   
     }
@@ -70,14 +70,14 @@ class Player{
       if(dist(this.faccel,0,0,0)<this.faccelspeed/2*d)this.faccel=0;
       
       if(this.ammo<100){
-        this.ammo+=this.reload/20;
+        this.ammo+=this.reload/15;
       }
 
       //shooting
 
       if(keyDown[keys[4]]==1 &&this.ammo>20 && reloaded){
         this.ammo-=20;
-        lasers.push(new Projectile(this.x,this.y,player.r));
+        lasers.push(new Projectile(this.x,this.y,player.r),10+this.bulletDamage*3);
         reloaded=false;
       }
       

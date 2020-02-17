@@ -33,6 +33,14 @@ class hub{
         for(let i=0;i<this.numOfUpgrades;i++){
             this.upgradeResources.push([]);
            this.upgrade = int(random(0,upgradeCost.length));
+           this.exists=true;
+           while(this.exists==true){
+                this.upgrade = int(random(0,upgradeCost.length));
+                this.exists=false;
+                for(let j=0;j<this.upgrades.length;j++){
+                    if(this.upgrades[j]==this.upgrade)this.exists=true;
+                }
+           }
 
            this.upgradeCost.push(int(random(upgradeCost[this.upgrade],upgradeCost[this.upgrade]+5)));
            for(let u=0;u<numOfResourcesUpgrade[this.upgrade];u++){
@@ -57,60 +65,12 @@ class hub{
 
         this.rotate=0;
 
-        //hub IMPORT
-        //it buys this from u
-        
-       // this.possible=0;
-
-       /*
-        //create unique imports
-        for(let k=0;k<this.importNum;k++){
-            this.possible=int(random(1,numOfResources+1));
-            this.exists=true;
-            while(this.exists==true){
-                this.possible=int(random(1,numOfResources+1));
-                this.exists=false;
-                for(let h=0;h<this.hubImport.length;h++){
-                    if(this.possible==this.hubImport[h])this.exists=true;
-                }
-            }
-            this.hubImport.push(this.possible);
-            this.hubImportValue.push(int(random(6,10)));
-        }
-
-        //hub EXPORT
-        this.hubExport=[];
-        this.hubExportCost=[];
-        this.exportNum=random(1,2);
-
-        //create unique things for sale, cannot be the same as the imports
-        for(let k=0;k<this.exportNum;k++){
-            this.possible=int(random(1,numOfResources+1));
-            this.exists=true;
-            while(this.exists==true){
-                this.possible=int(random(1,numOfResources+1));
-                this.exists=false;
-                for(let h=0;h<this.hubImport.length;h++){
-                    if(this.possible==this.hubImport[h])this.exists=true;
-                }
-                for(let h=0;h<this.hubExport.length;h++){
-                    if(this.possible==this.hubExport[h])this.exists=true;
-                }
-            }
-            this.hubExport.push(this.possible);
-            this.hubExportCost.push(int(random(3,6)));
-        } */
-        //end depreciation
         this.hubExport=[];
         this.hubExportCost=[];
         //this.exportNum=random(1,2);
 
         
 
-        print(planets.length);
-        //print("planets"+motherplanet.x);
-        //print(this.motherplanet.planetExport.length-1);
-       // print("akljsdfhlkzbnxcm,.v"+this.motherplanet.planetExport.length-1);
         for(let k=0;k<this.motherplanet.planetExport.length;k++){
            // this.hubExport.push(this.motherplanet.planetExport[k]);
             this.hubExportCost.push(int(random(3,5)));
@@ -158,26 +118,6 @@ class hub{
         }
 
         this.glow=5;
-
-
-
-        //this code isn't needed
-        if(false)
-        for(let k=0;k<this.upgradesNum;k++){
-            this.possible=int(random(1,this.numOfUpgrades+1));
-            this.exists=true;
-            while(this.exists==true){
-                this.possible=int(random(1,this.numOfUpgrades+1));
-                this.exists=false;
-                for(let h=0;h<this.hubUpgrades.length;h++){
-                    if(this.possible==this.hubUpgrades[h])this.exists=true;
-                }
-            }
-            this.hubUpgrades.push(this.possible);
-            //change this this.hubUpgrades.push(int(random(6,10)));
-        }
-
-        print("upgrades"+this.upgrades);
 
 
     }
