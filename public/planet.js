@@ -61,7 +61,7 @@ class planet{
                 this.dist=random(0,this.s/2-0);
                 this.touching=false;
                 for(let i=0;i<this.city.length;i++){
-                    if(dist(this.x+this.dist*cos(this.ag),this.y+this.dist*sin(this.ag),this.city[i].x,this.city[i].y)<this.city[i].citysize){
+                    if(dist(this.x+this.dist*cos(this.ag),this.y+this.dist*sin(this.ag),this.city[i].x,this.city[i].y)<this.city[i].citysize*2){
                         this.touching=true;
                     }
                 }

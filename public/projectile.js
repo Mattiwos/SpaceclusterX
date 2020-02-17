@@ -4,16 +4,18 @@ class Projectile{
         this.y=y;
         this.r=r;
         this.dmg = dmg;
-        this.size=25;
-//<<<<<<< HEAD
-        this.lifespan=100;//git 
-//=======
+        this.size=25+player.bulletSpeed*2;
+
         this.lifespan=100;
-//>>>>>>> c2c547824864bba7b9c059c81286a3e10dc5a8ee
+
+        this.lifespan=100;
+
         this.glow=15;
         this.ratio=10;
         this.id = id
         this.playerid = playerid;
+
+        this.speedmult=0.36;
 
         if (this.playerid == socket.id){
             gunshoot(this.x,this.y,this.r,this.dmg,this.id)
@@ -22,39 +24,52 @@ class Projectile{
    
     }
     colisiondetection(){
-        if (dist(this.x,this.y,player.x,player.y) <= this.size){ 
+//<<<<<<< HEAD
+        //if (dist(this.x,this.y,player.x,player.y) <= this.size){ 
+//=======
+        push();
+        translate(-player.x + width/2,-player.y + m + height /2)
+        if (this.playerid != socket.id){
+             if (dist(this.x,this.y,player.x,player.y) <= this.size+10){ 
+//>>>>>>> fca3e10fbd6bfd1cddff4d581354618cdd194829
             //need to improve collision detection if statment
-            player.health-= this.dmg;
-            this.lifespan=0;
+              player.health-= this.dmg;
+              this.lifespan=0;
+            }
         }
+    
+        
+        pop()
+        
     }
 
     draw(){
         this.colisiondetection();
         push();
+        
         translate(-player.x,-player.y);
 
         noStroke();
         if(this.lifespan>20)
         fill (255,0,0);
         else
-        fill(255,0,0,this.lifespan*255/20);
-        this.lifespan-=2;
+        fill(255,0,0,this.lifespan*255/15);
+        this.lifespan-=2.4;
         this.savex=this.x;
         this.savey=this.y;
-        for(let i=3;i>0;i--){
+        for(let i=1;i>0;i--){
             //this.size=15+i;
            
 
             if(this.lifespan>15)
                 fill(255,0,0,255-i*50);
             else{
-                //i=0;
+                
                 fill(255,0,0,this.lifespan*255/15);
                 
             }
-            this.x=this.savex+cos(this.r)*(14+player.bulletSpeed*2)*i-1;
-            this.y=this.savey+sin(this.r)*(14+player.bulletSpeed*2)*i-1;
+            this.x=this.savex+cos(this.r)*(14+player.bulletSpeed*3.4)*i-1*this.speedmult;
+            this.y=this.savey+sin(this.r)*(14+player.bulletSpeed*3.4)*i-1*this.speedmult;
             beginShape();
             vertex(this.x+cos(this.r)*this.size +cos(this.r+PI/2)*this.size/this.ratio+width/2,this.y+sin(this.r)*this.size +sin(this.r+PI/2)*this.size/this.ratio+height/2+m);
             vertex(this.x+cos(this.r)*this.size -cos(this.r+PI/2)*this.size/this.ratio+width/2,this.y+sin(this.r)*this.size -sin(this.r+PI/2)*this.size/this.ratio+height/2+m);
@@ -62,6 +77,8 @@ class Projectile{
             vertex(this.x-cos(this.r)*this.size -cos(this.r+PI/2)*this.size/this.ratio+width/2,this.y-sin(this.r)*this.size -sin(this.r+PI/2)*this.size/this.ratio+height/2+m);
             vertex(this.x-cos(this.r)*this.size +cos(this.r+PI/2)*this.size/this.ratio+width/2,this.y-sin(this.r)*this.size +sin(this.r+PI/2)*this.size/this.ratio+height/2+m);
             endShape();
+
+            if(this.lifespna<=15)i=0;
         }
         this.x=this.savex;
         this.y=this.savey;
@@ -69,8 +86,8 @@ class Projectile{
 
         
         
-        this.x+=cos(this.r)*(18+player.bulletSpeed*3)*d;
-        this.y+=sin(this.r)*(18+player.bulletSpeed*3)*d;
+        this.x+=cos(this.r)*(18+player.bulletSpeed*3.4)*d*this.speedmult;
+        this.y+=sin(this.r)*(18+player.bulletSpeed*3.4)*d*this.speedmult;
 
         
         pop ();
