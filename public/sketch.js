@@ -91,19 +91,20 @@ socket.on('init', (args)=>{
 socket.on('mapUpdate',(args)=>{
   
 })
-function gunshoot(x,y,r,dmg,id,pid = socket.id){
+function gunshoot(x,y,r,dmg,speed,id,pid = socket.id){
 
   socket.emit("pewpew",{
     x: x,
     y: y,
     r: r,
     dmg: dmg,
+    bulletspeed: speed,
     playerid: pid,
   })
 
 }
 socket.on("playershootomgrunnn",(arg)=>{
-  lasers.push(new Projectile(arg.x,arg.y,arg.r,arg.dmg,arg.id,arg.playerid));
+  lasers.push(new Projectile(arg.x,arg.y,arg.r,arg.dmg,arg.bulletspeed,arg.id,arg.playerid));
 });
 function sendata(){
   socket.emit("currData",{	  

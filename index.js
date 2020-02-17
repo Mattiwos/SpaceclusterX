@@ -46,7 +46,7 @@ app.use((error,req,res,next)=>{
 var playerson = [];
 var lasers = [];
 var planets = [];
-newplanets(10);
+newplanets(12);
 
 stars = [];
 newstars(100);
@@ -136,8 +136,8 @@ function newplanets(n){
   for(var i=0;i<n;i++){
     spawn=false;
     while(spawn==false){
-      cx=getRandomInt(-1000,1000);
-      cy=getRandomInt(-1000,1000);
+      cx=getRandomInt(-1400,1400);
+      cy=getRandomInt(-1400,1400);
       cs=getRandomInt(200,500);
 
       spawn=true;
@@ -159,7 +159,7 @@ function getRandomInt(min, max) {
 }
 function newstars(n){
   for(var i=0;i<n;i++){
-    stars.push([getRandomInt(-1000,1000),getRandomInt(-1000,1000)]);
+    stars.push([getRandomInt(-1400,1400),getRandomInt(-1400,1400)]);
   }
 
 }
