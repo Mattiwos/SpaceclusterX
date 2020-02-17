@@ -1,9 +1,14 @@
+var name = "AHHHAhA"
 const socket = io(
   {transports: ['websocket']},
   { forceNew: true }
   );
 socket.on('reconnect_attempt', () => {
   socket.io.opts.transports = ['polling', 'websocket'];
+});
+socket.on('whatsmyname',(arg)=>{ 
+  name = arg.name
+  
 });
 
 socket.on("updateLoc", (args)=>{
@@ -21,7 +26,7 @@ socket.on("updateLoc", (args)=>{
       }
       if (args.currentplayers[e][0] == socket.id){
         exists = true
-        player.name = args.currentplayers[e][5]
+        args.currentplayers[e][5] =player.name
       }
       
     }
@@ -42,6 +47,7 @@ socket.on('init', (args)=>{
     
     for (var i =0; i< oplayers.length;i++){
       if (oplayers[i].id == args.currentplayers[e][0] && args.currentplayers[e][0] != socket.id){
+        console.log(args.currentplayers[e][5])
         oplayers[i].update(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0],args.currentplayers[e][5]);
 
         exists = true
@@ -50,11 +56,12 @@ socket.on('init', (args)=>{
       }
       if (args.currentplayers[e][0] == socket.id){
         exists = true
-        player.name = args.currentplayers[e][5]
+        args.currentplayers[e][5] = player.name
       }
       
     }
     if (exists == false){
+      
       oplayers.push(new Oplayer(0,0,0,true,args.currentplayers[e][0],args.currentplayers[e][5]))
     }
       
@@ -163,7 +170,7 @@ var diagonal = 0;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  player = new Player(width/2+random(-1000,1000),height/2 + m+random(-1000,1000),random(-1000,1000),"unknown");
+  player = new Player(width/2+random(-1000,1000),height/2 + m+random(-1000,1000),random(-1000,1000),name);
   diagonal = dist(0,0,width/2,height/2);
   
 }
