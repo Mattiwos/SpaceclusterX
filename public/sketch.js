@@ -189,7 +189,7 @@ function draw() {
         //if( (dist(player.x,stars[i].x,player.y,stars[i].y)<diagonal))
   //   if ( (dist(player.x,stars[i].x,player.y,stars[i].y)) <= (2*width)){
 
-    if( (dist(player.x,player.y,stars[i].x,stars[i].y)/4<diagonal+stars[i].s/2))
+   // if( (dist(player.x,player.y,stars[i].x,stars[i].y)/4<diagonal+stars[i].s/2))
     stars[i].draw();
 //   }
       //stars[i].draw();
@@ -206,7 +206,7 @@ function draw() {
   for(var i =0;i<planets.length;i++){
     
     // if ( (dist(player.x,planets[i].x,player.y,planets[i].y)) <= (2*width)){
-      if( (dist(player.x,player.y,planets[i].x,planets[i].y)<diagonal+planets[i].s/2))
+     // if( (dist(player.x,player.y,planets[i].x,planets[i].y)<diagonal+planets[i].s/2))
        planets[i].draw();
   //   }
     //planets[i].draw();
@@ -215,7 +215,7 @@ function draw() {
 
   for(var i =0;i<lasers.length;i++){
     
-    if( (dist(player.x,player.y,lasers[i].x,lasers[i].y)<diagonal+lasers[i].size))
+   // if( (dist(player.x,player.y,lasers[i].x,lasers[i].y)<diagonal+lasers[i].size))
      //if ( (dist(player.x,lasers[i].x,player.y,lasers[i].y)) <= (2*width)){
        lasers[i].draw();
     // }
@@ -233,9 +233,9 @@ function draw() {
   
   for(var i =0;i<oplayers.length;i++){
     
-     if ( (dist(player.x,player.y,oplayers[i].x,oplayers[i].y))  <diagonal+40){
+    // if ( (dist(player.x,player.y,oplayers[i].x,oplayers[i].y))  <diagonal+40){
       oplayers[i].draw();
-     }
+     //}
     //oplayers[i].draw();
     
   }
