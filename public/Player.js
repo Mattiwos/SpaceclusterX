@@ -31,6 +31,9 @@ class Player{
   
     }
     movement(){
+      if (this.health <= 0){
+        window.location.href = 'index.html';
+      }
       ///rotation
       if(keyDown[keys[1]]==1){ //A
         if(this.raccel<this.raccelspeed*(9))
