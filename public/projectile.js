@@ -5,7 +5,7 @@ class Projectile{
         this.r=r;
         this.dmg = dmg
         this.size=25;
-        this.lifespan=100;
+        this.lifespan=100;git 
         this.glow=15;
         this.ratio=10;
         this.id = id
