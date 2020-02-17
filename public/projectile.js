@@ -22,16 +22,23 @@ class Projectile{
    
     }
     colisiondetection(){
-        if (dist(this.x,this.y,player.y,player.y) <= this.size){ 
+        push();
+        
+        translate(-player.x,-player.y);
+
+        if (dist(this.x,this.y,player.y,player.y) <= 60){ 
             //need to improve collision detection if statment
             player.health-= this.dmg;
             this.lifespan=0;
         }
+        pop()
+        
     }
 
     draw(){
         this.colisiondetection()
         push();
+        
         translate(-player.x,-player.y);
 
         noStroke();
