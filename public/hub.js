@@ -21,6 +21,9 @@ class hub{
         this.motherplanet=motherplanet;
         //the amount of different resources in the game ; constant !
 
+        //creates the contracts;
+        this.contracts=[];
+
 
         //Creates the upgrades
 
@@ -52,10 +55,6 @@ class hub{
 
 
        }
-        
-
-        
-
         //more constants
         this.spacing=0.7;
         //how far out the circle goes
@@ -66,17 +65,20 @@ class hub{
         this.rotate=0;
 
         this.hubExport=[];
-        this.hubExportCost=[];
+     //   this.hubExportCost=[];
         //this.exportNum=random(1,2);
 
         
 
-        for(let k=0;k<this.motherplanet.planetExport.length;k++){
+     //   for(let k=0;k<this.motherplanet.planetExport.length;k++){
            // this.hubExport.push(this.motherplanet.planetExport[k]);
-            this.hubExportCost.push(int(random(3,5)));
-        }
+      //      this.hubExportCost.push(int(random(3,5)));
+      //  }
 
         this.hubExport = this.motherplanet.planetExport;
+
+
+
 
         //create unique imports
         this.hubImport=[];
@@ -121,6 +123,18 @@ class hub{
 
 
     }
+    getLocation(){
+        
+    }
+    createContract(){
+        this.resourceAmount=int(random(0,4));
+        this.contracts.push([]);
+        for(let i=0;i<this.resourceAmount;i++){
+            //finds a resource that the planet dosen't sell
+            this.contracts[this.contracts.length].push
+        }
+
+    }
     draw(){
 
         textAlign(CENTER);
@@ -153,10 +167,11 @@ class hub{
             //    this.rectx[p-1]+width/2,this.recty[p-1]+height/2);
         }
 
-        
-        
+    }
+    /*
 
-        
+    */
+    randomLoc(){
 
 
     }
@@ -185,12 +200,13 @@ class hub{
                 fill(255);
                 textSize(25);
                 noStroke();
-                text(this.hubExportCost[h],this.resourcex,
-                this.resourcey+40);
+              //  text(this.hubExportCost[h],this.resourcex,
+              //  this.resourcey+40);
                 if(mouseIsPressed&&mouseP==false&&dist (mouseX+player.x,mouseY+player.y,this.resourcex,this.resourcey)<30){
                     
-                    if(player.credits>=this.hubExportCost[h] &&player.cargobay.length<player.storage){
-                        player.credits-=this.hubExportCost[h];
+                    if(player.credits>=1 &&player.cargobay.length<player.storage){
+                        //player.credits-=this.hubExportCost[h];
+                        player.credits-=1;
                         player.cargobay.push(this.hubExport[h]);
                         player.cargostate.push(100);
                         mouseP=true;
@@ -230,6 +246,7 @@ class hub{
                 textAlign(CENTER);
                 fill(255);
                 textSize(17);
+                noStroke();
 
                 text(upgradeName[this.upgrades[h]],this.resourcex,this.resourcey-0);
                 textSize(20);
@@ -319,3 +336,21 @@ class hub{
 
 }
 
+createHub(this.x,this.y,this.s);
+function createHub(x,y,s){
+
+ //
+    //if this thiasdlkasdlsf = 0
+  //  return [[1,2,3],[1231,123],'1']
+    
+  //  return [[1,2,3],[1231,123]]
+
+}
+/*
+    []We want to return a array which contrains the location 
+    []what it has (resources and upgrades)
+         req: you need to be able to esaly push teh array in the beginning 
+            - one array [ [x,y,s,r,g,b,id, [] ] ]
+            -hubs.push(new Hub (x,y,s,d,f,s,d      ))
+
+*/
