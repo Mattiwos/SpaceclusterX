@@ -148,6 +148,10 @@ function newplanets(n){
     cr = (Math.random() * 255) | 0
     cg = (Math.random() * 255) | 0
     cb = (Math.random() * 255) | 0
+    
+
+    
+    // planets.push([cx,cy,cs,cr,cg,cb,createHub(cx,cy,cs)]);
     planets.push([cx,cy,cs,cr,cg,cb]);
   }
 

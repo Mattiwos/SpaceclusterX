@@ -34,7 +34,7 @@ socket.on("updateLoc", (args)=>{
       }
       if (args.currentplayers[e][0] == socket.id){
         exists = true
-        args.currentplayers[e][5] =player.name
+        // args.currentplayers[e][5] =player.name
       }
       
     }
@@ -243,20 +243,18 @@ function draw() {
   }
   z=0;
   while(z<lasers.length){
-    if(lasers[z].lifespan<0){
+    if(lasers[z].lifespan <= 0){
       lasers.splice(z,1);
-      z=0;
+      z--
     }
     z++;
   }
   
   for(var i =0;i<oplayers.length;i++){
-    
     // if ( (dist(player.x,player.y,oplayers[i].x,oplayers[i].y))  <diagonal+40){
       oplayers[i].draw();
      //}
     //oplayers[i].draw();
-    
   }
 
   
