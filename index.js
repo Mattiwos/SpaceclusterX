@@ -46,6 +46,7 @@ app.use((error,req,res,next)=>{
 var playerson = [];
 var lasers = [];
 var planets = [];
+var city = [];
 newplanets(12);
 
 stars = [];
@@ -153,6 +154,9 @@ function newplanets(n){
     
     // planets.push([cx,cy,cs,cr,cg,cb,createHub(cx,cy,cs)]);
     planets.push([cx,cy,cs,cr,cg,cb]);
+
+    // creates the hubs on that planet
+    createHub(cx,cy,cs);
   }
 
 }

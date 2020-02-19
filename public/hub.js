@@ -339,6 +339,121 @@ class hub{
 createHub(this.x,this.y,this.s);
 function createHub(x,y,s){
 
+
+        planetExport=[];
+        planetResources=random(0,3);
+        //cfreates the planets natural resources that it sells on the citys
+        for(let k=0;k<planetResources;k++){
+            possible=int(random(1,numOfResources+1));
+            exists=true;
+            while(exists==true){
+                possible=int(random(1,numOfResources+1));
+                exists=false;
+                for(let h=0;h<planetExport.length;h++){
+                    if(possible==planetExport[h])exists=true;
+                }
+            }
+            planetExport.push(possible);
+        }
+
+
+        hubnumber = getRandomInt(0,2);
+
+        
+
+        for(var i=0;i<hubnumber;i++){
+            // now it will create the x , y of the hub(s)
+
+                touching=true;
+                while(touching==true){
+                    ag=random(0,2*PI);
+                    dist=random(0,s/2-0);
+                    touching=false;
+                    for(let p=0;p<city.length;p++){
+                        // change from distance to sqrt pythagoram theorm
+                        if(
+                            Math.sqrt(Math.pow(city[p].x-(x+dist*cos(ag)),2)+Math.pow(city[p].y-(y+dist*sin(ag)),2))
+                            
+                            <city[p].citysize*2){
+                            touching=true;
+                        }
+                        // old distance dist(x+dist*cos(ag),y+dist*sin(ag),city[p].x,city[p].y)
+                    }
+                }
+
+                newx=x+dist*cos(ag);
+                newy=y+dist*sin(ag);
+
+            
+
+            //next it will add the upgrades that are available
+
+            upgrades=[];
+            numOfUpgrades=int(random(0,2));
+            if(random(0,10)<2)numOfUpgrades=2;
+            upgradeCost=[];
+            upgradeResources=[];
+
+            for(let q=0;q<numOfUpgrades;q++){
+                upgradeResources.push([]);
+                upgrade = int(random(0,upgradeCost.length));
+                exists=true;
+                while(exists==true){
+                        upgrade = int(random(0,upgradeCost.length));
+                        exists=false;
+                        for(let j=0;j<upgrades.length;j++){
+                            if(upgrades[j]==upgrade)exists=true;
+                        }
+                }
+
+                upgradeCost.push(upgradeCost[upgrade]);
+                for(let u=0;u<numOfResourcesUpgrade[upgrade];u++){
+                    upgradeResources[i].push
+                    (upgradeResources[upgrade][ int(random(0,upgradeResources[upgrade].length))  ]   );
+                }
+                upgrades.push(upgrade);
+
+
+
+            }
+            
+            
+
+            //// create the little circle graphics
+
+            ///// >
+
+
+            //////(!) for now they aren't the same
+
+
+
+
+
+
+            ////end loop for creating one hub
+
+
+
+        }
+        /// condenses the imformation into the output
+
+
+        /////here are all of the variables:
+
+        // hubx , huby , EXPORT[array] , UPGRADES[array] ,upgradeResources[array]
+
+        return (newx,newy,planetExport,upgrades,upgradeResources);
+
+        // note that: currently the IMPORTS (contracts) are not included, they will be added somewhere else
+        // there will be a function that adds a contract to a random planet, in the constructor they don't get any
+
+
+
+
+
+
+
  //
     //if this thiasdlkasdlsf = 0
   //  return [[1,2,3],[1231,123],'1']
@@ -346,6 +461,8 @@ function createHub(x,y,s){
   //  return [[1,2,3],[1231,123]]
 
 }
+
+
 /*
     []We want to return a array which contrains the location 
     []what it has (resources and upgrades)
