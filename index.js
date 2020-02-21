@@ -165,7 +165,27 @@ function newplanets(n){
     planets.push([cx,cy,cs,cr,cg,cb]);
 
     // creates the hubs on that planet
+    //creates the resources
 
+    planetExport=[];
+    planetResources=getRandomInt(0,3);
+    //cfreates the planets natural resources that it sells on the citys
+    for(let k=0;k<planetResources;k++){
+        possible=getRandomInt(1,numOfResources+1);
+        exists=true;
+        while(exists==true){
+            possible=getRandomInt(1,numOfResources+1);
+            exists=false;
+            for(let h=0;h<planetExport.length;h++){
+                if(possible==planetExport[h])exists=true;
+            }
+        }
+        planetExport.push(possible);
+    }
+
+
+    hubnumber = getRandomInt(1,2);
+    for(var i=0;i<hubnumber;i++)
     city.push(createHub(cx,cy,cs));
   }
 
@@ -175,28 +195,11 @@ function newplanets(n){
 
 function createHub(x,y,s){
   // 
-        planetExport=[];
-        planetResources=getRandomInt(0,3);
-        //cfreates the planets natural resources that it sells on the citys
-        for(let k=0;k<planetResources;k++){
-            possible=getRandomInt(1,numOfResources+1);
-            exists=true;
-            while(exists==true){
-                possible=getRandomInt(1,numOfResources+1);
-                exists=false;
-                for(let h=0;h<planetExport.length;h++){
-                    if(possible==planetExport[h])exists=true;
-                }
-            }
-            planetExport.push(possible);
-        }
-
-
-        hubnumber = getRandomInt(1,2);
+        
 
         
 
-        for(var i=0;i<hubnumber;i++){
+       
             // now it will create the x , y of the hub(s)
 
           touching=true;
@@ -243,7 +246,7 @@ function createHub(x,y,s){
 
               upgradeCost.push(upgradeCost[upgrade]);
               for(let u=0;u<numOfResourcesUpgrade[upgrade];u++){
-                  upgradeResources[i].push
+                  upgradeResources[upgradeResources.length-1].push
                   (upgradeResources[upgrade][ getRandomInt(0,upgradeResources[upgrade].length)  ]   );
               }
               upgrades.push(upgrade);
@@ -256,7 +259,7 @@ function createHub(x,y,s){
             return [newx,newy,planetExport,upgrades,upgradeResources];
 
             ////end loop for creating one hub
-        }
+        
         /// condenses the imformation into the output
 
 

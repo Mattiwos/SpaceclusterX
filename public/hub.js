@@ -184,6 +184,9 @@ class hub {
 
     }
     draw() {
+        push();
+        
+        translate(-player.x,-player.y);
 
         textAlign(CENTER);
         fill(20);
@@ -215,15 +218,18 @@ class hub {
             //    this.rectx[p-1]+width/2,this.recty[p-1]+height/2);
         }
 
+        pop ();
+
     }
     /*
 
     */
-    randomLoc() {
-
-
-    }
+    
     drawGraphics() {
+
+        push();
+        
+        translate(-player.x,-player.y);
 
         this.rotate += 0.004;
         if (dist(this.x, this.y, player.x, player.y) < this.citysize / 2 + 30) {
@@ -261,6 +267,8 @@ class hub {
                     }
                 }
             }
+            // for now this is taken out while no imports
+            /*
             for (let h = 0; h < this.hubImport.length; h++) {
                 this.resourcex = this.x + width / 2 + cos(h * this.spacing + this.rotate + PI) * this.popup * 0.5;
                 this.resourcey = this.y + height / 2 + m + sin(h * this.spacing + this.rotate + PI) * this.popup * 0.5;
@@ -286,6 +294,7 @@ class hub {
 
                 }
             }
+            */
             //display the upgrades available to purchase
             for (let h = 0; h < this.upgrades.length; h++) {
                 this.resourcex = this.x + width / 2 + cos(h * this.spacing + this.rotate + PI + this.hubImport.length * this.spacing) * this.popup * 0.5;
@@ -378,6 +387,8 @@ class hub {
 
 
         } else this.popup = 0;
+
+        pop ();
 
     }
 
