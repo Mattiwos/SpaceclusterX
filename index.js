@@ -184,9 +184,10 @@ function newplanets(n){
     }
 
 
-    hubnumber = getRandomInt(1,2);
-    for(var i=0;i<hubnumber;i++)
-    city.push(createHub(cx,cy,cs));
+    // hubnumber = getRandomInt(1,2);
+    // for(var i=0;i<hubnumber;i++){
+    //   city.push(createHub(cx,cy,cs));
+    // }
   }
 
 }
