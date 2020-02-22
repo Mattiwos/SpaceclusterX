@@ -16,6 +16,7 @@ socket.on('deleteplayer',(arg)=>{
 })
 socket.on('whatsmyname',(arg)=>{ 
   name = arg.name
+  print(name)
   
 });
 
