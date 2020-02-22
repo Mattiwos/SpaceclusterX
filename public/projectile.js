@@ -55,7 +55,7 @@ class Projectile{
         fill (255,0,0);
         else
         fill(255,0,0,this.lifespan*255/15);
-        this.lifespan-=2.4;
+        this.lifespan-=2.6;
         this.savex=this.x;
         this.savey=this.y;
         for(let i=1;i>0;i--){
@@ -79,7 +79,7 @@ class Projectile{
             vertex(this.x-cos(this.r)*this.size +cos(this.r+PI/2)*this.size/this.ratio+width/2,this.y-sin(this.r)*this.size +sin(this.r+PI/2)*this.size/this.ratio+height/2+m);
             endShape();
 
-            if(this.lifespna<=15)i=0;
+            if(this.lifespan<=15)i=0;
         }
         this.x=this.savex;
         this.y=this.savey;

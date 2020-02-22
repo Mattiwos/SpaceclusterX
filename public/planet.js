@@ -16,7 +16,7 @@ class planet{
         
         this.spawn=false;
 
-        this.city=[];
+        
 
 
 
@@ -52,6 +52,8 @@ class planet{
 
         //print("exports:"+this.planetExport);
 
+
+        /*
         this.craters=random(1,3);
         
         for(var o=0;o<this.craters;o++){
@@ -69,7 +71,7 @@ class planet{
             this.city.push(new hub(this.x+this.dist*cos (this.ag), this.y+this.dist*sin (this.ag), this.r,this.g,this.b,this));
         }
         //this.craters=random(this.s^2/16000,this.s^2/8000);
-
+        
         
         /*for(var o=0;o<this.craters;o++){
 
@@ -122,14 +124,14 @@ class planet{
             //print(k);
         }
 
-
+        /*
         for(let k=0;k<this.city.length-1;k++){
             this.city[k].draw();
         }
         for(let k=0;k<this.city.length-1;k++){
             this.city[k].drawGraphics();
         }
-
+        */
 
         pop();
         

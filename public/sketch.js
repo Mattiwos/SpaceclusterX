@@ -35,7 +35,7 @@ socket.on("updateLoc", (args)=>{
       }
       if (args.currentplayers[e][0] == socket.id){
         exists = true
-        args.currentplayers[e][5] =player.name
+        // args.currentplayers[e][5] =player.name
       }
       
     }
@@ -83,6 +83,10 @@ socket.on('init', (args)=>{
     for (var i = 0; i < args.stars.length; i++){
       stars.push(new star(args.stars[i][0],args.stars[i][1]));
     }
+    for (var i = 0; i < args.city.length; i++){
+      city.push(new hub(args.city[i][0],args.city[i][1],args.city[i][2],args.city[i][3],args.city[i][4]));
+    }
+
    
  
   
@@ -138,6 +142,8 @@ var planets=[];
 var stars=[];
 var lasers=[];
 
+var city=[];
+
 var reloaded;
 
 var d;
@@ -145,20 +151,7 @@ var d;
 //used for a while loop
 var z;
 
-var m=-50;
-//how much the ship is moved down from the center
 
-var storagewidth = 50;
-//constant: how big the resources appear in the queue
-
-
-//constant : how many resources ther eare
-var numOfResources=6;
-
-
-
-//constant how spaced the upgrades
-var modificationSpacing=50;
 
 // what are the different upgrades
 
@@ -166,9 +159,7 @@ upgradeName=["Reload","Laser Speed","Damage","Cargo Bay"];
 
 upgradeCost=[10,10,10,5];
 
-upgradeResources=[[2,3],[1,2],[4,5],[5,6]];
 
-numOfResourcesUpgrade=[2,2,2,3];
 
 
 
@@ -233,6 +224,17 @@ function draw() {
    
   }
 
+  for(var i =0;i<city.length;i++){
+    
+    // if ( (dist(player.x,planets[i].x,player.y,planets[i].y)) <= (2*width)){
+     // if( (dist(player.x,player.y,planets[i].x,planets[i].y)<diagonal+planets[i].s/2))
+       city[i].draw();
+       city[i].drawGraphics();
+  //   }
+    //planets[i].draw();
+   
+  }
+
   for(var i =0;i<lasers.length;i++){
     
    // if( (dist(player.x,player.y,lasers[i].x,lasers[i].y)<diagonal+lasers[i].size))
@@ -244,20 +246,18 @@ function draw() {
   }
   z=0;
   while(z<lasers.length){
-    if(lasers[z].lifespan<0){
+    if(lasers[z].lifespan <= 0){
       lasers.splice(z,1);
-      z=0;
+      z--
     }
     z++;
   }
   
   for(var i =0;i<oplayers.length;i++){
-    
     // if ( (dist(player.x,player.y,oplayers[i].x,oplayers[i].y))  <diagonal+40){
       oplayers[i].draw();
      //}
     //oplayers[i].draw();
-    
   }
 
   

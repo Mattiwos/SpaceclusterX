@@ -5,6 +5,14 @@ var server = app.listen(port)
 //var http = require('http').Server(app);
 var io = require('socket.io').listen(server);
 
+var {m, storagewidth, numOfResources, modificationSpacing ,upgradeResources ,numOfResourcesUpgrade, citysize} = require("./public/constants")
+
+var PI = Math.PI
+var cos = Math.cos
+var sin = Math.sin
+
+var city=[];
+
 //security
 var helmet = require('helmet');
 //logger
@@ -46,7 +54,8 @@ app.use((error,req,res,next)=>{
 var playerson = [];
 var lasers = [];
 var planets = [];
-newplanets(10);
+var city = [];
+newplanets(12);
 
 stars = [];
 newstars(100);
@@ -72,6 +81,7 @@ io.on('connection', (socket)=>{
   socket.emit('init', {
     currentplayers: playerson,
     planets: planets,
+    city: city,
     stars: stars,
     lasers: lasers
     
@@ -136,8 +146,8 @@ function newplanets(n){
   for(var i=0;i<n;i++){
     spawn=false;
     while(spawn==false){
-      cx=getRandomInt(-1000,1000);
-      cy=getRandomInt(-1000,1000);
+      cx=getRandomInt(-1400,1400);
+      cy=getRandomInt(-1400,1400);
       cs=getRandomInt(200,500);
 
       spawn=true;
@@ -148,9 +158,131 @@ function newplanets(n){
     cr = (Math.random() * 255) | 0
     cg = (Math.random() * 255) | 0
     cb = (Math.random() * 255) | 0
+    
+
+    
+    // planets.push([cx,cy,cs,cr,cg,cb,createHub(cx,cy,cs)]);
     planets.push([cx,cy,cs,cr,cg,cb]);
+
+    // creates the hubs on that planet
+    //creates the resources
+
+    planetExport=[];
+    planetResources=getRandomInt(0,3);
+    //cfreates the planets natural resources that it sells on the citys
+    for(let k=0;k<planetResources;k++){
+        possible=getRandomInt(1,numOfResources+1);
+        exists=true;
+        while(exists==true){
+            possible=getRandomInt(1,numOfResources+1);
+            exists=false;
+            for(let h=0;h<planetExport.length;h++){
+                if(possible==planetExport[h])exists=true;
+            }
+        }
+        planetExport.push(possible);
+    }
+
+
+    hubnumber = getRandomInt(1,2);
+    for(var i=0;i<hubnumber;i++)
+    city.push(createHub(cx,cy,cs));
   }
 
+}
+
+//createHub(this.x,this.y,this.s);
+
+function createHub(x,y,s){
+  // 
+        
+
+        
+
+       
+            // now it will create the x , y of the hub(s)
+
+          touching=true;
+          while(touching==true){
+              ag=random(0,2*PI);
+              dist=random(0,s/2-0);
+              touching=false;
+
+              for(let p=0;p<city.length;p++){
+                console.log(city[p]);
+
+                  // change from distance to sqrt pythagoram theorm
+                  if(
+                      Math.sqrt(Math.pow(city[p][0]-(x+dist*cos(ag)),2)+Math.pow(city[p][1]-(y+dist*sin(ag)),2))
+                      
+                      <citysize*2){
+                      touching=true;
+                  }
+                  // old distance dist(x+dist*cos(ag),y+dist*sin(ag),city[p].x,city[p].y)
+              }
+          }
+
+          newx=x+dist*cos(ag);
+          newy=y+dist*sin(ag);
+          //next it will add the upgrades that are available
+
+          upgrades=[];
+          numOfUpgrades=getRandomInt(0,2);
+          if(random(0,10)<2)numOfUpgrades=2;
+          upgradeCost=[];
+          upgradeResources=[];
+
+          for(let q=0;q<numOfUpgrades;q++){
+              upgradeResources.push([]);
+              upgrade = getRandomInt(0,upgradeCost.length);
+              exists=true;
+              while(exists==true){
+                      upgrade = getRandomInt(0,upgradeCost.length);
+                      exists=false;
+                      for(let j=0;j<upgrades.length;j++){
+                          if(upgrades[j]==upgrade)exists=true;
+                      }
+              }
+
+              upgradeCost.push(upgradeCost[upgrade]);
+              for(let u=0;u<numOfResourcesUpgrade[upgrade];u++){
+                  upgradeResources[upgradeResources.length-1].push
+                  (upgradeResources[upgrade][ getRandomInt(0,upgradeResources[upgrade].length)  ]   );
+              }
+              upgrades.push(upgrade);
+          }
+            //// create the little circle graphics
+
+            ///// >
+            //////(!) for now they aren't the same
+
+            return [newx,newy,planetExport,upgrades,upgradeResources];
+
+            ////end loop for creating one hub
+        
+        /// condenses the imformation into the output
+
+
+        /////here are all of the variables:
+
+        // hubx , huby , EXPORT[array] , UPGRADES[array] ,upgradeResources[array]
+
+        // note that: currently the IMPORTS (contracts) are not included, they will be added somewhere else
+        // there will be a function that adds a contract to a random planet, in the constructor they don't get any
+
+
+ //
+    //if this thiasdlkasdlsf = 0
+  //  return [[1,2,3],[1231,123],'1']
+    
+  //  return [[1,2,3],[1231,123]]
+
+}
+
+
+
+function random(min, max) {
+  return Math.random() * (max - min) + min;
 }
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -159,7 +291,7 @@ function getRandomInt(min, max) {
 }
 function newstars(n){
   for(var i=0;i<n;i++){
-    stars.push([getRandomInt(-1000,1000),getRandomInt(-1000,1000)]);
+    stars.push([getRandomInt(-1400,1400),getRandomInt(-1400,1400)]);
   }
 
 }
