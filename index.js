@@ -5,7 +5,7 @@ var server = app.listen(port)
 //var http = require('http').Server(app);
 var io = require('socket.io').listen(server);
 
-var {m, storagewidth, numOfResources, modificationSpacing ,upgradeResources ,numOfResourcesUpgrade, citysize} = require("./public/constants")
+var {m, storagewidth, numOfResources, modificationSpacing ,upgradeResources ,numOfResourcesUpgrade, citysize,upgradeName} = require("./public/constants")
 
 var PI = Math.PI
 var cos = Math.cos
@@ -168,7 +168,7 @@ function newplanets(n){
     //creates the resources
 
     planetExport=[];
-    planetResources=getRandomInt(0,3);
+    planetResources=getRandomInt(1,3);
     //cfreates the planets natural resources that it sells on the citys
     for(let k=0;k<planetResources;k++){
         possible=getRandomInt(1,numOfResources+1);
@@ -184,10 +184,10 @@ function newplanets(n){
     }
 
 
-    // hubnumber = getRandomInt(1,2);
-    // for(var i=0;i<hubnumber;i++){
-    //   city.push(createHub(cx,cy,cs));
-    // }
+     hubnumber = getRandomInt(1,2);
+     for(var a=0;a<hubnumber;a++){
+       city.push(createHub(cx,cy,cs));
+     }
   }
 
 }
@@ -204,9 +204,10 @@ function createHub(x,y,s){
             // now it will create the x , y of the hub(s)
 
           touching=true;
+          
           while(touching==true){
               ag=random(0,2*PI);
-              dist=random(0,s/2-0);
+              dist=random(0,s/2);
               touching=false;
 
               for(let p=0;p<city.length;p++){
@@ -222,7 +223,7 @@ function createHub(x,y,s){
                   // old distance dist(x+dist*cos(ag),y+dist*sin(ag),city[p].x,city[p].y)
               }
           }
-
+          
           newx=x+dist*cos(ag);
           newy=y+dist*sin(ag);
           //next it will add the upgrades that are available
@@ -230,28 +231,34 @@ function createHub(x,y,s){
           upgrades=[];
           numOfUpgrades=getRandomInt(0,2);
           if(random(0,10)<2)numOfUpgrades=2;
-          upgradeCost=[];
+          //upgradeCost=[];
           upgradeResources=[];
 
+          
           for(let q=0;q<numOfUpgrades;q++){
               upgradeResources.push([]);
-              upgrade = getRandomInt(0,upgradeCost.length);
+
+              upgrade = getRandomInt(0,upgradeName.length-1);
+              console.log("upgrade name"+upgradeName.length);
               exists=true;
+              
               while(exists==true){
-                      upgrade = getRandomInt(0,upgradeCost.length);
+                      upgrade = getRandomInt(0,upgradeName.length-1);
                       exists=false;
                       for(let j=0;j<upgrades.length;j++){
                           if(upgrades[j]==upgrade)exists=true;
                       }
               }
-
-              upgradeCost.push(upgradeCost[upgrade]);
+              
+             // upgradeCost.push(upgradeCost[upgrade]);
               for(let u=0;u<numOfResourcesUpgrade[upgrade];u++){
-                  upgradeResources[upgradeResources.length-1].push
-                  (upgradeResources[upgrade][ getRandomInt(0,upgradeResources[upgrade].length)  ]   );
+             //     upgradeResources[upgradeResources.length-1].push
+               //   (upgradeResources[upgrade][ getRandomInt(0,upgradeResources[upgrade].length)  ]   );
               }
+              
               upgrades.push(upgrade);
           }
+          
             //// create the little circle graphics
 
             ///// >

@@ -17,8 +17,12 @@ var upgradeResources=[[2,3],[1,2],[4,5],[5,6]];
 
 var numOfResourcesUpgrade=[2,2,2,3];
 
+// what are the different upgrades
 
+upgradeName=["Reload","Laser Speed","Damage","Cargo Bay"];
+
+upgradeCost=[10,10,10,5];
 
 var citysize=50;
 
-module.exports = { m, storagewidth, numOfResources, modificationSpacing ,upgradeResources ,numOfResourcesUpgrade,  citysize}
+module.exports = { m, storagewidth, numOfResources, modificationSpacing ,upgradeResources ,numOfResourcesUpgrade,  citysize , upgradeName}
