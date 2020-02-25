@@ -95,10 +95,15 @@ class Player{
       this.movement();
       
       drawSpaceship(width / 2, height /2 +m,this.r, this.rocketfire);
+      textSize(30);
+      fill (255);
+      noStroke();
+      textAlign(RIGHT);
+      text(String(this.name), width*9/10, height *19/20)
 
-      // if (this.name === undefined){
-      //   window.location.href = 'index.html';
-      // }
+      if (this.name === null){
+        window.location.href = 'index.html';
+      }
       
       //drawSpaceship(width / 2, height /2 ,this.r, this.rocketfire);
     

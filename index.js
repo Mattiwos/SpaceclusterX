@@ -58,13 +58,14 @@ var city = [];
 newplanets(12);
 
 stars = [];
+var name;
 newstars(100);
 //heroku logs --tail -a spaceclusterx
 //socket
 io.on('connection', (socket)=>{
   playerson.push([socket.id]);
   socket.on('name', (arg)=>{
-
+    name = arg.name;
     for (var i = 0; i < playerson.length;i++){
       if (playerson[i][0] == socket.id){
         playerson[i][5] = arg.name;
@@ -73,9 +74,7 @@ io.on('connection', (socket)=>{
       }
     }
     console.log(arg.name);
-    socket.emit("whatsmyname",{
-      name: arg.name
-    });
+   
 
   });
   socket.emit('init', {
@@ -94,9 +93,17 @@ io.on('connection', (socket)=>{
         playerson[i][2] = (args.y);
         playerson[i][3] = (args.r);
         playerson[i][4] = args.rocketfire;
+        if (playerson[i][0] == socket.id){
+          playerson[i][5] = name;
+        }
+        
         updateLoc();
         break;
       }
+      if (playerson[i][0] == socket.id){
+        playerson[i][5] = name;
+      }
+      
     }
    
 
@@ -118,7 +125,7 @@ io.on('connection', (socket)=>{
   
     })
     io.emit('deleteplayer',{
-      name: socket.id
+      id: socket.id
     })
     updateLoc()
 	})
@@ -130,6 +137,8 @@ function updateLoc(){
   io.emit('updateLoc',{
     currentplayers: playerson,
     lasers: lasers,
+   
+    
   })
 }
 function updateMap(){

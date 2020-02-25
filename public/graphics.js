@@ -95,11 +95,7 @@ function drawGraphics(){
         drawIcon(width/modificationSpacing+width/modificationSpacing*i,6*height/modificationSpacing,3,10);
     }
 
-    textSize(30);
-      fill (255);
-      noStroke();
-      textAlign(RIGHT);
-      text(String(this.name), width*9/10, height *19/20)
+    
 
 }
 

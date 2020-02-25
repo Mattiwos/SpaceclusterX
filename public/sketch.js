@@ -1,4 +1,4 @@
-var name = "AHHHAhA"
+var name;
 const socket = io(
   {transports: ['websocket']},
   { forceNew: true }
@@ -8,17 +8,13 @@ socket.on('reconnect_attempt', () => {
 });
 socket.on('deleteplayer',(arg)=>{
   for (var i = 0; i < oplayers.length;i++){
-    if (arg.name == oplayers[i].id){
+    if (arg.id == oplayers[i].id){
       oplayers.slice(i,1)
       console.log("player left")
     }
   }
 })
-socket.on('whatsmyname',(arg)=>{ 
-  name = arg.name
-  print(name)
-  
-});
+
 
 socket.on("updateLoc", (args)=>{
   
@@ -33,9 +29,9 @@ socket.on("updateLoc", (args)=>{
         
 
       }
-      if (args.currentplayers[e][0] == socket.id){
+      if (args.currentplayers[e][0] == socket.id || args.currentplayers[e][0] == player.id){
         exists = true
-        // args.currentplayers[e][5] =player.name
+        player.name = args.currentplayers[e][5]
       }
       
     }
@@ -53,7 +49,10 @@ socket.on('init', (args)=>{
   var exists = false;
 
   for (var e = 0; e < args.currentplayers.length;e++){
-    
+    if (args.currentplayers[e][0] == socket.id){
+      player.name = args.currentplayers[e][5]
+      
+    }
     for (var i =0; i< oplayers.length;i++){
       if (oplayers[i].id == args.currentplayers[e][0] && args.currentplayers[e][0] != socket.id){
         console.log(args.currentplayers[e][5])
@@ -65,7 +64,9 @@ socket.on('init', (args)=>{
       }
       if (args.currentplayers[e][0] == socket.id){
         exists = true
-        args.currentplayers[e][5] = player.name
+        // args.currentplayers[e][5] = player.name
+        player.name = args.currentplayers[e][5]
+        
       }
       
     }
@@ -75,6 +76,10 @@ socket.on('init', (args)=>{
     }
       
     exists = false;
+    if (args.currentplayers[e][0] == socket.id){
+      player.name = args.currentplayers[e][5]
+      
+    }
     }
 
     for (var i = 0; i < args.planets.length; i++){
@@ -119,7 +124,7 @@ function sendata(){
     y: player.y,	
     r: player.r,	
     rocketfire: player.rocketfire,	
-    name: player.name,	
+   
   })
 }
 ///////////////////////////////////////////Socket ^ ////////////////////////////////////////////////////////////////////////////////////////////////////////
