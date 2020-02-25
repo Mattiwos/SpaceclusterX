@@ -297,8 +297,8 @@ class hub {
             */
             //display the upgrades available to purchase
             for (let h = 0; h < this.upgrades.length; h++) {
-                this.resourcex = this.x + width / 2 + cos(h * this.spacing + this.rotate + PI + this.hubImport.length * this.spacing) * this.popup * 0.5;
-                this.resourcey = this.y + height / 2 + m + sin(h * this.spacing + this.rotate + PI + this.hubImport.length * this.spacing) * this.popup * 0.5;
+                this.resourcex = this.x + width / 2 + cos(h * this.spacing + this.rotate + PI ) * this.popup * 0.5;
+                this.resourcey = this.y + height / 2 + m + sin(h * this.spacing + this.rotate + PI ) * this.popup * 0.5;
 
                 textAlign(CENTER);
                 fill(255);

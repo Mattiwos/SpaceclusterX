@@ -158,11 +158,7 @@ var z;
 
 
 
-// what are the different upgrades
 
-upgradeName=["Reload","Laser Speed","Damage","Cargo Bay"];
-
-upgradeCost=[10,10,10,5];
 
 
 
