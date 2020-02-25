@@ -252,8 +252,8 @@ function createHub(x,y,s){
               
              // upgradeCost.push(upgradeCost[upgrade]);
               for(let u=0;u<numOfResourcesUpgrade[upgrade];u++){
-             //     upgradeResources[upgradeResources.length-1].push
-               //   (upgradeResources[upgrade][ getRandomInt(0,upgradeResources[upgrade].length)  ]   );
+                  upgradeResources[upgradeResources.length-1].push
+                  (upgradeResources[upgrade][ getRandomInt(0,upgradeResources[upgrade].length)  ]   );
               }
               
               upgrades.push(upgrade);
