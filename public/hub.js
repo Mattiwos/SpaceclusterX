@@ -24,6 +24,19 @@ class hub {
         this.hubExport = [];
         this.hubExport = exportss;
 
+        this.availableExports =[];
+
+        for(var i=0;i<numberOfResources;i++)this.availableExports.push[i];
+
+        for(var i=0;i<this.hubExport.length;i++){
+            for(var g=0;g<this.availableExports.length;g++){
+                if(this.availableExports[g]==this.hubExport[i]){
+                    g=100000;
+                    this.availableExports.splice(g,1);
+                }
+            }
+        }
+
 
         //making those graphics
         this.rectx = [];
@@ -179,7 +192,7 @@ class hub {
         this.contracts.push([]);
         for (let i = 0; i < this.resourceAmount; i++) {
             //finds a resource that the planet dosen't sell
-            this.contracts[this.contracts.length].push
+            this.contracts[this.contracts.length].push(this.availableExports[int(random(0,this.availableExports.length))]);
         }
 
     }
