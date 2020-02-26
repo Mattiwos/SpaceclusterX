@@ -45,8 +45,10 @@ socket.on("updateLoc", (args)=>{
 }) 
 
 socket.on('init', (args)=>{
- 
+  var gameseed = args.gameseed;
+  noiseSeed(gameseed);
   var exists = false;
+
 
   for (var e = 0; e < args.currentplayers.length;e++){
     if (args.currentplayers[e][0] == socket.id){
@@ -169,6 +171,7 @@ var z;
 var mouseP=false;
 var diagonal = 0;
 
+var seedgeneratedplanets =[];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -176,10 +179,66 @@ function setup() {
   diagonal = dist(0,0,width/2,height/2);
   
 }
-
+//gameseed
+var nosx =2;
+var nosy =2;
 function draw() {
+  
+  xx = noise(player.x,player.y ,1);
+  yy = noise(player.x,player.y ,2);
+
+  sectorsize = 100
+  seedgeneratedplanets = [];
+  chanceofappearing = 0.5;
+
+  for (var x =0; x< width; x+= sectorsize){
+    basex = player.x + x;
+    basey = 0
+    if (noise(basex,basey,3) >= 1-chanceofappearing){
+      pedrand = noise(basex,basey,4) *200
+      pedr = noise(basex,basey,5) *255
+      pedg = noise(basex,basey,6) *255
+      pedb = noise(basex,basey,7) *255
+      seedgeneratedplanets.push(new planet(basex,basey,pedrand, pedr,pedg,pedb))
+    }
+
+    for (var y = 0; y < height; y+=sectorsize){
+      basey = player.y +y;
+      if (noise(basex,basey,3) >= 1-chanceofappearing){
+        pedrand = noise(basex,basey,4) *200
+        pedr = noise(basex,basey,5) *255
+        pedg = noise(basex,basey,6) *255
+        pedb = noise(basex,basey,7) *255
+        seedgeneratedplanets.push(new planet(basex,basey,pedrand, pedr,pedg,pedb))
+      }
+    }
+    for (var y = 0; y > -height; y-=sectorsize){
+      basey = player.y +y;
+      if (noise(basex,basey,3) >= 1-chanceofappearing){
+        pedrand = noise(basex,basey,4) *200
+        pedr = noise(basex,basey,5) *255
+        pedg = noise(basex,basey,6) *255
+        pedb = noise(basex,basey,7) *255
+        seedgeneratedplanets.push(new planet(basex,basey,pedrand, pedr,pedg,pedb))
+      }
+
+    }
+
+  }
+  for (var i = 0; i <seedgeneratedplanets.length;i++){
+    push()
+    translate(-player.x,-player.y);
+    seedgeneratedplanets[i].draw()
+    pop ()
+  }
+
+
+  
+
   d=deltaTime/10;
   background(0);
+  
+
   sendata() 
   if (player.health <= 0){
     window.location.href = 'index.html';
@@ -219,7 +278,7 @@ function draw() {
     
     // if ( (dist(player.x,planets[i].x,player.y,planets[i].y)) <= (2*width)){
      // if( (dist(player.x,player.y,planets[i].x,planets[i].y)<diagonal+planets[i].s/2))
-       planets[i].draw();
+      //  planets[i].draw();
   //   }
     //planets[i].draw();
    

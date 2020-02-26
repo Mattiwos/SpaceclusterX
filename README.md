@@ -13,5 +13,8 @@ Each hub on the same planet has the same imports, but different exports
 The hubs also sell upgrades, which cost credits and resources
 
 Upgrades
+#### To DO  
+    [N]noisejs
+    [N]Name
 
 

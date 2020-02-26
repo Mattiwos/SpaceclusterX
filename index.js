@@ -58,22 +58,29 @@ var city = [];
 newplanets(12);
 
 stars = [];
-var name;
+var name = [];
 newstars(100);
 //heroku logs --tail -a spaceclusterx
 //socket
+var gameseed = Math.random();
+
+
+
 io.on('connection', (socket)=>{
-  playerson.push([socket.id]);
+  name.push([socket.id]);
+  console.log(name);
+
   socket.on('name', (arg)=>{
-    name = arg.name;
+    name.push([socket.id, arg.name]);
     for (var i = 0; i < playerson.length;i++){
       if (playerson[i][0] == socket.id){
         playerson[i][5] = arg.name;
+        console.log(playerson[i][5]);
         updateLoc();
         break;
       }
     }
-    console.log(arg.name);
+ 
    
 
   });
@@ -82,7 +89,8 @@ io.on('connection', (socket)=>{
     planets: planets,
     city: city,
     stars: stars,
-    lasers: lasers
+    lasers: lasers,
+    gameseed: gameseed
     
 
   })
@@ -93,16 +101,12 @@ io.on('connection', (socket)=>{
         playerson[i][2] = (args.y);
         playerson[i][3] = (args.r);
         playerson[i][4] = args.rocketfire;
-        if (playerson[i][0] == socket.id){
-          playerson[i][5] = name;
-        }
+       
         
         updateLoc();
         break;
       }
-      if (playerson[i][0] == socket.id){
-        playerson[i][5] = name;
-      }
+  
       
     }
    
@@ -195,7 +199,7 @@ function newplanets(n){
 
      hubnumber = getRandomInt(1,2);
      for(var a=0;a<hubnumber;a++){
-       city.push(createHub(cx,cy,cs));
+      //  city.push(createHub(cx,cy,cs));
      }
   }
 
