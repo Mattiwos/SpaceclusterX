@@ -189,7 +189,7 @@ function draw() {
 
   sectorsize = 100
   seedgeneratedplanets = [];
-  chanceofappearing = 0.5;
+  chanceofappearing = 0.3;
 
   for (var x =0; x< width; x+= sectorsize){
     basex = player.x + x;
@@ -227,6 +227,7 @@ function draw() {
   }
   for (var i = 0; i <seedgeneratedplanets.length;i++){
     push()
+    console.log("draw")
     translate(-player.x,-player.y);
     seedgeneratedplanets[i].draw()
     pop ()
