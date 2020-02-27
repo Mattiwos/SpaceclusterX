@@ -14,7 +14,7 @@ The hubs also sell upgrades, which cost credits and resources
 
 Upgrades
 #### To DO  
-    [N]noisejs
-    [N]Name
+    - [ ]noisejs
+    - [ ]Name
 
 

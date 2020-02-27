@@ -187,7 +187,7 @@ function draw() {
   xx = noise(player.x,player.y ,1);
   yy = noise(player.x,player.y ,2);
 
-  sectorsize = 100
+  sectorsize = 500
   seedgeneratedplanets = [];
   chanceofappearing = 0.9;
 
@@ -202,7 +202,7 @@ function draw() {
       seedgeneratedplanets.push(new planet(basex,basey,pedrand, pedr,pedg,pedb))
     }
 
-    for (var y = 0; y < height; y+=sectorsize){
+    for (var y = -height; y < height; y+=sectorsize){
       basey = player.y +y;
       if (noise(basex,basey,3) >= 1-chanceofappearing){
         pedrand = noise(basex,basey,4) *200
@@ -212,29 +212,19 @@ function draw() {
         seedgeneratedplanets.push(new planet(basex,basey,pedrand, pedr,pedg,pedb))
       }
     }
-    for (var y = 0; y > -height; y-=sectorsize){
-      basey = player.y +y;
-      if (noise(basex,basey,3) >= 1-chanceofappearing){
-        pedrand = noise(basex,basey,4) *200
-        pedr = noise(basex,basey,5) *255
-        pedg = noise(basex,basey,6) *255
-        pedb = noise(basex,basey,7) *255
-        seedgeneratedplanets.push(new planet(basex,basey,pedrand, pedr,pedg,pedb))
-      }
+    
 
     }
 
-  }
+  
 
 
   d=deltaTime/10;
   background(0);
   for (var i = 0; i <seedgeneratedplanets.length;i++){
-    push()
-    
-    translate(-player.x,-player.y);
+  
     seedgeneratedplanets[i].draw()
-    pop ()
+    //noiseDetail()
   }
   
 
