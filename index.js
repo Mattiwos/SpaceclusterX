@@ -202,6 +202,11 @@ function newplanets(n){
         city.push(createHub(cx,cy,cs));
      }
   }
+  //creates the contracts
+  for(var i=0;i<10;i++){
+    console.log("city"+city[getRandomInt(0,city.length)]);
+    city[getRandomInt(0,city.length)].createContract();
+  }
 
 }
 

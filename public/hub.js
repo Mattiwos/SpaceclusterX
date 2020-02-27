@@ -440,7 +440,7 @@ class hub {
                             this.fakecargobay.push(0);
                         }
 
-                        this.resourcesneeded = this.upgradeResources[h];
+                        this.resourcesneeded = this.contracts[h];
                         this.changes = 0;
                         for (var p = 0; p < this.resourcesneeded.length; p++) {
                             //goes through each of the cargo bays to see if it has the one
@@ -448,7 +448,7 @@ class hub {
                             this.q = 0;
                             this.found = false;
                             while (this.q < this.fakecargobay.length && this.found == false) {
-                                if (player.cargobay[this.q] == this.upgradeResources[h][p]
+                                if (player.cargobay[this.q] == this.contracts[h][p]
                                     && this.fakecargobay[this.q] == 0 && player.cargostate[this.q] > -100) {
                                     //this.q=1000;
                                     this.found = true;
@@ -464,16 +464,13 @@ class hub {
                             }
                         }
                         //if(false)
-                        if (this.changes == this.resourcesneeded.length && player.credits >= upgradeCost[this.upgrades[h]]) {
+                        if (this.changes == this.resourcesneeded.length) {
                             for (let u = 0; u < this.fakecargobay.length; u++) {
                                 if (this.fakecargobay[u] == -100) player.cargostate[u] = -100;
                             }
 
-                            if (this.upgrades[h] == 0) player.reload++;
-                            if (this.upgrades[h] == 1) player.bulletSpeed++;
-                            if (this.upgrades[h] == 2) player.bulletDamage++;
-                            if (this.upgrades[h] == 3) player.storage++;
-                            player.credits -= upgradeCost[this.upgrades[h]];
+                            
+                            player.credits += 10;
                             mouseP = true;
                         }
                         //print("cargo bay after"+player.cargostate);
