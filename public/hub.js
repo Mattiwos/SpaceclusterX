@@ -26,7 +26,7 @@ class hub {
 
         this.availableExports =[];
 
-        for(var i=0;i<numberOfResources;i++)this.availableExports.push[i];
+        for(var i=0;i<numOfResources;i++)this.availableExports.push[i];
 
         for(var i=0;i<this.hubExport.length;i++){
             for(var g=0;g<this.availableExports.length;g++){
@@ -321,7 +321,7 @@ class hub {
                 text(upgradeName[this.upgrades[h]], this.resourcex, this.resourcey - 0);
                 textSize(20);
                 fill(200);
-                text(this.upgradeCost[h], this.resourcex, this.resourcey + 20);
+                text(upgradeCost[this.upgrades[h]], this.resourcex, this.resourcey + 20);
 
                 for (let i = 0; i < this.upgradeResources[h].length; i++) {
                     //print("upgraderesource"+this.upgradeResources);
@@ -376,7 +376,7 @@ class hub {
                             }
                         }
                         //if(false)
-                        if (this.changes == this.resourcesneeded.length && player.credits >= this.upgradeCost[h]) {
+                        if (this.changes == this.resourcesneeded.length && player.credits >= upgradeCost[this.upgrades[h]]) {
                             for (let u = 0; u < this.fakecargobay.length; u++) {
                                 if (this.fakecargobay[u] == -100) player.cargostate[u] = -100;
                             }
@@ -385,7 +385,7 @@ class hub {
                             if (this.upgrades[h] == 1) player.bulletSpeed++;
                             if (this.upgrades[h] == 2) player.bulletDamage++;
                             if (this.upgrades[h] == 3) player.storage++;
-                            player.credits -= this.upgradeCost[h];
+                            player.credits -= upgradeCost[this.upgrades[h]];
                             mouseP = true;
                         }
                         //print("cargo bay after"+player.cargostate);
@@ -397,6 +397,98 @@ class hub {
 
 
             }
+
+
+            ////// displays the contracts that are available:::: jadklfjh
+
+            /*
+            for (let h = 0; h < this.contracts.length; h++) {
+                this.resourcex = this.x + width / 2 + cos(h * this.spacing + this.rotate + PI ) * this.popup * 0.5;
+                this.resourcey = this.y + height / 2 + m + sin(h * this.spacing + this.rotate + PI ) * this.popup * 0.5;
+
+                textAlign(CENTER);
+                fill(255);
+                textSize(17);
+                noStroke();
+
+                textSize(20);
+                fill(200);
+                // cdisply the value of it
+                //need to add a value where it calculates where they are at
+                //text(upgradeCost[this.upgrades[h]], this.resourcex, this.resourcey + 20);
+
+                for (let i = 0; i < this.contracts[h].length; i++) {
+
+                    drawResource(
+                        this.resourcex - (this.contracts[h].length - 1) * 10 + (i * 20),
+                        this.resourcey + 30, this.contracts[h][i], 2 * this.popup / this.displaywidth
+                    );
+
+
+                    //buying the upgrades
+                    //if(false)
+                    if (mouseIsPressed && mouseP == false && dist(mouseX + player.x, mouseY + player.y, this.resourcex, this.resourcey) < 30) {
+
+                        //print("cargo bay before"+player.cargostate);
+                        //this variable is the ones needed
+                        this.resourcesneeded = [];
+                        this.fakecargobay = [];
+                        //makes them all 0
+
+
+                        for (let w = 0; w < player.cargobay.length; w++) {
+                            this.fakecargobay.push(0);
+                        }
+
+                        this.resourcesneeded = this.upgradeResources[h];
+                        this.changes = 0;
+                        for (var p = 0; p < this.resourcesneeded.length; p++) {
+                            //goes through each of the cargo bays to see if it has the one
+                            //that its looking for
+                            this.q = 0;
+                            this.found = false;
+                            while (this.q < this.fakecargobay.length && this.found == false) {
+                                if (player.cargobay[this.q] == this.upgradeResources[h][p]
+                                    && this.fakecargobay[this.q] == 0 && player.cargostate[this.q] > -100) {
+                                    //this.q=1000;
+                                    this.found = true;
+
+                                    this.fakecargobay[this.q] = -100;
+                                    this.changes++;
+                                }
+                                this.q++;
+                            }
+                            //if it did find one it saves the index of it
+                            if (this.found) {
+
+                            }
+                        }
+                        //if(false)
+                        if (this.changes == this.resourcesneeded.length && player.credits >= upgradeCost[this.upgrades[h]]) {
+                            for (let u = 0; u < this.fakecargobay.length; u++) {
+                                if (this.fakecargobay[u] == -100) player.cargostate[u] = -100;
+                            }
+
+                            if (this.upgrades[h] == 0) player.reload++;
+                            if (this.upgrades[h] == 1) player.bulletSpeed++;
+                            if (this.upgrades[h] == 2) player.bulletDamage++;
+                            if (this.upgrades[h] == 3) player.storage++;
+                            player.credits -= upgradeCost[this.upgrades[h]];
+                            mouseP = true;
+                        }
+                        //print("cargo bay after"+player.cargostate);
+
+                    }
+
+
+                }
+
+
+            }
+            */
+
+
+
 
 
         } else this.popup = 0;

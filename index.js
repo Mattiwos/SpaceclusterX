@@ -197,9 +197,9 @@ function newplanets(n){
     }
 
 
-     hubnumber = getRandomInt(1,2);
+     hubnumber = getRandomInt(1,3);
      for(var a=0;a<hubnumber;a++){
-      //  city.push(createHub(cx,cy,cs));
+        city.push(createHub(cx,cy,cs));
      }
   }
 
@@ -245,11 +245,11 @@ function createHub(x,y,s){
           numOfUpgrades=getRandomInt(0,2);
           if(random(0,10)<2)numOfUpgrades=2;
           //upgradeCost=[];
-          upgradeResources=[];
+          cityUpgradeResources=[];
 
           
           for(let q=0;q<numOfUpgrades;q++){
-              upgradeResources.push([]);
+            cityUpgradeResources.push([]);
 
               upgrade = getRandomInt(0,upgradeName.length-1);
               console.log("upgrade name"+upgradeName.length);
@@ -265,9 +265,9 @@ function createHub(x,y,s){
               
              // upgradeCost.push(upgradeCost[upgrade]);
               for(let u=0;u<numOfResourcesUpgrade[upgrade];u++){
-                console.log(upgradeResources[upgrade]);
+                console.log(upgradeResources);
 
-                  upgradeResources[upgradeResources.length-1].push
+                cityUpgradeResources[cityUpgradeResources.length-1].push
                   (upgradeResources[upgrade][ getRandomInt(0,upgradeResources[upgrade].length)  ]   );
               }
               
@@ -279,7 +279,7 @@ function createHub(x,y,s){
             ///// >
             //////(!) for now they aren't the same
 
-            return [newx,newy,planetExport,upgrades,upgradeResources];
+            return [newx,newy,planetExport,upgrades,cityUpgradeResources];
 
             ////end loop for creating one hub
         
