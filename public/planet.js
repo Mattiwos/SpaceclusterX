@@ -91,6 +91,13 @@ class planet{
         push();
         translate(-player.x,-player.y);
 
+        textSize(30);
+      fill (255);
+      noStroke();
+      textAlign(RIGHT);
+      text("X: " +(this.x+width/2) + "Y: " + (this.y+height/2), this.x+width/2, this.y+height/2)
+
+
         for(let k=0;k<20;k++){
             fill(this.r/2,this.b/2,this.g/2,100-k*255/20);
 

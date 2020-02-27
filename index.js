@@ -70,20 +70,7 @@ io.on('connection', (socket)=>{
   name.push([socket.id]);
   console.log(name);
 
-  socket.on('name', (arg)=>{
-    name.push([socket.id, arg.name]);
-    for (var i = 0; i < playerson.length;i++){
-      if (playerson[i][0] == socket.id){
-        playerson[i][5] = arg.name;
-        console.log(playerson[i][5]);
-        updateLoc();
-        break;
-      }
-    }
- 
-   
-
-  });
+  
   socket.emit('init', {
     currentplayers: playerson,
     planets: planets,
@@ -95,14 +82,16 @@ io.on('connection', (socket)=>{
 
   })
   socket.on('currData', (args)=>{
+    
     for (var i = 0; i < playerson.length;i++){
       if (playerson[i][0] == args.id){
         playerson[i][1] = (args.x);
         playerson[i][2] = (args.y);
         playerson[i][3] = (args.r);
         playerson[i][4] = args.rocketfire;
+        playerson[i][5] = args.name;
        
-        
+        console.log("reviedev data to currdat")
         updateLoc();
         break;
       }
@@ -138,6 +127,7 @@ io.on('connection', (socket)=>{
 });
 
 function updateLoc(){
+  console.log("recieved data");
   io.emit('updateLoc',{
     currentplayers: playerson,
     lasers: lasers,

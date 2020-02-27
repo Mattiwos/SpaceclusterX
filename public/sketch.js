@@ -1,4 +1,4 @@
-var name;
+
 const socket = io(
   {transports: ['websocket']},
   { forceNew: true }
@@ -17,7 +17,7 @@ socket.on('deleteplayer',(arg)=>{
 
 
 socket.on("updateLoc", (args)=>{
-  
+  print(`${args} got new update `)
   var exists = false;
   
   for (var e = 0; e < args.currentplayers.length;e++){
@@ -31,7 +31,7 @@ socket.on("updateLoc", (args)=>{
       }
       if (args.currentplayers[e][0] == socket.id || args.currentplayers[e][0] == player.id){
         exists = true
-        player.name = args.currentplayers[e][5]
+        args.currentplayers[e][5] = player.name
       }
       
     }
@@ -118,7 +118,7 @@ function gunshoot(x,y,r,dmg,speed,id,pid = socket.id){
 socket.on("playershootomgrunnn",(arg)=>{
   lasers.push(new Projectile(arg.x,arg.y,arg.r,arg.dmg,arg.bulletspeed,arg.id,arg.playerid));
 });
-function sendata(){
+function senddata(){
   socket.emit("currData",{	  
    
     id: socket.id,	
@@ -126,6 +126,7 @@ function sendata(){
     y: player.y,	
     r: player.r,	
     rocketfire: player.rocketfire,	
+    name: player.name,
    
   })
 }
@@ -182,17 +183,21 @@ function setup() {
 //gameseed
 var nosx =2;
 var nosy =2;
+console.log(window.location.search);
+
+var urlParams = new URLSearchParams(window.location.search);
+name  = urlParams.getAll('name') || null;
+
 function draw() {
   
-  xx = noise(player.x,player.y ,1);
-  yy = noise(player.x,player.y ,2);
-
+  
   sectorsize = 500
   seedgeneratedplanets = [];
-  chanceofappearing = 0.9;
+  chanceofappearing = 0.5;
 
-  for (var x = -width; x< width; x+= sectorsize){
+  for (var x = player.x  - width*2; x< player.x  +width*2; x+= sectorsize){
     basex = player.x + x;
+    basex = Math.floor(basex/sectorsize) * sectorsize;
     basey = 0
     if (noise(basex,basey,3) >= 1-chanceofappearing){
       pedrand = noise(basex,basey,4) *200
@@ -202,8 +207,9 @@ function draw() {
       seedgeneratedplanets.push(new planet(basex,basey,pedrand, pedr,pedg,pedb))
     }
 
-    for (var y = -height; y < height; y+=sectorsize){
+    for (var y = player.y  -height*2; y < player.y  +height*2; y+=sectorsize){
       basey = player.y +y;
+      basey = Math.floor(basey/sectorsize) * sectorsize;
       if (noise(basex,basey,3) >= 1-chanceofappearing){
         pedrand = noise(basex,basey,4) *200
         pedr = noise(basex,basey,5) *255
@@ -221,17 +227,19 @@ function draw() {
 
   d=deltaTime/10;
   background(0);
+  player.name = name;
   for (var i = 0; i <seedgeneratedplanets.length;i++){
-  
+    
     seedgeneratedplanets[i].draw()
+ 
     //noiseDetail()
   }
   
 
-  sendata() 
-  if (player.health <= 0){
-    window.location.href = 'index.html';
-  }
+  senddata() 
+  // if (player.health <= 0 || player.name ==""){
+  //   window.location.href = 'index.html';
+  // }
   
   //print("as;dlfkj");
   //draw objects close by only in orde to increase performance
@@ -269,7 +277,7 @@ function draw() {
      // if( (dist(player.x,player.y,planets[i].x,planets[i].y)<diagonal+planets[i].s/2))
       //  planets[i].draw();
   //   }
-    //planets[i].draw();
+    planets[i].draw();
    
   }
 

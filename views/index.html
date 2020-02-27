@@ -25,19 +25,8 @@
     <script> 
     function runswhenbuttonisclicked() {
 
-      const socket = io(
-        {transports: ['websocket']},
-        { forceNew: true }
-      );
-      socket.on('reconnect_attempt', () => {
-        socket.io.opts.transports = ['polling', 'websocket'];
-      });
-
-      socket.emit('name', {
-        name: document.getElementById("name").value.toString()
-      });
-      
-      window.location.href = 'game.html';
+      name = document.getElementById("name").value.toString()
+      window.location.href = `game.html?name=${name}`;
       
     }
     </script>
