@@ -241,7 +241,7 @@ function draw() {
   //   window.location.href = 'index.html';
   // }
   
-  //print("as;dlfkj");
+  
   //draw objects close by only in orde to increase performance
 
   
@@ -282,6 +282,7 @@ function draw() {
   }
 
   for(var i =0;i<city.length;i++){
+    
     
     // if ( (dist(player.x,planets[i].x,player.y,planets[i].y)) <= (2*width)){
      // if( (dist(player.x,player.y,planets[i].x,planets[i].y)<diagonal+planets[i].s/2))
