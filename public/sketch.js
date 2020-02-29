@@ -10,7 +10,9 @@ socket.on('reconnect_attempt', () => {
 socket.on('deleteplayer',(arg)=>{
   for (var i = 0; i < oplayers.length;i++){
     if (arg.id == oplayers[i].id){
+      print(`removing ${oplayers.id} from list to draw`)
       oplayers.slice(i,1)
+      
       
     }
   }

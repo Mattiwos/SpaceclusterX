@@ -115,24 +115,23 @@ io.on('connection', (socket)=>{
     for (var i = 0; i< playerson.length;i++){
       if (socket.id == playerson[i][0]){
         playerson.splice(i,1);
+        console.log(`player left ${socket.id} and ${playerson}`)
+        io.emit('deleteplayer',{
+          id: socket.id
+        })
+        updateLoc()
         break;
+
       } 
     }
-    socket.emit('init', {
-      currentplayers: playerson
-  
-    })
-    io.emit('deleteplayer',{
-      id: socket.id
-    })
-    updateLoc()
+    
 	})
 
 
 });
 
 function updateLoc(){
- 
+  console.log(`player left ${socket.id} and ${playerson}`)
   io.emit('updateLoc',{
     currentplayers: playerson,
     lasers: lasers,
