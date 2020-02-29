@@ -84,16 +84,7 @@ io.on('connection', (socket)=>{
     })
 
   });
-  socket.emit('init', {
-    currentplayers: playerson,
-    planets: planets,
-    city: city,
-    stars: stars,
-    lasers: lasers,
-    gameseed: gameseed
-    
 
-  })
   socket.on('currData', (args)=>{
     
     for (var i = 0; i < playerson.length;i++){
