@@ -71,7 +71,19 @@ io.on('connection', (socket)=>{
   name.push([socket.id]);
   
 
+  socket.on('send me data pretty please',(arg) =>{
+    socket.emit('init', {
+      currentplayers: playerson,
+      planets: planets,
+      city: city,
+      stars: stars,
+      lasers: lasers,
+      gameseed: gameseed
+      
   
+    })
+
+  });
   socket.emit('init', {
     currentplayers: playerson,
     planets: planets,

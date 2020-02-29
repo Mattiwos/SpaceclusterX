@@ -1,3 +1,4 @@
+
 var gameseed = 0;
 const socket = io(
   {transports: ['websocket']},
@@ -173,7 +174,9 @@ function setup() {
   player = (window.origin == "http://localhost:5500") ? new Player(0,0,random(-1000,1000),name) :new Player(width/2+random(-1000,1000),height/2 + m+random(-1000,1000),random(-1000,1000),name);
 
   diagonal = dist(0,0,width/2,height/2);
+  socket.emit('send me data pretty please',{
 
+  });
 
   noiseSeed(gameseed);
   
