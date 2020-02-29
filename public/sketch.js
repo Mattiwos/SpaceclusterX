@@ -77,7 +77,7 @@ socket.on('init', (args)=>{
     exists = false;
     
     }
-
+    
     for (var i = 0; i < args.planets.length; i++){
       planets.push(new planet(args.planets[i][0],args.planets[i][1],args.planets[i][2], args.planets[i][3], args.planets[i][4], args.planets[i][5]))
     }
