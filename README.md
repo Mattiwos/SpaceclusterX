@@ -14,7 +14,11 @@ The hubs also sell upgrades, which cost credits and resources
 
 Upgrades
 #### To DO  
-    - [ ]noisejs
-    - [ ]Name
+  - [X] Name
+  - [ ] noisejs
+    - [ ] Planets
+    - [ ] Hub
+  - [ ] Bot Players
+ 
 
 
