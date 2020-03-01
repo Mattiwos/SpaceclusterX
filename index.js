@@ -131,7 +131,7 @@ io.on('connection', (socket)=>{
 });
 
 function updateLoc(){
-  console.log(`player left ${socket.id} and ${playerson}`)
+  console.log(`player leftand ${playerson}`)
   io.emit('updateLoc',{
     currentplayers: playerson,
     lasers: lasers,
