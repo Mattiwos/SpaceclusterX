@@ -217,6 +217,21 @@ function drawResource(x,y,resource,sc){
 
 function drawLeaderBoard(arrayUsed){
 
+    //sorts the leaderboard by score
+    //algorithm:
+    // first, creates an array that is arrayUsed with player.credits on the end
+    // next, creates an empty display array and a variable called max that is set to the first elemtn
+    // also creates an variable called indexOfMax, which keeps track of where the biggest one is
+
+    // one more array that it has to create is a copy of the array. 
+
+    // has a for loop that goes through all of the elements of the array, and at each index,
+    //        if the value of the array there is greater than max, it sets max to it and indexOfmax to i
+    // after its gone through the array , it will push the display array with the indexOfmax
+    // then, it will set index of Max to -1
+
+    // it will then
+
     fill(255,100);
     noStroke();
     rect(width*4/5,10,width*4/25,arrayUsed.length*40);
@@ -225,10 +240,10 @@ function drawLeaderBoard(arrayUsed){
     textAlign(LEFT,CENTER);
     //rectMode(CENTER);
     for(var i=0;i<arrayUsed.length;i++){
-        text(arrayUsed[i].name,width*4/5+20,10 + i*40 +20);
+        text(arrayUsed[i].name,width*4/5+15,10 + i*40 +20);
         //change to be the actual score later
         
-        text(arrayUsed[i].credits,width-width*1/25,10 + i*40 +20);
+        text(arrayUsed[i].credits,width-width*2/25,10 + i*40 +20);
     }
     print(arrayUsed);
 
