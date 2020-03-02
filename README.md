@@ -18,3 +18,8 @@ Upgrades
     - [ ]Name
 
 
+### Ideas
+ - [ ]
+  
+
+

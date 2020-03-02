@@ -195,7 +195,7 @@ function newplanets(n){
   //creates the contracts
   for(var i=0;i<10;i++){
     console.log("city"+city[getRandomInt(0,city.length)]);
-    city[getRandomInt(0,city.length)].createContract();
+    //city[getRandomInt(0,city.length)].createContract();
   }
 
 }
@@ -203,12 +203,7 @@ function newplanets(n){
 //createHub(this.x,this.y,this.s);
 
 function createHub(x,y,s){
-  // 
-        
-
-        
-
-       
+  //   
             // now it will create the x , y of the hub(s)
 
           touching=true;
