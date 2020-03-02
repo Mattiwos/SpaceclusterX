@@ -1,14 +1,14 @@
 
 
 class Oplayer{
-    constructor(initx,inity,initr,rocketfire,id,name){
+    constructor(initx,inity,initr,rocketfire,id,name,score){
         this.x = initx;
         this.y = inity;
         this.r = initr;
         this.rocketfire = rocketfire;
         this.id = id;
         this.name = name;
-
+        this.score=score;
 
     }
     draw(){
