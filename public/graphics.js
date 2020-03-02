@@ -1,3 +1,5 @@
+//import { text } from "express";
+
 function drawGraphics(){
 
 
@@ -215,9 +217,23 @@ function drawResource(x,y,resource,sc){
 
 function drawLeaderBoard(arrayUsed){
 
-    fill(0,100);
+    fill(255,100);
     noStroke();
-    //rect(width*)
+    rect(width*4/5,10,width*4/25,arrayUsed.length*40);
+    fill(255);
+    textSize(30);
+    textAlign(LEFT,CENTER);
+    //rectMode(CENTER);
+    for(var i=0;i<arrayUsed.length;i++){
+        text(arrayUsed[i].name,width*4/5+20,10 + i*40 +20);
+        //change to be the actual score later
+        
+        text(arrayUsed[i].credits,width-width*1/25,10 + i*40 +20);
+    }
+    print(arrayUsed);
+
+    textAlign(CENTER);
+   
 }
 
 function drawIcon(x,y,icon,sc){
