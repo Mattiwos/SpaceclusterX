@@ -17,7 +17,7 @@
 
     <label for="name">Username:</label>
     <input class="u-full-width" type="text" id="name" name="name">
-    <button type = "button" onclick="runswhenbuttonisclicked()">START</button>
+    <button id="startgame" type = "button" onclick="runswhenbuttonisclicked()">START</button>
 
     </form>
 
@@ -30,6 +30,16 @@
       
     }
     </script>
+    <script>
+      var input = document.getElementById("name");
+      input.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+         event.preventDefault();
+         document.getElementById("startgame").click();
+         runswhenbuttonisclicked()
+        }
+      });
+      </script>
     
 
   </body>

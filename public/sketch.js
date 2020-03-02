@@ -1,4 +1,5 @@
 
+var gameseed = 0;
 const socket = io(
   {transports: ['websocket']},
   { forceNew: true }
@@ -9,15 +10,17 @@ socket.on('reconnect_attempt', () => {
 socket.on('deleteplayer',(arg)=>{
   for (var i = 0; i < oplayers.length;i++){
     if (arg.id == oplayers[i].id){
+      print(`removing ${oplayers.id} from list to draw`)
       oplayers.slice(i,1)
-      console.log("player left")
+      
+      
     }
   }
 })
 
 
 socket.on("updateLoc", (args)=>{
-  print(`${args} got new update `)
+  
   var exists = false;
   
   for (var e = 0; e < args.currentplayers.length;e++){
@@ -37,7 +40,7 @@ socket.on("updateLoc", (args)=>{
     }
     if (exists == false){
       oplayers.push(new Oplayer(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0],args.currentplayers[e][5]))
-     
+      
     }
     exists = false;
   }
@@ -46,15 +49,12 @@ socket.on("updateLoc", (args)=>{
 
 socket.on('init', (args)=>{
   var gameseed = args.gameseed;
-  noiseSeed(gameseed);
+  
   var exists = false;
 
 
   for (var e = 0; e < args.currentplayers.length;e++){
-    if (args.currentplayers[e][0] == socket.id){
-      player.name = args.currentplayers[e][5]
-      
-    }
+    
     for (var i =0; i< oplayers.length;i++){
       if (oplayers[i].id == args.currentplayers[e][0] && args.currentplayers[e][0] != socket.id){
         console.log(args.currentplayers[e][5])
@@ -67,7 +67,7 @@ socket.on('init', (args)=>{
       if (args.currentplayers[e][0] == socket.id){
         exists = true
         // args.currentplayers[e][5] = player.name
-        player.name = args.currentplayers[e][5]
+       
         
       }
       
@@ -78,12 +78,9 @@ socket.on('init', (args)=>{
     }
       
     exists = false;
-    if (args.currentplayers[e][0] == socket.id){
-      player.name = args.currentplayers[e][5]
-      
+    
     }
-    }
-
+    
     for (var i = 0; i < args.planets.length; i++){
       planets.push(new planet(args.planets[i][0],args.planets[i][1],args.planets[i][2], args.planets[i][3], args.planets[i][4], args.planets[i][5]))
     }
@@ -176,8 +173,14 @@ var seedgeneratedplanets =[];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  player = new Player(width/2+random(-1000,1000),height/2 + m+random(-1000,1000),random(-1000,1000),name);
+  player = (window.origin == "http://localhost:5500") ? new Player(0,0,random(-1000,1000),name) :new Player(width/2+random(-1000,1000),height/2 + m+random(-1000,1000),random(-1000,1000),name);
+
   diagonal = dist(0,0,width/2,height/2);
+  socket.emit('send me data pretty please',{
+
+  });
+
+  noiseSeed(gameseed);
   
 }
 //gameseed
@@ -191,9 +194,9 @@ name  = urlParams.getAll('name') || null;
 function draw() {
   
   
-  sectorsize = 500
+  sectorsize = 200
   seedgeneratedplanets = [];
-  chanceofappearing = 0.5;
+  chanceofappearing = 0.2;
 
   for (var x = player.x  - width*2; x< player.x  +width*2; x+= sectorsize){
     basex = player.x + x;
@@ -215,7 +218,9 @@ function draw() {
         pedr = noise(basex,basey,5) *255
         pedg = noise(basex,basey,6) *255
         pedb = noise(basex,basey,7) *255
-        seedgeneratedplanets.push(new planet(basex,basey,pedrand, pedr,pedg,pedb))
+        offx = Math.random() *noise(basex,basey,8) *500
+        offy = Math.random() *noise(basex,basey,9) *500
+        seedgeneratedplanets.push(new planet(basex,basey,pedrand,pedr,pedg,pedb))
       }
     }
     
@@ -237,9 +242,9 @@ function draw() {
   
 
   senddata() 
-  // if (player.health <= 0 || player.name ==""){
-  //   window.location.href = 'index.html';
-  // }
+  if (player.health <= 0 || player.name ==""){
+    window.location.href = 'index.html';
+  }
   
   
   //draw objects close by only in orde to increase performance

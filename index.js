@@ -67,20 +67,24 @@ var gameseed = Math.random();
 
 
 io.on('connection', (socket)=>{
+  playerson.push([socket.id]);
   name.push([socket.id]);
-  console.log(name);
-
   
-  socket.emit('init', {
-    currentplayers: playerson,
-    planets: planets,
-    city: city,
-    stars: stars,
-    lasers: lasers,
-    gameseed: gameseed
-    
 
-  })
+  socket.on('send me data pretty please',(arg) =>{
+    socket.emit('init', {
+      currentplayers: playerson,
+      planets: planets,
+      city: city,
+      stars: stars,
+      lasers: lasers,
+      gameseed: gameseed
+      
+  
+    })
+
+  });
+
   socket.on('currData', (args)=>{
     
     for (var i = 0; i < playerson.length;i++){
@@ -91,7 +95,8 @@ io.on('connection', (socket)=>{
         playerson[i][4] = args.rocketfire;
         playerson[i][5] = args.name;
        
-        console.log("reviedev data to currdat")
+        
+        
         updateLoc();
         break;
       }
@@ -110,24 +115,23 @@ io.on('connection', (socket)=>{
     for (var i = 0; i< playerson.length;i++){
       if (socket.id == playerson[i][0]){
         playerson.splice(i,1);
+        console.log(`player left ${socket.id} and ${playerson}`)
+        io.emit('deleteplayer',{
+          id: socket.id
+        })
+        updateLoc()
         break;
+
       } 
     }
-    socket.emit('init', {
-      currentplayers: playerson
-  
-    })
-    io.emit('deleteplayer',{
-      id: socket.id
-    })
-    updateLoc()
+    
 	})
 
 
 });
 
 function updateLoc(){
-  console.log("recieved data");
+  console.log(`player leftand ${playerson}`)
   io.emit('updateLoc',{
     currentplayers: playerson,
     lasers: lasers,
@@ -189,7 +193,7 @@ function newplanets(n){
 
      hubnumber = getRandomInt(1,3);
      for(var a=0;a<hubnumber;a++){
-        city.push(createHub(cx,cy,cs));
+        //city.push(createHub(cx,cy,cs));
      }
   }
   //creates the contracts
@@ -214,7 +218,7 @@ function createHub(x,y,s){
               touching=false;
 
               for(let p=0;p<city.length;p++){
-                console.log(city[p]);
+                //console.log(city[p]);
 
                   // change from distance to sqrt pythagoram theorm
                   if(
@@ -242,7 +246,7 @@ function createHub(x,y,s){
             cityUpgradeResources.push([]);
 
               upgrade = getRandomInt(0,upgradeName.length-1);
-              console.log("upgrade name"+upgradeName.length);
+              //console.log("upgrade name"+upgradeName.length);
               exists=true;
               
               while(exists==true){
@@ -255,7 +259,7 @@ function createHub(x,y,s){
               
              // upgradeCost.push(upgradeCost[upgrade]);
               for(let u=0;u<numOfResourcesUpgrade[upgrade];u++){
-                console.log(upgradeResources);
+                //console.log(upgradeResources);
 
                 cityUpgradeResources[cityUpgradeResources.length-1].push
                   (upgradeResources[upgrade][ getRandomInt(0,upgradeResources[upgrade].length)  ]   );
