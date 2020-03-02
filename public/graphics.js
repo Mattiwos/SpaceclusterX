@@ -213,6 +213,13 @@ function drawResource(x,y,resource,sc){
     }
 }
 
+function drawLeaderBoard(arrayUsed){
+
+    fill(0,100);
+    noStroke();
+    //rect(width*)
+}
+
 function drawIcon(x,y,icon,sc){
     //1 is energy
     //2 is damage

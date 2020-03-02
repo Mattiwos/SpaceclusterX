@@ -329,6 +329,8 @@ function draw() {
 
   drawGraphics();
 
+  drawLeaderBoard(oplayers);
+
 }
 
 function keyPressed(){
