@@ -27,7 +27,7 @@ socket.on("updateLoc", (args)=>{
    
     for (var i =0; i< oplayers.length;i++){
       if (oplayers[i].id == args.currentplayers[e][0] && args.currentplayers[e][0] != socket.id){
-        oplayers[i].update(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0],args.currentplayers[e][5]);
+        oplayers[i].update(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0],args.currentplayers[e][5],args.currentplayers[e][6]);
         exists = true
         
 
@@ -39,7 +39,7 @@ socket.on("updateLoc", (args)=>{
       
     }
     if (exists == false){
-      oplayers.push(new Oplayer(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0],args.currentplayers[e][5]))
+      oplayers.push(new Oplayer(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0],args.currentplayers[e][5],args.currentplayers[e][6]))
       
     }
     exists = false;
@@ -57,8 +57,9 @@ socket.on('init', (args)=>{
     
     for (var i =0; i< oplayers.length;i++){
       if (oplayers[i].id == args.currentplayers[e][0] && args.currentplayers[e][0] != socket.id){
-        console.log(args.currentplayers[e][5])
-        oplayers[i].update(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0],args.currentplayers[e][5]);
+        console.log(args.currentplayers[e][6])
+
+        oplayers[i].update(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0],args.currentplayers[e][5],args.currentplayers[e][6]);
 
         exists = true
        
@@ -124,9 +125,9 @@ function senddata(){
     r: player.r,	
     rocketfire: player.rocketfire,	
     name: player.name,
-    credit: player.credit,
+    credit: player.credits,
    
-  })
+  });
 }
 ///////////////////////////////////////////Socket ^ ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
