@@ -94,6 +94,7 @@ io.on('connection', (socket)=>{
         playerson[i][3] = (args.r);
         playerson[i][4] = args.rocketfire;
         playerson[i][5] = args.name;
+        playerson[i][6] = args.credit;
        
         
         
@@ -131,7 +132,7 @@ io.on('connection', (socket)=>{
 });
 
 function updateLoc(){
-  console.log(`player leftand ${playerson}`)
+  
   io.emit('updateLoc',{
     currentplayers: playerson,
     lasers: lasers,
@@ -198,7 +199,7 @@ function newplanets(n){
   }
   //creates the contracts
   for(var i=0;i<10;i++){
-    console.log("city"+city[getRandomInt(0,city.length)]);
+   
     //city[getRandomInt(0,city.length)].createContract();
   }
 
