@@ -183,29 +183,30 @@ function setup() {
   });
 
   noiseSeed(gameseed);
-  
+  console.log(window.location.search);
+
+  var urlParams = new URLSearchParams(window.location.search);
+  name  = urlParams.getAll('name') || null;
+  player.name = name;
 }
 //gameseed
 var nosx =2;
 var nosy =2;
-console.log(window.location.search);
 
-var urlParams = new URLSearchParams(window.location.search);
-name  = urlParams.getAll('name') || null;
 
 function draw() {
   
   
-  sectorsize = 200
+  sectorsize = 700
   seedgeneratedplanets = [];
-  chanceofappearing = 0.2;
+  chanceofappearing = 0.5;
   
   for (var x = player.x  - width*2; x< player.x  +width*2; x+= sectorsize){
     basex = player.x + x;
     basex = Math.floor(basex/sectorsize) * sectorsize;
     basey = 0
     if (noise(basex,basey,3) >= 1-chanceofappearing){
-      pedrand = noise(basex,basey,4) *200
+      pedrand = noise(basex,basey,4) *700
       pedr = noise(basex,basey,5) *255
       pedg = noise(basex,basey,6) *255
       pedb = noise(basex,basey,7) *255
@@ -216,7 +217,8 @@ function draw() {
       basey = player.y +y;
       basey = Math.floor(basey/sectorsize) * sectorsize;
       if (noise(basex,basey,3) >= 1-chanceofappearing){
-        pedrand = noise(basex,basey,4) *200
+        pedrand = noise(basex,basey,4) *700
+
         pedr = noise(basex,basey,5) *255
         pedg = noise(basex,basey,6) *255
         pedb = noise(basex,basey,7) *255
@@ -234,7 +236,8 @@ function draw() {
 
   d=deltaTime/10;
   background(0);
-  player.name = name;
+  
+
   for (var i = 0; i <seedgeneratedplanets.length;i++){
     
     seedgeneratedplanets[i].draw()
