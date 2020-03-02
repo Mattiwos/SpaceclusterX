@@ -74,7 +74,7 @@ socket.on('init', (args)=>{
     }
     if (exists == false){
       
-      oplayers.push(new Oplayer(0,0,0,true,args.currentplayers[e][0],args.currentplayers[e][5]))
+      oplayers.push(new Oplayer(0,0,0,true,args.currentplayers[e][0],args.currentplayers[e][5],args.currentplayers[e][6]))
     }
       
     exists = false;
@@ -124,6 +124,7 @@ function senddata(){
     r: player.r,	
     rocketfire: player.rocketfire,	
     name: player.name,
+    credit: player.credit,
    
   })
 }
@@ -197,7 +198,7 @@ function draw() {
   sectorsize = 200
   seedgeneratedplanets = [];
   chanceofappearing = 0.2;
-
+  
   for (var x = player.x  - width*2; x< player.x  +width*2; x+= sectorsize){
     basex = player.x + x;
     basex = Math.floor(basex/sectorsize) * sectorsize;
