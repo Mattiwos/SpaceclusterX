@@ -198,9 +198,9 @@ var nosy =2;
 function draw() {
   
   
-  sectorsize = 200
+  sectorsize = 20
   seedgeneratedplanets = [];
-  chanceofappearing = 1;
+  chanceofappearing = .2;
   
   console.log(`Star:${-1*(-player.y+height)} and end: ${-1*(-player.y+height)}`);
   for (var x = (-player.x + width/2)*-1; x < (-player.x - width/2)*-1; x+= sectorsize){
@@ -215,7 +215,7 @@ function draw() {
       seedgeneratedplanets.push(new planet(basex,basey,pedrand, pedr,pedg,pedb))
     }
 
-    for (var y = -1*(-player.y+height/2); y < -1*(-player.y -height/2); y+=sectorsize){
+    for (var y = -2*(-player.y+height/2); y < -2*(-player.y -height/2); y+=sectorsize){
       basey = y//-player.y +y;
       basey = Math.floor(basey/sectorsize) * sectorsize;
       if (noise(basex,basey,3) >= 1-chanceofappearing){
