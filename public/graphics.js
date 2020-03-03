@@ -232,6 +232,9 @@ function drawLeaderBoard(arrayUsed){
 
     // it will then
 
+    //arrayUsed.push(player.credits);
+    arrayUsed.sort();
+
     fill(255,100);
     noStroke();
     rect(width*4/5,10,width*4/25,arrayUsed.length*40);
@@ -241,7 +244,6 @@ function drawLeaderBoard(arrayUsed){
     //rectMode(CENTER);
     for(var i=0;i<arrayUsed.length;i++){
         text(arrayUsed[i].name,width*4/5+15,10 + i*40 +20);
-        //change to be the actual score later
         
         text(arrayUsed[i].credits,width-width*2/25,10 + i*40 +20);
     }
