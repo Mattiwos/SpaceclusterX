@@ -1,4 +1,5 @@
 
+
 var gameseed = 0;
 const socket = io(
   {transports: ['websocket']},
@@ -197,34 +198,38 @@ var nosy =2;
 function draw() {
   
   
-  sectorsize = 700
+  sectorsize = 200
   seedgeneratedplanets = [];
-  chanceofappearing = 0.5;
+  chanceofappearing = 1;
   
-  for (var x = player.x  - width*2; x< player.x  +width*2; x+= sectorsize){
-    basex = player.x + x;
+  console.log(`Star:${-1*(-player.y+height)} and end: ${-1*(-player.y+height)}`);
+  for (var x = (-player.x + width/2)*-1; x < (-player.x - width/2)*-1; x+= sectorsize){
+    basex = x//-player.x + x;
     basex = Math.floor(basex/sectorsize) * sectorsize;
     basey = 0
     if (noise(basex,basey,3) >= 1-chanceofappearing){
-      pedrand = noise(basex,basey,4) *700
+      pedrand = noise(basex,basey,4) *20
       pedr = noise(basex,basey,5) *255
       pedg = noise(basex,basey,6) *255
       pedb = noise(basex,basey,7) *255
       seedgeneratedplanets.push(new planet(basex,basey,pedrand, pedr,pedg,pedb))
     }
 
-    for (var y = player.y  -height*2; y < player.y  +height*2; y+=sectorsize){
-      basey = player.y +y;
+    for (var y = -1*(-player.y+height/2); y < -1*(-player.y -height/2); y+=sectorsize){
+      basey = y//-player.y +y;
       basey = Math.floor(basey/sectorsize) * sectorsize;
       if (noise(basex,basey,3) >= 1-chanceofappearing){
-        pedrand = noise(basex,basey,4) *700
+        pedrand = noise(basex,basey,4) *20
 
         pedr = noise(basex,basey,5) *255
         pedg = noise(basex,basey,6) *255
         pedb = noise(basex,basey,7) *255
         offx = Math.random() *noise(basex,basey,8) *500
         offy = Math.random() *noise(basex,basey,9) *500
+        push ()
+        
         seedgeneratedplanets.push(new planet(basex,basey,pedrand,pedr,pedg,pedb))
+        pop ()
       }
     }
     
@@ -290,6 +295,23 @@ function draw() {
     planets[i].draw();
    
   }
+  textSize(30);
+       fill (255);
+       noStroke();
+       textAlign(RIGHT);
+  
+       text("X: " +round(-player.x + width/2) + "Y: " + round(-player.y), width, height/2) //left
+       
+       text("X: " +round(-player.x) + "Y: " + round(-player.y+height), width/2, height-10) // bottom
+
+       text("X: " +round(-player.x) + "Y: " + round(-player.y +height/2), width/2, 0+12) //top
+
+       text("X: " +round(-player.x - width/2) + "Y: " + round(-player.y), 100, height/2) //right
+       fill (255);
+       translate(player.x,player.y)
+       //rect (-player.x + width/2,-player.y,400,400);
+
+       pop()
 
   for(var i =0;i<city.length;i++){
     
@@ -327,6 +349,10 @@ function draw() {
      //}
     //oplayers[i].draw();
   }
+
+  push()
+  
+
 
   
 
