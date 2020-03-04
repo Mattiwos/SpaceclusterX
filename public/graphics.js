@@ -215,8 +215,8 @@ function drawResource(x,y,resource,sc){
     }
 }
 
-function drawLeaderBoard(arrayUsed){
-
+function drawLeaderBoard(){
+    
     //sorts the leaderboard by score
     //algorithm:
     // first, creates an array that is arrayUsed with player.credits on the end
@@ -231,9 +231,22 @@ function drawLeaderBoard(arrayUsed){
     // then, it will set index of Max to -1
 
     // it will then
+    
+    // first elemt is the name, second is the score
 
-    //arrayUsed.push(player.credits);
-    arrayUsed.sort();
+
+    var arrayUsed=[];
+
+    for (var i =0;i<oplayers.length;i++){
+        arrayUsed.push([oplayers[i].credits,oplayers[i].name]);
+        
+    }
+    arrayUsed.push([player.credits,player.name]);
+    console.log("Before" + arrayUsed)
+
+    arrayUsed.sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0)
+    console.log(arrayUsed)
+    //sort();
 
     fill(255,100);
     noStroke();
@@ -243,11 +256,10 @@ function drawLeaderBoard(arrayUsed){
     textAlign(LEFT,CENTER);
     //rectMode(CENTER);
     for(var i=0;i<arrayUsed.length;i++){
-        text(arrayUsed[i].name,width*4/5+15,10 + i*40 +20);
+        text(arrayUsed[i][0],width*4/5+15,10 + i*40 +20);
         
-        text(arrayUsed[i].credits,width-width*2/25,10 + i*40 +20);
+        text(arrayUsed[i][1],width-width*2/25,10 + i*40 +20);
     }
-    print(arrayUsed);
 
     textAlign(CENTER);
    
