@@ -242,11 +242,10 @@ function drawLeaderBoard(){
         
     }
     arrayUsed.push([player.credits,player.name]);
-    console.log("Before" + arrayUsed)
+   
 
-    arrayUsed.sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0)
-    console.log(arrayUsed)
-    //sort();
+    arrayUsed = arrayUsed.sort(([a], [b]) => a > b ? -1 : a < b ? 1 : 0)
+
 
     fill(255,100);
     noStroke();
@@ -256,9 +255,9 @@ function drawLeaderBoard(){
     textAlign(LEFT,CENTER);
     //rectMode(CENTER);
     for(var i=0;i<arrayUsed.length;i++){
-        text(arrayUsed[i][0],width*4/5+15,10 + i*40 +20);
+        text(arrayUsed[i][1],width*4/5+15,10 + i*40 +20);
         
-        text(arrayUsed[i][1],width-width*2/25,10 + i*40 +20);
+        text(arrayUsed[i][0],width-width*2/25,10 + i*40 +20);
     }
 
     textAlign(CENTER);
