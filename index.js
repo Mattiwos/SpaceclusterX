@@ -116,7 +116,7 @@ io.on('connection', (socket)=>{
     for (var i = 0; i< playerson.length;i++){
       if (socket.id == playerson[i][0]){
         playerson.splice(i,1);
-        console.log(`player left ${socket.id} and ${playerson}`)
+       
         io.emit('deleteplayer',{
           id: socket.id
         })

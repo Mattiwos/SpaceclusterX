@@ -58,7 +58,7 @@ socket.on('init', (args)=>{
     
     for (var i =0; i< oplayers.length;i++){
       if (oplayers[i].id == args.currentplayers[e][0] && args.currentplayers[e][0] != socket.id){
-        console.log(args.currentplayers[e][6])
+        
 
         oplayers[i].update(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0],args.currentplayers[e][5],args.currentplayers[e][6]);
 
@@ -184,7 +184,7 @@ function setup() {
   });
 
   noiseSeed(gameseed);
-  console.log(window.location.search);
+  
 
   var urlParams = new URLSearchParams(window.location.search);
   name  = urlParams.getAll('name') || null;
@@ -202,7 +202,7 @@ function draw() {
   seedgeneratedplanets = [];
   chanceofappearing = .2;
   
-  console.log(`Star:${-1*(-player.y+height)} and end: ${-1*(-player.y+height)}`);
+  
   for (var x = (-player.x + width/2)*-1; x < (-player.x - width/2)*-1; x+= sectorsize){
     basex = x//-player.x + x;
     basex = Math.floor(basex/sectorsize) * sectorsize;
@@ -245,7 +245,7 @@ function draw() {
 
   for (var i = 0; i <seedgeneratedplanets.length;i++){
     
-    // seedgeneratedplanets[i].draw()
+    seedgeneratedplanets[i].draw()
  
     //noiseDetail()
   }
