@@ -254,10 +254,12 @@ function drawLeaderBoard(){
     textSize(30);
     textAlign(LEFT,CENTER);
     //rectMode(CENTER);
+    //var leaderlimit = (arrayUsed.length >= 10)? 10 :arrayUsed.length;
+    
     for(var i=0;i<arrayUsed.length;i++){
-        text(arrayUsed[i][1],width*4/5+15,10 + i*40 +20);
-        
-        text(arrayUsed[i][0],width-width*2/25,10 + i*40 +20);
+
+            text(arrayUsed[i][1],width*4/5+15,10 + i*40 +20); 
+            text(arrayUsed[i][0],width-width*2/25,10 + i*40 +20);
     }
 
     textAlign(CENTER);

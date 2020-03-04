@@ -213,6 +213,9 @@ function draw() {
       pedg = noise(basex,basey,6) *255
       pedb = noise(basex,basey,7) *255
       seedgeneratedplanets.push(new planet(basex,basey,pedrand, pedr,pedg,pedb))
+      
+      //HUB SHOULD GO HEREEEEEEEEEEEEE
+      
     }
 
     for (var y = -2*(-player.y+height/2); y < -2*(-player.y -height/2); y+=sectorsize){
@@ -226,10 +229,16 @@ function draw() {
         pedb = noise(basex,basey,7) *255
         offx = Math.random() *noise(basex,basey,8) *500
         offy = Math.random() *noise(basex,basey,9) *500
-        push ()
+        
+        
         
         seedgeneratedplanets.push(new planet(basex,basey,pedrand,pedr,pedg,pedb))
-        pop ()
+        
+        randomnum = noise(basex,basey,8) //gives a num 0 to 1 and can change the third parameter to get a diff pusedo random nunmber
+        //HUB SHOULD GO HEREEEEEEEEEEEEE
+        
+        //seedgeneratedhubs.push(new hub(basex,basey,))
+        
       }
     }
     
