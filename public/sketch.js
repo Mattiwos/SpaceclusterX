@@ -245,7 +245,7 @@ function draw() {
 
   for (var i = 0; i <seedgeneratedplanets.length;i++){
     
-    seedgeneratedplanets[i].draw()
+    // seedgeneratedplanets[i].draw()
  
     //noiseDetail()
   }
@@ -295,23 +295,7 @@ function draw() {
     planets[i].draw();
    
   }
-  textSize(30);
-       fill (255);
-       noStroke();
-       textAlign(RIGHT);
   
-       text("X: " +round(-player.x + width/2) + "Y: " + round(-player.y), width, height/2) //left
-       
-       text("X: " +round(-player.x) + "Y: " + round(-player.y+height), width/2, height-10) // bottom
-
-       text("X: " +round(-player.x) + "Y: " + round(-player.y +height/2), width/2, 0+12) //top
-
-       text("X: " +round(-player.x - width/2) + "Y: " + round(-player.y), 100, height/2) //right
-       fill (255);
-       translate(player.x,player.y)
-       //rect (-player.x + width/2,-player.y,400,400);
-
-       pop()
 
   for(var i =0;i<city.length;i++){
     
