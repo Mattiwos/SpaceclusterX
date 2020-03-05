@@ -257,7 +257,7 @@ function drawLeaderBoard(){
     var leaderlimit = (arrayUsed.length >= 10)? 10 :arrayUsed.length;
     
     for(var i=0;i<leaderlimit;i++){
-            push()
+            push();
             //fill(0)
             if(arrayUsed[i][2]==1)fill(255,0,0);
             text(arrayUsed[i][1],width*4/5+15,10 + i*40 +20); 
@@ -268,6 +268,8 @@ function drawLeaderBoard(){
     textAlign(CENTER);
    
 }
+
+
 
 function drawIcon(x,y,icon,sc){
     //1 is energy

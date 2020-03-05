@@ -171,7 +171,7 @@ var z;
 
 var mouseP=false;
 var diagonal = 0;
-
+var mappy;
 var seedgeneratedplanets =[];
 
 function setup() {
@@ -182,6 +182,7 @@ function setup() {
   socket.emit('send me data pretty please',{
 
   });
+  mappy = new Map();
 
   noiseSeed(gameseed);
   
@@ -352,6 +353,8 @@ function draw() {
   player.draw();
 
   drawGraphics();
+
+  mappy.drawMap();
 
   drawLeaderBoard(oplayers);
 
