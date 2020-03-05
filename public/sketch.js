@@ -203,7 +203,7 @@ function draw() {
   chanceofappearing = .2;
   
   
-  for (var x = (-player.x + width/2)*-1; x < (-player.x - width/2)*-1; x+= sectorsize){
+  for (var x = player.x - width/2; x < player.x +width/2 + sectorsize*2; x+= sectorsize){
     basex = x//-player.x + x;
     basex = Math.floor(basex/sectorsize) * sectorsize;
     basey = 0
@@ -218,7 +218,7 @@ function draw() {
       
     }
 
-    for (var y = -2*(-player.y+height/2); y < -2*(-player.y -height/2); y+=sectorsize){
+    for (var y = player.y - height/2; y < player.y +height/2 + sectorsize*2; y+=sectorsize){
       basey = y//-player.y +y;
       basey = Math.floor(basey/sectorsize) * sectorsize;
       if (noise(basex,basey,3) >= 1-chanceofappearing){
@@ -227,8 +227,8 @@ function draw() {
         pedr = noise(basex,basey,5) *255
         pedg = noise(basex,basey,6) *255
         pedb = noise(basex,basey,7) *255
-        offx = Math.random() *noise(basex,basey,8) *500
-        offy = Math.random() *noise(basex,basey,9) *500
+        //offx = Math.random() *noise(basex,basey,8) *500
+        //offy = Math.random() *noise(basex,basey,9) *500
         
         
         

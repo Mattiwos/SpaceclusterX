@@ -134,12 +134,7 @@ class planet{
             this.city[k].drawGraphics();
         }
         */
-       textSize(30);
-       fill (255);
-       noStroke();
-       textAlign(RIGHT);
-       text("X: " +(this.x+width/2) + "Y: " + (this.y+height/2+m), this.x+width/2, this.y+height/2)
- 
+       
         
         pop();
         
