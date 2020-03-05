@@ -238,10 +238,10 @@ function drawLeaderBoard(){
     var arrayUsed=[];
 
     for (var i =0;i<oplayers.length;i++){
-        arrayUsed.push([oplayers[i].credits,oplayers[i].name]);
+        arrayUsed.push([oplayers[i].credits,oplayers[i].name,0]);
         
     }
-    arrayUsed.push([player.credits,player.name]);
+    arrayUsed.push([player.credits,player.name,1]);
    
 
     arrayUsed = arrayUsed.sort(([a], [b]) => a > b ? -1 : a < b ? 1 : 0)
@@ -254,13 +254,16 @@ function drawLeaderBoard(){
     textSize(30);
     textAlign(LEFT,CENTER);
     //rectMode(CENTER);
-    //var leaderlimit = (arrayUsed.length >= 10)? 10 :arrayUsed.length;
+    var leaderlimit = (arrayUsed.length >= 10)? 10 :arrayUsed.length;
     
-    for(var i=0;i<arrayUsed.length;i++){
-
+    for(var i=0;i<leaderlimit;i++){
+            push()
+            //fill(0)
+            if(arrayUsed[i][2]==1)fill(255,0,0);
             text(arrayUsed[i][1],width*4/5+15,10 + i*40 +20); 
             text(arrayUsed[i][0],width-width*2/25,10 + i*40 +20);
-    }
+            pop ();
+        }
 
     textAlign(CENTER);
    
