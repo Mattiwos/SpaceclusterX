@@ -198,9 +198,9 @@ var nosy =2;
 function draw() {
   
   
-  sectorsize = 20
+  sectorsize = 700
   seedgeneratedplanets = [];
-  chanceofappearing = .2;
+  chanceofappearing = .4;
   
   
   for (var x = player.x - width/2; x < player.x +width/2 + sectorsize*2; x+= sectorsize){
@@ -208,7 +208,7 @@ function draw() {
     basex = Math.floor(basex/sectorsize) * sectorsize;
     basey = 0
     if (noise(basex,basey,3) >= 1-chanceofappearing){
-      pedrand = noise(basex,basey,4) *20
+      pedrand = noise(basex,basey,4) *700
       pedr = noise(basex,basey,5) *255
       pedg = noise(basex,basey,6) *255
       pedb = noise(basex,basey,7) *255
@@ -222,17 +222,17 @@ function draw() {
       basey = y//-player.y +y;
       basey = Math.floor(basey/sectorsize) * sectorsize;
       if (noise(basex,basey,3) >= 1-chanceofappearing){
-        pedrand = noise(basex,basey,4) *20
+        pedrand = noise(basex,basey,4) *700
 
         pedr = noise(basex,basey,5) *255
         pedg = noise(basex,basey,6) *255
         pedb = noise(basex,basey,7) *255
-        //offx = Math.random() *noise(basex,basey,8) *500
-        //offy = Math.random() *noise(basex,basey,9) *500
+        offx = noise(basex,basey,8) *200
+        offy = noise(basex,basey,9) *200
         
         
         
-        seedgeneratedplanets.push(new planet(basex,basey,pedrand,pedr,pedg,pedb))
+        seedgeneratedplanets.push(new planet(basex + offx,basey + offy,pedrand,pedr,pedg,pedb))
         
         randomnum = noise(basex,basey,8) //gives a num 0 to 1 and can change the third parameter to get a diff pusedo random nunmber
         //HUB SHOULD GO HEREEEEEEEEEEEEE
@@ -252,12 +252,7 @@ function draw() {
   background(0);
   
 
-  for (var i = 0; i <seedgeneratedplanets.length;i++){
-    
-    seedgeneratedplanets[i].draw()
- 
-    //noiseDetail()
-  }
+  
   
 
   senddata() 
@@ -295,15 +290,15 @@ function draw() {
  
 
 
-  for(var i =0;i<planets.length;i++){
+  // for(var i =0;i<planets.length;i++){
     
-    // if ( (dist(player.x,planets[i].x,player.y,planets[i].y)) <= (2*width)){
-     // if( (dist(player.x,player.y,planets[i].x,planets[i].y)<diagonal+planets[i].s/2))
-      //  planets[i].draw();
-  //   }
-    planets[i].draw();
+  //   // if ( (dist(player.x,planets[i].x,player.y,planets[i].y)) <= (2*width)){
+  //    // if( (dist(player.x,player.y,planets[i].x,planets[i].y)<diagonal+planets[i].s/2))
+  //     //  planets[i].draw();
+  // //   }
+  //   planets[i].draw();
    
-  }
+  // }
   
 
   for(var i =0;i<city.length;i++){
@@ -342,8 +337,14 @@ function draw() {
      //}
     //oplayers[i].draw();
   }
+  for (var i = 0; i <seedgeneratedplanets.length;i++){
+    
+    seedgeneratedplanets[i].draw()
+ 
+    //noiseDetail()
+  }
 
-  push()
+  //push()
   
 
 
