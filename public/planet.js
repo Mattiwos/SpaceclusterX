@@ -1,5 +1,7 @@
 class planet{
-    constructor(px,py,sz,sr,sb,sg){
+    constructor(px,py,sz,sr,sb,sg,craterz){
+
+        //ag, dist , cratersz , craterfill
         this.x=px;
         this.y=py;
         this.s=sz;
@@ -12,25 +14,24 @@ class planet{
         this.cy=[];
         this.cs=[];
         this.cf=[];
+        this.crater = craterz
 
         
         this.spawn=false;
 
+       // print(craterz);
+
+        //print(this.crater.length);
+
+
+
         
 
-
-
-        this.craters=random(10,40);
-        for(var o=0;o<this.craters;o++){
-
-            this.ag=random(0,2*PI);
-            this.cs.push(random(25,80));
-            this.dist=random(0,this.s/2-this.cs[o]/2);
-            
-            this.cx.push(this.x+this.dist*cos (this.ag));
-            this.cy.push(this.y+this.dist*sin (this.ag));
-            this.cf.push(random(0,255));
-            
+        for(var o=0;o< this.crater.length;o++){
+            this.cx.push(this.x+cos (this.crater [o][0])*this.crater[o][1]);
+            this.cy.push(this.y+sin (this.crater [o][0])*this.crater[o][1]);
+            this.cf.push(this.crater [o][3]);
+            this.cs.push(this.crater[o][2]);
         }
 
         this.planetExport=[];

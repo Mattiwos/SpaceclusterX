@@ -194,7 +194,7 @@ function setup() {
 //gameseed
 var nosx =2;
 var nosy =2;
-
+var crater = [];
 
 function draw() {
   
@@ -231,9 +231,26 @@ function draw() {
         offx = noise(basex,basey,8) *200
         offy = noise(basex,basey,9) *200
         
+
+        crater = [];
+
+        craternumber = noise(basex,basey,10) *10 +10
+
         
         
-        seedgeneratedplanets.push(new planet(basex + offx,basey + offy,pedrand,pedr,pedg,pedb))
+        for(var o=0;o<craternumber;o++){
+            // the first one in the array is x, y, fill
+
+            ag = noise(basex,basey,1+o) *2*PI
+            cratersz = noise(basex,basey,2+o) *40 +10
+            dists = noise(basex,basey,3+o) * (pedrand- cratersz) // 
+            craterfill = noise(basex,basey,4+o) * 255
+            // put this back for the craters but it causes an error sometimes, crater.length undefined
+           // crater.push ([ag, dists , cratersz , craterfill]);
+            
+        }
+        
+        seedgeneratedplanets.push(new planet(basex + offx,basey + offy,pedrand,pedr,pedg,pedb, crater))
         
         randomnum = noise(basex,basey,8) //gives a num 0 to 1 and can change the third parameter to get a diff pusedo random nunmber
         //HUB SHOULD GO HEREEEEEEEEEEEEE
@@ -241,6 +258,8 @@ function draw() {
         //seedgeneratedhubs.push(new hub(basex,basey,))
         
       }
+
+
     }
     
 
