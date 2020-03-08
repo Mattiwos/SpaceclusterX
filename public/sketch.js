@@ -41,6 +41,7 @@ socket.on("updateLoc", (args)=>{
       
     }
     if (exists == false){
+      if (args.currentplayers[e][0] != socket.id)
       oplayers.push(new Oplayer(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0],args.currentplayers[e][5],args.currentplayers[e][6]))
       
     }
@@ -76,7 +77,7 @@ socket.on('init', (args)=>{
       
     }
     if (exists == false){
-      
+      if (args.currentplayers[e][0] != socket.id) //double checking might not need
       oplayers.push(new Oplayer(0,0,0,true,args.currentplayers[e][0],args.currentplayers[e][5],args.currentplayers[e][6]))
     }
       
@@ -174,6 +175,21 @@ var mouseP=false;
 var diagonal = 0;
 var mappy;
 var seedgeneratedplanets =[];
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
 
 function setup() { 
   createCanvas(windowWidth * (window.devicePixelRatio /2), windowHeight* (window.devicePixelRatio /2));
@@ -188,9 +204,10 @@ function setup() {
   noiseSeed(gameseed);
   
 
-  var urlParams = new URLSearchParams(window.location.search);
-  name  = urlParams.getAll('name') || null;
+  
+  name = String(getCookie('username'))
   player.name = name;
+
 }
 //gameseed
 var nosx =2;
