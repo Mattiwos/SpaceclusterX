@@ -21,6 +21,7 @@ class Projectile{
 
         if (this.playerid == socket.id){
             gunshoot(this.x,this.y,this.r,this.dmg,this.speed,this.id);
+            // laserSound.play()
         }
         
    

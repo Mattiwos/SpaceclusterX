@@ -23,10 +23,10 @@ app.use(morgen('common'))
 
 //required folders
 
-
+app.use(express.static('assets'));
 app.use(express.static('public'));
 app.use(express.static('views'));
-app.use(express.static('assets'));
+
 
 //renders index.html
 app.get('/', (req, res)=>{

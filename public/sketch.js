@@ -1,3 +1,5 @@
+// let laserSound = new Audio('assets/laserSound1.mp3');
+
 
 
 var gameseed = 0;
