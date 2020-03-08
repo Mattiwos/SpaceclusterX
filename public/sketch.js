@@ -243,9 +243,9 @@ function draw() {
 
           ag = noise(basex,basey,1+o) *2*PI
           cratersz = noise(basex,basey,2+o) *40 +10
-          dists = noise(basex,basey,3+o) * (pedrand+cratersz) // 
+          dists = noise(basex,basey,3+o) * (pedrand-cratersz) /2 // 
           craterfill = noise(basex,basey,4+o) * 255
-           
+           //console.log(`${pedrand} amd ${cratersz} = ${dists}`)
            crater.push ([ag, dists , cratersz , craterfill]);
             
         }
@@ -262,6 +262,7 @@ function draw() {
         pedb = noise(basex,basey,7) *255
         offx = noise(basex,basey,8) *200
         offy = noise(basex,basey,9) *200
+
         crater = [];
 
         craternumber = Math.round(noise(basex,basey,10) *10)      
@@ -270,7 +271,7 @@ function draw() {
 
             ag = noise(basex,basey,1+o) *2*PI
             cratersz = noise(basex,basey,2+o) *40 +10
-            dists = noise(basex,basey,3+o) * (pedrand+ cratersz) // 
+            dists = noise(basex,basey,3+o) * (pedrand+ cratersz) /2// 
             craterfill = noise(basex,basey,4+o) * 255  //opasity?  
            crater.push ([ag, dists , cratersz , craterfill]);         
         }  
