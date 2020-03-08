@@ -238,7 +238,7 @@ function drawLeaderBoard(){
     var arrayUsed=[];
 
     for (var i =0;i<oplayers.length;i++){
-        arrayUsed.push([oplayers[i].credits,oplayers[i].name,0]);
+        arrayUsed.push([oplayers[i].credits, oplayers[i].name,0]);
         
     }
     arrayUsed.push([player.credits,player.name,1]);
@@ -260,8 +260,14 @@ function drawLeaderBoard(){
             push();
             //fill(0)
             if(arrayUsed[i][2]==1)fill(255,0,0);
-            text(arrayUsed[i][1] | 0,width*4/5+15,10 + i*40 +20); 
-            text(arrayUsed[i][0] | 0,width-width*2/25,10 + i*40 +20);
+            if (arrayUsed[i][1] != undefined){
+                text(arrayUsed[i][1],width*4/5+15,10 + i*40 +20); 
+            text(arrayUsed[i][0],width-width*2/25,10 + i*40 +20);
+            }
+            else{
+                
+            }
+
             pop ();
         }
 
