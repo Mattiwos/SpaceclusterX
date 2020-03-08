@@ -50,10 +50,10 @@ class hub {
 
         for (var h = 0; h < this.rectnumber; h++) {
             this.ag = random(0, 2 * PI);
-            this.dist = random(0, this.citysize / 2 - 0);
+            this.dists = random(0, this.citysize / 2 - 0);
 
-            this.rectx.push(this.x + cos(this.ag) * this.dist);
-            this.recty.push(this.y + sin(this.ag) * this.dist);
+            this.rectx.push(this.x + cos(this.ag) * this.dists);
+            this.recty.push(this.y + sin(this.ag) * this.dists);
 
             this.rf.push(int(random(0, 255)));
         }
@@ -171,10 +171,10 @@ class hub {
 
         for (var h = 0; h < this.rectnumber; h++) {
             this.ag = random(0, 2 * PI);
-            this.dist = random(0, this.citysize / 2 - 0);
+            this.dists = random(0, this.citysize / 2 - 0);
 
-            this.rectx.push(this.x + cos(this.ag) * this.dist);
-            this.recty.push(this.y + sin(this.ag) * this.dist);
+            this.rectx.push(this.x + cos(this.ag) * this.dists);
+            this.recty.push(this.y + sin(this.ag) * this.dists);
 
             this.rf.push(int(random(0, 255)));
         }
@@ -510,33 +510,33 @@ class hub {
 */
 //createHub(this.x,this.y,this.s);
 
-function createHub(x,y,s){
+function createHub(x,y,s,ag){
     //   
               // now it will create the x , y of the hub(s)
   
             touching=true;
             
             while(touching==true){
-                ag=random(0,2*PI);
-                dist=random(0,s/2);
+                ;
+                dists=random(0,s/2);
                 touching=false;
   
                 for(let p=0;p<city.length;p++){
                   //console.log(city[p]);
   
-                    // change from distance to sqrt pythagoram theorm
+                    // change from distsance to sqrt pythagoram theorm
                     if(
-                        Math.sqrt(Math.pow(city[p][0]-(x+dist*cos(ag)),2)+Math.pow(city[p][1]-(y+dist*sin(ag)),2))
+                        Math.sqrt(Math.pow(city[p][0]-(x+dists*cos(ag)),2)+Math.pow(city[p][1]-(y+dists*sin(ag)),2))
                         
                         <citysize*2){
                         touching=true;
                     }
-                    // old distance dist(x+dist*cos(ag),y+dist*sin(ag),city[p].x,city[p].y)
+                    // old distsance dists(x+dists*cos(ag),y+dists*sin(ag),city[p].x,city[p].y)
                 }
             }
             
-            newx=x+dist*cos(ag);
-            newy=y+dist*sin(ag);
+            newx=x+dists*cos(ag);
+            newy=y+dists*sin(ag);
             //next it will add the upgrades that are available
   
             upgrades=[];
@@ -577,7 +577,7 @@ function createHub(x,y,s){
               ///// >
               //////(!) for now they aren't the same
   
-              return [newx,newy,planetExport,upgrades,cityUpgradeResources];
+              return [newx,newy,upgrades,cityUpgradeResources];
   
               ////end loop for creating one hub
           
@@ -598,4 +598,9 @@ function createHub(x,y,s){
       
     //  return [[1,2,3],[1231,123]]
   
+  }
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
   }

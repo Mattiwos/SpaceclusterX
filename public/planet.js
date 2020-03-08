@@ -25,6 +25,7 @@ class planet{
 
         this.planetExport=[];
         //this.planetExportCost=[];
+
         this.planetResources=random(0,3);
         //cfreates the planets natural resources that it sells on the citys
         for(let k=0;k<this.planetResources;k++){
@@ -39,13 +40,22 @@ class planet{
             }
             this.planetExport.push(this.possible);
         }
-
+        this.planetExport = [2,3]
+        //exportss , upgrade, upgradecost
+        //planetExport,upgrades,cityUpgradeResources
+        this.hubs = []
+        this.onehub = createHub(this.x,this.y,this.s,this.craterrand [0][0])
+        
+        this.hubs.push(new hub(this.onehub[0],this.onehub[1],this.planetExport,this.onehub[2],this.onehub[3]))
 
     }
     draw(){
         push();
+        for (var i =0;i<this.hubs.length; i++){
+            this.hubs[i].draw()
+        }
         translate(-player.x,-player.y);
-
+        
         
 
         for(let k=0;k<20;k++){ //draws planet outter circles that make it glow
