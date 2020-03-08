@@ -1,5 +1,7 @@
 class Map{
-    constructor(){}
+    constructor(){
+        
+    }
     drawMap(){
         this.mx=width-100;
         this.my=height-100;

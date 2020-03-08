@@ -83,9 +83,9 @@ socket.on('init', (args)=>{
     
     }
     
-    for (var i = 0; i < args.planets.length; i++){
-      planets.push(new planet(args.planets[i][0],args.planets[i][1],args.planets[i][2], args.planets[i][3], args.planets[i][4], args.planets[i][5]))
-    }
+    // for (var i = 0; i < args.planets.length; i++){
+    //   planets.push(new planet(args.planets[i][0],args.planets[i][1],args.planets[i][2], args.planets[i][3], args.planets[i][4], args.planets[i][5]))
+    // }
     for (var i = 0; i < args.stars.length; i++){
       stars.push(new star(args.stars[i][0],args.stars[i][1]));
     }
@@ -213,7 +213,26 @@ function draw() {
       pedr = noise(basex,basey,5) *255
       pedg = noise(basex,basey,6) *255
       pedb = noise(basex,basey,7) *255
-      seedgeneratedplanets.push(new planet(basex,basey,pedrand, pedr,pedg,pedb))
+
+      crater = [];
+
+      craternumber = Math.round(noise(basex,basey,10) *10 +10)
+
+        
+        
+      for(var o=0;o<craternumber;o++){
+            // the first one in the array is x, y, fill
+
+          ag = noise(basex,basey,1+o) *2*PI
+          cratersz = noise(basex,basey,2+o) *40 +10
+          dists = noise(basex,basey,3+o) * (pedrand- cratersz) // 
+          craterfill = noise(basex,basey,4+o) * 255
+            // put this back for the craters but it causes an error sometimes, crater.length undefined
+           crater.push ([ag, dists , cratersz , craterfill]);
+            
+        }
+        
+        seedgeneratedplanets.push(new planet(basex + offx,basey + offy,pedrand,pedr,pedg,pedb, crater))
       
       //HUB SHOULD GO HEREEEEEEEEEEEEE
       
@@ -234,7 +253,7 @@ function draw() {
 
         crater = [];
 
-        craternumber = noise(basex,basey,10) *10 +10
+        craternumber = Math.round(noise(basex,basey,10) *10 +10)
 
         
         
@@ -246,13 +265,13 @@ function draw() {
             dists = noise(basex,basey,3+o) * (pedrand- cratersz) // 
             craterfill = noise(basex,basey,4+o) * 255
             // put this back for the craters but it causes an error sometimes, crater.length undefined
-           // crater.push ([ag, dists , cratersz , craterfill]);
+           crater.push ([ag, dists , cratersz , craterfill]);
             
         }
         
         seedgeneratedplanets.push(new planet(basex + offx,basey + offy,pedrand,pedr,pedg,pedb, crater))
         
-        randomnum = noise(basex,basey,8) //gives a num 0 to 1 and can change the third parameter to get a diff pusedo random nunmber
+        
         //HUB SHOULD GO HEREEEEEEEEEEEEE
         
         //seedgeneratedhubs.push(new hub(basex,basey,))
