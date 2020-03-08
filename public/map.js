@@ -26,15 +26,18 @@ class Map{
             let distX = (oplayers[i].x - player.x) * this.distanceconstant ;
             let distY = (oplayers[i].y - player.y) * this.distanceconstant ;
 
-            if(dist (this.mx+distX,this.my+distY,this.mx,this.my) <  this.mapsize/2 +10)
+            if(dist (this.mx+distX,this.my+distY,this.mx,this.my) <  this.mapsize/2 +10){
+
+                drawSpaceship(this.mx + distX, this.my + distY,oplayers[i].r,false,5)
+
+                textSize(10)
+                fill(255)
+                if (oplayers[i].name != undefined)
+                text (oplayers[i].name,this.mx + distX, this.my + distY);
+            }
         
    
-            drawSpaceship(this.mx + distX, this.my + distY,oplayers[i].r,false,5)
-
-            textSize(10)
-            fill(255)
-            if (oplayers[i].name != undefined)
-            text (oplayers[i].name,this.mx + distX, this.my + distY);
+            
             
         }
         //using this to test it
