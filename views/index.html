@@ -16,13 +16,14 @@
     <form class="loginname">
 
     <label for="name">Username:</label>
-    <input class="u-full-width" type="text" id="name" name="name">
+    <input class="u-full-width" type="text" id="name" minlength="1" maxlength="9" name="name">
     <button id="startgame" type = "button" onclick="runswhenbuttonisclicked()">START</button>
 
     </form>
 
     <script src="/socket.io/socket.io.js"></script>
     <script> 
+    document.getElementById("name").value = getPrevUsername();
     function runswhenbuttonisclicked() {
 
       name = document.getElementById("name").value.toString()
@@ -31,6 +32,29 @@
       window.location.href = `game.html`;
       
     }
+    function getPrevUsername(){
+      if (getCookie('username') != undefined)
+      return getCookie('username')
+      else
+      return ""
+    }
+    
+    function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
     </script>
     <script>
       var input = document.getElementById("name");
