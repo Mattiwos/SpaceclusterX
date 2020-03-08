@@ -318,7 +318,7 @@ class hub {
                 textSize(17);
                 noStroke();
 
-                text(upgradeName[this.upgrades[h]], this.resourcex, this.resourcey - 0);
+                text(upgradeName[this.upgrades[h]], this.resourcex, this.resourcey);
                 textSize(20);
                 fill(200);
                 text(upgradeCost[this.upgrades[h]], this.resourcex, this.resourcey + 20);

@@ -216,7 +216,7 @@ function draw() {
 
       crater = [];
 
-      craternumber = Math.round(noise(basex,basey,10) *10 +10)
+      craternumber = Math.round(noise(basex,basey,10) *10)
 
         
         
@@ -225,19 +225,14 @@ function draw() {
 
           ag = noise(basex,basey,1+o) *2*PI
           cratersz = noise(basex,basey,2+o) *40 +10
-          dists = noise(basex,basey,3+o) * (pedrand- cratersz) // 
+          dists = noise(basex,basey,3+o) * (pedrand+cratersz) // 
           craterfill = noise(basex,basey,4+o) * 255
-            // put this back for the craters but it causes an error sometimes, crater.length undefined
+           
            crater.push ([ag, dists , cratersz , craterfill]);
             
         }
-        
         seedgeneratedplanets.push(new planet(basex + offx,basey + offy,pedrand,pedr,pedg,pedb, crater))
-      
-      //HUB SHOULD GO HEREEEEEEEEEEEEE
-      
     }
-
     for (var y = player.y - height/2; y < player.y +height/2 + sectorsize*2; y+=sectorsize){
       basey = y//-player.y +y;
       basey = Math.floor(basey/sectorsize) * sectorsize;
@@ -249,32 +244,19 @@ function draw() {
         pedb = noise(basex,basey,7) *255
         offx = noise(basex,basey,8) *200
         offy = noise(basex,basey,9) *200
-        
-
         crater = [];
 
-        craternumber = Math.round(noise(basex,basey,10) *10 +10)
-
-        
-        
+        craternumber = Math.round(noise(basex,basey,10) *10)      
         for(var o=0;o<craternumber;o++){
             // the first one in the array is x, y, fill
 
             ag = noise(basex,basey,1+o) *2*PI
             cratersz = noise(basex,basey,2+o) *40 +10
-            dists = noise(basex,basey,3+o) * (pedrand- cratersz) // 
-            craterfill = noise(basex,basey,4+o) * 255
-            // put this back for the craters but it causes an error sometimes, crater.length undefined
-           crater.push ([ag, dists , cratersz , craterfill]);
-            
-        }
-        
+            dists = noise(basex,basey,3+o) * (pedrand+ cratersz) // 
+            craterfill = noise(basex,basey,4+o) * 255  //opasity?  
+           crater.push ([ag, dists , cratersz , craterfill]);         
+        }  
         seedgeneratedplanets.push(new planet(basex + offx,basey + offy,pedrand,pedr,pedg,pedb, crater))
-        
-        
-        //HUB SHOULD GO HEREEEEEEEEEEEEE
-        
-        //seedgeneratedhubs.push(new hub(basex,basey,))
         
       }
 
