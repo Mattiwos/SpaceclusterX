@@ -27,7 +27,7 @@ class planet{
 
         
 
-        for(var o=0;o< this.crater.length;o++){
+        for(var o=0; o< this.crater.length;o++){
             this.cx.push(this.x+cos (this.crater [o][0])*this.crater[o][1]);
             this.cy.push(this.y+sin (this.crater [o][0])*this.crater[o][1]);
             this.cf.push(this.crater [o][3]);
