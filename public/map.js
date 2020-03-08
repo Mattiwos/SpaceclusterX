@@ -11,6 +11,7 @@ class Map{
         this.mapsize=150;
         
         fill(255,100);
+        //t
 
         noStroke();
         ellipse(this.mx,this.my, this.mapsize, this.mapsize);
