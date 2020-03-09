@@ -33,6 +33,7 @@ class Map{
 
                 textSize(10)
                 fill(255)
+                textAlign(CENTER);
                 if (oplayers[i].name != undefined)
                 text (oplayers[i].name,this.mx + distX, this.my + distY);
             }
