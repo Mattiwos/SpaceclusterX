@@ -11,3 +11,30 @@ h1{
 p{
     text-align-last: center;
 }
+.chatContainer Button {
+    color: aliceblue;
+    position: fixed;
+    bottom: 1%;
+    left: 94%; 
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    font-size: 200%;
+}
+.collapse #collapse.in Button {
+color: aliceblue;
+    position: fixed;
+    bottom: 10%;
+    left: 94%; 
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    font-size: 10%;
+
+}
