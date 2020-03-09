@@ -1,14 +1,17 @@
 h1{
     text-align: center;
+    color: white;
     
 
 }
 p{
     text-align: center;
+    color: white;
 }
 .loginname {
     height: 100;
     text-align: center;
+    color: white;
     
 }
 .loginname input {
@@ -20,14 +23,14 @@ p{
 
 .loginname Button{ 
     text-align-last: center;
+    font: white;
+    background: black;
+    color: aqua;
 
 }
 .loginname Button:hover{ 
 
-    font: white;
-    background: black;
-    color: aqua;
-    
-    
+    text-align-last: center;
+    background-color: Transparent;
 }
 
