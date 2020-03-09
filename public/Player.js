@@ -26,11 +26,21 @@ class Player{
       this.ammo = 0;
 
       this.bulletSpeed=0;
-      this.reload=0;
+      this.reload=10;
       this.bulletDamage=0;
-  
+
+      this.damageTimer=0;
+      this.damageTimertime=40;
     }
     movement(){
+      if(player.damageTimer>0){
+        player.damageTimer-=2;
+        stroke(255,0,0);
+        noFill();
+        strokeWeight(10);
+        ellipse(width/2,height/2+m,(this.damageTimertime-this.damageTimer)*(width+height/2)/this.damageTimertime,
+        (this.damageTimertime-this.damageTimer)*(width+height/2)/this.damageTimertime);
+      }
       if (this.health <= 0){
         window.location.href = 'index.html';
       }

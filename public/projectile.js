@@ -36,6 +36,7 @@ class Projectile{
             //need to improve collision detection if statment
               player.health-= this.dmg;
               this.lifespan=0;
+              player.damageTimer=player.damageTimertime;
             }
         }
     
