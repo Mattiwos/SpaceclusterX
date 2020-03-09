@@ -515,10 +515,11 @@ function createHub(x,y,s,ag){
               // now it will create the x , y of the hub(s)
   
             touching=true;
+            dists=s;
             
             while(touching==true){
                 ;
-                dists=random(0,s/2);
+                //dists=random(0,s/2);
                 touching=false;
   
                 for(let p=0;p<city.length;p++){

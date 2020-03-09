@@ -194,7 +194,7 @@ function getCookie(cname) {
 }
 
 function setup() { 
-  createCanvas(windowWidth * (window.devicePixelRatio /2), windowHeight* (window.devicePixelRatio /2));
+  createCanvas(windowWidth * (window.devicePixelRatio / 1), windowHeight* (window.devicePixelRatio /1));
   player = (window.origin == "http://localhost:5500") ? new Player(0,0,random(-1000,1000),name) :new Player(width/2+random(-1000,1000),height/2 + m+random(-1000,1000),random(-1000,1000),name);
 
   diagonal = dist(0,0,width/2,height/2);
@@ -273,7 +273,8 @@ function draw() {
 
             ag = noise(basex,basey,1+o) *2*PI
             cratersz = noise(basex,basey,2+o) *40 +10
-            dists = noise(basex,basey,3+o) * (pedrand+ cratersz) /2// 
+            dists = noise(basex,basey,3+o) * (pedrand + cratersz) /2// 
+            dists = noise(basex,basey,3+o) * (pedrand + cratersz) /2// 
             craterfill = noise(basex,basey,4+o) * 255  //opasity?  
            crater.push ([ag, dists , cratersz , craterfill]);         
         }  
@@ -330,6 +331,12 @@ function draw() {
    
   }
  
+  for (var i = 0; i <seedgeneratedplanets.length;i++){
+    
+    seedgeneratedplanets[i].draw()
+ 
+    //noiseDetail()
+  }
 
 
   // for(var i =0;i<planets.length;i++){
@@ -348,8 +355,8 @@ function draw() {
     
     // if ( (dist(player.x,planets[i].x,player.y,planets[i].y)) <= (2*width)){
      // if( (dist(player.x,player.y,planets[i].x,planets[i].y)<diagonal+planets[i].s/2))
-       city[i].draw();
-       city[i].drawGraphics();
+      // city[i].draw();
+     //  city[i].drawGraphics();
   //   }
     //planets[i].draw();
    
@@ -379,12 +386,7 @@ function draw() {
      //}
     //oplayers[i].draw();
   }
-  for (var i = 0; i <seedgeneratedplanets.length;i++){
-    
-    seedgeneratedplanets[i].draw()
- 
-    //noiseDetail()
-  }
+  
 
   //push()
   
