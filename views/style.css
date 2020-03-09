@@ -24,7 +24,7 @@ p{
     outline:none;
     font-size: 200%;
 }
-.collapse #collapse.in Button {
+.chatContainer #chat.collapse.in {
 color: aliceblue;
     position: fixed;
     bottom: 10%;
