@@ -103,8 +103,10 @@ class Player{
     }
     calculateDamage(bd){
       // this one is the linear one
-      return 10+bd*3;
+      //return 10+bd*3;
       // logarithmic
+
+      return (7*Math.log(0.5*bd+1)+10 );
       
     }
     draw(){
