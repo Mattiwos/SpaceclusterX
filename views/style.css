@@ -24,10 +24,10 @@ p{
     outline:none;
     font-size: 200%;
 }
-#chatContainer .chat Button {
-  color: aliceblue;
+.collapse #collapse.in Button {
+color: aliceblue;
     position: fixed;
-    bottom: 90%;
+    bottom: 10%;
     left: 94%; 
     background-color: Transparent;
     background-repeat:no-repeat;
@@ -36,4 +36,5 @@ p{
     overflow: hidden;
     outline:none;
     font-size: 10%;
+
 }
