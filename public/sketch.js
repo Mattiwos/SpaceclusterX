@@ -90,12 +90,12 @@ socket.on('init', (args)=>{
     // for (var i = 0; i < args.planets.length; i++){
     //   planets.push(new planet(args.planets[i][0],args.planets[i][1],args.planets[i][2], args.planets[i][3], args.planets[i][4], args.planets[i][5]))
     // }
-    for (var i = 0; i < args.stars.length; i++){
-      stars.push(new star(args.stars[i][0],args.stars[i][1]));
-    }
-    for (var i = 0; i < args.city.length; i++){
-      city.push(new hub(args.city[i][0],args.city[i][1],args.city[i][2],args.city[i][3],args.city[i][4]));
-    }
+    // for (var i = 0; i < args.stars.length; i++){
+    //   stars.push(new star(args.stars[i][0],args.stars[i][1]));
+    // }
+    // for (var i = 0; i < args.city.length; i++){
+    //   city.push(new hub(args.city[i][0],args.city[i][1],args.city[i][2],args.city[i][3],args.city[i][4]));
+    // }
 
    
  
@@ -177,6 +177,8 @@ var mouseP=false;
 var diagonal = 0;
 var mappy;
 var seedgeneratedplanets =[];
+var seedgeneratedstars =[];
+
 function getCookie(cname) {
   var name = cname + "=";
   var decodedCookie = decodeURIComponent(document.cookie);
@@ -222,7 +224,9 @@ function draw() {
   
   sectorsize = 700
   seedgeneratedplanets = [];
+  seedgeneratedstars = [];
   chanceofappearing = .4;
+  chanceofappearingstar = .1;
   
   
   for (var x = player.x - width/2; x < player.x +width/2 + sectorsize*2; x+= sectorsize){
@@ -234,7 +238,7 @@ function draw() {
       pedr = noise(basex,basey,5) *255
       pedg = noise(basex,basey,6) *255
       pedb = noise(basex,basey,7) *255
-
+      
       crater = [];
 
       craternumber = Math.round(noise(basex,basey,10) *10)
@@ -252,8 +256,17 @@ function draw() {
            crater.push ([ag, dists , cratersz , craterfill]);
             
         }
+        
+        
         seedgeneratedplanets.push(new planet(basex + offx,basey + offy,pedrand,pedr,pedg,pedb, crater))
+    
+        
     }
+    if (noise(basex,basey,3) >= chanceofappearingstar){
+      starspeed = noise(basex,basey,88) *2 + 5
+      seedgeneratedstars.push(new star(basex,basey,starspeed))
+    }
+
     for (var y = player.y - height/2; y < player.y +height/2 + sectorsize*2; y+=sectorsize){
       basey = y//-player.y +y;
       basey = Math.floor(basey/sectorsize) * sectorsize;
@@ -265,6 +278,7 @@ function draw() {
         pedb = noise(basex,basey,7) *255
         offx = noise(basex,basey,8) *200
         offy = noise(basex,basey,9) *200
+        
 
         crater = [];
 
@@ -282,12 +296,19 @@ function draw() {
         seedgeneratedplanets.push(new planet(basex + offx,basey + offy,pedrand,pedr,pedg,pedb, crater))
         
       }
+      if (noise(basex,basey,3) >= chanceofappearingstar){
+        starspeed = noise(basex,basey,88) *2 + 5
+        seedgeneratedstars.push(new star(basex,basey,starspeed))
+      }
 
 
     }
     
 
     }
+
+
+    
 
   
 
@@ -305,63 +326,22 @@ function draw() {
   }
   
   
-  //draw objects close by only in orde to increase performance
-
-  
-  for(var i =0;i<stars.length;i++){
-   
- //     if(stars[i].x+width/2>player.x-width/2-stars[i].s/2
-  //      && stars[i].x+width/2<player.x+width/2+stars[i].s/2
-  //      && stars[i].y+height/2>player.y-height/2-stars[i].s/2
-  //      && stars[i].y+height/2<player.y+height/2+stars[i].s/2)
-  //      stars[i].draw();
-    
-
-        //if( (dist(player.x,stars[i].x,player.y,stars[i].y)<diagonal))
-  //   if ( (dist(player.x,stars[i].x,player.y,stars[i].y)) <= (2*width)){
-
-   // if( (dist(player.x,player.y,stars[i].x,stars[i].y)/4<diagonal+stars[i].s/2))
-    stars[i].draw();
-//   }
-      //stars[i].draw();
-   //  }
-
-
-   // stars[i].draw();
-
-   
-  }
- 
-  for (var i = 0; i <seedgeneratedplanets.length;i++){
-    
-    seedgeneratedplanets[i].draw()
- 
+  for (var i = 0; i <seedgeneratedstars.length;i++){
+    seedgeneratedstars[i].draw()
     //noiseDetail()
   }
+  for (var i = 0; i <seedgeneratedplanets.length;i++){
+    seedgeneratedplanets[i].draw()
+    //noiseDetail()
+  }
+  
+ 
 
 
-  // for(var i =0;i<planets.length;i++){
-    
-  //   // if ( (dist(player.x,planets[i].x,player.y,planets[i].y)) <= (2*width)){
-  //    // if( (dist(player.x,player.y,planets[i].x,planets[i].y)<diagonal+planets[i].s/2))
-  //     //  planets[i].draw();
-  // //   }
-  //   planets[i].draw();
-   
-  // }
+
   
 
-  for(var i =0;i<city.length;i++){
-    
-    
-    // if ( (dist(player.x,planets[i].x,player.y,planets[i].y)) <= (2*width)){
-     // if( (dist(player.x,player.y,planets[i].x,planets[i].y)<diagonal+planets[i].s/2))
-      // city[i].draw();
-     //  city[i].drawGraphics();
-  //   }
-    //planets[i].draw();
-   
-  }
+  
 
   for(var i =0;i<lasers.length;i++){
     

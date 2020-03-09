@@ -1,13 +1,13 @@
 class star{
 
-    constructor(x,y){
+    constructor(x,y,starspeed){
         this.x=x;
         this.y=y;
         //star size
         this.s=5;
         //star speed 
         //this.ss =4;
-        this.ss =random(5,7);
+        this.ss =starspeed;
 
 
         this.glow=4;

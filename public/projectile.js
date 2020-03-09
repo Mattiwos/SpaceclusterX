@@ -31,7 +31,7 @@ class Projectile{
         push();
         translate(-player.x + width/2,-player.y + m + height /2)
         if (this.playerid != socket.id){
-             if (dist(this.x,this.y,player.x,player.y) <= this.size+20){ 
+             if (dist(this.x,this.y,player.x,player.y) <= this.size+20){  //this is the hit bot
 
             //need to improve collision detection if statment
               player.health-= this.dmg;
