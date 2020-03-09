@@ -9,6 +9,9 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <!-- <script src='https://cdn.socket.io/socket.io-1.2.0.js'> </script> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8" />
@@ -33,6 +36,26 @@
 
 
     <script src="/sketch.js" defer></script>
+
+    <script src="Chat.js" defer></script>
+
+    <div class="chatContainer">
+
+      <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#chat" >💬</button>
+    
+     <div id="chat" class="collapse">
+
+        <button type="button">Send</button>
+        <!-- <h1>Chat goes here</h1>
+        <ul>
+            <li>Coffee</li>
+            <li>Tea</li>
+            <li>Milk</li>
+          </ul> -->
+
+      </div>
+
+    </div>
 
   </body>
 </html>

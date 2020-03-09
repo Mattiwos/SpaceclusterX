@@ -217,6 +217,7 @@ var nosy =2;
 var crater = [];
 
 function draw() {
+  // document.body.style.zoom="100%"
   
   
   sectorsize = 700
