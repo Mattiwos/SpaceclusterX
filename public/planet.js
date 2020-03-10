@@ -45,7 +45,8 @@ class planet{
         //planetExport,upgrades,cityUpgradeResources
         this.hubs = []
         this.dists=random(0,this.s/2);
-        this.onehub = createHub(this.x,this.y,this.dists,this.craterrand [0][0])
+        this.dists=sr/255 * this.s/2;
+        this.onehub = createHub(this.x,this.y,this.dists,this.craterrand [0][0]) ;
         
         this.hubs.push(new hub(this.onehub[0],this.onehub[1],this.planetExport,this.onehub[2],this.onehub[3]))
 
@@ -94,6 +95,7 @@ class planet{
         push();
         for (var i =0;i<this.hubs.length; i++){
             this.hubs[i].draw()
+            this.hubs[i].drawGraphics()
         }
 
         pop();

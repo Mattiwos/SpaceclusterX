@@ -97,7 +97,7 @@ class Player{
         lasers.push(new Projectile(this.x,this.y,player.r,this.calculateDamage(this.bulletDamage),this.bulletSpeed));
         reloaded=false;
 
-        if(this.faccel>0)this.faccel-=this.faccelspeed*this.maxfs/2;
+        if(this.faccel>0)this.faccel-=this.faccelspeed*this.maxfs;
       }
       
     }
