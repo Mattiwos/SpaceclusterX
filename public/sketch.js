@@ -212,100 +212,30 @@ function setup() { //window.devicePixelRatio
   name = String(getCookie('username'))
   player.name = name;
 
+ 
+
+  recalculateseedbasedobjects()
+
 }
 //gameseed
 var nosx =2;
 var nosy =2;
 var crater = [];
+var prevx = 0;
+var prevy = 0;
 
 function draw() {
   // document.body.style.zoom="100%"
   
+  if (dist(prevx,prevy,-player.x + width/2,-player.y + m + height /2) >= 1000){
+    recalculateseedbasedobjects();
+    prevx = -player.x + width/2;
+    prevy = -player.y + m + height /2;
+    console.log("drawing")
+
+
+  }
   
-  sectorsize = 700
-  seedgeneratedplanets = [];
-  seedgeneratedstars = [];
-  chanceofappearing = .4;
-  chanceofappearingstar = .1;
-  
-  
-  for (var x = player.x - width/2; x < player.x +width/2 + sectorsize*2; x+= sectorsize){
-    basex = x//-player.x + x;
-    basex = Math.floor(basex/sectorsize) * sectorsize;
-    basey = 0
-    if (noise(basex,basey,3) >= 1-chanceofappearing){
-      pedrand = noise(basex,basey,4) *700
-      pedr = noise(basex,basey,5) *255
-      pedg = noise(basex,basey,6) *255
-      pedb = noise(basex,basey,7) *255
-      
-      crater = [];
-
-      craternumber = Math.round(noise(basex,basey,10) *10)
-
-        
-        
-      for(var o=0;o<craternumber;o++){
-            // the first one in the array is x, y, fill
-
-          ag = noise(basex,basey,1+o) *2*PI
-          cratersz = noise(basex,basey,2+o) *40 +10
-          dists = noise(basex,basey,3+o) * (pedrand-cratersz) /2 // 
-          craterfill = noise(basex,basey,4+o) * 255
-           //console.log(`${pedrand} amd ${cratersz} = ${dists}`)
-           crater.push ([ag, dists , cratersz , craterfill]);
-            
-        }
-        
-        
-        seedgeneratedplanets.push(new planet(basex + offx,basey + offy,pedrand,pedr,pedg,pedb, crater))
-    
-        
-    }
-    if (noise(basex,basey,3) >= chanceofappearingstar){
-      starspeed = noise(basex,basey,88) *2 + 5
-      seedgeneratedstars.push(new star(basex,basey,starspeed))
-    }
-
-    for (var y = player.y - height/2; y < player.y +height/2 + sectorsize*2; y+=sectorsize){
-      basey = y//-player.y +y;
-      basey = Math.floor(basey/sectorsize) * sectorsize;
-      if (noise(basex,basey,3) >= 1-chanceofappearing){
-        pedrand = noise(basex,basey,4) *700
-
-        pedr = noise(basex,basey,5) *255
-        pedg = noise(basex,basey,6) *255
-        pedb = noise(basex,basey,7) *255
-        offx = noise(basex,basey,8) *200
-        offy = noise(basex,basey,9) *200
-        
-
-        crater = [];
-
-        craternumber = Math.round(noise(basex,basey,10) *10)      
-        for(var o=0;o<craternumber;o++){
-            // the first one in the array is x, y, fill
-
-            ag = noise(basex,basey,1+o) *2*PI
-            cratersz = noise(basex,basey,2+o) *40 +10
-            dists = noise(basex,basey,3+o) * (pedrand + cratersz) /2// 
-            dists = noise(basex,basey,3+o) * (pedrand + cratersz) /2// 
-            craterfill = noise(basex,basey,4+o) * 255  //opasity?  
-           crater.push ([ag, dists , cratersz , craterfill]);         
-        }  
-        seedgeneratedplanets.push(new planet(basex + offx,basey + offy,pedrand,pedr,pedg,pedb, crater))
-        
-      }
-      if (noise(basex,basey,3) >= chanceofappearingstar){
-        starspeed = noise(basex,basey,88) *2 + 5
-        seedgeneratedstars.push(new star(basex,basey,starspeed))
-      }
-
-
-    }
-    
-
-    }
 
 
     
@@ -397,6 +327,98 @@ function mousePressed(){
 }
 function mouseReleased(){
   mouseP=false;
+}
+
+
+function recalculateseedbasedobjects(){
+ 
+  sectorsize = 700
+  seedgeneratedplanets = [];
+  seedgeneratedstars = [];
+  chanceofappearing = .4;
+  chanceofappearingstar = .1;
+  
+  
+  for (var x = player.x - width/2; x < player.x +width/2 + sectorsize*2; x+= sectorsize){
+    basex = x//-player.x + x;
+    basex = Math.floor(basex/sectorsize) * sectorsize;
+    basey = 0
+    if (noise(basex,basey,3) >= 1-chanceofappearing){
+      pedrand = noise(basex,basey,4) *700
+      pedr = noise(basex,basey,5) *255
+      pedg = noise(basex,basey,6) *255
+      pedb = noise(basex,basey,7) *255
+      
+      crater = [];
+
+      craternumber = Math.round(noise(basex,basey,10) *10)
+
+        
+        
+      for(var o=0;o<craternumber;o++){
+            // the first one in the array is x, y, fill
+
+          ag = noise(basex,basey,1+o) *2*PI
+          cratersz = noise(basex,basey,2+o) *40 +10
+          dists = noise(basex,basey,3+o) * (pedrand-cratersz) /2 // 
+          craterfill = noise(basex,basey,4+o) * 255
+           //console.log(`${pedrand} amd ${cratersz} = ${dists}`)
+           crater.push ([ag, dists , cratersz , craterfill]);
+            
+        }
+        
+        
+        seedgeneratedplanets.push(new planet(basex + offx,basey + offy,pedrand,pedr,pedg,pedb, crater))
+    
+        
+    }
+    if (noise(basex,basey,3) >= chanceofappearingstar){
+      starspeed = noise(basex,basey,88) *2 + 5
+      seedgeneratedstars.push(new star(basex,basey,starspeed))
+    }
+
+    for (var y = player.y - height/2; y < player.y +height/2 + sectorsize*2; y+=sectorsize){
+      basey = y//-player.y +y;
+      basey = Math.floor(basey/sectorsize) * sectorsize;
+      if (noise(basex,basey,3) >= 1-chanceofappearing){
+        pedrand = noise(basex,basey,4) *700
+
+        pedr = noise(basex,basey,5) *255
+        pedg = noise(basex,basey,6) *255
+        pedb = noise(basex,basey,7) *255
+        offx = noise(basex,basey,8) *200
+        offy = noise(basex,basey,9) *200
+        
+
+        crater = [];
+
+        craternumber = Math.round(noise(basex,basey,10) *10)      
+        for(var o=0;o<craternumber;o++){
+            // the first one in the array is x, y, fill
+
+            ag = noise(basex,basey,1+o) *2*PI
+            cratersz = noise(basex,basey,2+o) *40 +10
+            dists = noise(basex,basey,3+o) * (pedrand + cratersz) /2// 
+            dists = noise(basex,basey,3+o) * (pedrand + cratersz) /2// 
+            craterfill = noise(basex,basey,4+o) * 255  //opasity?  
+           crater.push ([ag, dists , cratersz , craterfill]);         
+        }  
+        seedgeneratedplanets.push(new planet(basex + offx,basey + offy,pedrand,pedr,pedg,pedb, crater))
+        
+      }
+      if (noise(basex,basey,3) >= chanceofappearingstar){
+        starspeed = noise(basex,basey,88) *2 + 5
+        seedgeneratedstars.push(new star(basex,basey,starspeed))
+      }
+
+
+    }
+    
+
+    }
+
+
+
 }
 
 
