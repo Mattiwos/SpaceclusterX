@@ -1,9 +1,16 @@
-function createHub(x,y,s,ag){
+function createHub(x,y,s,ag,randomseed1,randomseed2,randomseed3){
     //   
+
+
+
+    //randomseed is from 0 to 255
+        
               // now it will create the x , y of the hub(s)
   
             touching=true;
             dists=s;
+
+
             
             while(touching==true){
                 ;
@@ -29,8 +36,12 @@ function createHub(x,y,s,ag){
             //next it will add the upgrades that are available
   
             upgrades=[];
-            numOfUpgrades=getRandomInt(0,2);
-            if(random(0,10)<2)numOfUpgrades=2;
+            ///numOfUpgrades=getRandomInt(0,2);
+           // alert(ag);
+            // use ag to make it
+            numOfUpgrades=floor((ag/(2*PI))*3);
+
+            //if(random(0,10)<2)numOfUpgrades=2;
             //upgradeCost=[];
             cityUpgradeResources=[];
   
@@ -38,17 +49,20 @@ function createHub(x,y,s,ag){
             for(let q=0;q<numOfUpgrades;q++){
               cityUpgradeResources.push([]);
   
-                upgrade = getRandomInt(0,upgradeName.length-1);
+                upgrade = floor(randomseed1*(upgradeName.length-1));
                 //console.log("upgrade name"+upgradeName.length);
                 exists=true;
                 
-                while(exists==true){
-                        upgrade = getRandomInt(0,upgradeName.length-1);
-                        exists=false;
-                        for(let j=0;j<upgrades.length;j++){
-                            if(upgrades[j]==upgrade)exists=true;
-                        }
-                }
+                // <><><><> for now there could be the same uupgrade multiple times
+           //     while(exists==true){
+                     //   upgrade = getRandomInt(0,upgradeName.length-1);
+                    //    exists=false;
+                    //    for(let j=0;j<upgrades.length;j++){
+                           // if(upgrades[j]==upgrade)exists=true;
+
+
+                     //   }
+           //     }
                 
                // upgradeCost.push(upgradeCost[upgrade]);
                 for(let u=0;u<numOfResourcesUpgrade[upgrade];u++){
