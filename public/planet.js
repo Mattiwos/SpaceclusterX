@@ -40,7 +40,7 @@ class planet{
             }
             this.planetExport.push(this.possible);
         }
-        this.planetExport = [2,3]
+        //this.planetExport = [2,3]
         //exportss , upgrade, upgradecost
         //planetExport,upgrades,cityUpgradeResources
         this.hubs = []
