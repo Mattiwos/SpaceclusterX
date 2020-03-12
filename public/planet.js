@@ -26,20 +26,39 @@ class planet{
         this.planetExport=[];
         //this.planetExportCost=[];
 
-        this.planetResources=random(0,3);
+        this.randomseed=[this.r/255,this.g/255,this.b/255];
+        this.randomseed=[noise(this.x,this.y,5),noise(this.x,this.y,6),noise(this.x,this.y,7)];
+        //noise(this.x,this.y,5);
+
+        this.resources = [];
+        for(var i=0;i<numOfResources-1;i++){
+            this.resources.push(i+1);
+        }
+        //alert(this.randomseed);
+
+        this.planetResources=floor(this.randomseed[0]*3 +1);
         //cfreates the planets natural resources that it sells on the citys
         for(let k=0;k<this.planetResources;k++){
-            this.possible=int(random(1,numOfResources+1));
-            this.exists=true;
-            while(this.exists==true){
-                this.possible=int(random(1,numOfResources+1));
-                this.exists=false;
-                for(let h=0;h<this.planetExport.length;h++){
-                    if(this.possible==this.planetExport[h])this.exists=true;
-                }
-            }
-            this.planetExport.push(this.possible);
+          //  this.possible=int(random(1,numOfResources+1));
+         //   this.exists=true;
+         //   while(this.exists==true){
+         //       this.possible=int(random(1,numOfResources+1));
+         //       this.exists=false;
+         //       for(let h=0;h<this.planetExport.length;h++){
+         //           if(this.possible==this.planetExport[h])this.exists=true;
+          //      }
+         //   }
+
+            // new algorithm : chooses a random from the resources list
+            // then it pushes it and removes it from the 
+
+
+
+            this.planetExport.push(this.resources[floor(this.randomseed[k]*this.resources.length)]);
+          //  this.resources.splice(floor(this.randomseed[k]*this.resources.length),1);
+            
         }
+        //alert(this.planetExport);
         //this.planetExport = [2,3]
         //exportss , upgrade, upgradecost
         //planetExport,upgrades,cityUpgradeResources

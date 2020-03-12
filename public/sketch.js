@@ -227,7 +227,7 @@ var prevy = 0;
 function draw() {
   // document.body.style.zoom="100%"
   
-  if (dist(prevx,prevy,-player.x + width/2,-player.y + m + height /2) >= 1000){
+  if (dist(prevx,prevy,-player.x + width/2,-player.y + m + height /2) >= 500){
     recalculateseedbasedobjects();
     prevx = -player.x + width/2;
     prevy = -player.y + m + height /2;

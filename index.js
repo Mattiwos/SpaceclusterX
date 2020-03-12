@@ -63,7 +63,7 @@ newstars(100);
 //heroku logs --tail -a spaceclusterx
 //socket
 var gameseed = Math.random();
-
+console.log(gameseed)
 
 
 io.on('connection', (socket)=>{

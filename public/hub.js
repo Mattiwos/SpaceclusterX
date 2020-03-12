@@ -44,7 +44,7 @@ function createHub(x,y,s,ag,randomseed1,randomseed2,randomseed3){
             //if(random(0,10)<2)numOfUpgrades=2;
             //upgradeCost=[];
             cityUpgradeResources=[];
-  
+            
             
             for(let q=0;q<numOfUpgrades;q++){
               cityUpgradeResources.push([]);
