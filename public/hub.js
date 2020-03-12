@@ -49,7 +49,7 @@ function createHub(x,y,s,ag,randomseed1,randomseed2,randomseed3){
             for(let q=0;q<numOfUpgrades;q++){
               cityUpgradeResources.push([]);
   
-                upgrade = floor(randomseed1*(upgradeName.length-1));
+                upgrade = floor(randomseed2*(upgradeName.length-1));
                 //console.log("upgrade name"+upgradeName.length);
                 exists=true;
                 
@@ -68,8 +68,11 @@ function createHub(x,y,s,ag,randomseed1,randomseed2,randomseed3){
                 for(let u=0;u<numOfResourcesUpgrade[upgrade];u++){
                   //console.log(upgradeResources);
   
-                  cityUpgradeResources[cityUpgradeResources.length-1].push
-                    (upgradeResources[upgrade][ getRandomInt(0,upgradeResources[upgrade].length)  ]   );
+                 // cityUpgradeResources[cityUpgradeResources.length-1].push
+                 //   (upgradeResources[upgrade][ getRandomInt(0,upgradeResources[upgrade].length)  ]   );
+                        //using random seed
+                    cityUpgradeResources[cityUpgradeResources.length-1].push
+                    (upgradeResources[upgrade][ randomseed3*upgradeResources[upgrade].length  ]   );
                 }
                 
                 upgrades.push(upgrade);
