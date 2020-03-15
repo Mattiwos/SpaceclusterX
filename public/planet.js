@@ -26,14 +26,16 @@ class planet{
         this.planetExport=[];
         //this.planetExportCost=[];
 
-        this.randomseed=[this.r/255,this.g/255,this.b/255];
+        //this.randomseed=[sr/255,sg/255,sb/255];
         this.randomseed=[noise(this.x,this.y,5),noise(this.x,this.y,6),noise(this.x,this.y,7)];
+        this.randomseed=[sr/255,sg/255,sb/255];
         //noise(this.x,this.y,5);
 
         this.resources = [];
-        for(var i=0;i<numOfResources-1;i++){
+        for(var i=0;i<numOfResources;i++){
             this.resources.push(i+1);
         }
+        //alert(this.resources);
         //alert(this.randomseed);
 
         this.planetResources=floor(this.randomseed[0]*3 +1);
@@ -55,7 +57,7 @@ class planet{
 
 
             this.planetExport.push(this.resources[floor(this.randomseed[k]*this.resources.length)]);
-          //  this.resources.splice(floor(this.randomseed[k]*this.resources.length),1);
+            this.resources.splice(floor(this.randomseed[k]*this.resources.length),1);
             
         }
         //alert(this.planetExport);

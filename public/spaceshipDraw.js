@@ -3,14 +3,15 @@ function drawSpaceship(x,y,r,fire,size = 20){
 
    if(fire){
       fill(0,0,200,random(0,100));
+      fill(255,0,0,random(0,100));
       noStroke();
       ellipse(x+1.2*this.r*cos(r+PI),y+1.2*this.r*sin(r+PI),30,30);
       ellipse(x+this.r*cos(r+PI),y+this.r*sin(r+PI),20,20);
    }
 
    fill(100);
-    stroke(180);
-    strokeWeight(2);
+    stroke(50);
+    strokeWeight(3);
 
     beginShape();
     vertex(  x-this.r*cos(r) + this.r/3 * cos(r+PI/2)  ,

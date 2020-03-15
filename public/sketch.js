@@ -2,7 +2,7 @@
 
 
 
-var gameseed = 0;
+var gameseed = 0.222;
 const socket = io(
   {transports: ['websocket']},
   { forceNew: true }
@@ -226,6 +226,7 @@ var prevy = 0;
 
 function draw() {
   // document.body.style.zoom="100%"
+  
   
   if (dist(prevx,prevy,-player.x + width/2,-player.y + m + height /2) >= 500){
     recalculateseedbasedobjects();
