@@ -282,9 +282,12 @@ function drawCredit(x,y,sc){
     noStroke();
     ellipse(x,y,10*sc,10*sc);
     fill(0);
-    textSize(10*sc);
+    textSize(8*sc);
     textAlign(CENTER);
     text("C",x,y);
+    rectMode(CENTER);
+    rect(x,y,sc,8*sc);
+    rectMode(CORNER);
 }
 
 

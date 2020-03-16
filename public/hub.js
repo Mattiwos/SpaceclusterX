@@ -50,7 +50,7 @@ function createHub(x,y,s,ag,randomseed1,randomseed2,randomseed3){
             for(let q=0;q<numOfUpgrades;q++){
               cityUpgradeResources.push([]);
   
-                upgrade = floor(randomseed[0]*(upgradeName.length-1));
+                upgrade = floor(randomseed[q]*(upgradeName.length-1));
                 //console.log("upgrade name"+upgradeName.length);
                 exists=true;
                 
@@ -446,7 +446,7 @@ class hub {
                 fill(200);
                 text(upgradeCost[this.upgrades[h]], this.resourcex, this.resourcey + 10);
                 drawCredit(this.resourcex-15,this.resourcey+10,1* this.popup / this.displaywidth);
-
+                drawCredit(this.resourcex+15,this.resourcey+10,1* this.popup / this.displaywidth);
                 for (let i = 0; i < this.upgradeResources[h].length; i++) {
                     //print("upgraderesource"+this.upgradeResources);
                     //drawResource(this.resourcex,this.resourcey,this.hubImport[h],4*this.popup/this.displaywidth);

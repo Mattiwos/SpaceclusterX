@@ -25,7 +25,7 @@ class Player{
       this.health = 100;
       this.ammo = 0;
 
-      this.bulletSpeed=10;
+      this.bulletSpeed=-5;
       this.reload=10;
       this.bulletDamage=10;
 
