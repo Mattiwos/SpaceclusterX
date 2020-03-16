@@ -25,7 +25,7 @@ class Player{
       this.health = 100;
       this.ammo = 0;
 
-      this.bulletSpeed=-5;
+      this.bulletSpeed=10;
       this.reload=10;
       this.bulletDamage=10;
 
@@ -97,7 +97,8 @@ class Player{
         lasers.push(new Projectile(this.x,this.y,player.r,this.calculateDamage(this.bulletDamage),this.bulletSpeed));
         reloaded=false;
 
-        if(this.faccel>0)this.faccel-=this.faccelspeed*this.maxfs;
+        //if(this.faccel>=0)
+        this.faccel-=this.faccelspeed*this.maxfs/2;
       }
       
     }

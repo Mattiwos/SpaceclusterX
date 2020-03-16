@@ -141,13 +141,17 @@ class hub {
 
         this.availableExports =[];
 
-        for(var i=0;i<numOfResources;i++)this.availableExports.push[i];
+        for(let i=1;i<numOfResources;i++)this.availableExports.push(i);
+
+        print(this.availableExports);
+        //alert(this.availableExports);
 
         for(var i=0;i<this.hubExport.length;i++){
             for(var g=0;g<this.availableExports.length;g++){
                 if(this.availableExports[g]==this.hubExport[i]){
-                    g=100000;
                     this.availableExports.splice(g,1);
+                    g=100000;
+                    
                 }
             }
         }
@@ -174,6 +178,43 @@ class hub {
         }
 
         this.glow = 5;
+
+
+
+        /// creating the contracts
+        ///// this will be added to the noise constructor later
+        /// for now it is creating them randomly without it being the same
+        /////
+        this.contracts=[];
+        this.contractcost=[];
+        this.createContract();
+
+        
+
+    }
+
+    createContract() {
+        this.resourceAmount = int(random(1, 6));
+        this.contracts.push([]);
+        for (let i = 0; i < this.resourceAmount; i++) {
+            //finds a resource that the planet dosen't sell
+            this.contracts[this.contracts.length-1].push(this.availableExports[int(random(0,this.availableExports.length))]);
+            print(this.contracts);
+        }
+        ///calculates the cost of the contract:
+        this.differentresources=[];
+
+        for(var i=0;i<this.contracts[this.contracts.length-1].length;i++){
+            this.found=false;
+            for(var j=0;j<this.differentresources.length;j++){
+                if(this.contracts[this.contracts.length-1][i]==this.differentresources[j])
+                this.found=true;
+            }
+            if(this.found==false)this.differentresources.push(this.contracts[this.contracts.length-1][i]);
+        }
+        this.contractcost.push(this.differentresources.length+2*this.contracts[this.contracts.length-1].length);
+
+
     }
 
 
@@ -308,15 +349,7 @@ class hub {
     getLocation() {
 
     }
-    createContract() {
-        this.resourceAmount = int(random(0, 4));
-        this.contracts.push([]);
-        for (let i = 0; i < this.resourceAmount; i++) {
-            //finds a resource that the planet dosen't sell
-            this.contracts[this.contracts.length].push(this.availableExports[int(random(0,this.availableExports.length))]);
-        }
-
-    }
+    
     draw() {
         push();
         
@@ -525,21 +558,24 @@ class hub {
 
             ////// displays the contracts that are available:::: jadklfjh
 
-            /*
+            
             for (let h = 0; h < this.contracts.length; h++) {
-                this.resourcex = this.x + width / 2 + cos(h * this.spacing + this.rotate + PI ) * this.popup * 0.5;
-                this.resourcey = this.y + height / 2 + m + sin(h * this.spacing + this.rotate + PI ) * this.popup * 0.5;
+                this.resourcex = this.x + width / 2 + cos(h * this.spacing + this.rotate + PI + this.upgrades.length *this.spacing) * this.popup * 0.5;
+                this.resourcey = this.y + height / 2 + m + sin(h * this.spacing + this.rotate + PI + this.upgrades.length *this.spacing ) * this.popup * 0.5;
 
                 textAlign(CENTER);
                 fill(255);
                 textSize(17);
                 noStroke();
 
-                textSize(20);
+                textSize(30);
                 fill(200);
                 // cdisply the value of it
                 //need to add a value where it calculates where they are at
-                //text(upgradeCost[this.upgrades[h]], this.resourcex, this.resourcey + 20);
+                //alert(this.contracts);
+                text("+"+this.contractcost[h], this.resourcex, this.resourcey );
+                drawCredit(this.resourcex-35,this.resourcey+0,2* this.popup / this.displaywidth);
+                drawCredit(this.resourcex+35,this.resourcey+0,2* this.popup / this.displaywidth);
 
                 for (let i = 0; i < this.contracts[h].length; i++) {
 
@@ -606,7 +642,7 @@ class hub {
 
 
             }
-            */
+            
 
 
 

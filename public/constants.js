@@ -6,7 +6,7 @@ var storagewidth = 50;
 
 
 //constant : how many resources ther eare
-var numOfResources=6;
+var numOfResources=7;
 
 
 
