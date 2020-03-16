@@ -368,7 +368,7 @@ class hub {
         this.rotate += 0.004;
         if (dist(this.x, this.y, player.x, player.y) < this.citysize / 2 + 30) {
 
-            print("drawing hub");
+            //print("drawing hub");
             stroke(50, 120);
             strokeWeight(60 * this.popup / this.displaywidth);
             noFill();
@@ -440,11 +440,12 @@ class hub {
                 fill(255);
                 textSize(17);
                 noStroke();
-
-                text(upgradeName[this.upgrades[h]], this.resourcex, this.resourcey);
+                drawIcon(this.resourcex,this.resourcey-10,this.upgrades[h],7* this.popup / this.displaywidth);
+               // text(upgradeName[this.upgrades[h]], this.resourcex, this.resourcey);
                 textSize(20);
                 fill(200);
-                text(upgradeCost[this.upgrades[h]], this.resourcex, this.resourcey + 20);
+                text(upgradeCost[this.upgrades[h]], this.resourcex, this.resourcey + 10);
+                drawCredit(this.resourcex-15,this.resourcey+10,1* this.popup / this.displaywidth);
 
                 for (let i = 0; i < this.upgradeResources[h].length; i++) {
                     //print("upgraderesource"+this.upgradeResources);

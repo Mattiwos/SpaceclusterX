@@ -27,7 +27,7 @@ class planet{
         //this.planetExportCost=[];
 
         //this.randomseed=[sr/255,sg/255,sb/255];
-        this.randomseed=[noise(this.x,this.y,5),noise(this.x,this.y,6),noise(this.x,this.y,7)];
+        //this.randomseed=[noise(this.x,this.y,15),noise(this.x,this.y,16),noise(this.x,this.y,17)];
         this.randomseed=[sr/255,sg/255,sb/255];
         //noise(this.x,this.y,5);
 

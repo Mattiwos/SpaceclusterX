@@ -2,7 +2,7 @@
 
 
 
-var gameseed = 0;
+var gameseed = 0.9;
 
 const socket = io(
   {transports: ['websocket']},

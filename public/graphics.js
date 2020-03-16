@@ -47,7 +47,9 @@ function drawGraphics(){
         fill(255);
         stroke(200);
         strokeWeight(2);
-        text("¢"+player.displaycredits,width/10,height+m);
+       // text("¢"+player.displaycredits,width/10,height+m);
+       text(player.displaycredits,width/10,height+m);
+       drawCredit(width/10-60,height+m,3);
 
     for(let i=0;i<player.cargobay.length;i++){
         if(player.cargostate[i]<=0&&player.cargostate[i]>-100)
@@ -88,13 +90,13 @@ function drawGraphics(){
     ///draw the player's reload, damage, and bulletspeed upgrades
 
     for(let i=0;i<player.reload;i++){
-        drawIcon(width/modificationSpacing+width/modificationSpacing*i,2*height/modificationSpacing,1,10);
+        drawIcon(width/modificationSpacing+width/modificationSpacing*i,2*height/modificationSpacing,0,10);
     }
     for(let i=0;i<player.bulletDamage;i++){
         drawIcon(width/modificationSpacing+width/modificationSpacing*i,4*height/modificationSpacing,2,10);
     }
     for(let i=0;i<player.bulletSpeed;i++){
-        drawIcon(width/modificationSpacing+width/modificationSpacing*i,6*height/modificationSpacing,3,10);
+        drawIcon(width/modificationSpacing+width/modificationSpacing*i,6*height/modificationSpacing,1,10);
     }
 
     
@@ -275,6 +277,15 @@ function drawLeaderBoard(){
    
 }
 
+function drawCredit(x,y,sc){
+    fill(255);
+    noStroke();
+    ellipse(x,y,10*sc,10*sc);
+    fill(0);
+    textSize(10*sc);
+    textAlign(CENTER);
+    text("C",x,y);
+}
 
 
 function drawIcon(x,y,icon,sc){
@@ -284,7 +295,7 @@ function drawIcon(x,y,icon,sc){
 
     fill(255);
     noStroke();
-    if(icon==1){
+    if(icon==0){
         triangle(x,y,
             x-sc,y,
             x,y-2*sc
@@ -304,7 +315,7 @@ function drawIcon(x,y,icon,sc){
             );
         }
     }
-    if(icon==3){
+    if(icon==1){
         rect(x-2*sc,y-sc/2,2*sc,sc);
         triangle(x,y-sc,x+sc,y,x,y+sc);
     }
