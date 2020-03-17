@@ -188,7 +188,7 @@ class hub {
         this.contracts=[];
         this.contractcost=[];
         this.createContract();
-
+        //this.createContract();
         
 
     }
@@ -403,7 +403,11 @@ class hub {
 
         this.rotate += 0.004;
         if (dist(this.x, this.y, player.x, player.y) < this.citysize / 2 + 30) {
-
+            if(this.popup==0){
+                for (let h = 0; h < this.contracts.length; h++) {
+                    this.testIfContains(h);
+                }
+            }
             //print("drawing hub");
             stroke(50, 120);
             strokeWeight(60 * this.popup / this.displaywidth);
@@ -591,10 +595,55 @@ class hub {
                     //buying the upgrades
                     //if(false)
                     if (mouseIsPressed && mouseP == false && dist(mouseX + player.x, mouseY + player.y, this.resourcex, this.resourcey) < 30) {
-
+                        this.testIfContains(h);
                         //print("cargo bay before"+player.cargostate);
                         //this variable is the ones needed
-                        this.resourcesneeded = [];
+                        
+                        //print("cargo bay after"+player.cargostate);
+
+                    }
+
+
+                }
+
+
+            }
+            
+
+
+
+
+
+        }else {
+            this.popup = 0;
+            fill(0,100);
+            noStroke();
+            rectMode(CENTER);
+            rect (this.x+width/2,this.y+height/2+m-30-20*this.contracts.length,120,40*this.contracts.length);
+            triangle(this.x+width/2+20,this.y+height/2+m-30,
+                this.x+width/2-20,this.y+height/2+m-30,
+                this.x+width/2+0,this.y+height/2+m-10)
+            for(let i=0;i<this.contracts.length;i++){
+             //ellipse(this.x + width / 2, this.y + height / 2 + m, this.citysize * 8 / 9, this.citysize * 8 / 9);
+                for(let j=0;j<this.contracts[i].length;j++){
+                    rectMode(CORNER);
+                    drawResource(this.x+width/2 -40+20*j,this.y+height/2 +m- 40*i -50,this.contracts[i][j],2);
+                    
+                }
+                fill(255);
+                noStroke();
+                textSize(30);
+                text(this.contractcost[i],this.x+width/2 +40,this.y+height/2 +m- 40*i -50);
+            }
+            rectMode(CORNER);
+        } 
+
+        pop ();
+
+    }
+
+    testIfContains(h){
+        this.resourcesneeded = [];
                         this.fakecargobay = [];
                         //makes them all 0
 
@@ -631,32 +680,13 @@ class hub {
                             for (let u = 0; u < this.fakecargobay.length; u++) {
                                 if (this.fakecargobay[u] == -100) player.cargostate[u] = -100;
                             }
-
+                            this.contracts.splice(h,1);
+                            this.contractcost.splice(h,1);
                             
                             player.credits += this.contractcost[h];
                             mouseP = true;
                         }
-                        //print("cargo bay after"+player.cargostate);
-
-                    }
-
-
-                }
-
-
-            }
-            
-
-
-
-
-
-        } 
-
-        pop ();
-
     }
-
 
 
 }
