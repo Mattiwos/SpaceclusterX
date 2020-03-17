@@ -143,7 +143,7 @@ class hub {
 
         for(let i=1;i<numOfResources;i++)this.availableExports.push(i);
 
-        print(this.availableExports);
+        
         //alert(this.availableExports);
 
         for(var i=0;i<this.hubExport.length;i++){
@@ -199,7 +199,7 @@ class hub {
         for (let i = 0; i < this.resourceAmount; i++) {
             //finds a resource that the planet dosen't sell
             this.contracts[this.contracts.length-1].push(this.availableExports[int(random(0,this.availableExports.length))]);
-            print(this.contracts);
+        
         }
         ///calculates the cost of the contract:
         this.differentresources=[];
