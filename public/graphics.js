@@ -4,7 +4,9 @@ function drawGraphics(){
 
 
     textSize(22);
-    text(`X: ${Math.round(player.x)} Y: ${Math.round(player.y)}`, width*0.8,height*0.9);
+    fill(255,50);
+    text(`X: ${Math.round(player.x)}`, width-mappy.mapsize/2,height-230);
+    text(`Y: ${Math.round(player.y)}`, width-mappy.mapsize/2,height-200);
     
     
     stroke(255,0,0,100);
@@ -261,7 +263,7 @@ function drawLeaderBoard(){
     for(var i=0;i<leaderlimit;i++){
             push();
             //fill(0)
-            if(arrayUsed[i][2]==1)fill(255,0,0);
+            if(arrayUsed[i][2]==1)fill(150,0,0);
             if (arrayUsed[i][1] != undefined){
                 text(arrayUsed[i][1],width*4/5+15,10 + i*40 +20); 
             text(arrayUsed[i][0],width-width*2/25,10 + i*40 +20);

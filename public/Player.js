@@ -127,7 +127,7 @@ class Player{
       fill (255);
       noStroke();
       textAlign(RIGHT);
-      text(String(this.name), width*9/10, height *19/20)
+      text(String(this.name), 200, height -50)
 
       if (this.name === null){
         window.location.href = 'index.html';

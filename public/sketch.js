@@ -328,6 +328,7 @@ function draw() {
     drawGraphics();
 
     mappy.drawMap();
+    mappy.drawWorldMap();
 
     drawLeaderBoard(oplayers);
 
