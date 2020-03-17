@@ -194,13 +194,16 @@ class hub {
     }
 
     createContract() {
-        this.resourceAmount = int(random(1, 6));
+        this.resourceAmount = noise(this.x,this.y,1)*this.availableExports.length;
         this.contracts.push([]);
+        //noise(this.x,this.y,1);
         for (let i = 0; i < this.resourceAmount; i++) {
             //finds a resource that the planet dosen't sell
-            this.contracts[this.contracts.length-1].push(this.availableExports[int(random(0,this.availableExports.length))]);
+            this.contracts[this.contracts.length-1].push(this.availableExports[floor(noise(this.x,this.y,i+1)*this.availableExports.length)]);
+            //this.contracts[this.contracts.length-1].push(this.availableExports[int(random(0,this.availableExports.length))]);
             print(this.contracts);
         }
+        //alert(noise(this.x,this.y,2)*this.availableExports.length);
         ///calculates the cost of the contract:
         this.differentresources=[];
 
@@ -630,7 +633,7 @@ class hub {
                             }
 
                             
-                            player.credits += 10;
+                            player.credits += this.contractcost[h];
                             mouseP = true;
                         }
                         //print("cargo bay after"+player.cargostate);
