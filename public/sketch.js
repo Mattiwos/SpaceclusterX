@@ -252,6 +252,37 @@ function draw() {
 
 
     }
+
+    sectorsize = 300
+    seedgeneratedstars = [];
+    chanceofappearingstar = .1;
+    for (var x = player.x - width/2; x < player.x +width/2 + sectorsize*2; x+= sectorsize){
+      basex = x//-player.x + x;
+      basex = Math.floor(basex/sectorsize) * sectorsize;
+      basey = 0
+      if (noise(basex,basey,3) >= chanceofappearingstar){
+        starspeed = noise(basex,basey,88) *2 + 5
+        offx = noise(basex,basey,4) * sectorsize
+        offy = noise(basex,basey,5)*sectorsize 
+
+        seedgeneratedstars.push(new star(basex+offx,basey+offy,starspeed))
+        
+      }
+      for (var y = player.y - height/2; y < player.y +height/2 + sectorsize*2; y+=sectorsize){
+        basey = y//-player.y +y;
+        basey = Math.floor(basey/sectorsize) * sectorsize;
+        if (noise(basex,basey,3) >= chanceofappearingstar){
+          starspeed = noise(basex,basey,88) *2 + 5
+          offx = noise(basex,basey,4) * sectorsize
+          offy = noise(basex,basey,5)*sectorsize 
+
+          seedgeneratedstars.push(new star(basex+offx,basey+offy,starspeed))
+
+
+        }
+      }
+
+    }
     
     
 
@@ -360,9 +391,8 @@ function recalculateseedbasedobjects(){
  
   sectorsize = 700
   seedgeneratedplanets = [];
-  seedgeneratedstars = [];
   chanceofappearing = .4;
-  chanceofappearingstar = .1;
+
   worldsize=5000;
   
   
@@ -404,10 +434,7 @@ function recalculateseedbasedobjects(){
     
         
     }
-    if (noise(basex,basey,3) >= chanceofappearingstar){
-      starspeed = noise(basex,basey,88) *2 + 5
-      seedgeneratedstars.push(new star(basex,basey,starspeed))
-    }
+   
     
     for (var y = player.y - height/2; y < player.y +height/2 + sectorsize*2; y+=sectorsize){
       basey = y//-player.y +y;
@@ -439,17 +466,12 @@ function recalculateseedbasedobjects(){
         seedgeneratedplanets.push(new planet(basex + offx,basey + offy,pedrand,pedr,pedg,pedb, crater))
         
       }
-      if (noise(basex,basey,3) >= chanceofappearingstar){
-        starspeed = noise(basex,basey,88) *2 + 5
-        seedgeneratedstars.push(new star(basex,basey,starspeed))
-      }
 
 
     }
     
 
     }
-
 
 
 }
