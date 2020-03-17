@@ -2,8 +2,8 @@
 
 
 
-var gameseed = 0.9;
-
+var gameseed = 1;
+var newgameseed;
 const socket = io(
   {transports: ['websocket']},
   { forceNew: true }
@@ -14,7 +14,7 @@ socket.on('reconnect_attempt', () => {
 socket.on('deleteplayer',(arg)=>{
   for (var i = 0; i < oplayers.length;i++){
     if (arg.id == oplayers[i].id){
-      print(`removing ${oplayers.id} from list to draw`)
+  
       oplayers.splice(i,1)
       
       
@@ -54,8 +54,9 @@ socket.on("updateLoc", (args)=>{
 }) 
 
 socket.on('init', (args)=>{
-  gameseed = args.gameseed;
-  console.log(gameseed);
+  // gameseed = args.gameseed;
+  newgameseed = args.gameseed;
+  
   
   var exists = false;
 
@@ -208,16 +209,21 @@ function setup() { //window.devicePixelRatio
 
   mappy = new Map();
 
-  noiseSeed(gameseed);
+  
   
 
   
   name = String(getCookie('username'))
   player.name = name;
+  console.log(gameseed);
+  if (gameseed == newgameseed){
 
- 
+    noiseSeed(gameseed);
+    recalculateseedbasedobjects();
+  }
+  
 
-  recalculateseedbasedobjects()
+  
 
 }
 //gameseed
@@ -228,95 +234,105 @@ var prevx = 0;
 var prevy = 0;
 
 function draw() {
-  // document.body.style.zoom="100%"
-  
-  
-  if (dist(prevx,prevy,-player.x + width/2,-player.y + m + height /2) >= 500){
-    recalculateseedbasedobjects();
-    prevx = -player.x + width/2;
-    prevy = -player.y + m + height /2;
-    console.log("drawing")
-
-
+  if (gameseed != newgameseed && newgameseed != undefined){
+    noiseSeed(newgameseed);
+    gameseed = newgameseed 
   }
-  noiseSeed(gameseed);
-  
 
-
+  if (gameseed == newgameseed){
     
 
-  
-
-
-  d=deltaTime/10;
-  background(0);
-  
-
-  
-  
-
-  senddata() 
-  if (player.health <= 0 || player.name ==""){
-    window.location.href = 'index.html';
-  }
-  
-  
-  for (var i = 0; i <seedgeneratedstars.length;i++){
-    seedgeneratedstars[i].draw()
-    //noiseDetail()
-  }
-  for (var i = 0; i <seedgeneratedplanets.length;i++){
-    seedgeneratedplanets[i].draw()
-    //noiseDetail()
-  }
-  
- 
-
-
-
-  
-
-  
-
-  for(var i =0;i<lasers.length;i++){
     
-   // if( (dist(player.x,player.y,lasers[i].x,lasers[i].y)<diagonal+lasers[i].size))
-     //if ( (dist(player.x,lasers[i].x,player.y,lasers[i].y)) <= (2*width)){
-       //lasers[i].draw();
-    // }
-    lasers[i].draw();
-   
-  }
-  z=0;
-  while(z<lasers.length){
-    if(lasers[z].lifespan <= 0){
-      lasers.splice(z,1);
-      z--
+    
+    if (dist(prevx,prevy,-player.x + width/2,-player.y + m + height /2) >= 500){
+      recalculateseedbasedobjects();
+      prevx = -player.x + width/2;
+      prevy = -player.y + m + height /2;
+     
+
+
     }
-    z++;
+    
+    
+
+
+      
+
+    
+
+
+    d=deltaTime/10;
+    background(0);
+    
+
+    
+    
+
+    senddata() 
+    if (player.health <= 0 || player.name ==""){
+      window.location.href = 'index.html';
+    }
+    
+    
+    for (var i = 0; i <seedgeneratedstars.length;i++){
+      seedgeneratedstars[i].draw()
+      //noiseDetail()
+    }
+    for (var i = 0; i <seedgeneratedplanets.length;i++){
+      seedgeneratedplanets[i].draw()
+      //noiseDetail()
+    }
+    
+  
+
+
+
+    
+
+    
+
+    for(var i =0;i<lasers.length;i++){
+      
+    // if( (dist(player.x,player.y,lasers[i].x,lasers[i].y)<diagonal+lasers[i].size))
+      //if ( (dist(player.x,lasers[i].x,player.y,lasers[i].y)) <= (2*width)){
+        //lasers[i].draw();
+      // }
+      lasers[i].draw();
+    
+    }
+    z=0;
+    while(z<lasers.length){
+      if(lasers[z].lifespan <= 0){
+        lasers.splice(z,1);
+        z--
+      }
+      z++;
+    }
+    
+    for(var i =0;i<oplayers.length;i++){
+      // if ( (dist(player.x,player.y,oplayers[i].x,oplayers[i].y))  <diagonal+40){
+        oplayers[i].draw();
+      //}
+      //oplayers[i].draw();
+    }
+    
+
+    //push()
+    
+
+
+    
+
+    player.draw();
+
+    drawGraphics();
+
+    mappy.drawMap();
+
+    drawLeaderBoard(oplayers);
+
   }
   
-  for(var i =0;i<oplayers.length;i++){
-    // if ( (dist(player.x,player.y,oplayers[i].x,oplayers[i].y))  <diagonal+40){
-      oplayers[i].draw();
-     //}
-    //oplayers[i].draw();
-  }
-  
-
-  //push()
-  
-
-
-  
-
-  player.draw();
-
-  drawGraphics();
-
-  mappy.drawMap();
-
-  drawLeaderBoard(oplayers);
 
 }
 
@@ -353,6 +369,8 @@ function recalculateseedbasedobjects(){
       pedr = noise(basex,basey,5) *255
       pedg = noise(basex,basey,6) *255
       pedb = noise(basex,basey,7) *255
+      offx = noise(basex,basey,8) *200
+      offy = noise(basex,basey,9) *200
       
       crater = [];
 

@@ -143,7 +143,7 @@ class hub {
 
         for(let i=1;i<numOfResources;i++)this.availableExports.push(i);
 
-        print(this.availableExports);
+        
         //alert(this.availableExports);
 
         for(var i=0;i<this.hubExport.length;i++){
