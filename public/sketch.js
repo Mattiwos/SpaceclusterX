@@ -350,6 +350,10 @@ function mouseReleased(){
   mouseP=false;
 }
 
+function distance(x,y,xs,ys){
+  return(Math.pow(Math.pow(Math.abs(xs-x),2)+Math.pow(Math.abs(ys-y),2),0.5));
+}
+
 
 function recalculateseedbasedobjects(){
  
@@ -358,12 +362,16 @@ function recalculateseedbasedobjects(){
   seedgeneratedstars = [];
   chanceofappearing = .4;
   chanceofappearingstar = .1;
+  worldsize=5000;
   
   
   for (var x = player.x - width/2; x < player.x +width/2 + sectorsize*2; x+= sectorsize){
     basex = x//-player.x + x;
     basex = Math.floor(basex/sectorsize) * sectorsize;
     basey = 0
+    //makes boundary
+    print(distance(player.x,player.y,0,0));
+    //if(distance(basex +offx,basey+offy,0,0)<5000) if(distance(player.x,player.y,0,0)<5000)
     if (noise(basex,basey,3) >= 1-chanceofappearing){
       pedrand = noise(basex,basey,4) *700
       pedr = noise(basex,basey,5) *255
@@ -390,7 +398,7 @@ function recalculateseedbasedobjects(){
             
         }
         
-        
+        if(distance(basex +offx,basey+offy,0,0)<worldsize) 
         seedgeneratedplanets.push(new planet(basex + offx,basey + offy,pedrand,pedr,pedg,pedb, crater))
     
         
@@ -399,7 +407,7 @@ function recalculateseedbasedobjects(){
       starspeed = noise(basex,basey,88) *2 + 5
       seedgeneratedstars.push(new star(basex,basey,starspeed))
     }
-
+    
     for (var y = player.y - height/2; y < player.y +height/2 + sectorsize*2; y+=sectorsize){
       basey = y//-player.y +y;
       basey = Math.floor(basey/sectorsize) * sectorsize;
@@ -425,7 +433,8 @@ function recalculateseedbasedobjects(){
             dists = noise(basex,basey,3+o) * (pedrand + cratersz) /2// 
             craterfill = noise(basex,basey,4+o) * 255  //opasity?  
            crater.push ([ag, dists , cratersz , craterfill]);         
-        }  
+        }
+        if(distance(basex +offx,basey+offy,0,0)<worldsize)  
         seedgeneratedplanets.push(new planet(basex + offx,basey + offy,pedrand,pedr,pedg,pedb, crater))
         
       }

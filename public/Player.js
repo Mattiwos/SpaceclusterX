@@ -8,10 +8,10 @@ class Player{
       //speed of rotation
       this.raccel=0;
       this.faccel=0;
-      this.maxfs = 16;
+      this.maxfs = 15;
       this.maxbs = 4;
-      this.raccelspeed = 0.008;
-      this.faccelspeed = 0.5;
+      this.raccelspeed = 0.007;
+      this.faccelspeed = 0.4;
       this.rocketfire =false;
 
       this.upgrades = [];

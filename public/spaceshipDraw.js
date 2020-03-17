@@ -1,4 +1,4 @@
-function drawSpaceship(x,y,r,fire,size = 20){
+function drawSpaceship(x,y,r,fire,size = 15){
    this.r = size;
 
    if(fire){

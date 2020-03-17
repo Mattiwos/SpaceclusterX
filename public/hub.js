@@ -680,8 +680,8 @@ class hub {
                             for (let u = 0; u < this.fakecargobay.length; u++) {
                                 if (this.fakecargobay[u] == -100) player.cargostate[u] = -100;
                             }
-                            this.contracts.splice(h,1);
-                            this.contractcost.splice(h,1);
+                            //this.contracts.splice(h,1);
+                            //this.contractcost.splice(h,1);
                             
                             player.credits += this.contractcost[h];
                             mouseP = true;

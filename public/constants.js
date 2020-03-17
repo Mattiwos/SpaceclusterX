@@ -8,7 +8,8 @@ var storagewidth = 50;
 //constant : how many resources ther eare
 var numOfResources=8;
 
-
+var worldsize=5000;
+//the radiuso of the world
 
 //constant how spaced the upgrades
 var modificationSpacing=50;
