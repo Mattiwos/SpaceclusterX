@@ -85,6 +85,15 @@ class Player{
 
       if(this.faccel==0&&this.health<100)this.health+=0.02*d;
       if(this.health<100)this.health+=0.01*d;
+
+      if(dist(this.x,this.y,0,0)>worldsize){
+        this.health-=0.06*d;
+        fill(255,0,0);
+        textSize(30);
+        noStroke();
+        textAlign(CENTER);
+        text("WARNING return to map",width/2,height*1/4);
+      }
       
       if(this.ammo<100){
         this.ammo+=this.reload/15;
