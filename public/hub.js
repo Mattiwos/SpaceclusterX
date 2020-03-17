@@ -194,7 +194,7 @@ class hub {
     }
 
     createContract() {
-        this.resourceAmount = noise(this.x,this.y,1)*this.availableExports.length;
+        this.resourceAmount = noise(this.x,this.y,1)*6;
         this.contracts.push([]);
         //noise(this.x,this.y,1);
         for (let i = 0; i < this.resourceAmount; i++) {
@@ -215,7 +215,7 @@ class hub {
             }
             if(this.found==false)this.differentresources.push(this.contracts[this.contracts.length-1][i]);
         }
-        this.contractcost.push(this.differentresources.length+2*this.contracts[this.contracts.length-1].length);
+        this.contractcost.push((this.differentresources.length+1)*this.contracts[this.contracts.length-1].length);
 
 
     }
@@ -651,7 +651,7 @@ class hub {
 
 
 
-        } else this.popup = 0;
+        } 
 
         pop ();
 
