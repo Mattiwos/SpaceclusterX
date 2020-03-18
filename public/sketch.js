@@ -2,8 +2,8 @@
 
 
 
-var gameseed = 1;
-var newgameseed;
+var gameseed;
+
 const socket = io(
   {transports: ['websocket']},
   { forceNew: true }
@@ -55,7 +55,7 @@ socket.on("updateLoc", (args)=>{
 
 socket.on('init', (args)=>{
   // gameseed = args.gameseed;
-  newgameseed = args.gameseed;
+  gameseed = args.gameseed;
   
   
   var exists = false;
@@ -201,14 +201,17 @@ function getCookie(cname) {
   return "";
 }
 
+
+
 function setup() { //window.devicePixelRatio
+  socket.emit('sendmedataprettyplease',{
+
+  });
   createCanvas(windowWidth, windowHeight);
   player = (window.origin == "http://localhost:5500") ? new Player(0,0,random(-1000,1000),name) :new Player(width/2+random(-1000,1000),height/2 + m+random(-1000,1000),random(-1000,1000),name);
 
   diagonal = dist(0,0,width/2,height/2);
-  socket.emit('sendmedataprettyplease',{
-
-  });
+  
 
   mappy = new Map();
 
@@ -219,7 +222,7 @@ function setup() { //window.devicePixelRatio
   name = String(getCookie('username'))
   player.name = name;
   console.log(gameseed);
-  if (gameseed == newgameseed){
+  if (gameseed != undefined){
 
     noiseSeed(gameseed);
     recalculateseedbasedobjects();
@@ -235,14 +238,15 @@ var nosy =2;
 var crater = [];
 var prevx = 0;
 var prevy = 0;
-
+var numofloop = 0;
 function draw() {
-  if (gameseed != newgameseed && newgameseed != undefined){
-    noiseSeed(newgameseed);
-    gameseed = newgameseed 
+  if (gameseed != undefined && numofloop == 0){
+    noiseSeed(gameseed);
+    numofloop+=1;
+  
   }
 
-  if (gameseed == newgameseed){
+  if (gameseed != undefined){
     
 
     
@@ -404,7 +408,7 @@ function recalculateseedbasedobjects(){
     basex = Math.floor(basex/sectorsize) * sectorsize;
     basey = 0
     //makes boundary
-   
+    //print(distance(player.x,player.y,0,0));
     //if(distance(basex +offx,basey+offy,0,0)<5000) if(distance(player.x,player.y,0,0)<5000)
     if (noise(basex,basey,3) >= 1-chanceofappearing){
       pedrand = noise(basex,basey,4) *700
