@@ -15,7 +15,9 @@ class star{
     draw(){
 
         push();
-        translate(-player.x/this.ss,-player.y/this.ss);
+
+        // translate(-player.x/this.ss,-player.y/this.ss);
+        translate(-player.x,-player.y);
         fill (255);
         noStroke();
         ellipse(this.x+width/2,this.y+height/2+m,this.s,this.s);
