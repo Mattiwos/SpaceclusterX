@@ -6,7 +6,7 @@ var storagewidth = 50;
 
 
 //constant : how many resources ther eare
-var numOfResources=8;
+var numOfResources=7;
 
 var worldsize=5000;
 //the radiuso of the world
