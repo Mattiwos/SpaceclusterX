@@ -45,10 +45,10 @@ class Player{
         window.location.href = 'index.html';
       }
       ///rotation
-      if(keyDown[keys[1]]==1){ //A
+      if(keyDown[keys[1]]==1 || keyDown[keys2[1]]==1){ //A
         if(this.raccel<this.raccelspeed*(9))
         this.raccel+=this.raccelspeed*d;
-      }if(keyDown[keys[0]]==1){ //D
+      }if(keyDown[keys[0]]==1 || keyDown[keys2[0]]==1){ //D
         if(this.raccel>this.raccelspeed*(-9)) 
         this.raccel-=this.raccelspeed*d;
       }
@@ -63,14 +63,14 @@ class Player{
 
       
       //forward and backward speeds
-      if(keyDown[keys[2]]==1){
+      if(keyDown[keys[2]]==1 ||keyDown[keys2[2]]==1 ){
         this.rocketfire = true;
         if(this.faccel<this.faccelspeed*(this.maxfs))
         this.faccel+=this.faccelspeed*d;
       
       }
       else this.rocketfire = false;
-      if(keyDown[keys[3]]==1){
+      if(keyDown[keys[3]]==1 || keyDown[keys2[3]]==1){
         if(this.faccel>this.faccelspeed*(-1*this.maxbs))
         this.faccel-=this.faccelspeed*d;
       }
@@ -126,7 +126,7 @@ class Player{
       textSize(30);
       fill (255);
       noStroke();
-      textAlign(RIGHT);
+      textAlign(LEFT);
       text(String(this.name), 200, height -50)
 
       if (this.name === null){

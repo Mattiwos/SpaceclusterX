@@ -5,6 +5,7 @@ function drawGraphics(){
 
     textSize(22);
     fill(255,50);
+    textAlign(CENTER);
     text(`X: ${Math.round(player.x)}`, width-mappy.mapsize/2,height-230);
     text(`Y: ${Math.round(player.y)}`, width-mappy.mapsize/2,height-200);
     
@@ -54,9 +55,16 @@ function drawGraphics(){
        drawCredit(width/10-60,height+m,3);
 
     for(let i=0;i<player.cargobay.length;i++){
-        if(player.cargostate[i]<=0&&player.cargostate[i]>-100)
+        if(player.cargostate[i]<=0&&player.cargostate[i]>-100){
         drawResource(width/2 - player.storage * storagewidth / 2 +storagewidth/2  +storagewidth*i, height + m*1.15,
             player.cargobay[i],4);
+
+            if(mouseP==false &&mouseIsPressed &&mouseP==false && dist (mouseX,mouseY,
+                width/2 - player.storage * storagewidth / 2 +storagewidth/2  +storagewidth*i, height + m*1.15)<30 ){
+                player.cargostate[i]=-100;
+                mouseP=true;
+                }
+        }
             else if (player.cargostate[i]>0){
 
                 drawResource(

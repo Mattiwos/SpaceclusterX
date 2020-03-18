@@ -150,6 +150,9 @@ document.onkeydown = function (e) {
 var keyDown={};
 var keys=[65,68,87,83,32];
 
+//alternate arrow keys
+var keys2=[37,39,38,40];
+
 
 var oplayers = [];
 var player;
@@ -393,7 +396,7 @@ function recalculateseedbasedobjects(){
   seedgeneratedplanets = [];
   chanceofappearing = .4;
 
-  worldsize=5000;
+  worldsize=6000;
   
   
   for (var x = player.x - width/2; x < player.x +width/2 + sectorsize*2; x+= sectorsize){
