@@ -1,8 +1,12 @@
+
+
 function drawGraphics(){
 
 
     textSize(22);
-    text("X: " + (player.x | 0 )+" Y: "+ (player.y | 0), width*0.8,height*0.9);
+    fill(255,50);
+    text(`X: ${Math.round(player.x)}`, width-mappy.mapsize/2,height-230);
+    text(`Y: ${Math.round(player.y)}`, width-mappy.mapsize/2,height-200);
     
     
     stroke(255,0,0,100);
@@ -45,7 +49,9 @@ function drawGraphics(){
         fill(255);
         stroke(200);
         strokeWeight(2);
-        text("¢"+player.displaycredits,width/10,height+m);
+       // text("¢"+player.displaycredits,width/10,height+m);
+       text(player.displaycredits,width/10,height+m);
+       drawCredit(width/10-60,height+m,3);
 
     for(let i=0;i<player.cargobay.length;i++){
         if(player.cargostate[i]<=0&&player.cargostate[i]>-100)
@@ -86,20 +92,16 @@ function drawGraphics(){
     ///draw the player's reload, damage, and bulletspeed upgrades
 
     for(let i=0;i<player.reload;i++){
-        drawIcon(width/modificationSpacing+width/modificationSpacing*i,2*height/modificationSpacing,1,10);
+        drawIcon(width/modificationSpacing+width/modificationSpacing*i,2*height/modificationSpacing,0,10);
     }
     for(let i=0;i<player.bulletDamage;i++){
         drawIcon(width/modificationSpacing+width/modificationSpacing*i,4*height/modificationSpacing,2,10);
     }
     for(let i=0;i<player.bulletSpeed;i++){
-        drawIcon(width/modificationSpacing+width/modificationSpacing*i,6*height/modificationSpacing,3,10);
+        drawIcon(width/modificationSpacing+width/modificationSpacing*i,6*height/modificationSpacing,1,10);
     }
 
-    textSize(30);
-      fill (255);
-      noStroke();
-      textAlign(RIGHT);
-      text(String(this.name), width*9/10, height *19/20)
+    
 
 }
 
@@ -217,6 +219,80 @@ function drawResource(x,y,resource,sc){
     }
 }
 
+function drawLeaderBoard(){
+    
+    //sorts the leaderboard by score
+    //algorithm:
+    // first, creates an array that is arrayUsed with player.credits on the end
+    // next, creates an empty display array and a variable called max that is set to the first elemtn
+    // also creates an variable called indexOfMax, which keeps track of where the biggest one is
+
+    // one more array that it has to create is a copy of the array. 
+
+    // has a for loop that goes through all of the elements of the array, and at each index,
+    //        if the value of the array there is greater than max, it sets max to it and indexOfmax to i
+    // after its gone through the array , it will push the display array with the indexOfmax
+    // then, it will set index of Max to -1
+
+    // it will then
+    
+    // first elemt is the name, second is the score
+
+
+    var arrayUsed=[];
+
+    for (var i =0;i<oplayers.length;i++){
+        arrayUsed.push([oplayers[i].credits, oplayers[i].name,0]);
+        
+    }
+    arrayUsed.push([player.credits,player.name,1]);
+   
+
+    arrayUsed = arrayUsed.sort(([a], [b]) => a > b ? -1 : a < b ? 1 : 0)
+
+
+    fill(255,100);
+    noStroke();
+    rect(width*4/5,10,width*4/25,arrayUsed.length*40);
+    fill(255);
+    textSize(30);
+    textAlign(LEFT,CENTER);
+    //rectMode(CENTER);
+    var leaderlimit = (arrayUsed.length >= 10)? 10 :arrayUsed.length;
+    
+    for(var i=0;i<leaderlimit;i++){
+            push();
+            //fill(0)
+            if(arrayUsed[i][2]==1)fill(150,0,0);
+            if (arrayUsed[i][1] != undefined){
+                text(arrayUsed[i][1],width*4/5+15,10 + i*40 +20); 
+            text(arrayUsed[i][0],width-width*2/25,10 + i*40 +20);
+            }
+            else{
+                
+            }
+
+            pop ();
+        }
+
+    textAlign(CENTER);
+   
+}
+
+function drawCredit(x,y,sc){
+    fill(255);
+    noStroke();
+    ellipse(x,y,10*sc,10*sc);
+    fill(0);
+    textSize(8*sc);
+    textAlign(CENTER);
+    text("C",x,y);
+    rectMode(CENTER);
+    rect(x,y,sc,8*sc);
+    rectMode(CORNER);
+}
+
+
 function drawIcon(x,y,icon,sc){
     //1 is energy
     //2 is damage
@@ -224,7 +300,7 @@ function drawIcon(x,y,icon,sc){
 
     fill(255);
     noStroke();
-    if(icon==1){
+    if(icon==0){
         triangle(x,y,
             x-sc,y,
             x,y-2*sc
@@ -244,7 +320,7 @@ function drawIcon(x,y,icon,sc){
             );
         }
     }
-    if(icon==3){
+    if(icon==1){
         rect(x-2*sc,y-sc/2,2*sc,sc);
         triangle(x,y-sc,x+sc,y,x,y+sc);
     }

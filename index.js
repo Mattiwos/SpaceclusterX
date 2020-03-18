@@ -5,6 +5,14 @@ var server = app.listen(port)
 //var http = require('http').Server(app);
 var io = require('socket.io').listen(server);
 
+var {m, storagewidth, numOfResources, modificationSpacing ,upgradeResources ,numOfResourcesUpgrade, citysize,upgradeName} = require("./public/constants")
+
+var PI = Math.PI
+var cos = Math.cos
+var sin = Math.sin
+
+var city=[];
+
 //security
 var helmet = require('helmet');
 //logger
@@ -15,10 +23,10 @@ app.use(morgen('common'))
 
 //required folders
 
-
+app.use(express.static('assets'));
 app.use(express.static('public'));
 app.use(express.static('views'));
-app.use(express.static('assets'));
+
 
 //renders index.html
 app.get('/', (req, res)=>{
@@ -46,47 +54,66 @@ app.use((error,req,res,next)=>{
 var playerson = [];
 var lasers = [];
 var planets = [];
+var city = [];
 newplanets(12);
 
 stars = [];
+var name = [];
 newstars(100);
 //heroku logs --tail -a spaceclusterx
 //socket
+var gameseed = Math.random();
+console.log(gameseed)
+
+
 io.on('connection', (socket)=>{
   playerson.push([socket.id]);
-  socket.on('name', (arg)=>{
+  name.push([socket.id]);
+  
 
-    for (var i = 0; i < playerson.length;i++){
-      if (playerson[i][0] == socket.id){
-        playerson[i][5] = arg.name;
-        updateLoc();
-        break;
-      }
-    }
-    console.log(arg.name);
-    socket.emit("whatsmyname",{
-      name: arg.name
+  socket.on('sendmedataprettyplease',(arg) =>{
+    socket.emit('init', {
+      currentplayers: playerson,
+      planets: planets,
+      city: city,
+      stars: stars,
+      lasers: lasers,
+      gameseed: gameseed
+      
+  
     });
 
   });
   socket.emit('init', {
     currentplayers: playerson,
     planets: planets,
+    city: city,
     stars: stars,
-    lasers: lasers
+    lasers: lasers,
+    gameseed: gameseed
     
 
-  })
+  });
+  
+
   socket.on('currData', (args)=>{
+    
     for (var i = 0; i < playerson.length;i++){
       if (playerson[i][0] == args.id){
         playerson[i][1] = (args.x);
         playerson[i][2] = (args.y);
         playerson[i][3] = (args.r);
         playerson[i][4] = args.rocketfire;
+        playerson[i][5] = args.name;
+        playerson[i][6] = args.credit;
+       
+        
+        
         updateLoc();
         break;
       }
+  
+      
     }
    
 
@@ -100,26 +127,28 @@ io.on('connection', (socket)=>{
     for (var i = 0; i< playerson.length;i++){
       if (socket.id == playerson[i][0]){
         playerson.splice(i,1);
+       
+        io.emit('deleteplayer',{
+          id: socket.id
+        })
+        updateLoc()
         break;
+
       } 
     }
-    socket.emit('init', {
-      currentplayers: playerson
-  
-    })
-    io.emit('deleteplayer',{
-      name: socket.id
-    })
-    updateLoc()
+    
 	})
 
 
 });
 
 function updateLoc(){
+  
   io.emit('updateLoc',{
     currentplayers: playerson,
     lasers: lasers,
+   
+    
   })
 }
 function updateMap(){
@@ -148,9 +177,52 @@ function newplanets(n){
     cr = (Math.random() * 255) | 0
     cg = (Math.random() * 255) | 0
     cb = (Math.random() * 255) | 0
+    
+
+    
+    
+    // planets.push([cx,cy,cs,cr,cg,cb,createHub(cx,cy,cs)]);
     planets.push([cx,cy,cs,cr,cg,cb]);
+
+    // creates the hubs on that planet
+    //creates the resources
+
+    planetExport=[];
+    planetResources=getRandomInt(1,3);
+    //cfreates the planets natural resources that it sells on the citys
+    for(let k=0;k<planetResources;k++){
+        possible=getRandomInt(1,numOfResources+1);
+        exists=true;
+        while(exists==true){
+            possible=getRandomInt(1,numOfResources+1);
+            exists=false;
+            for(let h=0;h<planetExport.length;h++){
+                if(possible==planetExport[h])exists=true;
+            }
+        }
+        planetExport.push(possible);
+    }
+
+
+     hubnumber = getRandomInt(1,3);
+     for(var a=0;a<hubnumber;a++){
+        //city.push(createHub(cx,cy,cs));
+     }
+  }
+  //creates the contracts
+  for(var i=0;i<10;i++){
+   
+    //city[getRandomInt(0,city.length)].createContract();
   }
 
+}
+
+
+
+
+
+function random(min, max) {
+  return Math.random() * (max - min) + min;
 }
 function getRandomInt(min, max) {
   min = Math.ceil(min);

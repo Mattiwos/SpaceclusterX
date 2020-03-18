@@ -8,39 +8,72 @@
 
   </head>
   <body>
-    <h1> StarclusterX </h1>
+    <h1> Spacecluster X </h1>
         
     <p>By Peter R. and Mattiwos B.</p>
+    <style>
+      body {
+        background-image: url('/space.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+      }
+      </style>
     
 
     <form class="loginname">
 
     <label for="name">Username:</label>
-    <input class="u-full-width" type="text" id="name" name="name" required minlength="4" maxlength="8">
-    <button onclick="runswhenbuttonisclicked()">START</button>
+    <input class="u-full-width" type="text" id="name" minlength="1" maxlength="9" name="name">
+    <button id="startgame" type = "button" onclick="runswhenbuttonisclicked()">START</button>
 
     </form>
 
     <script src="/socket.io/socket.io.js"></script>
     <script> 
+    document.getElementById("name").value = getPrevUsername();
     function runswhenbuttonisclicked() {
 
-      const socket = io(
-        {transports: ['websocket']},
-        { forceNew: true }
-      );
-      socket.on('reconnect_attempt', () => {
-        socket.io.opts.transports = ['polling', 'websocket'];
-      });
+      name = document.getElementById("name").value.toString()
+      document.cookie = `username=${name}`;
 
-      socket.emit('name', {
-        name: document.getElementById("name").value.toString()
-      });
-      
-      window.location.href = 'game.html';
+      window.location.href = `game.html`;
       
     }
+    function getPrevUsername(){
+      if (getCookie('username') != undefined)
+      return getCookie('username')
+      else
+      return ""
+    }
+    
+    function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
     </script>
+    <script>
+      var input = document.getElementById("name");
+      input.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+         event.preventDefault();
+         document.getElementById("startgame").click();
+         runswhenbuttonisclicked()
+        }
+      });
+      </script>
     
 
   </body>

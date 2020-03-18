@@ -7,7 +7,35 @@ canvas {
 }
 h1{
     text-align-last: center;
+    
 }
 p{
     text-align-last: center;
+}
+.chatContainer Button {
+    color: aliceblue;
+    position: fixed;
+    bottom: 1%;
+    left: 94%; 
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    font-size: 200%;
+}
+.chatContainer #chat.collapse.in {
+color: aliceblue;
+    position: fixed;
+    bottom: 10%;
+    left: 94%; 
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    font-size: 10%;
+
 }

@@ -12,6 +12,22 @@ Each planet has a random amount of hubs on it. Each hub buys and sells resources
 Each hub on the same planet has the same imports, but different exports
 The hubs also sell upgrades, which cost credits and resources
 
+
+Upgrades
+#### To DO  
+  - [X] Name
+  - [ ] noisejs
+    - [ ] Planets
+    - [ ] Hub
+  - [ ] Bot Players
+ 
+
+
+### Ideas
+ - [ ]
+  
+=======
 ### Upgrades
+
 
 

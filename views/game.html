@@ -2,11 +2,16 @@
 <html>
   <head>
     <title>SpaceclusterX</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/addons/p5.sound.min.js"></script>
-    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.dom.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.sound.min.js"></script>
+
     <script src="/socket.io/socket.io.js"></script>
     <!-- <script src='https://cdn.socket.io/socket.io-1.2.0.js'> </script> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8" />
@@ -17,9 +22,10 @@
         
     <p>By Peter R. and Mattiwos B.</p>
     -->
-   
+    <script src="/constants.js"></script>
     <script src="/graphics.js"></script>
     <script src="/hub.js"></script>
+    <script src="/map.js"></script>
     <script src="/Oplayer.js"></script>
     <script src="/Player.js"></script>  
     <script src="/projectile.js"></script>  
@@ -28,7 +34,27 @@
     <script src="/star.js"></script>
     <script src="/spaceshipDraw.js"></script>
 
-    <script src="/sketch.js"></script>
+
+    <script src="/sketch.js" defer></script>
+
+    <script src="Chat.js" defer></script>
+
+    <div class="chatContainer">
+
+      <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#chat" >💬</button>
+    
+     <div id="chat" class="collapse">
+        <button id = "send" type="button">Send</button>
+        <h1>Chat goes here</h1>
+        <ul>
+            <li>Coffee</li>
+            <li>Tea</li>
+            <li>Milk</li>
+          </ul>
+          
+      </div>
+
+    </div>
 
   </body>
 </html>

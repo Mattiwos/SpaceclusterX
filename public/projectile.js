@@ -21,6 +21,7 @@ class Projectile{
 
         if (this.playerid == socket.id){
             gunshoot(this.x,this.y,this.r,this.dmg,this.speed,this.id);
+            // laserSound.play()
         }
         
    
@@ -30,11 +31,15 @@ class Projectile{
         push();
         translate(-player.x + width/2,-player.y + m + height /2)
         if (this.playerid != socket.id){
-             if (dist(this.x,this.y,player.x,player.y) <= this.size+20){ 
+             if (dist(this.x,this.y,player.x,player.y) <= this.size+20){  //this is the hit bot
 
             //need to improve collision detection if statment
               player.health-= this.dmg;
+              if (player.health <= 0 || player.name ==""){
+                window.location.href = 'index.html';
+              }
               this.lifespan=0;
+              player.damageTimer=player.damageTimertime;
             }
         }
     
@@ -55,7 +60,7 @@ class Projectile{
         fill (255,0,0);
         else
         fill(255,0,0,this.lifespan*255/15);
-        this.lifespan-=2.4;
+        this.lifespan-=2.6;
         this.savex=this.x;
         this.savey=this.y;
         for(let i=1;i>0;i--){
@@ -79,7 +84,7 @@ class Projectile{
             vertex(this.x-cos(this.r)*this.size +cos(this.r+PI/2)*this.size/this.ratio+width/2,this.y-sin(this.r)*this.size +sin(this.r+PI/2)*this.size/this.ratio+height/2+m);
             endShape();
 
-            if(this.lifespna<=15)i=0;
+            if(this.lifespan<=15)i=0;
         }
         this.x=this.savex;
         this.y=this.savey;

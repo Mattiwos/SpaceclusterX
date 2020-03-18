@@ -1,4 +1,9 @@
-var name = "AHHHAhA"
+// let laserSound = new Audio('assets/laserSound1.mp3');
+
+
+
+var gameseed;
+
 const socket = io(
   {transports: ['websocket']},
   { forceNew: true }
@@ -8,16 +13,16 @@ socket.on('reconnect_attempt', () => {
 });
 socket.on('deleteplayer',(arg)=>{
   for (var i = 0; i < oplayers.length;i++){
-    if (arg.name == oplayers[i].id){
-      oplayers.slice(i,1)
-      console.log("player left")
+    if (arg.id == oplayers[i].id){
+  
+      oplayers.splice(i,1)
+      
+      
     }
+
   }
 })
-socket.on('whatsmyname',(arg)=>{ 
-  name = arg.name
-  
-});
+
 
 socket.on("updateLoc", (args)=>{
   
@@ -27,20 +32,21 @@ socket.on("updateLoc", (args)=>{
    
     for (var i =0; i< oplayers.length;i++){
       if (oplayers[i].id == args.currentplayers[e][0] && args.currentplayers[e][0] != socket.id){
-        oplayers[i].update(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0],args.currentplayers[e][5]);
+        oplayers[i].update(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0],args.currentplayers[e][5],args.currentplayers[e][6]);
         exists = true
         
 
       }
-      if (args.currentplayers[e][0] == socket.id){
+      if (args.currentplayers[e][0] == socket.id || args.currentplayers[e][0] == player.id){
         exists = true
-        args.currentplayers[e][5] =player.name
+        args.currentplayers[e][5] = player.name
       }
       
     }
     if (exists == false){
-      oplayers.push(new Oplayer(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0],args.currentplayers[e][5]))
-     
+      if (args.currentplayers[e][0] != socket.id)
+      oplayers.push(new Oplayer(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0],args.currentplayers[e][5],args.currentplayers[e][6]))
+      
     }
     exists = false;
   }
@@ -48,15 +54,20 @@ socket.on("updateLoc", (args)=>{
 }) 
 
 socket.on('init', (args)=>{
- 
+  // gameseed = args.gameseed;
+  gameseed = args.gameseed;
+  
+  
   var exists = false;
+
 
   for (var e = 0; e < args.currentplayers.length;e++){
     
     for (var i =0; i< oplayers.length;i++){
       if (oplayers[i].id == args.currentplayers[e][0] && args.currentplayers[e][0] != socket.id){
-        console.log(args.currentplayers[e][5])
-        oplayers[i].update(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0],args.currentplayers[e][5]);
+        
+
+        oplayers[i].update(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0],args.currentplayers[e][5],args.currentplayers[e][6]);
 
         exists = true
        
@@ -64,24 +75,31 @@ socket.on('init', (args)=>{
       }
       if (args.currentplayers[e][0] == socket.id){
         exists = true
-        args.currentplayers[e][5] = player.name
+        // args.currentplayers[e][5] = player.name
+       
+        
       }
       
     }
     if (exists == false){
-      
-      oplayers.push(new Oplayer(0,0,0,true,args.currentplayers[e][0],args.currentplayers[e][5]))
+      if (args.currentplayers[e][0] != socket.id) //double checking might not need
+      oplayers.push(new Oplayer(0,0,0,true,args.currentplayers[e][0],args.currentplayers[e][5],args.currentplayers[e][6]))
     }
       
     exists = false;
+    
     }
+    
+    // for (var i = 0; i < args.planets.length; i++){
+    //   planets.push(new planet(args.planets[i][0],args.planets[i][1],args.planets[i][2], args.planets[i][3], args.planets[i][4], args.planets[i][5]))
+    // }
+    // for (var i = 0; i < args.stars.length; i++){
+    //   stars.push(new star(args.stars[i][0],args.stars[i][1]));
+    // }
+    // for (var i = 0; i < args.city.length; i++){
+    //   city.push(new hub(args.city[i][0],args.city[i][1],args.city[i][2],args.city[i][3],args.city[i][4]));
+    // }
 
-    for (var i = 0; i < args.planets.length; i++){
-      planets.push(new planet(args.planets[i][0],args.planets[i][1],args.planets[i][2], args.planets[i][3], args.planets[i][4], args.planets[i][5]))
-    }
-    for (var i = 0; i < args.stars.length; i++){
-      stars.push(new star(args.stars[i][0],args.stars[i][1]));
-    }
    
  
   
@@ -106,7 +124,7 @@ function gunshoot(x,y,r,dmg,speed,id,pid = socket.id){
 socket.on("playershootomgrunnn",(arg)=>{
   lasers.push(new Projectile(arg.x,arg.y,arg.r,arg.dmg,arg.bulletspeed,arg.id,arg.playerid));
 });
-function sendata(){
+function senddata(){
   socket.emit("currData",{	  
    
     id: socket.id,	
@@ -114,8 +132,10 @@ function sendata(){
     y: player.y,	
     r: player.r,	
     rocketfire: player.rocketfire,	
-    name: player.name,	
-  })
+    name: player.name,
+    credit: player.credits,
+   
+  });
 }
 ///////////////////////////////////////////Socket ^ ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -137,6 +157,8 @@ var planets=[];
 var stars=[];
 var lasers=[];
 
+var city=[];
+
 var reloaded;
 
 var d;
@@ -144,126 +166,209 @@ var d;
 //used for a while loop
 var z;
 
-var m=-50;
-//how much the ship is moved down from the center
-
-var storagewidth = 50;
-//constant: how big the resources appear in the queue
-
-
-//constant : how many resources ther eare
-var numOfResources=6;
 
 
 
-//constant how spaced the upgrades
-var modificationSpacing=50;
 
-// what are the different upgrades
 
-upgradeName=["Reload","Laser Speed","Damage","Cargo Bay"];
-
-upgradeCost=[10,10,10,5];
-
-upgradeResources=[[2,3],[1,2],[4,5],[5,6]];
-
-numOfResourcesUpgrade=[2,2,2,3];
 
 
 
 //Other players
-
+var keyP=false;
 var mouseP=false;
 var diagonal = 0;
+var mappy;
+var seedgeneratedplanets =[];
+var seedgeneratedstars =[];
 
-
-function setup() {
-  createCanvas(windowWidth, windowHeight);
-  player = new Player(width/2+random(-1000,1000),height/2 + m+random(-1000,1000),random(-1000,1000),name);
-  diagonal = dist(0,0,width/2,height/2);
-  
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 }
 
+
+
+function setup() { //window.devicePixelRatio
+  socket.emit('sendmedataprettyplease',{
+
+  });
+  createCanvas(windowWidth, windowHeight);
+  player = (window.origin == "http://localhost:5500") ? new Player(0,0,random(-1000,1000),name) :new Player(width/2+random(-1000,1000),height/2 + m+random(-1000,1000),random(-1000,1000),name);
+
+  diagonal = dist(0,0,width/2,height/2);
+  
+
+  mappy = new Map();
+
+  
+  
+
+  
+  name = String(getCookie('username'))
+  player.name = name;
+  console.log(gameseed);
+  if (gameseed != undefined){
+
+    noiseSeed(gameseed);
+    recalculateseedbasedobjects();
+  }
+  
+
+  
+
+}
+//gameseed
+var nosx =2;
+var nosy =2;
+var crater = [];
+var prevx = 0;
+var prevy = 0;
+var numofloop = 0;
 function draw() {
-  d=deltaTime/10;
-  background(0);
-  sendata() 
-  if (player.health <= 0){
-    window.location.href = 'index.html';
-  }
+  if (gameseed != undefined && numofloop == 0){
+    noiseSeed(gameseed);
+    numofloop+=1;
   
-  //print("as;dlfkj");
-  //draw objects close by only in orde to increase performance
-
-  
-  for(var i =0;i<stars.length;i++){
-   
- //     if(stars[i].x+width/2>player.x-width/2-stars[i].s/2
-  //      && stars[i].x+width/2<player.x+width/2+stars[i].s/2
-  //      && stars[i].y+height/2>player.y-height/2-stars[i].s/2
-  //      && stars[i].y+height/2<player.y+height/2+stars[i].s/2)
-  //      stars[i].draw();
-    
-
-        //if( (dist(player.x,stars[i].x,player.y,stars[i].y)<diagonal))
-  //   if ( (dist(player.x,stars[i].x,player.y,stars[i].y)) <= (2*width)){
-
-   // if( (dist(player.x,player.y,stars[i].x,stars[i].y)/4<diagonal+stars[i].s/2))
-    stars[i].draw();
-//   }
-      //stars[i].draw();
-   //  }
-
-
-   // stars[i].draw();
-
-   
-  }
- 
-
-
-  for(var i =0;i<planets.length;i++){
-    
-    // if ( (dist(player.x,planets[i].x,player.y,planets[i].y)) <= (2*width)){
-     // if( (dist(player.x,player.y,planets[i].x,planets[i].y)<diagonal+planets[i].s/2))
-       planets[i].draw();
-  //   }
-    //planets[i].draw();
-   
   }
 
-  for(var i =0;i<lasers.length;i++){
+  if (gameseed != undefined){
     
-   // if( (dist(player.x,player.y,lasers[i].x,lasers[i].y)<diagonal+lasers[i].size))
-     //if ( (dist(player.x,lasers[i].x,player.y,lasers[i].y)) <= (2*width)){
-       //lasers[i].draw();
-    // }
-    lasers[i].draw();
-   
-  }
-  z=0;
-  while(z<lasers.length){
-    if(lasers[z].lifespan<0){
-      lasers.splice(z,1);
-      z=0;
+
+    
+    
+    if (dist(prevx,prevy,-player.x + width/2,-player.y + m + height /2) >= 500){
+      recalculateseedbasedobjects();
+      prevx = -player.x + width/2;
+      prevy = -player.y + m + height /2;
+     
+
+
     }
-    z++;
+
+    sectorsize = 300
+    seedgeneratedstars = [];
+    chanceofappearingstar = .1;
+    for (var x = player.x - width/2; x < player.x +width/2 + sectorsize*2; x+= sectorsize){
+      basex = x//-player.x + x;
+      basex = Math.floor(basex/sectorsize) * sectorsize;
+      basey = 0
+      if (noise(basex,basey,3) >= chanceofappearingstar){
+        starspeed = noise(basex,basey,88) *2 + 5
+        offx = noise(basex,basey,4) * sectorsize
+        offy = noise(basex,basey,5)*sectorsize 
+
+        seedgeneratedstars.push(new star(basex+offx,basey+offy,starspeed))
+        
+      }
+      for (var y = player.y - height/2; y < player.y +height/2 + sectorsize*2; y+=sectorsize){
+        basey = y//-player.y +y;
+        basey = Math.floor(basey/sectorsize) * sectorsize;
+        if (noise(basex,basey,3) >= chanceofappearingstar){
+          starspeed = noise(basex,basey,88) *2 + 5
+          offx = noise(basex,basey,4) * sectorsize
+          offy = noise(basex,basey,5)*sectorsize 
+
+          seedgeneratedstars.push(new star(basex+offx,basey+offy,starspeed))
+
+
+        }
+      }
+
+    }
+    
+    //if(keyP>0)keyP--;
+
+
+      
+
+    
+
+
+    d=deltaTime/10;
+    background(0);
+    
+
+    
+    
+
+    senddata() 
+    if (player.health <= 0 || player.name ==""){
+      window.location.href = 'index.html';
+    }
+    
+    
+    for (var i = 0; i <seedgeneratedstars.length;i++){
+      seedgeneratedstars[i].draw()
+      //noiseDetail()
+    }
+    for (var i = 0; i <seedgeneratedplanets.length;i++){
+      seedgeneratedplanets[i].draw()
+      //noiseDetail()
+    }
+    
+  
+
+
+
+    
+
+    
+
+    for(var i =0;i<lasers.length;i++){
+      
+    // if( (dist(player.x,player.y,lasers[i].x,lasers[i].y)<diagonal+lasers[i].size))
+      //if ( (dist(player.x,lasers[i].x,player.y,lasers[i].y)) <= (2*width)){
+        //lasers[i].draw();
+      // }
+      lasers[i].draw();
+    
+    }
+    z=0;
+    while(z<lasers.length){
+      if(lasers[z].lifespan <= 0){
+        lasers.splice(z,1);
+        z--
+      }
+      z++;
+    }
+    
+    for(var i =0;i<oplayers.length;i++){
+      // if ( (dist(player.x,player.y,oplayers[i].x,oplayers[i].y))  <diagonal+40){
+        oplayers[i].draw();
+      //}
+      //oplayers[i].draw();
+    }
+    
+
+    //push()
+    
+
+
+    
+
+    player.draw();
+
+    drawGraphics();
+
+    mappy.drawMap();
+    mappy.drawWorldMap();
+
+    drawLeaderBoard(oplayers);
+
   }
   
-  for(var i =0;i<oplayers.length;i++){
-    
-    // if ( (dist(player.x,player.y,oplayers[i].x,oplayers[i].y))  <diagonal+40){
-      oplayers[i].draw();
-     //}
-    //oplayers[i].draw();
-    
-  }
-
-  
-
-  player.draw();
-
-  drawGraphics();
 
 }
 
@@ -279,6 +384,100 @@ function mousePressed(){
 }
 function mouseReleased(){
   mouseP=false;
+}
+
+function distance(x,y,xs,ys){
+  return(Math.pow(Math.pow(Math.abs(xs-x),2)+Math.pow(Math.abs(ys-y),2),0.5));
+}
+
+
+function recalculateseedbasedobjects(){
+ 
+  sectorsize = 700
+  seedgeneratedplanets = [];
+  chanceofappearing = .4;
+
+  worldsize=5000;
+  
+  
+  for (var x = player.x - width/2; x < player.x +width/2 + sectorsize*2; x+= sectorsize){
+    basex = x//-player.x + x;
+    basex = Math.floor(basex/sectorsize) * sectorsize;
+    basey = 0
+    //makes boundary
+    //print(distance(player.x,player.y,0,0));
+    //if(distance(basex +offx,basey+offy,0,0)<5000) if(distance(player.x,player.y,0,0)<5000)
+    if (noise(basex,basey,3) >= 1-chanceofappearing){
+      pedrand = noise(basex,basey,4) *700
+      pedr = noise(basex,basey,5) *255
+      pedg = noise(basex,basey,6) *255
+      pedb = noise(basex,basey,7) *255
+      offx = noise(basex,basey,8) *200
+      offy = noise(basex,basey,9) *200
+      
+      crater = [];
+
+      craternumber = Math.round(noise(basex,basey,10) *10)
+
+        
+        
+      for(var o=0;o<craternumber;o++){
+            // the first one in the array is x, y, fill
+
+          ag = noise(basex,basey,1+o) *2*PI
+          cratersz = noise(basex,basey,2+o) *40 +10
+          dists = noise(basex,basey,3+o) * (pedrand-cratersz) /2 // 
+          craterfill = noise(basex,basey,4+o) * 255
+           //console.log(`${pedrand} amd ${cratersz} = ${dists}`)
+           crater.push ([ag, dists , cratersz , craterfill]);
+            
+        }
+        
+        if(distance(basex +offx,basey+offy,0,0)<worldsize) 
+        seedgeneratedplanets.push(new planet(basex + offx,basey + offy,pedrand,pedr,pedg,pedb, crater))
+    
+        
+    }
+   
+    
+    for (var y = player.y - height/2; y < player.y +height/2 + sectorsize*2; y+=sectorsize){
+      basey = y//-player.y +y;
+      basey = Math.floor(basey/sectorsize) * sectorsize;
+      if (noise(basex,basey,3) >= 1-chanceofappearing){
+        pedrand = noise(basex,basey,4) *700
+
+        pedr = noise(basex,basey,5) *255
+        pedg = noise(basex,basey,6) *255
+        pedb = noise(basex,basey,7) *255
+        offx = noise(basex,basey,8) *200
+        offy = noise(basex,basey,9) *200
+        
+
+        crater = [];
+
+        craternumber = Math.round(noise(basex,basey,10) *10)      
+        for(var o=0;o<craternumber;o++){
+            // the first one in the array is x, y, fill
+
+            ag = noise(basex,basey,1+o) *2*PI
+            cratersz = noise(basex,basey,2+o) *40 +10
+            dists = noise(basex,basey,3+o) * (pedrand + cratersz) /2// 
+            dists = noise(basex,basey,3+o) * (pedrand + cratersz) /2// 
+            craterfill = noise(basex,basey,4+o) * 255  //opasity?  
+           crater.push ([ag, dists , cratersz , craterfill]);         
+        }
+        if(distance(basex +offx,basey+offy,0,0)<worldsize)  
+        seedgeneratedplanets.push(new planet(basex + offx,basey + offy,pedrand,pedr,pedg,pedb, crater))
+        
+      }
+
+
+    }
+    
+
+    }
+
+
 }
 
 

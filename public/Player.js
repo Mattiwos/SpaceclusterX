@@ -8,10 +8,10 @@ class Player{
       //speed of rotation
       this.raccel=0;
       this.faccel=0;
-      this.maxfs = 16;
+      this.maxfs = 15;
       this.maxbs = 4;
-      this.raccelspeed = 0.008;
-      this.faccelspeed = 0.5;
+      this.raccelspeed = 0.007;
+      this.faccelspeed = 0.4;
       this.rocketfire =false;
 
       this.upgrades = [];
@@ -28,9 +28,19 @@ class Player{
       this.bulletSpeed=0;
       this.reload=0;
       this.bulletDamage=0;
-  
+
+      this.damageTimer=0;
+      this.damageTimertime=40;
     }
     movement(){
+      if(player.damageTimer>0){
+        player.damageTimer-=2;
+        stroke(255,0,0);
+        noFill();
+        strokeWeight(10);
+        ellipse(width/2,height/2+m,(this.damageTimertime-this.damageTimer)*(width+height/2)/this.damageTimertime,
+        (this.damageTimertime-this.damageTimer)*(width+height/2)/this.damageTimertime);
+      }
       if (this.health <= 0){
         window.location.href = 'index.html';
       }
@@ -75,6 +85,15 @@ class Player{
 
       if(this.faccel==0&&this.health<100)this.health+=0.02*d;
       if(this.health<100)this.health+=0.01*d;
+
+      if(dist(this.x,this.y,0,0)>worldsize){
+        this.health-=0.06*d;
+        fill(255,0,0);
+        textSize(30);
+        noStroke();
+        textAlign(CENTER);
+        text("WARNING return to map",width/2,height*1/4);
+      }
       
       if(this.ammo<100){
         this.ammo+=this.reload/15;
@@ -84,21 +103,35 @@ class Player{
 
       if(keyDown[keys[4]]==1 &&this.ammo>20 && reloaded){
         this.ammo-=20;
-        lasers.push(new Projectile(this.x,this.y,player.r,10+this.bulletDamage*3,this.bulletSpeed));
+        lasers.push(new Projectile(this.x,this.y,player.r,this.calculateDamage(this.bulletDamage),this.bulletSpeed));
         reloaded=false;
 
-        if(this.faccel>0)this.faccel-=this.faccelspeed*this.maxfs/2;
+        if(this.faccel>=-1*this.maxfs)
+        this.faccel-=this.faccelspeed*this.maxfs/3;
       }
+      
+    }
+    calculateDamage(bd){
+      // this one is the linear one
+      //return 10+bd*3;
+      // logarithmic
+
+      return (7*Math.log(0.5*bd+1)+10 );
       
     }
     draw(){
       this.movement();
       
       drawSpaceship(width / 2, height /2 +m,this.r, this.rocketfire);
+      textSize(30);
+      fill (255);
+      noStroke();
+      textAlign(RIGHT);
+      text(String(this.name), 200, height -50)
 
-      // if (this.name === undefined){
-      //   window.location.href = 'index.html';
-      // }
+      if (this.name === null){
+        window.location.href = 'index.html';
+      }
       
       //drawSpaceship(width / 2, height /2 ,this.r, this.rocketfire);
     
