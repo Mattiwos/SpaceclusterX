@@ -4,7 +4,7 @@
 
 var gameseed;
 var spectate = false;
-
+var deathbanner = true;
 const socket = io(
   {transports: ['websocket']},
   { forceNew: true }
@@ -38,7 +38,7 @@ socket.on("updateLoc", (args)=>{
         
 
       }
-      if (args.currentplayers[e][0] == socket.id || args.currentplayers[e][0] == player.id){
+      if (args.currentplayers[e][0] == socket.id || args.currentplayers[e][0] == socket.id){
         exists = true
         args.currentplayers[e][5] = player.name
       }
@@ -271,19 +271,10 @@ function draw() {
     numofloop+=1;
   
   }
+ 
 
   if (gameseed != undefined){
-    if (spectate == true){
-
-      push()
-      fill (255,0,0)
     
-      textFont('Georgia');
-      textSize(width / 5);
-      textAlign(CENTER, CENTER);
-      text ("Your Died", width/2,height/2) 
-    pop ()
-    }
     
     
     
@@ -400,7 +391,7 @@ function draw() {
     
     //ellipse(grounditems[i][0],grounditems[i][1],20,20) 
     drawCredit(grounditems[i][0],grounditems[i][1], 3)
-    
+
     if (spectate == false){
     if (dist(player.x,player.y,grounditems[i][0],grounditems[i][1] ) <= 30 ){
       player.credits += (grounditems[i][2])/2; //divided by two because it was
@@ -437,6 +428,53 @@ function draw() {
     drawLeaderBoard(oplayers);
 
   }
+  if (spectate == true){
+
+    push()
+    fill (255,0,0)
+    if (deathbanner){
+      
+      textFont('Georgia');
+      textSize(width / 5);
+      textAlign(CENTER, CENTER);
+      text ("Your Died", width/2,height/2) 
+
+    }
+    
+
+    rectMode(CENTER); 
+    rect(width/2,height/2 + height/6,140,40,20);
+
+    textSize(width / 35);
+    textAlign(CENTER);
+    fill(0)
+    text ("Play Again", width/2,height/2 + height/6) 
+
+
+    fill (255,0,0)
+    rectMode(CENTER); 
+    rect(width/2,height/2 + height/4,140,40,20);
+
+    textSize(width / 35);
+    textAlign(CENTER);
+    fill(0)
+    text ("Go Home", width/2,height/2 + height/4) 
+
+    fill (255,0,0)
+    rectMode(CENTER); 
+    rect(width/2,height/2 + height/6 + height/6,140,40,20);
+
+    textSize(width / 35);
+    textAlign(CENTER);
+    fill(0)
+    text ("Spectate", width/2,height/2 + height/6+ height/6) 
+
+
+    // rect(30, 20, 55, 55, 20);
+
+  pop ()
+
+  }
   
 
 }
@@ -449,7 +487,23 @@ function keyReleased(){
   reloaded=true;
 }
 function mousePressed(){
-  //mouseP=true;
+
+  if (spectate == true){
+    if (abs(mouseX -width/2 ) < 70 && abs(mouseY - (height/2 + height/6) ) < 20){
+      location.reload();
+    }
+
+    if (abs(mouseX -width/2 ) < 70 && abs(mouseY - (height/2 + height/4) ) < 20){
+      location.href = "/index.html"
+    }
+  
+    if (abs(mouseX -width/2 ) < 70 && abs(mouseY - (height/2 + height/6+ height/6) ) < 20){
+      deathbanner= false;
+    }
+   
+}
+
+
 }
 function mouseReleased(){
   mouseP=false;
@@ -533,7 +587,7 @@ function recalculateseedbasedobjects(){
             dists = noise(basex,basey,3+o) * (pedrand + cratersz) /2// 
             dists = noise(basex,basey,3+o) * (pedrand + cratersz) /2// 
             craterfill = noise(basex,basey,4+o) * 255  //opasity?  
-           crater.push ([ag, dists , cratersz , craterfill]);         
+            crater.push ([ag, dists , cratersz , craterfill]);         
         }
         if(distance(basex +offx,basey+offy,0,0)<worldsize)  
         seedgeneratedplanets.push(new planet(basex + offx,basey + offy,pedrand,pedr,pedg,pedb, crater))
