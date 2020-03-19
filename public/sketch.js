@@ -3,6 +3,7 @@
 
 
 var gameseed;
+var spectate = false;
 
 const socket = io(
   {transports: ['websocket']},
@@ -22,7 +23,7 @@ socket.on('deleteplayer',(arg)=>{
 
   }
 })
-
+var grounditems = [];
 
 socket.on("updateLoc", (args)=>{
   
@@ -50,6 +51,8 @@ socket.on("updateLoc", (args)=>{
     }
     exists = false;
   }
+
+  grounditems = args.grounditems;
 
 }) 
 
@@ -109,8 +112,12 @@ socket.on('init', (args)=>{
 socket.on('mapUpdate',(args)=>{
   
 })
-function gunshoot(x,y,r,dmg,speed,id,pid = socket.id){
 
+function gunshoot(x,y,r,dmg,speed,id,pid = socket.id){
+  if (spectate == false){
+
+
+  
   socket.emit("pewpew",{
     x: x,
     y: y,
@@ -119,12 +126,16 @@ function gunshoot(x,y,r,dmg,speed,id,pid = socket.id){
     bulletspeed: speed,
     playerid: pid,
   })
+}
 
 }
 socket.on("playershootomgrunnn",(arg)=>{
   lasers.push(new Projectile(arg.x,arg.y,arg.r,arg.dmg,arg.bulletspeed,arg.id,arg.playerid));
 });
 function senddata(){
+  if (spectate == false){
+
+  
   socket.emit("currData",{	  
    
     id: socket.id,	
@@ -136,6 +147,7 @@ function senddata(){
     credit: player.credits,
    
   });
+}
 }
 ///////////////////////////////////////////Socket ^ ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -239,6 +251,20 @@ var crater = [];
 var prevx = 0;
 var prevy = 0;
 var numofloop = 0;
+
+function spectatemode(){
+  socket.emit('removeme',{
+    id: socket.id
+  })
+
+  player.health = undefined
+  spectate = true
+  
+
+  
+
+
+}
 function draw() {
   if (gameseed != undefined && numofloop == 0){
     noiseSeed(gameseed);
@@ -247,8 +273,18 @@ function draw() {
   }
 
   if (gameseed != undefined){
-    
+    if (spectate == true){
 
+      push()
+      fill (255,0,0)
+    
+      textFont('Georgia');
+      textSize(width / 5);
+      textAlign(CENTER, CENTER);
+      text ("Your Died", width/2,height/2) 
+    pop ()
+    }
+    
     
     
     if (dist(prevx,prevy,-player.x + width/2,-player.y + m + height /2) >= 500){
@@ -307,8 +343,8 @@ function draw() {
     
 
     senddata() 
-    if (player.health <= 0 || player.name ==""){
-      window.location.href = 'index.html';
+    if (this.health <= 0 || player.name ==""){
+      spectatemode()
     }
     
     
@@ -358,7 +394,37 @@ function draw() {
     //push()
     
 
+  for (var i =0; i < grounditems.length; i++){
+    push()
+    translate(-player.x + width/2,-player.y + m + height /2)
+    
+    //ellipse(grounditems[i][0],grounditems[i][1],20,20) 
+    drawCredit(grounditems[i][0],grounditems[i][1], 3)
+    
+    if (spectate == false){
+    if (dist(player.x,player.y,grounditems[i][0],grounditems[i][1] ) <= 30 ){
+      player.credits += (grounditems[i][2])/2; //divided by two because it was
+      //giving twice as much credits
 
+
+      socket.emit('recovedgrounditems',{
+        x:grounditems[i][0],
+        y:grounditems[i][1],
+        credits:grounditems[i][2],
+      }) 
+      grounditems.splice(i,1)
+      
+
+
+    }
+  }
+
+   
+
+    
+
+    pop ();
+  }
     
 
     player.draw();

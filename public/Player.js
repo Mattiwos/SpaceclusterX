@@ -22,6 +22,7 @@ class Player{
 
       this.credits = 20;
       this.displaycredits = 20;
+      
       this.health = 100;
       this.ammo = 0;
 
@@ -42,7 +43,7 @@ class Player{
         (this.damageTimertime-this.damageTimer)*(width+height/2)/this.damageTimertime);
       }
       if (this.health <= 0){
-        window.location.href = 'index.html';
+        spectatemode()
       }
       ///rotation
       if(keyDown[keys[1]]==1 || keyDown[keys2[1]]==1){ //A
@@ -121,7 +122,10 @@ class Player{
     }
     draw(){
       this.movement();
-      
+      if (spectate == false) {
+
+
+     
       drawSpaceship(width / 2, height /2 +m,this.r, this.rocketfire);
       textSize(30);
       fill (255);
@@ -135,9 +139,11 @@ class Player{
       
       //drawSpaceship(width / 2, height /2 ,this.r, this.rocketfire);
     
-      if (this.health <= 0){
-        window.location.href = 'index.html';
+      if (this.health <= 0 || this.health == undefined){
+        spectatemode()
       }
+
+    }
     }
 
   

@@ -9,7 +9,7 @@ function drawGraphics(){
     text(`X: ${Math.round(player.x)}`, width-mappy.mapsize/2,height-230);
     text(`Y: ${Math.round(player.y)}`, width-mappy.mapsize/2,height-200);
     
-    
+    if (spectate == false) {
     stroke(255,0,0,100);
     strokeWeight(10);
     noFill();
@@ -28,6 +28,8 @@ function drawGraphics(){
     noStroke();
     strokeWeight(0);
     rect(width/2-100+5,4*height/50+5,player.ammo*190/100,20);
+    }
+
 
     fill (0,0,0,190);
     //fill(0);
@@ -53,7 +55,7 @@ function drawGraphics(){
        // text("¢"+player.displaycredits,width/10,height+m);
        text(player.displaycredits,width/10,height+m);
        drawCredit(width/10-60,height+m,3);
-
+       if (spectate == false) {
     for(let i=0;i<player.cargobay.length;i++){
         if(player.cargostate[i]<=0&&player.cargostate[i]>-100){
         drawResource(width/2 - player.storage * storagewidth / 2 +storagewidth/2  +storagewidth*i, height + m*1.15,
@@ -95,7 +97,7 @@ function drawGraphics(){
                     }
             }
     }
-
+       
 
     ///draw the player's reload, damage, and bulletspeed upgrades
 
@@ -109,7 +111,7 @@ function drawGraphics(){
         drawIcon(width/modificationSpacing+width/modificationSpacing*i,6*height/modificationSpacing,1,10);
     }
 
-    
+    }
 
 }
 
@@ -229,6 +231,7 @@ function drawResource(x,y,resource,sc){
 
 function drawLeaderBoard(){
     
+    
     //sorts the leaderboard by score
     //algorithm:
     // first, creates an array that is arrayUsed with player.credits on the end
@@ -288,6 +291,7 @@ function drawLeaderBoard(){
 }
 
 function drawCredit(x,y,sc){
+    if (spectate == false) {
     fill(255);
     noStroke();
     ellipse(x,y,10*sc,10*sc);
@@ -298,6 +302,10 @@ function drawCredit(x,y,sc){
     rectMode(CENTER);
     rect(x,y,sc,8*sc);
     rectMode(CORNER);
+}
+else{
+
+}
 }
 
 

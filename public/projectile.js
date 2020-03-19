@@ -35,9 +35,11 @@ class Projectile{
 
             //need to improve collision detection if statment
               player.health-= this.dmg;
-              if (player.health <= 0 || player.name ==""){
-                window.location.href = 'index.html';
-              }
+              
+                if (this.health <= 0 || player.name ==""){
+                    spectatemode()
+                  }
+
               this.lifespan=0;
               player.damageTimer=player.damageTimertime;
             }
