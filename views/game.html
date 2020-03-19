@@ -43,13 +43,50 @@
 
       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#chat" >💬</button>
     
-     <div id="chat" class="collapse">
-        <button id = "send" type="button">Send</button>
-        <h1>Chat goes here</h1>
-        <ul>
-            <li>Coffee</li>
-            <li>Tea</li>
-            <li>Milk</li>
+     <div id="chat" style="color: aliceblue;
+     position: fixed;
+     bottom: 10%;
+     left: 94%; 
+     background-color: Transparent;
+     background-repeat:no-repeat;
+     border: none;
+     cursor:pointer;
+     overflow: hidden;
+     outline:none;
+     font-size: 10%;" class="collapse">
+
+        <button id = "send" style = "    font-size: large;
+        bottom: 11%;
+        position: inherit;
+        border-radius: 9px;
+        background-color: black;
+        padding: .3px;
+        left: 95%;
+        color: aqua;" type="button">Send</button>
+        
+        <input type="text" style = "font-size: large;
+        bottom: 16%;
+        text-align: center;
+        left: 80%;
+        color: turquoise;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        position: inherit;
+        background-color: Transparent;
+        background-repeat: no-repeat;
+        box-sizing: border-box;" id="messageinput" name="fname">
+
+        <ul style = "color: aliceblue;
+        font: message-box;
+        bottom: 20%;
+        left: 80%;
+        position: fixed;
+        height: 40%;
+        overflow: auto;
+        padding: 0;
+         margin: 0;
+    " id = "messages">
+            
           </ul>
           
       </div>

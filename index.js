@@ -128,6 +128,10 @@ io.on('connection', (socket)=>{
       }
     }
   })
+  socket.on('usermessage',(arg)=>{
+    socket.broadcast.emit('chat message', arg.message)
+
+  })
 
 	socket.on('removeme',(arg)=>{
     for (var i = 0; i< playerson.length;i++){
