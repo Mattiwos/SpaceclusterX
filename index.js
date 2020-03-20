@@ -26,7 +26,7 @@ app.use(morgen('common'))
 app.use(express.static('assets'));
 app.use(express.static('public'));
 app.use(express.static('views'));
-
+var grounditems = []
 
 //renders index.html
 app.get('/', (req, res)=>{
@@ -62,12 +62,12 @@ var name = [];
 newstars(100);
 //heroku logs --tail -a spaceclusterx
 //socket
-var gameseed = Math.random();
+var gameseed = Math.random() * 100;
 console.log(gameseed)
 
 
 io.on('connection', (socket)=>{
-  playerson.push([socket.id]);
+  playerson.push([socket.id,0,0,0,0,0,0]);
   name.push([socket.id]);
   
 
@@ -121,13 +121,42 @@ io.on('connection', (socket)=>{
   socket.on('pewpew',(arg)=>{
     socket.broadcast.emit("playershootomgrunnn",arg);
   })
+  socket.on('recovedgrounditems',(arg)=>{
+    for (var i = 0; i < grounditems.length;i++){
+      if (arg.x == grounditems[i][0] && arg.y == grounditems[i][1]&&arg.credits == grounditems[i][2]){
+        grounditems.splice(i,1);
+      }
+    }
+  })
+  socket.on('usermessage',(arg)=>{
+    socket.broadcast.emit('chat message', arg.message)
 
-	
+  })
+
+	socket.on('removeme',(arg)=>{
+    for (var i = 0; i< playerson.length;i++){
+      if (arg.id == playerson[i][0]){
+        grounditems.push([playerson[i][1],playerson[i][2], playerson[i][6]])
+        playerson.splice(i,1);
+        io.emit('deleteplayer',{
+          id: socket.id
+        })
+        updateLoc()
+        break;
+      }
+
+    }
+
+  })
 	socket.on('disconnect', (arg)=>{
     for (var i = 0; i< playerson.length;i++){
       if (socket.id == playerson[i][0]){
+        if (playerson[i][6] != undefined && playerson[i][6] != 0)
+        grounditems.push([playerson[i][1],playerson[i][2], playerson[i][6]])
         playerson.splice(i,1);
-       
+
+        
+
         io.emit('deleteplayer',{
           id: socket.id
         })
@@ -147,6 +176,7 @@ function updateLoc(){
   io.emit('updateLoc',{
     currentplayers: playerson,
     lasers: lasers,
+    grounditems:grounditems,
    
     
   })
