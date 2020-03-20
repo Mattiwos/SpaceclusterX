@@ -19,7 +19,7 @@ class Map{
 
         fill(255,0,0); //shows where the user is on the map
         //noStroke();
-        drawSpaceship(this.mx, this.my,player.r,false,5);
+        drawSpaceship(this.mx, this.my,player.r,false,0,0,0,5);
         // ellipse(this.mx, this.my, 10, 10);
 
         for(let i=0;i<oplayers.length;i++){
@@ -31,7 +31,7 @@ class Map{
 
             if(dist (this.mx+distX,this.my+distY,this.mx,this.my) <  this.mapsize/2 +10){
 
-                drawSpaceship(this.mx + distX, this.my + distY,oplayers[i].r,false,5)
+                drawSpaceship(this.mx + distX, this.my + distY,oplayers[i].r,false,oplayers[i].red, oplayers[i].green, oplayers[i].blue,5 )
 
                 textSize(10)
                 fill(255)

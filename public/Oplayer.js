@@ -1,7 +1,7 @@
 
 
 class Oplayer{
-    constructor(initx,inity,initr,rocketfire,id,name,credit){
+    constructor(initx,inity,initr,rocketfire,id,name,credit,r,g,b){
         this.x = initx;
         this.y = inity;
         this.r = initr;
@@ -10,11 +10,15 @@ class Oplayer{
         this.name = name;
         this.credits=credit;
 
+        this.red=r;
+        this.blue=b;
+        this.green=g;
+        alert(this.red,this.blue,this.green);
     }
     draw(){
         push();
         translate(-player.x + width/2,-player.y + m + height /2)
-        drawSpaceship(this.x, this.y,this.r, this.rocketfire);
+        drawSpaceship(this.x, this.y,this.r, this.rocketfire,this.red,this.blue,this.green);
         if (this.name != undefined)
         text(this.name, this.x +3, this.y);
         pop()
@@ -28,6 +32,9 @@ class Oplayer{
         this.id = id
         this.name = name;
         this.credits = credit
+        this.red=r;
+        this.blue=b;
+        this.green=g;
 
     }
 //

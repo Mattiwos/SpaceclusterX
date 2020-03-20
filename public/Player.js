@@ -1,5 +1,5 @@
 class Player{
-    constructor(ax,ay,ar,name){
+    constructor(ax,ay,ar,name,red,g,b){
       this.x=ax;
       this.y=ay;
       this.r=ar;
@@ -32,6 +32,10 @@ class Player{
 
       this.damageTimer=0;
       this.damageTimertime=40;
+
+      this.red=red;
+      this.green=g;
+      this.blue=b;
     }
     movement(){
       if(player.damageTimer>0){
@@ -125,8 +129,8 @@ class Player{
       if (spectate == false) {
 
 
-     
-      drawSpaceship(width / 2, height /2 +m,this.r, this.rocketfire);
+     stroke(this.red,this.green,this.blue);
+      drawSpaceship(width / 2, height /2 +m,this.r, this.rocketfire,this.red,this.green,this.blue);
       textSize(30);
       fill (255);
       noStroke();
