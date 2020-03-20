@@ -62,7 +62,7 @@ var name = [];
 newstars(100);
 //heroku logs --tail -a spaceclusterx
 //socket
-var gameseed = Math.random();
+var gameseed = Math.random() * 100;
 console.log(gameseed)
 
 
