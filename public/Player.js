@@ -1,5 +1,5 @@
 class Player{
-    constructor(ax,ay,ar,name){
+    constructor(ax,ay,ar,name,red,g,b){
       this.x=ax;
       this.y=ay;
       this.r=ar;
@@ -22,6 +22,7 @@ class Player{
 
       this.credits = 20;
       this.displaycredits = 20;
+      
       this.health = 100;
       this.ammo = 0;
 
@@ -31,6 +32,10 @@ class Player{
 
       this.damageTimer=0;
       this.damageTimertime=40;
+
+      this.red=red;
+      this.green=g;
+      this.blue=b;
     }
     movement(){
       if(player.damageTimer>0){
@@ -42,13 +47,13 @@ class Player{
         (this.damageTimertime-this.damageTimer)*(width+height/2)/this.damageTimertime);
       }
       if (this.health <= 0){
-        window.location.href = 'index.html';
+        spectatemode()
       }
       ///rotation
-      if(keyDown[keys[1]]==1){ //A
+      if(keyDown[keys[1]]==1 || keyDown[keys2[1]]==1){ //A
         if(this.raccel<this.raccelspeed*(9))
         this.raccel+=this.raccelspeed*d;
-      }if(keyDown[keys[0]]==1){ //D
+      }if(keyDown[keys[0]]==1 || keyDown[keys2[0]]==1){ //D
         if(this.raccel>this.raccelspeed*(-9)) 
         this.raccel-=this.raccelspeed*d;
       }
@@ -63,14 +68,14 @@ class Player{
 
       
       //forward and backward speeds
-      if(keyDown[keys[2]]==1){
+      if(keyDown[keys[2]]==1 ||keyDown[keys2[2]]==1 ){
         this.rocketfire = true;
         if(this.faccel<this.faccelspeed*(this.maxfs))
         this.faccel+=this.faccelspeed*d;
       
       }
       else this.rocketfire = false;
-      if(keyDown[keys[3]]==1){
+      if(keyDown[keys[3]]==1 || keyDown[keys2[3]]==1){
         if(this.faccel>this.faccelspeed*(-1*this.maxbs))
         this.faccel-=this.faccelspeed*d;
       }
@@ -121,12 +126,15 @@ class Player{
     }
     draw(){
       this.movement();
-      
-      drawSpaceship(width / 2, height /2 +m,this.r, this.rocketfire);
+      if (spectate == false) {
+
+
+     stroke(this.red,this.green,this.blue);
+      drawSpaceship(width / 2, height /2 +m,this.r, this.rocketfire,this.red,this.green,this.blue);
       textSize(30);
       fill (255);
       noStroke();
-      textAlign(RIGHT);
+      textAlign(LEFT);
       text(String(this.name), 200, height -50)
 
       if (this.name === null){
@@ -135,9 +143,11 @@ class Player{
       
       //drawSpaceship(width / 2, height /2 ,this.r, this.rocketfire);
     
-      if (this.health <= 0){
-        window.location.href = 'index.html';
+      if (this.health <= 0 || this.health == undefined){
+        spectatemode()
       }
+
+    }
     }
 
   

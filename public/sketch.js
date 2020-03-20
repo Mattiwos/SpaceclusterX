@@ -3,7 +3,8 @@
 
 
 var gameseed;
-
+var spectate = false;
+var deathbanner = true;
 const socket = io(
   {transports: ['websocket']},
   { forceNew: true }
@@ -22,7 +23,7 @@ socket.on('deleteplayer',(arg)=>{
 
   }
 })
-
+var grounditems = [];
 
 socket.on("updateLoc", (args)=>{
   
@@ -32,12 +33,14 @@ socket.on("updateLoc", (args)=>{
    
     for (var i =0; i< oplayers.length;i++){
       if (oplayers[i].id == args.currentplayers[e][0] && args.currentplayers[e][0] != socket.id){
-        oplayers[i].update(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0],args.currentplayers[e][5],args.currentplayers[e][6]);
+        oplayers[i].update(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],
+          args.currentplayers[e][4],args.currentplayers[e][0],args.currentplayers[e][5],args.currentplayers[e][6],args.currentplayers[e][7]
+          ,args.currentplayers[e][8],args.currentplayers[e][9]);
         exists = true
         
 
       }
-      if (args.currentplayers[e][0] == socket.id || args.currentplayers[e][0] == player.id){
+      if (args.currentplayers[e][0] == socket.id || args.currentplayers[e][0] == socket.id){
         exists = true
         args.currentplayers[e][5] = player.name
       }
@@ -45,11 +48,15 @@ socket.on("updateLoc", (args)=>{
     }
     if (exists == false){
       if (args.currentplayers[e][0] != socket.id)
-      oplayers.push(new Oplayer(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0],args.currentplayers[e][5],args.currentplayers[e][6]))
+      oplayers.push(new Oplayer(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],
+        args.currentplayers[e][4],args.currentplayers[e][0],args.currentplayers[e][5],args.currentplayers[e][6],args.currentplayers[e][7]
+        ,args.currentplayers[e][8],args.currentplayers[e][9]))
       
     }
     exists = false;
   }
+
+  grounditems = args.grounditems;
 
 }) 
 
@@ -67,7 +74,8 @@ socket.on('init', (args)=>{
       if (oplayers[i].id == args.currentplayers[e][0] && args.currentplayers[e][0] != socket.id){
         
 
-        oplayers[i].update(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0],args.currentplayers[e][5],args.currentplayers[e][6]);
+        oplayers[i].update(args.currentplayers[e][1],args.currentplayers[e][2],args.currentplayers[e][3],args.currentplayers[e][4],args.currentplayers[e][0],args.currentplayers[e][5],args.currentplayers[e][6],args.currentplayers[e][7]
+          ,args.currentplayers[e][8],args.currentplayers[e][9]);
 
         exists = true
        
@@ -83,34 +91,26 @@ socket.on('init', (args)=>{
     }
     if (exists == false){
       if (args.currentplayers[e][0] != socket.id) //double checking might not need
-      oplayers.push(new Oplayer(0,0,0,true,args.currentplayers[e][0],args.currentplayers[e][5],args.currentplayers[e][6]))
+      oplayers.push(new Oplayer(0,0,0,true,args.currentplayers[e][0],args.currentplayers[e][5],args.currentplayers[e][6],args.currentplayers[e][7],args.currentplayers[e][8],args.currentplayers[e][9]))
     }
       
     exists = false;
     
     }
     
-    // for (var i = 0; i < args.planets.length; i++){
-    //   planets.push(new planet(args.planets[i][0],args.planets[i][1],args.planets[i][2], args.planets[i][3], args.planets[i][4], args.planets[i][5]))
-    // }
-    // for (var i = 0; i < args.stars.length; i++){
-    //   stars.push(new star(args.stars[i][0],args.stars[i][1]));
-    // }
-    // for (var i = 0; i < args.city.length; i++){
-    //   city.push(new hub(args.city[i][0],args.city[i][1],args.city[i][2],args.city[i][3],args.city[i][4]));
-    // }
 
-   
- 
-  
 
 })
 
 socket.on('mapUpdate',(args)=>{
   
 })
-function gunshoot(x,y,r,dmg,speed,id,pid = socket.id){
 
+function gunshoot(x,y,r,dmg,speed,id,pid = socket.id){
+  if (spectate == false){
+
+
+  
   socket.emit("pewpew",{
     x: x,
     y: y,
@@ -119,12 +119,16 @@ function gunshoot(x,y,r,dmg,speed,id,pid = socket.id){
     bulletspeed: speed,
     playerid: pid,
   })
+}
 
 }
 socket.on("playershootomgrunnn",(arg)=>{
   lasers.push(new Projectile(arg.x,arg.y,arg.r,arg.dmg,arg.bulletspeed,arg.id,arg.playerid));
 });
 function senddata(){
+  if (spectate == false){
+
+  
   socket.emit("currData",{	  
    
     id: socket.id,	
@@ -136,6 +140,7 @@ function senddata(){
     credit: player.credits,
    
   });
+}
 }
 ///////////////////////////////////////////Socket ^ ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -149,6 +154,9 @@ document.onkeydown = function (e) {
 
 var keyDown={};
 var keys=[65,68,87,83,32];
+
+//alternate arrow keys
+var keys2=[37,39,38,40];
 
 
 var oplayers = [];
@@ -205,7 +213,7 @@ function setup() { //window.devicePixelRatio
 
   });
   createCanvas(windowWidth, windowHeight);
-  player = (window.origin == "http://localhost:5500") ? new Player(0,0,random(-1000,1000),name) :new Player(width/2+random(-1000,1000),height/2 + m+random(-1000,1000),random(-1000,1000),name);
+  player = (window.origin == "http://localhost:5500") ? new Player(0,0,random(-1000,1000),name,random(0,255),random(0,255),random(0,255)) :new Player(width/2+random(-1000,1000),height/2 + m+random(-1000,1000),random(-1000,1000),name,random(0,255),random(0,255),random(0,255));
 
   diagonal = dist(0,0,width/2,height/2);
   
@@ -236,16 +244,31 @@ var crater = [];
 var prevx = 0;
 var prevy = 0;
 var numofloop = 0;
+
+function spectatemode(){
+  socket.emit('removeme',{
+    id: socket.id
+  })
+
+  player.health = undefined
+  spectate = true
+  
+
+  
+
+
+}
 function draw() {
   if (gameseed != undefined && numofloop == 0){
     noiseSeed(gameseed);
     numofloop+=1;
   
   }
+ 
 
   if (gameseed != undefined){
     
-
+    
     
     
     if (dist(prevx,prevy,-player.x + width/2,-player.y + m + height /2) >= 500){
@@ -304,8 +327,8 @@ function draw() {
     
 
     senddata() 
-    if (player.health <= 0 || player.name ==""){
-      window.location.href = 'index.html';
+    if (this.health <= 0 || player.name ==""){
+      spectatemode()
     }
     
     
@@ -328,10 +351,7 @@ function draw() {
 
     for(var i =0;i<lasers.length;i++){
       
-    // if( (dist(player.x,player.y,lasers[i].x,lasers[i].y)<diagonal+lasers[i].size))
-      //if ( (dist(player.x,lasers[i].x,player.y,lasers[i].y)) <= (2*width)){
-        //lasers[i].draw();
-      // }
+  
       lasers[i].draw();
     
     }
@@ -345,17 +365,45 @@ function draw() {
     }
     
     for(var i =0;i<oplayers.length;i++){
-      // if ( (dist(player.x,player.y,oplayers[i].x,oplayers[i].y))  <diagonal+40){
+      
         oplayers[i].draw();
-      //}
-      //oplayers[i].draw();
+   
     }
     
 
-    //push()
+ 
+
+  for (var i =0; i < grounditems.length; i++){
+    push()
+    translate(-player.x + width/2,-player.y + m + height /2)
+    
+    
+    drawCredit(grounditems[i][0],grounditems[i][1], 3)
+
+    if (spectate == false){
+    if (dist(player.x,player.y,grounditems[i][0],grounditems[i][1] ) <= 30 ){
+      player.credits += (grounditems[i][2]); // Might fix itself when put online 
+      
+
+
+      socket.emit('recovedgrounditems',{
+        x:grounditems[i][0],
+        y:grounditems[i][1],
+        credits:grounditems[i][2],
+      }) 
+      grounditems.splice(i,1)
+      
+
+
+    }
+  }
+
+   
+
     
 
-
+    pop ();
+  }
     
 
     player.draw();
@@ -368,19 +416,90 @@ function draw() {
     drawLeaderBoard(oplayers);
 
   }
+  if (spectate == true){
+
+    push()
+    fill (255,0,0)
+    if (deathbanner){
+      
+      textFont('Georgia');
+      textSize(width / 5);
+      textAlign(CENTER, CENTER);
+      text ("Your Died", width/2,height/2) 
+
+    }
+    
+
+    rectMode(CENTER); 
+    rect(width/2,height/2 + height/6,140,40,20);
+
+    textSize(width / 35);
+    textAlign(CENTER);
+    fill(0)
+    text ("Play Again", width/2,height/2 + height/6) 
+
+
+    fill (255,0,0)
+    rectMode(CENTER); 
+    rect(width/2,height/2 + height/4,140,40,20);
+
+    textSize(width / 35);
+    textAlign(CENTER);
+    fill(0)
+    text ("Go Home", width/2,height/2 + height/4) 
+
+    fill (255,0,0)
+    rectMode(CENTER); 
+    rect(width/2,height/2 + height/6 + height/6,140,40,20);
+
+    textSize(width / 35);
+    textAlign(CENTER);
+    fill(0)
+    text ("Spectate", width/2,height/2 + height/6+ height/6) 
+
+
+    // rect(30, 20, 55, 55, 20);
+
+  pop ()
+
+  }
   
 
 }
 
 function keyPressed(){
+  
   keyDown[keyCode]=1;
+  // console.log(document.getElementById('messageinput').oninput)
+
+  if (keyCode === 67 && document.getElementById('messageinput').selected == false){
+
+    document.getElementById("chattoggle").click();
+  }
 }
 function keyReleased(){
   keyDown[keyCode]=0;
   reloaded=true;
+
 }
 function mousePressed(){
-  //mouseP=true;
+
+  if (spectate == true){
+    if (abs(mouseX -width/2 ) < 70 && abs(mouseY - (height/2 + height/6) ) < 20){
+      location.reload();
+    }
+
+    if (abs(mouseX -width/2 ) < 70 && abs(mouseY - (height/2 + height/4) ) < 20){
+      location.href = "/index.html"
+    }
+  
+    if (abs(mouseX -width/2 ) < 70 && abs(mouseY - (height/2 + height/6+ height/6) ) < 20){
+      deathbanner= false;
+    }
+   
+}
+
+
 }
 function mouseReleased(){
   mouseP=false;
@@ -397,7 +516,7 @@ function recalculateseedbasedobjects(){
   seedgeneratedplanets = [];
   chanceofappearing = .4;
 
-  worldsize=5000;
+  worldsize=6000;
   
   
   for (var x = player.x - width/2; x < player.x +width/2 + sectorsize*2; x+= sectorsize){
@@ -464,7 +583,7 @@ function recalculateseedbasedobjects(){
             dists = noise(basex,basey,3+o) * (pedrand + cratersz) /2// 
             dists = noise(basex,basey,3+o) * (pedrand + cratersz) /2// 
             craterfill = noise(basex,basey,4+o) * 255  //opasity?  
-           crater.push ([ag, dists , cratersz , craterfill]);         
+            crater.push ([ag, dists , cratersz , craterfill]);         
         }
         if(distance(basex +offx,basey+offy,0,0)<worldsize)  
         seedgeneratedplanets.push(new planet(basex + offx,basey + offy,pedrand,pedr,pedg,pedb, crater))

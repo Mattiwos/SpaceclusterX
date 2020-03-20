@@ -143,7 +143,7 @@ class hub {
 
         this.hotkey=[49,50,51];
 
-        for(let i=1;i<numOfResources;i++)this.availableExports.push(i);
+        for(let i=0;i<numOfResources;i++)this.availableExports.push(i+1);
 
         
         //alert(this.availableExports);
@@ -400,7 +400,7 @@ class hub {
     */
     
     drawGraphics() {
-
+        
         if(keyDown[this.hotkey[0]]!=1 && keyDown[this.hotkey[1]]!=1 && keyDown[this.hotkey[2]]!=1 )keyP=false;
         
 
