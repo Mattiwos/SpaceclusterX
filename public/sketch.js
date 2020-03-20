@@ -1,3 +1,5 @@
+import { kMaxLength } from "buffer";
+
 // let laserSound = new Audio('assets/laserSound1.mp3');
 
 
@@ -382,7 +384,7 @@ function draw() {
 
     if (spectate == false){
     if (dist(player.x,player.y,grounditems[i][0],grounditems[i][1] ) <= 30 ){
-      player.credits += (grounditems[i][2]); // Might fix itself when put online 
+      player.credits += Math.round(grounditems[i][2]/2); // Might fix itself when put online 
       
 
 
