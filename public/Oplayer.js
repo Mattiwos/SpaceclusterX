@@ -13,7 +13,7 @@ class Oplayer{
         this.red=r;
         this.blue=b;
         this.green=g;
-        alert(this.red,this.blue,this.green);
+       // alert(this.red,this.blue,this.green);
     }
     draw(){
         push();
