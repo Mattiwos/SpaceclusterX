@@ -482,7 +482,7 @@ function draw() {
 function keyPressed(){
   keyDown[keyCode]=1;
 
-  if (keyCode === 67){
+  if (keyCode === 67 ){
 
     document.getElementById("chattoggle").click();
   }
