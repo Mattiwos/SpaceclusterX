@@ -7,7 +7,11 @@ $(document).ready(function(){
       var li = document.createElement("li");
       if (document.getElementById("messageinput").value == "/showloc"){
         li.appendChild(document.createTextNode( "*"+username+": "+"x: " + Math.round(player.x) + ", y: " + Math.round(player.y)));
+
+        // document.getElementById(li.id).style.color = 'red'
+
         ul.appendChild(li);
+        
         socket.emit('usermessage', {
         message:  "*"+username+": "+"x: " + Math.round(player.x) + ", y: " + Math.round(player.y)
         })
