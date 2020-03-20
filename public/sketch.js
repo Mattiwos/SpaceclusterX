@@ -425,15 +425,15 @@ function draw() {
     if (deathbanner){
       
       textFont('Georgia');
-      textSize(width / 5);
+      textSize(width / 7);
       textAlign(CENTER, CENTER);
-      text ("Your Died", width/2,height/2) 
+      text ("Game Over", width/2,height/2) 
 
     }
     
 
     rectMode(CENTER); 
-    rect(width/2,height/2 + height/6,140,40,20);
+    rect(width/2,height/2 + height/6,240,40,20);
 
     textSize(width / 35);
     textAlign(CENTER);
@@ -443,21 +443,23 @@ function draw() {
 
     fill (255,0,0)
     rectMode(CENTER); 
-    rect(width/2,height/2 + height/4,140,40,20);
+    rect(width/2,height/2 + height/4,240,40,20);
 
     textSize(width / 35);
     textAlign(CENTER);
     fill(0)
     text ("Go Home", width/2,height/2 + height/4) 
 
-    fill (255,0,0)
-    rectMode(CENTER); 
-    rect(width/2,height/2 + height/6 + height/6,140,40,20);
+    if(deathbanner){
+      fill (255,0,0)
+      rectMode(CENTER); 
+      rect(width/2,height/2 + height/6 + height/6,240,40,20);
 
-    textSize(width / 35);
-    textAlign(CENTER);
-    fill(0)
-    text ("Spectate", width/2,height/2 + height/6+ height/6) 
+      textSize(width / 35);
+      textAlign(CENTER);
+      fill(0)
+      text ("Spectate", width/2,height/2 + height/6+ height/6) 
+    }
 
 
     // rect(30, 20, 55, 55, 20);
@@ -538,7 +540,7 @@ function recalculateseedbasedobjects(){
       
       crater = [];
 
-      craternumber = Math.round(noise(basex,basey,10) *10)
+      craternumber = Math.round(noise(basex,basey,10) *20 *pedrand/700)
 
         
         
@@ -576,7 +578,7 @@ function recalculateseedbasedobjects(){
 
         crater = [];
 
-        craternumber = Math.round(noise(basex,basey,10) *10)      
+        craternumber = Math.round(noise(basex,basey,10) *10 *pedrand/700)      
         for(var o=0;o<craternumber;o++){
             // the first one in the array is x, y, fill
 
