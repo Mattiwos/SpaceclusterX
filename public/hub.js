@@ -141,8 +141,6 @@ class hub {
 
         this.availableExports =[];
 
-        this.hotkey=[49,50,51];
-
         for(let i=1;i<numOfResources;i++)this.availableExports.push(i);
 
         
@@ -203,7 +201,11 @@ class hub {
             //finds a resource that the planet dosen't sell
             this.contracts[this.contracts.length-1].push(this.availableExports[floor(noise(this.x,this.y,i+1)*this.availableExports.length)]);
             //this.contracts[this.contracts.length-1].push(this.availableExports[int(random(0,this.availableExports.length))]);
+<<<<<<< HEAD
            // print(this.contracts);
+=======
+            print(this.contracts);
+>>>>>>> parent of 47394f0... added keys to buy
         }
         //alert(noise(this.x,this.y,2)*this.availableExports.length);
         ///calculates the cost of the contract:
@@ -231,7 +233,7 @@ class hub {
         //this.p=planet;
         this.x = x;
         this.y = y;
-        
+        //print("works");
         this.citysize = 50;
 
         this.rectx = [];
@@ -356,8 +358,6 @@ class hub {
     }
     
     draw() {
-        
-        
         push();
         
         translate(-player.x,-player.y);
@@ -401,9 +401,6 @@ class hub {
     
     drawGraphics() {
 
-        if(keyDown[this.hotkey[0]]!=1 && keyDown[this.hotkey[1]]!=1 && keyDown[this.hotkey[2]]!=1 )keyP=false;
-        
-
         push();
         
         translate(-player.x,-player.y);
@@ -415,7 +412,7 @@ class hub {
                     this.testIfContains(h);
                 }
             }
-            //("drawing hub");
+            //print("drawing hub");
             stroke(50, 120);
             strokeWeight(60 * this.popup / this.displaywidth);
             noFill();
@@ -439,17 +436,14 @@ class hub {
                 noStroke();
                 //  text(this.hubExportCost[h],this.resourcex,
                 //  this.resourcey+40);
-                if (
-                    (mouseIsPressed && mouseP == false && dist(mouseX + player.x, mouseY + player.y, this.resourcex, this.resourcey) < 30)
-                    ||(keyDown[this.hotkey[h]]==1 &&keyP==false) ) {
+                if (mouseIsPressed && mouseP == false && dist(mouseX + player.x, mouseY + player.y, this.resourcex, this.resourcey) < 30) {
 
                     if (player.credits >= 1 && player.cargobay.length < player.storage) {
                         //player.credits-=this.hubExportCost[h];
                         player.credits -= 1;
                         player.cargobay.push(this.hubExport[h]);
                         player.cargostate.push(100);
-                        if(mouseIsPressed && mouseP == false && dist(mouseX + player.x, mouseY + player.y, this.resourcex, this.resourcey) < 30)mouseP=true;
-                        if((keyDown[this.hotkey[h]]==1 &&keyP==false))keyP=true;
+                        mouseP = true;
                     }
                 }
             }
@@ -459,7 +453,7 @@ class hub {
                 this.resourcex = this.x + width / 2 + cos(h * this.spacing + this.rotate + PI) * this.popup * 0.5;
                 this.resourcey = this.y + height / 2 + m + sin(h * this.spacing + this.rotate + PI) * this.popup * 0.5;
                 drawResource(this.resourcex, this.resourcey, this.hubImport[h], 4 * this.popup / this.displaywidth);
-                //prit(this.hubExport[h]);
+                //print(this.hubExport[h]);
                 fill(0);
                 textSize(22);
                 noStroke();
@@ -498,7 +492,7 @@ class hub {
                 drawCredit(this.resourcex-15,this.resourcey+10,1* this.popup / this.displaywidth);
                 drawCredit(this.resourcex+15,this.resourcey+10,1* this.popup / this.displaywidth);
                 for (let i = 0; i < this.upgradeResources[h].length; i++) {
-                    //prit("upgraderesource"+this.upgradeResources);
+                    //print("upgraderesource"+this.upgradeResources);
                     //drawResource(this.resourcex,this.resourcey,this.hubImport[h],4*this.popup/this.displaywidth);
                     //drawResource(
                     //    this.resourcex-this.upgradeResources[h].length*5+i*10,
@@ -515,7 +509,7 @@ class hub {
                     //if(false)
                     if (mouseIsPressed && mouseP == false && dist(mouseX + player.x, mouseY + player.y, this.resourcex, this.resourcey) < 30) {
 
-                        //("cargo bay before"+player.cargostate);
+                        //print("cargo bay before"+player.cargostate);
                         //this variable is the ones needed
                         this.resourcesneeded = [];
                         this.fakecargobay = [];
@@ -562,7 +556,7 @@ class hub {
                             player.credits -= upgradeCost[this.upgrades[h]];
                             mouseP = true;
                         }
-                        //("cargo bay after"+player.cargostate);
+                        //print("cargo bay after"+player.cargostate);
 
                     }
 
@@ -606,10 +600,10 @@ class hub {
                     //if(false)
                     if (mouseIsPressed && mouseP == false && dist(mouseX + player.x, mouseY + player.y, this.resourcex, this.resourcey) < 30) {
                         this.testIfContains(h);
-                        
+                        //print("cargo bay before"+player.cargostate);
                         //this variable is the ones needed
                         
-                        
+                        //print("cargo bay after"+player.cargostate);
 
                     }
 

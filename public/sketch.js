@@ -175,7 +175,7 @@ var z;
 
 
 //Other players
-var keyP=false;
+
 var mouseP=false;
 var diagonal = 0;
 var mappy;
@@ -288,7 +288,7 @@ function draw() {
 
     }
     
-    //if(keyP>0)keyP--;
+    
 
 
       
@@ -405,7 +405,11 @@ function recalculateseedbasedobjects(){
     basex = Math.floor(basex/sectorsize) * sectorsize;
     basey = 0
     //makes boundary
+<<<<<<< HEAD
     //print(distance(player.x,player.y,0,0));
+=======
+    print(distance(player.x,player.y,0,0));
+>>>>>>> parent of 47394f0... added keys to buy
     //if(distance(basex +offx,basey+offy,0,0)<5000) if(distance(player.x,player.y,0,0)<5000)
     if (noise(basex,basey,3) >= 1-chanceofappearing){
       pedrand = noise(basex,basey,4) *700
