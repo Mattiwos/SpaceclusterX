@@ -400,7 +400,7 @@ class hub {
     */
     
     drawGraphics() {
-
+        
         if(keyDown[this.hotkey[0]]!=1 && keyDown[this.hotkey[1]]!=1 && keyDown[this.hotkey[2]]!=1 )keyP=false;
         
 

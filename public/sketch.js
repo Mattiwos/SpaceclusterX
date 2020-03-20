@@ -93,19 +93,7 @@ socket.on('init', (args)=>{
     
     }
     
-    // for (var i = 0; i < args.planets.length; i++){
-    //   planets.push(new planet(args.planets[i][0],args.planets[i][1],args.planets[i][2], args.planets[i][3], args.planets[i][4], args.planets[i][5]))
-    // }
-    // for (var i = 0; i < args.stars.length; i++){
-    //   stars.push(new star(args.stars[i][0],args.stars[i][1]));
-    // }
-    // for (var i = 0; i < args.city.length; i++){
-    //   city.push(new hub(args.city[i][0],args.city[i][1],args.city[i][2],args.city[i][3],args.city[i][4]));
-    // }
 
-   
- 
-  
 
 })
 
@@ -358,10 +346,7 @@ function draw() {
 
     for(var i =0;i<lasers.length;i++){
       
-    // if( (dist(player.x,player.y,lasers[i].x,lasers[i].y)<diagonal+lasers[i].size))
-      //if ( (dist(player.x,lasers[i].x,player.y,lasers[i].y)) <= (2*width)){
-        //lasers[i].draw();
-      // }
+  
       lasers[i].draw();
     
     }
@@ -375,27 +360,25 @@ function draw() {
     }
     
     for(var i =0;i<oplayers.length;i++){
-      // if ( (dist(player.x,player.y,oplayers[i].x,oplayers[i].y))  <diagonal+40){
+      
         oplayers[i].draw();
-      //}
-      //oplayers[i].draw();
+   
     }
     
 
-    //push()
-    
+ 
 
   for (var i =0; i < grounditems.length; i++){
     push()
     translate(-player.x + width/2,-player.y + m + height /2)
     
-    //ellipse(grounditems[i][0],grounditems[i][1],20,20) 
+    
     drawCredit(grounditems[i][0],grounditems[i][1], 3)
 
     if (spectate == false){
     if (dist(player.x,player.y,grounditems[i][0],grounditems[i][1] ) <= 30 ){
-      player.credits += (grounditems[i][2])/2; //divided by two because it was
-      //giving twice as much credits
+      player.credits += (grounditems[i][2]); // Might fix itself when put online 
+      
 
 
       socket.emit('recovedgrounditems',{
@@ -480,9 +463,11 @@ function draw() {
 }
 
 function keyPressed(){
+  
   keyDown[keyCode]=1;
+  // console.log(document.getElementById('messageinput').oninput)
 
-  if (keyCode === 67 ){
+  if (keyCode === 67 && document.getElementById('messageinput').selected == false){
 
     document.getElementById("chattoggle").click();
   }
@@ -490,6 +475,7 @@ function keyPressed(){
 function keyReleased(){
   keyDown[keyCode]=0;
   reloaded=true;
+
 }
 function mousePressed(){
 
