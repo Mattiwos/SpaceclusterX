@@ -2,11 +2,13 @@ function drawSpaceship(x,y,r,fire,red,g,b,size = 15){
    this.r = size;
    
    if(fire){
+      push()
       fill(0,0,200,random(0,100));
       fill(255,0,0,random(0,100));
       noStroke();
       ellipse(x+1.2*this.r*cos(r+PI),y+1.2*this.r*sin(r+PI),30,30);
       ellipse(x+this.r*cos(r+PI),y+this.r*sin(r+PI),20,20);
+      pop ()
    }
    stroke(red,g,b);
    fill(100);
