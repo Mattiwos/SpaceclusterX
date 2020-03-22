@@ -19,6 +19,7 @@ class Oplayer{
         push();
         translate(-player.x + width/2,-player.y + m + height /2)
         drawSpaceship(this.x, this.y,this.r, this.rocketfire,this.red,this.blue,this.green);
+        fill (255);
         if (this.name != undefined)
         text(this.name, this.x +3, this.y);
         pop()
@@ -32,9 +33,9 @@ class Oplayer{
         this.id = id
         this.name = name;
         this.credits = credit
-        this.red=r;
-        this.blue=b;
-        this.green=g;
+        this.red=0;
+        this.blue=0;
+        this.green=0;
 
     }
 //

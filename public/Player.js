@@ -106,7 +106,7 @@ class Player{
 
       //shooting
 
-      if(keyDown[keys[4]]==1 &&this.ammo>20 && reloaded){
+      if(keyDown[keys[4]]==1 &&this.ammo>20 && reloaded &&!spectate){
         this.ammo-=20;
         lasers.push(new Projectile(this.x,this.y,player.r,this.calculateDamage(this.bulletDamage),this.bulletSpeed));
         reloaded=false;
