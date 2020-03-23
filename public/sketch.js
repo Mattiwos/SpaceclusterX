@@ -540,7 +540,7 @@ function recalculateseedbasedobjects(){
       
       crater = [];
 
-      craternumber = Math.round(noise(basex,basey,10) *20 *pedrand/700)
+      craternumber = Math.round(noise(basex,basey,10) *20 *pedrand/700) +1;
 
         
         
