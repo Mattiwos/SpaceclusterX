@@ -144,7 +144,7 @@ class hub {
 
         this.hotkey=[49,50,51];
 
-        for(let i=0;i<numOfResources;i++)this.availableExports.push(i+1);
+        for(let i=1;i<numOfResources;i++)this.availableExports.push(i);
 
         
         //alert(this.availableExports);
