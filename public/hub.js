@@ -314,14 +314,19 @@ class hub {
                 noStroke();
                 //  text(this.hubExportCost[h],this.resourcex,
                 //  this.resourcey+40);
-                if (mouseIsPressed && mouseP == false && dist(mouseX + player.x, mouseY + player.y, this.resourcex, this.resourcey) < 30) {
+                //if (mouseIsPressed && mouseP == false && dist(mouseX + player.x, mouseY + player.y, this.resourcex, this.resourcey) < 30) {
+                if (
+                        (mouseIsPressed && mouseP == false && dist(mouseX + player.x, mouseY + player.y, this.resourcex, this.resourcey) < 30)
+                        ||(keyDown[this.hotkey[h]]==1 &&keyP==false) ) {
 
                     if (player.credits >= 1 && player.cargobay.length < player.storage) {
                         //player.credits-=this.hubExportCost[h];
                         player.credits -= 1;
                         player.cargobay.push(this.hubExport[h]);
                         player.cargostate.push(100);
-                        mouseP = true;
+                        
+                        if(mouseIsPressed && mouseP == false && dist(mouseX + player.x, mouseY + player.y, this.resourcex, this.resourcey) < 30)mouseP=true;
+                        if((keyDown[this.hotkey[h]]==1 &&keyP==false))keyP=true;
                     }
                 }
             }
@@ -358,7 +363,10 @@ class hub {
 
                     //buying the upgrades
                     //if(false)
-                    if (mouseIsPressed && mouseP == false && dist(mouseX + player.x, mouseY + player.y, this.resourcex, this.resourcey) < 30) {
+                    if (
+                        (mouseIsPressed && mouseP == false && dist(mouseX + player.x, mouseY + player.y, this.resourcex, this.resourcey) < 30)
+                         ) {
+                     
 
                         //print("cargo bay before"+player.cargostate);
                         //this variable is the ones needed
