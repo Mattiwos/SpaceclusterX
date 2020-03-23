@@ -540,14 +540,14 @@ function recalculateseedbasedobjects(){
       
       crater = [];
 
-      craternumber = Math.round(noise(basex,basey,10) *20 *pedrand/700) +1;
+      craternumber = (Math.round(noise(basex,basey,10) *20 *pedrand/700) +1 );
 
         
         
       for(var o=0;o<craternumber;o++){
             // the first one in the array is x, y, fill
 
-          ag = noise(basex,basey,1+o) *2*PI
+          ag = noise(basex,basey,1+o) *2*PI ;
           cratersz = noise(basex,basey,2+o) *40 +10
           dists = noise(basex,basey,3+o) * (pedrand-cratersz) /2 // 
           craterfill = noise(basex,basey,4+o) * 255
@@ -561,7 +561,7 @@ function recalculateseedbasedobjects(){
     
         
     }
-   
+   // alert(crater);
     
     for (var y = player.y - height/2; y < player.y +height/2 + sectorsize*2; y+=sectorsize){
       basey = y//-player.y +y;
@@ -578,7 +578,7 @@ function recalculateseedbasedobjects(){
 
         crater = [];
 
-        craternumber = Math.round(noise(basex,basey,10) *10 *pedrand/700)      
+        craternumber = Math.round(noise(basex,basey,10) *10 *pedrand/700) +1;     
         for(var o=0;o<craternumber;o++){
             // the first one in the array is x, y, fill
 
