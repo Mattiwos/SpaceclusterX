@@ -41,18 +41,7 @@ class planet{
         this.planetResources=floor(this.randomseed[0]*3 +1);
         //cfreates the planets natural resources that it sells on the citys
         for(let k=0;k<this.planetResources;k++){
-          //  this.possible=int(random(1,numOfResources+1));
-         //   this.exists=true;
-         //   while(this.exists==true){
-         //       this.possible=int(random(1,numOfResources+1));
-         //       this.exists=false;
-         //       for(let h=0;h<this.planetExport.length;h++){
-         //           if(this.possible==this.planetExport[h])this.exists=true;
-          //      }
-         //   }
-
-            // new algorithm : chooses a random from the resources list
-            // then it pushes it and removes it from the 
+          
 
 
 
