@@ -14,6 +14,8 @@ class Oplayer{
         this.blue=b;
         this.green=g;
        // alert(this.red,this.blue,this.green);
+
+       
     }
     draw(){
         push();
@@ -21,7 +23,7 @@ class Oplayer{
         drawSpaceship(this.x, this.y,this.r, this.rocketfire,this.red,this.blue,this.green);
         fill (255);
         if (this.name != undefined)
-        text(this.name, this.x +3, this.y);
+        text(this.name, this.x , this.y+30);
         pop()
 
     }

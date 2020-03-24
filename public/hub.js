@@ -197,7 +197,7 @@ class hub {
     }
 
     createContract() {
-        this.resourceAmount = noise(this.x,this.y,1)*6;
+        this.resourceAmount = noise(this.x,this.y,2)*6;
         this.contracts.push([]);
       
         //noise(this.x,this.y,1);
@@ -482,7 +482,7 @@ class hub {
             fill(0,100);
             noStroke();
             rectMode(CENTER);
-            rect (this.x+width/2,this.y+height/2+m-30-20*this.contracts.length,120,40*this.contracts.length);
+            rect (this.x+width/2,this.y+height/2+m-30-20*this.contracts.length,140,40*this.contracts.length);
             triangle(this.x+width/2+20,this.y+height/2+m-30,
                 this.x+width/2-20,this.y+height/2+m-30,
                 this.x+width/2+0,this.y+height/2+m-10)
@@ -490,13 +490,14 @@ class hub {
              //ellipse(this.x + width / 2, this.y + height / 2 + m, this.citysize * 8 / 9, this.citysize * 8 / 9);
                 for(let j=0;j<this.contracts[i].length;j++){
                     rectMode(CORNER);
-                    drawResource(this.x+width/2 -40+20*j,this.y+height/2 +m- 40*i -50,this.contracts[i][j],2);
+                    drawResource(this.x+width/2 -53+20*j,this.y+height/2 +m- 40*i -50,this.contracts[i][j],2);
                     
                 }
                 fill(255);
+                if(this.contracts[i].length>4)fill(242,191,5);
                 noStroke();
                 textSize(30);
-                text(this.contractcost[i],this.x+width/2 +40,this.y+height/2 +m- 40*i -50);
+                text(this.contractcost[i],this.x+width/2 +50,this.y+height/2 +m- 40*i -50);
             }
             rectMode(CORNER);
         } 

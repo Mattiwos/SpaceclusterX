@@ -284,13 +284,13 @@ function draw() {
 
     sectorsize = 300
     seedgeneratedstars = [];
-    chanceofappearingstar = .1;
+    chanceofappearingstar = .04;
     for (var x = player.x - width/2; x < player.x +width/2 + sectorsize*2; x+= sectorsize){
       basex = x//-player.x + x;
       basex = Math.floor(basex/sectorsize) * sectorsize;
       basey = 0
       if (noise(basex,basey,3) >= chanceofappearingstar){
-        starspeed = noise(basex,basey,88) *2 + 5
+        starspeed = noise(basex,basey,88) *5 + 5
         offx = noise(basex,basey,4) * sectorsize
         offy = noise(basex,basey,5)*sectorsize 
 
@@ -301,7 +301,7 @@ function draw() {
         basey = y//-player.y +y;
         basey = Math.floor(basey/sectorsize) * sectorsize;
         if (noise(basex,basey,3) >= chanceofappearingstar){
-          starspeed = noise(basex,basey,88) *2 + 5
+          starspeed = noise(basex,basey,88) *5 + 5
           offx = noise(basex,basey,4) * sectorsize
           offy = noise(basex,basey,5)*sectorsize 
 
