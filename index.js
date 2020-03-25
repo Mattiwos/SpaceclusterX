@@ -152,7 +152,7 @@ io.on('connection', (socket)=>{
     for (var i = 0; i< playerson.length;i++){
       if (socket.id == playerson[i][0]){
         if (playerson[i][6] != undefined && playerson[i][6] != 0)
-        grounditems.push([playerson[i][1],playerson[i][2], playerson[i][6]])
+        // grounditems.push([playerson[i][1],playerson[i][2], playerson[i][6]])
         playerson.splice(i,1);
 
         
