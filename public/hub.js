@@ -210,6 +210,9 @@ class hub {
         noiseSeed(noise(this.x,this.y, tempC) *100)
 
         this.resourceAmount = noise(this.x,this.y,2)*6;
+
+        pop ()
+        noiseSeed(gameseed)
         this.contracts.push([]);
       
         //noise(this.x,this.y,1);
@@ -232,7 +235,7 @@ class hub {
         this.contractcost.push((this.differentresources.length+1)*this.contracts[this.contracts.length-1].length);
 
 
-        pop ()
+       
     }
 
 
