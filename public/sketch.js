@@ -246,6 +246,8 @@ var crater = [];
 var prevx = 0;
 var prevy = 0;
 var numofloop = 0;
+var newcontractlist = []
+var listofBoughtcontractloc = [];
 
 function spectatemode(){
   socket.emit('removeme',{

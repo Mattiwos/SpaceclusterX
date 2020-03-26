@@ -197,6 +197,18 @@ class hub {
     }
 
     createContract() {
+        push()
+        
+
+        var tempC = 0;
+
+        for (var i = 0; i < newcontractlist.length; i++){
+            if (newcontractlist[0] == this.x && newcontractlist[1] == this.y){
+                thempC = newcontractlist[2]
+            }
+        }
+        noiseSeed(noise(this.x,this.y, tempC) *100)
+
         this.resourceAmount = noise(this.x,this.y,2)*6;
         this.contracts.push([]);
       
@@ -220,6 +232,7 @@ class hub {
         this.contractcost.push((this.differentresources.length+1)*this.contracts[this.contracts.length-1].length);
 
 
+        pop ()
     }
 
 
