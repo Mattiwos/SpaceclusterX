@@ -118,7 +118,7 @@ function drawGraphics(){
 function drawResource(x,y,resource,sc){
     //sc = scale factor
     noStroke();
-
+    //circle , square , triangle , diamond ,star , brown blocks
     //yellow circle
     if(resource==1){
         fill(100,100,0);
